@@ -1,0 +1,39 @@
+@import 'src/styles/variables.scss';
+
+.income-item__container {
+    font-size: $font-size-14;
+
+    .income-item__header {
+        display: flex;
+        flex-direction: column;
+
+        .header-text {
+            font-weight: $font-weight-700;
+        }
+
+        .header-sub-text {
+            font-size: $font-size-10;
+        }
+    }
+
+    .amount__container {
+        display: flex;
+        gap: 5px;
+        grid-gap: 5px;
+        padding: 5px 0 0 0;
+
+        .amount-view {
+            .edit-icon {
+                font-size: $font-size-14;
+                padding: 0 0 0 3px;
+                cursor: pointer;
+            }
+        }
+
+        .amount-edit {
+            .save-icon {
+                cursor: pointer;
+            }
+        }
+    }
+}
