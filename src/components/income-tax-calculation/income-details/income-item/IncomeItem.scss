@@ -1,0 +1,55 @@
+@import "src/styles/variables.scss";
+
+.income-item__container {
+  font-size: $font-size-14;
+
+  background: linear-gradient(45deg, #c5d2e9, transparent);
+  width: 20%;
+  padding: 10px;
+  border-radius: 10px;
+  .income-item__header {
+    display: flex;
+    flex-direction: column;
+
+    .header-text {
+      font-weight: $font-weight-700;
+    }
+
+    .header-sub-text {
+      font-size: $font-size-10;
+    }
+  }
+
+  .amount__container {
+    display: flex;
+    gap: 5px;
+    grid-gap: 5px; 
+    align-items: center;
+
+    .amount-view {
+      display: flex;
+      align-items: center;
+
+      .edit-icon {
+        font-size: $font-size-14;
+        padding: 0 0 0 3px;
+        cursor: pointer;
+      }
+    }
+
+    .amount-edit {
+      display: flex;
+      align-items: center;
+      .save-icon {
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media screen and (max-width:$mobile-max-width) {
+  .income-item__container{
+    width: 40%;
+    font-size: $font-size-10;
+    padding: 6px;
+  }
+}

@@ -1,0 +1,1 @@
+export const UPDATE_INCOME_DETAILS: string = "UPDATE_INCOME_DETAILS";

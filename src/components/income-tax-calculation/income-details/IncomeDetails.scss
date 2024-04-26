@@ -1,0 +1,17 @@
+@import "src/styles/variables.scss";
+.income-details__container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px 0;
+  border-bottom: 1px solid #c3c1c1;
+  gap: 5px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .income-details__container {
+    padding: 5px;
+  }
+}

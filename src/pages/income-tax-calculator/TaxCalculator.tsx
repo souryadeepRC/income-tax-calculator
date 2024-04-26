@@ -1,5 +1,15 @@
-import { IncomeDetails } from "../../components/income-tax-calculation/income-details/IncomeDetails"
-
+// component
+import { IncomeDetails } from "src/components/income-tax-calculation/income-details/IncomeDetails";
+import { IncomeTaxBreakup } from "src/components/income-tax-calculation/income-tax-breakup/IncomeTaxBreakup";
+import { IncomeTaxDeduction } from "src/components/income-tax-calculation/income-tax-deduction/IncomeTaxDeduction";
+// styles
+import "./TaxCalculator.scss";
 export const TaxCalculator = () => {
-    return <span><IncomeDetails /></span>
-}
+  return (
+    <section>
+      <IncomeDetails />
+      <IncomeTaxBreakup />
+      <IncomeTaxDeduction />
+    </section>
+  );
+};
