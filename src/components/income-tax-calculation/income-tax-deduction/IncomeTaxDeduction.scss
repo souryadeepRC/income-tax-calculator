@@ -1,0 +1,25 @@
+@import "src/styles/variables.scss";
+.deduction__container {
+  header {
+    font-size: $font-size-14;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+  .deduction-list {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 10px 0;
+    gap: 5px;
+    justify-content: space-around;
+    font-size: $font-size-12;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .deduction__container .deduction-list {
+    font-size: $font-size-10;
+  }
+}

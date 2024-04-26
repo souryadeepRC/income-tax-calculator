@@ -1,0 +1,24 @@
+@import 'src/styles/variables.scss';
+
+.footer__container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+    background: #c8c8c8;
+    font-size: $font-size-15;
+    font-weight: $font-weight-500;
+    text-align: center;
+
+    .footer__text {
+        padding: 0 0 0 5px;
+        font-family: $primary-font-family;
+        color: $color-black;
+    }
+}
+
+@media screen and (max-width:$mobile-max-width) {
+    .footer__container {
+        font-size: $font-size-12;
+    }
+}

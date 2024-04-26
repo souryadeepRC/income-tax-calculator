@@ -1,11 +1,21 @@
-import './App.scss';
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+// components
+import { PrivateLayout } from "./components/common/PrivateLayout/PrivateLayout";
+import { TaxCalculator } from "./pages/income-tax-calculator/TaxCalculator";
+// store
+import { rootStore } from "./store/root-store";
 
+// styles
+import "./App.scss";
 function App() {
   return (
-   
-    <div className="app__container">
-      <span className='app__title'>Income Tax Calculator</span>
-    </div>
+    <BrowserRouter>
+    <Provider store={rootStore}>
+      <PrivateLayout>
+        <TaxCalculator />
+      </PrivateLayout></Provider>
+    </BrowserRouter>
   );
 }
 
