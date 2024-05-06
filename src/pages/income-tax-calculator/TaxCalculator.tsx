@@ -6,7 +6,7 @@ import { IncomeTaxDeduction } from "src/components/income-tax-calculation/income
 import "./TaxCalculator.scss";
 export const TaxCalculator = () => {
   return (
-    <section>
+    <section className="tax-section">
       <IncomeDetails />
       <IncomeTaxBreakup />
       <IncomeTaxDeduction />

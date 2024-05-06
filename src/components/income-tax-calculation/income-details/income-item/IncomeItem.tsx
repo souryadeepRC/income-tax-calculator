@@ -9,6 +9,7 @@ import { updateIncomeDetails } from "src/store/income/income-actions";
 // types
 import { AppDispatch } from "src/store/reducer-types";
 // styles
+import { update80CDeduction } from "src/store/deduction/deduction-actions";
 import "./IncomeItem.scss";
 interface IncomeItemProps {
   label: string;
@@ -30,13 +31,16 @@ export const IncomeItem = ({
 
   // event fns
   const onSave = () => {
-    setIsEditMode(false)
+    setIsEditMode(false);
     dispatch(
       updateIncomeDetails({
         type,
         amount: +income,
       })
     );
+    if (type === "pf") {
+      dispatch(update80CDeduction({ providentFund: +income }));
+    }
   };
   const onIncomeChange = (e: any) => {
     setIncome(e.target.value);
@@ -52,10 +56,7 @@ export const IncomeItem = ({
         {isEditMode ? (
           <div className="amount-edit">
             <Input value={income} onChange={onIncomeChange} />
-            <SaveIcon
-              className="save-icon"
-              onClick={onSave}
-            />
+            <SaveIcon className="save-icon" onClick={onSave} />
           </div>
         ) : (
           <div className="amount-view">
