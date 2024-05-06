@@ -1,16 +1,17 @@
 // components
 import { useSelector } from "react-redux";
-import { selectPf, selectSalary } from "src/store/income/income-selectors";
+import { selectIncome } from "src/store/income/income-selectors";
 import { calculateTax } from "src/utils/tax-calculation";
 // styles
+import { selectDeduction } from "src/store/deduction/deduction-selectors";
+import { DeductionReducerType } from "src/types/deduction-types";
+import { IncomeReducerType } from "src/types/income-types";
 import "./IncomeTaxBreakup.scss";
 
 export const IncomeTaxBreakup = () => {
-  const salary: number = useSelector(selectSalary);
-  const pf: number = useSelector(selectPf);
-  const tax: any = calculateTax(salary - pf, {
-    "Standard Deduction": 50000,
-  }); 
+  const totalIncome: IncomeReducerType = useSelector(selectIncome);
+  const deduction: DeductionReducerType = useSelector(selectDeduction); 
+  const tax: any = calculateTax(totalIncome, deduction);
 
   return (
     <div className="breakup__container">

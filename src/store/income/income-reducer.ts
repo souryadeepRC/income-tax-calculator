@@ -5,10 +5,10 @@ import { IncomeReducerType } from "src/types/income-types";
 import { UPDATE_INCOME_DETAILS } from "src/store/income/income-constants";
 
 const initialState: IncomeReducerType = {
-  salary: 1000000, // 1110000
-  basic: 350000, // 388500 --> 35%
-  hra: 175000, // 194250 --? 17.5%
-  pf: 42000, // 46620 --> 42%
+  salary: 1110000, // 1110000 1000000
+  basic: 388500, // 388500 350000 --> 35%
+  hra: 194250, // 194250 175000--? 17.5%
+  pf: 46620, // 46620 42000--> 42%
 };
 const IncomeReducer = (
   state = initialState,
