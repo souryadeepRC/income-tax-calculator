@@ -1,12 +1,28 @@
-// styles
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
+// library
+import { Button } from "@mui/material";
+// components
 import { Deduction80C } from "./80C/Deduction80C";
 import { DeductionChapter6 } from "./DeductionChapter6";
-import "./IncomeTaxDeduction.scss";
 import { Rent } from "./rent/Rent";
 import { Section24 } from "./section24/Section24";
+// styles
+import "react-toastify/dist/ReactToastify.css";
+import "./IncomeTaxDeduction.scss";
+import "./deduction-element.scss";
 
+export const DeductionElement = ({ children, className = "", onSave }: any) => {
+  return (
+    <section className="deduction__option">
+      <section className={`deduction__option-content ${className}`}>
+        {children}
+      </section>
+      <Button className="deduction__option__button" onClick={onSave}>
+        Save
+      </Button>
+    </section>
+  );
+};
 export const IncomeTaxDeduction = () => {
   return (
     <section className="deduction__container">

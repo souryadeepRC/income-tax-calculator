@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // library
-import { Button, Checkbox, TextField } from "@mui/material";
+import { Checkbox, TextField } from "@mui/material";
 // hooks
 import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
@@ -13,6 +13,7 @@ import { AppDispatch } from "src/store/reducer-types";
 import { RentDeductionType } from "src/types/deduction-types";
 // styles
 import "../deduction-element.scss";
+import { DeductionElement } from "../IncomeTaxDeduction";
 
 export const Rent = () => {
   // store
@@ -46,8 +47,8 @@ export const Rent = () => {
   };
 
   return (
-    <section className="deduction__option">
-      <section className="deduction__option-content">
+    <DeductionElement onSave={onSave}>
+      <>
         <TextField
           className="deduction__option__input"
           label="Monthly Rental Amount"
@@ -78,10 +79,7 @@ export const Rent = () => {
             inputProps={{ "aria-label": "controlled" }}
           />
         </div>
-      </section>
-      <Button className="deduction__option__button" onClick={onSave}>
-        Save
-      </Button>
-    </section>
+      </>
+    </DeductionElement>
   );
 };
