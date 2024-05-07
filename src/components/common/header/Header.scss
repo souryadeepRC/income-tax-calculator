@@ -1,32 +1,40 @@
-@import 'src/styles/variables.scss';
+@import "src/styles/variables.scss";
 
 .header__container {
-    box-shadow: 1px 5px 3px rgba($color-quartz, 0.30);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 0 0 10px 0;
-    padding: 20px 80px;
+  box-shadow: 1px 5px 3px rgba($color-quartz, 0.3);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 0 10px 0;
+  padding: 20px 80px;
 
-    .header__text {
-        margin: 0;
-        padding: 0 0 0 10px;
-        font-size: $font-size-25;
-        font-weight: $font-weight-700;
+  background-color: #e5efe5;
+  .header__text {
+    margin: 0;
+    font-size: $font-size-25;
+    font-weight: $font-weight-700;
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      &.active {
+        color: #005858;
+      }
     }
+  }
 }
 
-@media screen and (max-width:$mobile-max-width) {
-    .header__container {
-        justify-content: center;
-        padding: 10px;
+@media screen and (max-width: $mobile-max-width) {
+  .header__container {
+    justify-content: center;
+    padding: 10px;
 
-        .app-logo {
-            font-size: $font-size-15;
-        }
-
-        .header__text {
-            font-size: $font-size-15;
-        }
+    .app-logo {
+      font-size: $font-size-15;
     }
+
+    .header__text {
+      font-size: $font-size-15;
+    }
+  }
 }

@@ -1,0 +1,16 @@
+.navigation-list {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  li > a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    &.active {
+      color: #005858;
+    }
+  }
+}

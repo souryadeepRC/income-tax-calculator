@@ -11,10 +11,11 @@ import "./App.scss";
 function App() {
   return (
     <BrowserRouter>
-    <Provider store={rootStore}>
-      <PrivateLayout>
-        <TaxCalculator />
-      </PrivateLayout></Provider>
+      <Provider store={rootStore}>
+        <PrivateLayout>
+          <TaxCalculator />
+        </PrivateLayout>
+      </Provider>
     </BrowserRouter>
   );
 }

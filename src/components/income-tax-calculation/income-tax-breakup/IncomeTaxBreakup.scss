@@ -34,20 +34,22 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .breakup__container {
-    gap: 5px;
-    padding: 5px 0;
+    flex-direction: column;
+
     .tax-details {
       font-size: $font-size-10;
       padding: 7px;
-      gap: 3px;
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
       .tax-amount {
         display: flex;
         flex-direction: column;
       }
       .best-choice-regime {
         padding: 5px;
-        top: -8px;
-        left: -20px;
+        top: -12px;
+        left: -6px;
       }
     }
   }
