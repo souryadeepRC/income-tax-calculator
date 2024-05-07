@@ -2,13 +2,38 @@
 import { ReducerActionPayloadType } from "src/store/reducer-types";
 import { IncomeReducerType } from "src/types/income-types";
 // constants
-import { UPDATE_INCOME_DETAILS } from "src/store/income/income-constants";
+import {
+  UPDATE_INCOME_DETAILS,
+  UPDATE_TAX_DETAILS,
+} from "src/store/income/income-constants";
 
 const initialState: IncomeReducerType = {
-  salary: 1000000, // 1110000 1000000
-  basic: 350000, // 388500 350000 --> 35%
-  hra: 175000, // 194250 175000--? 17.5%
-  pf: 42000, // 46620 42000--> 42%
+  income: {
+    salary: 1000000, // 1110000 1000000
+    basic: 350000, // 388500 350000 --> 35%
+    hra: 175000, // 194250 175000--? 17.5%
+    pf: 42000, // 46620 42000--> 42%
+  },
+  tax: {
+    difference: {
+      amount: 0,
+      type: "New",
+    },
+    newScheme: {
+      baseTax: 0,
+      cessAmount: 0,
+      monthlyTax: 0,
+      taxableAmount: 0,
+      yearlyTax: 0,
+    },
+    oldScheme: {
+      baseTax: 0,
+      cessAmount: 0,
+      monthlyTax: 0,
+      taxableAmount: 0,
+      yearlyTax: 0,
+    },
+  },
 };
 const IncomeReducer = (
   state = initialState,
@@ -20,10 +45,15 @@ const IncomeReducer = (
       const { type: incomeType, amount } = payload;
       return {
         ...state,
-        [incomeType]: amount,
+        income: { ...state.income, [incomeType]: amount },
       };
     }
-
+    case UPDATE_TAX_DETAILS: {
+      return {
+        ...state,
+        tax: payload,
+      };
+    }
     default:
       return state;
   }

@@ -1,0 +1,22 @@
+@import "src/styles/variables.scss";
+.navigation-list {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  li > a {
+    @include font($size: $font-size-non-mobile-primary, $weight: bold);
+    text-decoration: none;
+    color: $color-black;
+    &.active {
+      color: $color-navigation-active;
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .navigation-list .MuiSvgIcon-root {
+    @include dimension($width: 18px, $height: 18px);
+  }
+}

@@ -1,11 +1,15 @@
 // components
-import { Footer } from "../footer/Footer"
-import { Header } from "../header/Header"
+import { useMediaQuery } from "src/hooks/useMediaQuery";
+import { Footer } from "../footer/Footer";
+import { Header } from "../header/Header";
 
 export const PrivateLayout = ({ children }: any) => {
-    return (<>
-        <Header />
-        {children}
-        <Footer />
-    </>)
-}
+  useMediaQuery();
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  );
+};

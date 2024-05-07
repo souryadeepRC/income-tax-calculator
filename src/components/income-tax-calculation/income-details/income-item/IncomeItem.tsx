@@ -1,36 +1,33 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// components
-import { EditIcon, SaveIcon } from "../../../../icons";
-import { Input } from "../../../../library";
+// icons
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
+// library
+import Input from "@mui/material/Input";
 // actions
+import { update80CDeduction } from "src/store/deduction/deduction-actions";
 import { updateIncomeDetails } from "src/store/income/income-actions";
 // selectors
 // types
 import { AppDispatch } from "src/store/reducer-types";
 // styles
-import { update80CDeduction } from "src/store/deduction/deduction-actions";
 import "./IncomeItem.scss";
 interface IncomeItemProps {
   label: string;
   type: string;
-  subLabel?: string;
   selectAmount: any;
 }
-export const IncomeItem = ({
-  label,
-  type,
-  subLabel,
-  selectAmount,
-}: IncomeItemProps) => {
+export const IncomeItem = ({ label, type, selectAmount }: IncomeItemProps) => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const amount: number = useSelector(selectAmount);
+  // state
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [income, setIncome] = useState<string>(`${amount}`);
 
   // event fns
-  const onSave = () => {
+  const onSave = (): void => {
     setIsEditMode(false);
     dispatch(
       updateIncomeDetails({
@@ -42,15 +39,12 @@ export const IncomeItem = ({
       dispatch(update80CDeduction({ providentFund: +income }));
     }
   };
-  const onIncomeChange = (e: any) => {
+  const onIncomeChange = (e: any): void => {
     setIncome(e.target.value);
   };
   return (
     <div className="income-item__container">
-      <div className="income-item__header">
-        <span className="header-text">{label}</span>
-        <span className="header-sub-text">{subLabel}</span>
-      </div>
+      <span className="header-text">{label}</span>
       <div className="amount__container">
         <span>Rs.</span>
         {isEditMode ? (

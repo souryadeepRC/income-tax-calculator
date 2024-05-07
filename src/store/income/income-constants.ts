@@ -1,1 +1,2 @@
 export const UPDATE_INCOME_DETAILS: string = "UPDATE_INCOME_DETAILS";
+export const UPDATE_TAX_DETAILS: string = "UPDATE_TAX_DETAILS";

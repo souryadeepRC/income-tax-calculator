@@ -1,20 +1,21 @@
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+// library
+import { ToastContainer } from "react-toastify";
 // components
-import { PrivateLayout } from "./components/common/PrivateLayout/PrivateLayout";
 import { TaxCalculator } from "./pages/income-tax-calculator/TaxCalculator";
+// hooks
 // store
 import { rootStore } from "./store/root-store";
-
 // styles
 import "./App.scss";
 function App() {
   return (
     <BrowserRouter>
-    <Provider store={rootStore}>
-      <PrivateLayout>
+      <Provider store={rootStore}>
+        <ToastContainer />
         <TaxCalculator />
-      </PrivateLayout></Provider>
+      </Provider>
     </BrowserRouter>
   );
 }

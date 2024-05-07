@@ -2,7 +2,6 @@ import {
   DeductionReducerType,
   RentDeductionType,
 } from "src/types/deduction-types";
-import { IncomeReducerType } from "src/types/income-types";
 
 const IS_NEW_SCHEME = true;
 const calculateByNewTaxSlab = (taxableAmount: number) => {
@@ -61,7 +60,11 @@ const calculateByOldTaxSlab = (taxableAmount: number) => {
 };
 const calculateCess = (incomeTax: number) => incomeTax * 0.04;
 
-const calculateIncomeTax = (taxableAmount: number, type: any) => {
+const calculateIncomeTax = (
+  taxableAmount: number,
+  deductedAmount: number,
+  type: any
+) => {
   let baseTax = 0;
   if (type) {
     baseTax = calculateByNewTaxSlab(taxableAmount);
@@ -77,6 +80,7 @@ const calculateIncomeTax = (taxableAmount: number, type: any) => {
     cessAmount,
     yearlyTax,
     monthlyTax,
+    deductedAmount,
   };
 };
 const calculateRentDeduction = (
@@ -127,7 +131,7 @@ const calculateChapter6CDeduction = (deductionByChapter6: any) => {
   return totalDeduction;
 };
 const calculateTax = (
-  totalIncome: IncomeReducerType,
+  totalIncome: any,
   deductionDetail: DeductionReducerType
 ) => {
   let deductedAmount = 0;
@@ -147,15 +151,19 @@ const calculateTax = (
 
   deductedAmount += calculateChapter6CDeduction(
     deductionDetail.deductionByChapter6
-  );
-  console.log({ taxableAmount, deductedAmount });
+  ); 
 
   const newSchemeTaxableIncome =
     +taxableAmount - deductionDetail.standardDeduction;
   let taxBreakup: any = {
-    newScheme: calculateIncomeTax(newSchemeTaxableIncome, IS_NEW_SCHEME),
+    newScheme: calculateIncomeTax(
+      newSchemeTaxableIncome,
+      deductionDetail.standardDeduction,
+      IS_NEW_SCHEME
+    ),
     oldScheme: calculateIncomeTax(
       taxableAmount - deductedAmount,
+      deductedAmount,
       !IS_NEW_SCHEME
     ),
   };

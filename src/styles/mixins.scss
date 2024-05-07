@@ -1,0 +1,36 @@
+@mixin font($size, $weight: "") {
+  font-size: $size;
+  @if $weight!= "" {
+    font-weight: $weight;
+  }
+}
+@mixin dimension($width: "", $height: "") {
+  @if $width!= "" {
+    width: $width;
+  }
+  @if $height!= "" {
+    height: $height;
+  }
+}
+@mixin flexBox(
+  $direction: row,
+  $justifyContent: "",
+  $alignItems: "",
+  $wrap: "",
+  $gap: ""
+) {
+  display: flex;
+  flex-direction: $direction;
+  @if $wrap != "" {
+    flex-wrap: $wrap;
+  }
+  @if $justifyContent != "" {
+    justify-content: $justifyContent;
+  }
+  @if $alignItems != "" {
+    align-items: $alignItems;
+  }
+  @if $gap != "" {
+    gap: $gap;
+  }
+}

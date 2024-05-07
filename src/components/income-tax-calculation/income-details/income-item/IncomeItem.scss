@@ -1,29 +1,24 @@
 @import "src/styles/variables.scss";
 
 .income-item__container {
-  font-size: $font-size-14;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   background: linear-gradient(45deg, #c5d2e9, transparent);
-  width: 20%;
-  padding: 10px;
+  width: 35%;
+  padding: 10px 15px; 
   border-radius: 10px;
-  .income-item__header {
-    display: flex;
-    flex-direction: column;
-
-    .header-text {
-      font-weight: $font-weight-700;
-    }
-
-    .header-sub-text {
-      font-size: $font-size-10;
-    }
+  gap: 8px;
+  font-size: 14px;
+  .header-text {
+    font-weight: $font-weight-700;
   }
 
   .amount__container {
     display: flex;
     gap: 5px;
-    grid-gap: 5px; 
+    grid-gap: 5px;
     align-items: center;
 
     .amount-view {
@@ -46,10 +41,11 @@
     }
   }
 }
-@media screen and (max-width:$mobile-max-width) {
-  .income-item__container{
-    width: 40%;
-    font-size: $font-size-10;
-    padding: 6px;
+@media screen and (max-width: $mobile-max-width) {
+  .income-item__container {
+    width: 90%;
+    font-size: 12px;
+    padding: 6px 15px; 
+    gap: 5px;
   }
 }
