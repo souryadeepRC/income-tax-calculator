@@ -1,0 +1,46 @@
+@import "src/styles/variables.scss";
+hr{
+  margin: 0;
+}
+.tax-breakup-message  {
+  background-color: #cbfdcb;
+  padding: 15px;
+  border-radius: 10px;
+  color: #024848;
+  text-align: center;
+  margin: 10px auto;
+  width: 60%;
+  font-weight: bold;
+  font-size: 12px;
+}
+.tax-breakup__container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  .breakup-details {
+    font-size: 14px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    background: #d7f5d8;
+    &.best-choice {
+      border: 5px solid darkcyan;
+    }
+    h4 {
+      margin: 0;
+      padding: 10px;
+      background-color: darkcyan;
+      color: white;
+      border-radius: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .tax-breakup__container {
+    flex-direction: column;
+    padding: 0 15px;
+  }
+}

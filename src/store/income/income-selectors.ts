@@ -1,11 +1,12 @@
 // types
 import { AppStoreType } from "src/store/reducer-types";
-import { IncomeReducerType } from "src/types/income-types";
 
-export const selectIncome = (store: AppStoreType): IncomeReducerType =>
-  store.income;
+export const selectIncome = (store: AppStoreType): any => store.income.income;
 export const selectSalary = (store: AppStoreType): number =>
-  store.income.salary;
-export const selectBasic = (store: AppStoreType): number => store.income.basic;
-export const selectHra = (store: AppStoreType): number => store.income.hra;
-export const selectPf = (store: AppStoreType): number => store.income.pf;
+  store.income.income.salary;
+export const selectBasic = (store: AppStoreType): number =>
+  store.income.income.basic;
+export const selectHra = (store: AppStoreType): number =>
+  store.income.income.hra;
+export const selectPf = (store: AppStoreType): number => store.income.income.pf;
+export const selectTaxDetails = (store: AppStoreType): any => store.income.tax;

@@ -1,13 +1,28 @@
-// component
-// styles
-import { ToastContainer } from "react-toastify";
+// components
+import { Footer, Header } from "src/components/common/CommonComponents";
+// hooks
+import { useMediaQuery } from "src/hooks/useMediaQuery";
+import { useTaxCalculation } from "src/hooks/useTaxCalculation";
+// routes
 import { AppRoutes } from "src/routes/AppRoutes";
+// styles
 import "./TaxCalculator.scss";
-export const TaxCalculator = () => {
+const TaxSection = () => {
+  useTaxCalculation();
   return (
     <section className="tax-section">
-      <ToastContainer />
       <AppRoutes />
     </section>
+  );
+};
+export const TaxCalculator = () => {
+  // hooks
+  useMediaQuery();
+  return (
+    <>
+      <Header />
+      <TaxSection />
+      <Footer />
+    </>
   );
 };

@@ -1,25 +1,22 @@
 @import "src/styles/variables.scss";
 
 .header__container {
+  @include flexBox($justifyContent: flex-start, $alignItems: center);
   box-shadow: 1px 5px 3px rgba($color-quartz, 0.3);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  box-sizing: border-box;
   margin: 0 0 10px 0;
-  padding: 20px 80px;
-
-  background-color: #e5efe5;
-  .header__text {
-    margin: 0;
-    font-size: $font-size-25;
-    font-weight: $font-weight-700;
-    a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      &.active {
-        color: #005858;
-      }
+  padding: 15px 50px;
+  background-color: #f9fbf9;
+  .app-logo.MuiSvgIcon-root {
+    @include dimension($width: 15px, $height: 15px);
+  }
+  a {
+    color: $color-navigation;
+    span {
+      @include font($size: $font-size-non-mobile-primary, $weight: bold);
+    }
+    &.active {
+      color: $color-navigation-active;
     }
   }
 }
@@ -28,13 +25,11 @@
   .header__container {
     justify-content: center;
     padding: 10px;
-
-    .app-logo {
-      font-size: $font-size-15;
+    .app-logo.MuiSvgIcon-root {
+      @include dimension($width: 12px, $height: 12px);
     }
-
-    .header__text {
-      font-size: $font-size-15;
+    a > span {
+      font-size: $font-size-mobile-primary;
     }
   }
 }

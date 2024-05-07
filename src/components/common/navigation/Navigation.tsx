@@ -10,9 +10,8 @@ import "./Navigation.scss";
 
 export const Navigation = () => {
   // store
-  const isMobile: boolean = useSelector(selectIsMobile);
-  console.log({ isMobile });
-
+  const isMobile: boolean = useSelector(selectIsMobile);  
+  
   // render fns
   return (
     <ul className="navigation-list">
