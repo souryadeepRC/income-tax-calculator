@@ -10,6 +10,7 @@ import { rootStore } from "./store/root-store";
 // styles
 import "./App.scss";
 function App() {
+  const name = "TEST";
   return (
     <BrowserRouter>
       <Provider store={rootStore}>
