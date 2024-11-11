@@ -8,10 +8,12 @@ import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 import { updateRentDeduction } from "src/store/deduction/deduction-actions";
 // selectors
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
+import { selectBasic, selectHra } from "src/store/income/income-selectors";
 // types
 import { AppDispatch } from "src/store/reducer-types";
 import { RentDeductionType } from "src/types/deduction-types";
 // styles
+import { IncomeItem } from "../../income-details/income-item/IncomeItem";
 import "../deduction-element.scss";
 import { DeductionElement } from "../IncomeTaxDeduction";
 
@@ -49,6 +51,8 @@ export const Rent = () => {
   return (
     <DeductionElement onSave={onSave}>
       <>
+        <IncomeItem label="Basic" type="basic" selectAmount={selectBasic} />
+        <IncomeItem label="HRA" type="hra" selectAmount={selectHra} />
         <TextField
           className="deduction__option__input"
           label="Monthly Rental Amount"

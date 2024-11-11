@@ -111,6 +111,7 @@ export const DeductionChapter6 = () => {
             return (
               <TextField
                 key={index}
+                title={item.label}
                 className="deduction__option__input"
                 label={item.label}
                 value={deductionAmount[item.amountKey]}

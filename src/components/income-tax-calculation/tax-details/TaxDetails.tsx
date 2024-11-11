@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 // selectors
 import { selectTaxDetails } from "src/store/income/income-selectors";
 // styles
+import { formatNumber } from "src/utils/tax-calculation";
 import "./TaxDetails.scss";
 const TaxDetail = ({ differenceType, type, details }: any) => {
   return (
@@ -11,8 +12,8 @@ const TaxDetail = ({ differenceType, type, details }: any) => {
       )}
       <span className="regime-type">{type} Regime</span>
       <span className="tax-amount">
-        Rs. {details.yearlyTax.toFixed(2)} (Rs.&nbsp;
-        {details.monthlyTax.toFixed(2)}/month)
+        Rs. {formatNumber(details.yearlyTax)} (Rs.&nbsp;
+        {formatNumber(details.monthlyTax)}/month)
       </span>
     </section>
   );

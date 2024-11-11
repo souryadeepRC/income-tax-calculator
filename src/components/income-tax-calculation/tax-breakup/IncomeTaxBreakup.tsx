@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 // selectors
 import { selectTaxDetails } from "src/store/income/income-selectors";
 // styles
+import { formatNumber } from "src/utils/tax-calculation";
 import "./IncomeTaxBreakup.scss";
 
 const Breakup = ({ type, details, differenceType }: any) => {
@@ -11,27 +12,27 @@ const Breakup = ({ type, details, differenceType }: any) => {
       <h4>Tax Regime : {type}</h4>
       <span>
         <strong>Net Taxable Income : </strong>
-        {details.taxableAmount}
+        {formatNumber(details.taxableAmount)}
       </span>
       <span>
         <strong>Deducted Amount : </strong>
-        {details.deductedAmount}
+        {formatNumber(details.deductedAmount)}
       </span>
       <hr />
       <span>
         <strong>Base Tax : </strong>
-        {details.baseTax} &nbsp;
+        {formatNumber(details.baseTax)} &nbsp;
         <strong>CESS : </strong>
-        {details.cessAmount}
-      </span> 
+        {formatNumber(details.cessAmount)}
+      </span>
       <hr />
       <span>
         <strong>Total Tax : </strong>
-        Rs.{details.yearlyTax}
+        Rs.{formatNumber(details.yearlyTax)}
       </span>
       <span>
         <strong>Monthly Tax : </strong> Rs.
-        {details.monthlyTax.toFixed(2)} / month
+        {formatNumber(details.monthlyTax)} / month
       </span>
     </section>
   );

@@ -10,7 +10,7 @@ import {
 } from "src/store/deduction/deduction-constants";
 
 const initialState: DeductionReducerType = {
-  standardDeduction: 50000,
+  standardDeduction: { newScheme: 75000, oldScheme: 50000 },
   rent: {
     amount: 0,
     duration: 12,
@@ -37,7 +37,7 @@ const initialState: DeductionReducerType = {
     additionalHomeLoanInterest: 0,
     additionalNps: 0,
     electricVehicleInterest: 0,
-  }
+  },
 };
 const DeductionReducer = (
   state = initialState,

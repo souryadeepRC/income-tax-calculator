@@ -1,5 +1,5 @@
 export type DeductionReducerType = {
-  standardDeduction: number;
+  standardDeduction: { newScheme: number; oldScheme: number };
   rent: {
     amount: number;
     duration: number;
@@ -20,11 +20,11 @@ export type DeductionType80C = {
   others: number;
 };
 export type DeductionByChapter6Type = {
-  medicalInsuranceSelf:number;
+  medicalInsuranceSelf: number;
   medicalInsuranceParent: number;
   handicappedDependent: number;
   specifiedDiseaseTreatment: number;
-  educationLoanInterest:number;
+  educationLoanInterest: number;
   selfDisability: number;
   additionalHomeLoanInterest: number;
   additionalNps: number;
