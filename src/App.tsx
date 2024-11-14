@@ -3,10 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 // library
 import { ToastContainer } from "react-toastify";
 // components
-import { TaxCalculator } from "./pages/income-tax-calculator/TaxCalculator";
+import { TaxCalculator } from "src/pages/income-tax-calculator/TaxCalculator";
 // hooks
 // store
-import { rootStore } from "./store/root-store";
+import { rootStore } from "src/store/root-store";
 // styles
 import "./App.scss";
 function App() {
