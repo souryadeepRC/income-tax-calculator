@@ -6,31 +6,13 @@ import AppsIcon from "@mui/icons-material/Apps";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import InsightsIcon from "@mui/icons-material/Insights";
 // styles
+import { useSelector } from "react-redux";
+import {
+  selectSalary,
+  selectTaxChoice,
+} from "src/store/income/income-selectors";
+import { formatNumber } from "src/utils/tax-calculation";
 import classes from "./Landing.module.scss";
-
-const IncomeInfo: React.FC = () => {
-  return (
-    <Card
-      className={classes.income}
-      actionItem={
-        <Button
-          variant="contained"
-          startIcon={<CurrencyRupeeIcon />}
-          className={classes.action__btn}
-        >
-          Modify amount
-        </Button>
-      }
-      content={
-        <section>
-          <span className={classes.label}>Annual Income</span>
-          <strong className={classes.amount}>Rs.50,000</strong>
-          <span className={classes.description}>Including provident fund</span>
-        </section>
-      }
-    />
-  );
-};
 interface CardProps {
   content: JSX.Element;
   actionItem?: JSX.Element;
@@ -48,7 +30,35 @@ const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
     </section>
   );
 };
+const IncomeInfo: React.FC = () => {
+  const annualIncome = useSelector(selectSalary);
+  return (
+    <Card
+      className={classes.income}
+      actionItem={
+        <Button
+          variant="contained"
+          startIcon={<CurrencyRupeeIcon />}
+          className={classes.action__btn}
+        >
+          Modify amount
+        </Button>
+      }
+      content={
+        <section>
+          <span className={classes.label}>Annual Income</span>
+          <strong className={classes.amount}>
+            Rs.{formatNumber(annualIncome)}
+          </strong>
+          <span className={classes.description}>Including provident fund</span>
+        </section>
+      }
+    />
+  );
+};
 const TaxInfo: React.FC = () => {
+  const { label, taxAmount, percentage } = useSelector(selectTaxChoice);
+
   return (
     <Card
       className={classes.tax}
@@ -63,9 +73,18 @@ const TaxInfo: React.FC = () => {
       }
       content={
         <section>
-          <span className={classes.label}>Tax Rs.5,000/month</span>
-          <strong className={classes.amount}>SAVE 20%</strong>
-          <span className={classes.description}>By opting New Tax Regime</span>
+          <span
+            title={`Yearly Tax: Rs. ${formatNumber(taxAmount.yearly)}`}
+            className={classes.label}
+          >
+            {`Tax Rs.${formatNumber(taxAmount.monthly)}/month`}
+          </span>
+          <strong className={classes.amount}>
+            SAVE {formatNumber(percentage)}%
+          </strong>
+          <span className={classes.description}>
+            By opting {label} Tax Regime
+          </span>
         </section>
       }
     />

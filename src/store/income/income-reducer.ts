@@ -9,15 +9,20 @@ import {
 
 const initialState: IncomeReducerType = {
   income: {
-    salary: 1000000, // 1110000 1000000
+    salary: 842079653, // 1110000 1000000
     basic: 350000, // 388500 350000 --> 35%
     hra: 175000, // 194250 175000--? 17.5%
     pf: 42000, // 46620 42000--> 42%
   },
   tax: {
-    difference: {
-      amount: 0,
+    choice: {
+      taxAmount: {
+        monthly: 0,
+        yearly: 0,
+      },
+      difference: 0,
       type: "New",
+      percentage: 0,
     },
     newScheme: {
       baseTax: 0,

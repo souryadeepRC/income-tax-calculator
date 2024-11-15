@@ -25,7 +25,7 @@ const calculateByNewTaxSlab = (taxableAmount: number) => {
   if (taxableAmount > 1000000 && taxableAmount <= 1200000) {
     return taxAmount + (taxableAmount - 1000000) * 0.15;
   } else {
-    taxAmount +=  (1200000 - 1000000) * 0.15;
+    taxAmount += (1200000 - 1000000) * 0.15;
   }
 
   /* ------- Rs.12 lakh to Rs.15 lakh - 20% ----*/
@@ -60,6 +60,7 @@ const calculateByOldTaxSlab = (taxableAmount: number) => {
 };
 const calculateCess = (incomeTax: number) => incomeTax * 0.04;
 export const formatNumber = (value: number) => {
+  if (!value) return 0;
   return value % 1 === 0 ? value : +value.toFixed(2);
 };
 
@@ -135,7 +136,7 @@ const calculateChapter6CDeduction = (deductionByChapter6: any) => {
   }
   return totalDeduction;
 };
-const calculateTax = (
+export const calculateTax = (
   totalIncome: any,
   deductionDetail: DeductionReducerType
 ) => {
@@ -171,14 +172,19 @@ const calculateTax = (
       !IS_NEW_SCHEME
     ),
   };
-  const difference: number =
-    taxBreakup.newScheme.monthlyTax - taxBreakup.oldScheme.monthlyTax;
-  taxBreakup["difference"] = {
-    amount: difference < 0 ? difference * -1 : difference,
-    type: difference < 0 ? "New" : "Old",
+  const amount: number =
+    taxBreakup.newScheme.yearlyTax - taxBreakup.oldScheme.yearlyTax;
+  const bestScheme = amount < 0 ? "newScheme" : "oldScheme";
+  const difference: number = amount < 0 ? amount * -1 : amount;
+  const percentage: number = (difference / taxBreakup.oldScheme.yearlyTax) * 100;
+  taxBreakup["choice"] = {
+    taxAmount: {
+      yearly: taxBreakup[bestScheme].yearlyTax,
+      monthly: taxBreakup[bestScheme].monthlyTax,
+    },
+    difference,
+    label: bestScheme === "newScheme" ? "New" : "Old",
+    percentage,
   };
   return taxBreakup;
 };
-
-export { calculateTax };
-
