@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 // icons
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SavingsIcon from "@mui/icons-material/Savings";
 // selectors
@@ -10,11 +11,16 @@ import "./Navigation.scss";
 
 export const Navigation = () => {
   // store
-  const isMobile: boolean = useSelector(selectIsMobile);  
-  
+  const isMobile: boolean = useSelector(selectIsMobile);
+
   // render fns
   return (
     <ul className="navigation-list">
+      <li>
+        <NavLink to="income">
+          {isMobile ? <AccountBalanceWalletIcon /> : "Income"}
+        </NavLink>
+      </li>
       <li>
         <NavLink to="deduction">
           {isMobile ? <SavingsIcon /> : "Deduction"}

@@ -1,8 +1,17 @@
-export type IncomeReducerType = {
-  income: { salary: number; basic: number; hra: number; pf: number };
+export interface IncomeReducerType {
+  income: {
+    salary: Record<string, number>;
+    extra: Record<string, number>;
+  };
   tax: any;
-};
-export type incomeDetailsUpdateType = {
+  editableIncome: IncomeComponent;
+}
+export interface incomeDetailsUpdateType {
   type: string;
   amount: number;
-};
+}
+export interface IncomeComponent {
+  group: "salary" | "extra";
+  label: string;
+  amount: string;
+}

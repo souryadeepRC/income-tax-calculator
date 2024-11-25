@@ -39,8 +39,8 @@ export const DeductionChapter6 = () => {
   // effects
   useEffect(() => {
     setDeductionAmount(deductionChapter6);
-  }, [deductionChapter6]); 
-  
+  }, [deductionChapter6]);
+
   const onDeductionChange =
     (amountKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setDeductionAmount((deductionAmount: any) => {
@@ -56,22 +56,25 @@ export const DeductionChapter6 = () => {
     for (const key in deductionAmount) {
       modifiedDeductedAmount[key] = Number(deductionAmount[key]);
     }
-    console.log(modifiedDeductedAmount);
-    
+
     dispatch(updateChapter6Deduction(modifiedDeductedAmount));
     notify("Deduction by Chapter VI saved");
   };
 
-  const DEDUCTION_ITEMS: { label: string; amountKey: string,helperText?:string }[] = [
+  const DEDUCTION_ITEMS: {
+    label: string;
+    amountKey: string;
+    helperText?: string;
+  }[] = [
     {
       label: "Medical Insurance Self/spouse/children - 80D",
       amountKey: "medicalInsuranceSelf",
-      helperText: 'Max 25,000'
+      helperText: "Max 25,000",
     },
     {
       label: "Medical Insurance Parent - 80D",
       amountKey: "medicalInsuranceParent",
-      helperText: 'Max 50,000'
+      helperText: "Max 50,000",
     },
     {
       label: "Handicapped Dependent - 80DD",
@@ -92,7 +95,7 @@ export const DeductionChapter6 = () => {
     {
       label: "Additional Home Loan Interest - 80EEA/80EEB",
       amountKey: "additionalHomeLoanInterest",
-      helperText: 'Max 1,50,000'
+      helperText: "Max 1,50,000",
     },
     {
       label: "Electric Vehicle Interest - 80EEB",

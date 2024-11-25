@@ -8,7 +8,7 @@ import InsightsIcon from "@mui/icons-material/Insights";
 // styles
 import { useSelector } from "react-redux";
 import {
-  selectSalary,
+  selectAnnualIncome,
   selectTaxChoice,
 } from "src/store/income/income-selectors";
 import { formatNumber } from "src/utils/tax-calculation";
@@ -31,7 +31,7 @@ const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
   );
 };
 const IncomeInfo: React.FC = () => {
-  const annualIncome = useSelector(selectSalary);
+  const annualIncome: any = useSelector(selectAnnualIncome);
   return (
     <Card
       className={classes.income}
