@@ -4,6 +4,7 @@ import { IncomeComponent, IncomeReducerType } from "src/types/income-types";
 // constants
 import {
   MODIFY_INCOME_DETAILS,
+  SET_EDITABLE_INCOME_DETAILS,
   UPDATE_INCOME_DETAILS,
   UPDATE_TAX_DETAILS,
 } from "src/store/income/income-constants";
@@ -62,10 +63,17 @@ const IncomeReducer = (
         income: { ...state.income, [incomeType]: amount },
       };
     }
+    case SET_EDITABLE_INCOME_DETAILS: {
+      return {
+        ...state,
+        editableIncome: payload,
+      };
+    }
     case MODIFY_INCOME_DETAILS: {
       const { label, group, amount }: IncomeComponent = payload;
       return {
         ...state,
+        editableIncome: initialState.editableIncome,
         income: {
           ...state.income,
           [group]: {

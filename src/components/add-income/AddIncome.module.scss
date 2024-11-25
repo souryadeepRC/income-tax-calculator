@@ -1,9 +1,16 @@
 @import "src/styles/variables.scss";
 .add_income__container {
-  padding: 2vw;
   display: flex;
   flex-direction: column;
   gap: 1vw;
   width: 40%;
- 
+  padding: 2vw;
+  .add_income__label {
+    display: flex;
+    flex-direction: column;
+    span:first-child {
+      font-size: 2vw;
+      font-weight: bold;
+    }
+  }
 }

@@ -2,15 +2,39 @@ import { memo, useState } from "react";
 // library
 import { Box, Tab, Tabs } from "@mui/material";
 // styles
+import { useDispatch, useSelector } from "react-redux";
+import { setEditableIncomeDetails } from "src/store/income/income-actions";
+import {
+  selectExtraIncome,
+  selectSalaryIncome,
+} from "src/store/income/income-selectors";
+import { IncomeComponent } from "src/types/income-types";
+import { getIncomeBreakdown } from "src/utils/income-utils";
 import classes from "./IncomeDetails.module.scss";
+interface IncomeBreakdownProps {
+  group: "salary" | "extra";
+  dataSelector: any;
+}
 
-const IncomeBreakdown: React.FC = () => {
-  const components = Array(50).fill("T");
+const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
+  group,
+  dataSelector,
+}) => {
+  const dispatch = useDispatch();
+  const breakdownIncomes = getIncomeBreakdown(group, useSelector(dataSelector));
+
+  const onIncomeClick = (income: IncomeComponent) => () => {
+    dispatch(setEditableIncomeDetails(income));
+  };
   return (
     <section className={classes.income_breakdown_container}>
-      {components.map((income: number, index: number) => {
+      {breakdownIncomes.map((income: IncomeComponent, index: number) => {
         return (
-          <div key={index} className={classes.item_container}>
+          <div
+            key={income.label}
+            className={classes.item_container}
+            onClick={onIncomeClick(income)}
+          >
             <Box className={classes.item_inner__container}>
               <Box
                 display="flex"
@@ -18,8 +42,8 @@ const IncomeBreakdown: React.FC = () => {
                 padding={"0 1vw"}
                 width={"80%"}
               >
-                <strong>Basic</strong>
-                <span>Rs. 50000</span>
+                <strong>{income.label}</strong>
+                <span>Rs. {income.amount}</span>
               </Box>
             </Box>
           </div>
@@ -28,26 +52,7 @@ const IncomeBreakdown: React.FC = () => {
     </section>
   );
 };
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
 const IncomeDetails: React.FC = () => {
   const [value, setValue] = useState(0);
 
@@ -66,12 +71,12 @@ const IncomeDetails: React.FC = () => {
           <Tab label={`Extra Income Rs. 20000`} />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        <IncomeBreakdown />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        Extra Income
-      </CustomTabPanel>
+      {value === 0 && (
+        <IncomeBreakdown group="salary" dataSelector={selectSalaryIncome} />
+      )}
+      {value === 1 && (
+        <IncomeBreakdown group="extra" dataSelector={selectExtraIncome} />
+      )}
     </Box>
   );
 };

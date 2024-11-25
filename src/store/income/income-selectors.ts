@@ -1,6 +1,7 @@
 // types
 import { createSelector } from "@reduxjs/toolkit";
 import { AppStoreType } from "src/store/reducer-types";
+import { IncomeComponent } from "src/types/income-types";
 
 export const selectIncome = (store: AppStoreType): any => store.income.income;
 export const selectSalary = (store: AppStoreType): number => 0;
@@ -10,6 +11,8 @@ export const selectSalaryIncome = (
 export const selectExtraIncome = (
   store: AppStoreType
 ): Record<string, number> => store.income.income.extra;
+export const selectEditableIncome = (store: AppStoreType): IncomeComponent =>
+  store.income.editableIncome;
 export const selectBasic = (store: AppStoreType): number =>
   store.income.income.salary?.["basic"] || 0;
 export const selectHra = (store: AppStoreType): number =>
