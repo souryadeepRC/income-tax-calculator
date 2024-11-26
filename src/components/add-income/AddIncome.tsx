@@ -6,12 +6,13 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
+  TextField
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 // components
 import { Button } from "src/components/common/CommonComponents";
 // icons
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 // hooks
 import { useNotifyMessage } from "src/hooks/useNotifyMessage";
@@ -27,25 +28,32 @@ import { updateState } from "src/utils/common-utils";
 import { NUMERIC_REGEX } from "src/constants/common-constants";
 // styles
 import classes from "./AddIncome.module.scss";
-
+interface IncomeFormError {
+  label: boolean;
+  amount: boolean;
+}
 const FORM_ERROR_MESSAGE = {
   label: "Enter a label within min 100 characters",
   amount: "Enter a valid amount more than 0 (e.g. 100.50 or 100)",
+};
+const INITIAL_INCOME_DETAILS: IncomeComponent = {
+  label: "",
+  amount: "",
+  group: "salary",
+};
+const INITIAL_ERRORS: IncomeFormError = {
+  label: false,
+  amount: false,
 };
 const AddIncome: React.FC = () => {
   const { notify } = useNotifyMessage();
   const dispatch = useDispatch();
   const editableIncome = useSelector(selectEditableIncome);
 
-  const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>({
-    label: "",
-    amount: "",
-    group: "salary",
-  });
-  const [errors, setErrors] = useState<{ label: boolean; amount: boolean }>({
-    label: false,
-    amount: false,
-  });
+  const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
+    INITIAL_INCOME_DETAILS
+  );
+  const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
   useEffect(() => {
     setIncomeDetails(editableIncome);
     setErrors({
@@ -81,18 +89,19 @@ const AddIncome: React.FC = () => {
     dispatch(modifyIncomeDetails(incomeDetails));
     notify(`Income with Rs. ${incomeDetails.amount} saved.`);
   };
+  const onClear = () => {
+    setIncomeDetails(INITIAL_INCOME_DETAILS);
+    setErrors(INITIAL_ERRORS);
+  };
 
   const { label, amount, group } = incomeDetails;
   return (
-    <section className={classes.add_income__container}>
-      <div className={classes.add_income__label} data-testid="add-income-label">
-        <span>Add a new component </span>
-        <span>or Click existing component to update</span>
-      </div>
+    <form className={classes.add_income__form}>
       <TextField
         label="Income label"
         id="add-income-form-label"
         fullWidth
+        disabled={editableIncome.label !== ""}
         inputProps={{ "data-testid": "add-income-form-label-input" }}
         value={label}
         onChange={onLabelChange}
@@ -122,14 +131,25 @@ const AddIncome: React.FC = () => {
           <MenuItem value="extra">Extra Income</MenuItem>
         </Select>
       </FormControl>
-      <Button
-        data-testid="add-income-form-btn"
-        startIcon={<DataSaverOnIcon />}
-        onClick={onAddIncome}
-      >
-        {editableIncome.label === "" ? "Add" : "Update"}
-      </Button>
-    </section>
+      <div className={classes.action_btn__container}>
+        <Button
+          data-testid="add-income-form-submit-btn"
+          startIcon={<DataSaverOnIcon />}
+          onClick={onAddIncome}
+          className={classes.action_btn__submit}
+        >
+          {editableIncome.label === "" ? "Add" : "Update"}
+        </Button>
+        <Button
+          data-testid="add-income-form-clear-btn"
+          startIcon={<ClearAllIcon />}
+          onClick={onClear}
+          className={classes.action_btn__clear}
+        >
+          Clear
+        </Button>
+      </div>
+    </form>
   );
 };
 export default memo(AddIncome);

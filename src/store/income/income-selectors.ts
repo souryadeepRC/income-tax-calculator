@@ -22,7 +22,26 @@ export const selectPf = (store: AppStoreType): number =>
 export const selectTaxDetails = (store: AppStoreType): any => store.income.tax;
 export const selectTaxChoice = (store: AppStoreType): any =>
   store.income.tax.choice;
+export const selectIncomeBreakdown: (store: AppStoreType) => {
+  salary: number;
+  extra: number;
+  total: number;
+} = createSelector([selectSalaryIncome, selectExtraIncome], (salary, extra) => {
+  const totalSalary = Object.values(salary).reduce(
+    (acc: number, amount: number) => acc + amount,
+    0
+  );
+  const totalExtra = Object.values(extra).reduce(
+    (acc: number, amount: number) => acc + amount,
+    0
+  );
 
+  return {
+    salary: totalSalary,
+    extra: totalExtra,
+    total: totalSalary + totalExtra,
+  };
+});
 export const selectAnnualIncome: (store: AppStoreType) => number =
   createSelector([selectSalaryIncome, selectExtraIncome], (salary, extra) => {
     const totalSalary = Object.values(salary).reduce(

@@ -39,14 +39,11 @@ describe("test AddIncome component", () => {
     fireEvent.change(element, { target: { value } });
   };
   const submitForm = () => {
-    const submitBtn = screen.getByTestId("add-income-form-btn");
+    const submitBtn = screen.getByTestId("add-income-form-submit-btn");
     fireEvent.click(submitBtn);
   };
   test("render the form with label and fields", () => {
     setup();
-    expect(screen.getByTestId("add-income-label")).toHaveTextContent(
-      "Add a new component"
-    );
     expect(screen.getByLabelText("Income label")).toBeInTheDocument();
     expect(
       screen.getByTestId("add-income-form-label-input")
@@ -58,8 +55,16 @@ describe("test AddIncome component", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByLabelText("Group")).toBeInTheDocument();
-    expect(screen.getByTestId("add-income-form-btn")).toBeInTheDocument();
-    expect(screen.getByTestId("add-income-form-btn")).toHaveTextContent("Add");
+    expect(
+      screen.getByTestId("add-income-form-submit-btn")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
+      "Add"
+    );
+    expect(screen.getByTestId("add-income-form-clear-btn")).toBeInTheDocument();
+    expect(screen.getByTestId("add-income-form-clear-btn")).toHaveTextContent(
+      "Clear"
+    );
   });
 
   test("update fields with valid inputs and submit records", () => {
@@ -94,8 +99,9 @@ describe("test AddIncome component", () => {
   test("update fields with invalid inputs and check submit validation", () => {
     const { mockDispatch } = setup();
     const labelErrorMessage = "Enter a label within min 100 characters";
-    const amountErrorMessage = "Enter a valid amount more than 0 (e.g. 100.50 or 100)";
-    // validate with :: default field value 
+    const amountErrorMessage =
+      "Enter a valid amount more than 0 (e.g. 100.50 or 100)";
+    // validate with :: default field value
     submitForm();
 
     expect(screen.getByText(labelErrorMessage)).toBeInTheDocument();
@@ -136,7 +142,6 @@ describe("test AddIncome component", () => {
     expect(screen.getByText(labelErrorMessage)).toBeInTheDocument();
     expect(mockDispatch).toHaveBeenCalledTimes(0);
   });
-
   test("render submit button as text update for edit case", () => {
     setup({
       amount: "1000",
@@ -144,9 +149,22 @@ describe("test AddIncome component", () => {
       group: "salary",
     });
 
-    expect(screen.getByTestId("add-income-form-btn")).toBeInTheDocument();
-    expect(screen.getByTestId("add-income-form-btn")).toHaveTextContent(
+    expect(
+      screen.getByTestId("add-income-form-submit-btn")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
       "Update"
     );
+  });
+  test("type records in text field then clear the record", () => {
+    setup();
+
+    updateTextField("add-income-form-label-input", "Test Label");
+    updateTextField("add-income-form-amount-input", "200");
+
+    const labelInput = screen.getByTestId("add-income-form-label-input");
+    expect(labelInput).toHaveValue("Test Label");
+    fireEvent.click(screen.getByTestId("add-income-form-clear-btn"));
+    expect(labelInput).toHaveValue("");
   });
 });

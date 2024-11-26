@@ -6,7 +6,7 @@
     width: 85%;
     padding: 1vw;
     transition: all 0.3s;
-    border-radius: 2vw;
+    /* border-radius: 2vw; */
     font-size: 1vw;
     color: #fff;
     text-transform: uppercase;
@@ -20,7 +20,7 @@
       width: 100%;
       height: 100%;
       background-color: #72240c;
-      border-radius: 2vw;
+      /* border-radius: 2vw; */
     }
     &:before {
       content: "";
@@ -32,7 +32,7 @@
       height: 100%;
       transition: all 0.3s;
       background-color: darken(#e2896d, 15%);
-      border-radius: 2vw;
+      /* border-radius: 2vw; */
     }
     &:hover {
       &:before {

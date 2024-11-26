@@ -7,6 +7,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import InsightsIcon from "@mui/icons-material/Insights";
 // styles
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   selectAnnualIncome,
   selectTaxChoice,
@@ -32,6 +33,10 @@ const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
 };
 const IncomeInfo: React.FC = () => {
   const annualIncome: any = useSelector(selectAnnualIncome);
+  const navigate = useNavigate();
+  const onModifyIncome = () => {
+    navigate("/income");
+  };
   return (
     <Card
       className={classes.income}
@@ -40,6 +45,7 @@ const IncomeInfo: React.FC = () => {
           variant="contained"
           startIcon={<CurrencyRupeeIcon />}
           className={classes.action__btn}
+          onClick={onModifyIncome}
         >
           Modify amount
         </Button>
@@ -91,6 +97,10 @@ const TaxInfo: React.FC = () => {
   );
 };
 const Landing: React.FC = () => {
+  const navigate = useNavigate();
+  const onGetStarted = () => {
+    navigate("/income");
+  };
   return (
     <section className={classes.page__container}>
       <section className={classes.page__heading}>
@@ -103,7 +113,11 @@ const Landing: React.FC = () => {
           estimated tax, deductions, and take-home pay. Perfect for planning and
           peace of mind, all in just a few clicks!
         </span>
-        <Button variant="contained" startIcon={<AppsIcon />}>
+        <Button
+          variant="contained"
+          startIcon={<AppsIcon />}
+          onClick={onGetStarted}
+        >
           Get Started
         </Button>
       </section>

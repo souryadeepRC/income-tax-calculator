@@ -1,16 +1,28 @@
 @import "src/styles/variables.scss";
-.add_income__container {
+
+.add_income__form {
   display: flex;
   flex-direction: column;
-  gap: 1vw;
-  width: 40%;
-  padding: 2vw;
-  .add_income__label {
+  gap: 3vh;
+  width: 75%;
+  max-width: 40vw;
+  margin: 0 auto;
+  .action_btn__container {
     display: flex;
-    flex-direction: column;
-    span:first-child {
-      font-size: 2vw;
-      font-weight: bold;
+    flex-wrap: wrap;
+    gap: 0.5vw;
+    width: 100%;
+    justify-content: space-between;
+    .action_btn__submit {
+      width: 70%;
     }
+    .action_btn__clear {
+      width: 28%;
+    }
+  }
+}
+@media (max-width: $mobile-max-width) {
+  .add_income__form {
+    max-width: 95%;
   }
 }

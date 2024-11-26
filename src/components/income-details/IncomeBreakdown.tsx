@@ -1,30 +1,34 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 // library
-import { Box, Tab, Tabs } from "@mui/material";
-// styles
+import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+// actions
 import { setEditableIncomeDetails } from "src/store/income/income-actions";
-import {
-  selectExtraIncome,
-  selectSalaryIncome,
-} from "src/store/income/income-selectors";
+// types
 import { IncomeComponent } from "src/types/income-types";
+// utils
 import { getIncomeBreakdown } from "src/utils/income-utils";
-import classes from "./IncomeDetails.module.scss";
+// styles
+import classes from "./IncomeBreakdown.module.scss";
 interface IncomeBreakdownProps {
+  amount?: number;
   group: "salary" | "extra";
   dataSelector: any;
 }
 
 const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
+  amount,
   group,
   dataSelector,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const breakdownIncomes = getIncomeBreakdown(group, useSelector(dataSelector));
 
   const onIncomeClick = (income: IncomeComponent) => () => {
     dispatch(setEditableIncomeDetails(income));
+    navigate("/income/add-income")
   };
   return (
     <section className={classes.income_breakdown_container}>
@@ -52,32 +56,4 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
     </section>
   );
 };
-
-const IncomeDetails: React.FC = () => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-  return (
-    <Box width={"60%"}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label={`Salary Income Rs. 30000`} />
-          <Tab label={`Extra Income Rs. 20000`} />
-        </Tabs>
-      </Box>
-      {value === 0 && (
-        <IncomeBreakdown group="salary" dataSelector={selectSalaryIncome} />
-      )}
-      {value === 1 && (
-        <IncomeBreakdown group="extra" dataSelector={selectExtraIncome} />
-      )}
-    </Box>
-  );
-};
-export default memo(IncomeDetails);
+export default memo(IncomeBreakdown);
