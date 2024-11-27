@@ -1,22 +1,27 @@
 @import "src/styles/variables.scss";
 .navigation-list {
+  box-shadow: inset 8px 6px 7px #72240c42;
   display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 60%;
+  margin: 0 auto;
+  padding: 9px;
+  background: white;
+  border-radius: 50px;
   list-style-type: none;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  margin-left: auto;
   li > a {
     @include font($size: $font-size-non-mobile-primary, $weight: bold);
+    color: $color-navigation-link;
     text-decoration: none;
-    color: $color-black;
     &.active {
       color: $color-navigation-active;
     }
   }
 }
 @media screen and (max-width: $mobile-max-width) {
-  .navigation-list .MuiSvgIcon-root {
-    @include dimension($width: 18px, $height: 18px);
+  .navigation-list {
+    gap: 8px;
+    width: 40%;
   }
 }

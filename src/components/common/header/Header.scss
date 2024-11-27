@@ -5,13 +5,19 @@
   box-shadow: 1px 5px 3px rgba($color-quartz, 0.3);
   box-sizing: border-box;
   margin: 0 0 10px 0;
-  padding: 15px 50px;
-  background-color: #f9fbf9;
-  .app-logo.MuiSvgIcon-root {
-    @include dimension($width: 15px, $height: 15px);
+  padding: 5px 0;
+  background-color: $primary-color;
+  color: $color-header;
+  .header__text {
+    width: 20%;
+    text-align: center;
+  }
+  .header__theme {
+    width: 20%;
+    text-align: center;
   }
   a {
-    color: $color-navigation;
+    color: $color-navigation-link;
     span {
       @include font($size: $font-size-non-mobile-primary, $weight: bold);
     }
@@ -25,8 +31,12 @@
   .header__container {
     justify-content: center;
     padding: 10px;
-    .app-logo.MuiSvgIcon-root {
-      @include dimension($width: 12px, $height: 12px);
+    .header__text {
+      width: 30%;
+      font-size: $font-size-mobile-primary;
+    }
+    .header__theme {
+      width: 30%;
     }
     a > span {
       font-size: $font-size-mobile-primary;
