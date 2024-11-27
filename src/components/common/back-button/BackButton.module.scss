@@ -1,0 +1,7 @@
+@import "src/styles/variables.scss";
+.back__button {
+  &:global(.MuiButton-root) {
+    color: $primary-color;
+    text-transform: capitalize;
+  }
+}

@@ -39,27 +39,18 @@ const Breakup = ({ type, details, differenceType }: any) => {
 };
 export const IncomeTaxBreakup = () => {
   // store
-  const { difference, newScheme, oldScheme }: any =
-    useSelector(selectTaxDetails);
-
+  const { choice, newScheme, oldScheme }: any = useSelector(selectTaxDetails);
+  const { difference, type } = choice;
   return (
     <section>
       <section className="tax-breakup-message">
-        You will save Rs. {difference.amount.toFixed(2)} by choosing&nbsp;
-        {difference.type} Tax Regime
+        You will save Rs. {difference.toFixed(2)} by choosing&nbsp;
+        {type} Tax Regime
       </section>
 
       <div className="tax-breakup__container">
-        <Breakup
-          differenceType={difference.type}
-          type="New"
-          details={newScheme}
-        />
-        <Breakup
-          differenceType={difference.type}
-          type="Old"
-          details={oldScheme}
-        />
+        <Breakup differenceType={type} type="New" details={newScheme} />
+        <Breakup differenceType={type} type="Old" details={oldScheme} />
       </div>
     </section>
   );

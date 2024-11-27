@@ -21,7 +21,7 @@ export const Deduction80C = () => {
   const dispatch: AppDispatch = useDispatch();
   const deduction80C: Deduction80CType = useSelector(selectDeduction80C);
   // hooks
-  const {notify} = useNotifyMessage();
+  const { notify } = useNotifyMessage();
   // state
   const [deductionAmount, setDeductionAmount] = useState<DeductionAmountType>({
     providentFund: 0,
@@ -61,7 +61,7 @@ export const Deduction80C = () => {
         others: Number(deductionAmount.others),
       })
     );
-    notify('Deduction by 80C saved')
+    notify("Deduction by 80C saved");
   };
 
   const DEDUCTION_ITEMS: { label: string; amountKey: string }[] = [
@@ -97,16 +97,12 @@ export const Deduction80C = () => {
       label: "Others(VPF,NSC etc.)",
       amountKey: "others",
     },
-  ]; 
+  ];
   return (
     <section className="deduction__option">
       <section className="deduction__option-content">
         <section className="deduction__80c-items">
           {DEDUCTION_ITEMS.map((item, index) => {
-            /* console.log(item.amountKey);
-            console.log(deductionAmount);
-            console.log(deductionAmount[item.amountKey]); */
-
             return (
               <TextField
                 key={index}
