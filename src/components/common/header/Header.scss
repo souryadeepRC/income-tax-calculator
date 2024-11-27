@@ -4,25 +4,26 @@
   @include flexBox($justifyContent: flex-start, $alignItems: center);
   box-shadow: 1px 5px 3px rgba($color-quartz, 0.3);
   box-sizing: border-box;
-  margin: 0 0 10px 0;
   padding: 5px 0;
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   color: $color-header;
   .header__text {
     width: 20%;
     text-align: center;
+    font-weight: bold;
+    color: var(--secondary-font-color);
   }
   .header__theme {
     width: 20%;
     text-align: center;
   }
   a {
-    color: $color-navigation-link;
+    color: var(--navigation-link-color);
     span {
       @include font($size: $font-size-non-mobile-primary, $weight: bold);
     }
     &.active {
-      color: $color-navigation-active;
+      color: var(--navigation-active-color);
     }
   }
 }

@@ -7,15 +7,15 @@
   width: 60%;
   margin: 0 auto;
   padding: 9px;
-  background: white;
+  background: var(--primary-bg-color);
   border-radius: 50px;
   list-style-type: none;
   li > a {
     @include font($size: $font-size-non-mobile-primary, $weight: bold);
-    color: $color-navigation-link;
+    color: var(--navigation-link-color);
     text-decoration: none;
     &.active {
-      color: $color-navigation-active;
+      color: var(--navigation-active-color);
     }
   }
 }

@@ -1,21 +1,21 @@
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 // library
+import { Box } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 // components
 import { TaxCalculator } from "src/pages/income-tax-calculator/TaxCalculator";
-// hooks
-// store
-import { rootStore } from "src/store/root-store";
 // styles
 import "./App.scss";
+import { selectAppTheme } from "./store/screen/screen-selectors";
 function App() {
+  const appTheme = useSelector(selectAppTheme);
   return (
     <BrowserRouter>
-      <Provider store={rootStore}>
+      <Box width={"100%"} height={"100%"} data-theme={appTheme}>
         <ToastContainer />
         <TaxCalculator />
-      </Provider>
+      </Box>
     </BrowserRouter>
   );
 }

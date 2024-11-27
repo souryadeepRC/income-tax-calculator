@@ -1,27 +1,28 @@
-
+@import "src/styles/theme-variables.scss";
 @import "src/styles/mixins.scss";
 // Font Family
-$primary-font-family : 'Tahoma';
+$primary-font-family: "Tahoma";
 // Font Size
 $font-size-non-mobile-primary: 12px;
 $font-size-mobile-primary: 12px;
-$font-size-9 : 9px;
-$font-size-10 : 10px;
-$font-size-12 : 12px;
-$font-size-14 : 14px;
-$font-size-15 : 15px;
-$font-size-25 : 25px;
+$font-size-9: 9px;
+$font-size-10: 10px;
+$font-size-12: 12px;
+$font-size-14: 14px;
+$font-size-15: 15px;
+$font-size-25: 25px;
 // Color
-$primary-color: #72240c;
+/* $primary-color: #72240c; */
 $secondary-color: #d4994373;
-$color-quartz :  #4A4A4A;
-$color-black : #000000;
+$color-quartz: #4a4a4a;
+$color-black: #000000;
+$color-white: #ffffff;
 
 $color-header: white;
-$color-navigation-link: #676363;
-$color-navigation-active: #72240c;
+/* $color-navigation-link: #676363;
+$color-navigation-active: #72240c; */
 // Font Weight
-$font-weight-700 : 700;
-$font-weight-500 : 500;
+$font-weight-700: 700;
+$font-weight-500: 500;
 
-$mobile-max-width : 787px
+$mobile-max-width: 787px;

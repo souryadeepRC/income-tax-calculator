@@ -1,7 +1,7 @@
 // library
 // icons
 // components
-import { Navigation } from "src/components/common/navigation/Navigation";
+import { AppTheme, Navigation } from "src/components/common/CommonComponents";
 // styles
 import "./Header.scss";
 
@@ -11,7 +11,9 @@ export const Header = () => {
     <header className="header__container">
       <span className="header__text">Tax Calculator</span>
       <Navigation />
-      <div className="header__theme">Theme Button</div>
+      <div className="header__theme">
+        <AppTheme />
+      </div>
     </header>
   );
 };
