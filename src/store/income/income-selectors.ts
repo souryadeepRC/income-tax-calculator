@@ -42,16 +42,3 @@ export const selectIncomeBreakdown: (store: AppStoreType) => {
     total: totalSalary + totalExtra,
   };
 });
-export const selectAnnualIncome: (store: AppStoreType) => number =
-  createSelector([selectSalaryIncome, selectExtraIncome], (salary, extra) => {
-    const totalSalary = Object.values(salary).reduce(
-      (acc: number, amount: number) => acc + amount,
-      0
-    );
-    const totalExtra = Object.values(extra).reduce(
-      (acc: number, amount: number) => acc + amount,
-      0
-    );
-
-    return totalSalary + totalExtra;
-  });

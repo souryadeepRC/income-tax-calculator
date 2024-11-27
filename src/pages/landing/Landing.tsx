@@ -9,7 +9,7 @@ import InsightsIcon from "@mui/icons-material/Insights";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  selectAnnualIncome,
+  selectIncomeBreakdown,
   selectTaxChoice,
 } from "src/store/income/income-selectors";
 import { formatNumber } from "src/utils/tax-calculation";
@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
   );
 };
 const IncomeInfo: React.FC = () => {
-  const annualIncome: any = useSelector(selectAnnualIncome);
+  const { total } = useSelector(selectIncomeBreakdown);
   const navigate = useNavigate();
   const onModifyIncome = () => {
     navigate("/income");
@@ -54,7 +54,7 @@ const IncomeInfo: React.FC = () => {
         <section>
           <span className={classes.label}>Annual Income</span>
           <strong className={classes.amount}>
-            Rs.{formatNumber(annualIncome)}
+            Rs.{formatNumber(total)}
           </strong>
           <span className={classes.description}>Including provident fund</span>
         </section>

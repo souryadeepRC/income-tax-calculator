@@ -137,16 +137,17 @@ const calculateChapter6CDeduction = (deductionByChapter6: any) => {
   return totalDeduction;
 };
 export const calculateTax = (
-  totalIncome: any,
+  salaryIncome:any,
+  totalIncome: number,
   deductionDetail: DeductionReducerType
 ) => {
   let deductedAmount = 0;
-  const taxableAmount = totalIncome.salary - totalIncome.pf;
+  const taxableAmount = totalIncome - salaryIncome.pf;
 
   deductedAmount += calculateRentDeduction(
     deductionDetail.rent,
-    totalIncome.basic,
-    totalIncome.hra
+    salaryIncome.basic,
+    salaryIncome.hra
   );
 
   deductedAmount +=
