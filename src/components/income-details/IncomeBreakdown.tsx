@@ -1,8 +1,13 @@
 import { memo } from "react";
 // library
+import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+// components
+import { Menu } from "src/components/common/CommonComponents";
 // actions
 import { setEditableIncomeDetails } from "src/store/income/income-actions";
 // types
@@ -12,13 +17,11 @@ import { getIncomeBreakdown } from "src/utils/income-utils";
 // styles
 import classes from "./IncomeBreakdown.module.scss";
 interface IncomeBreakdownProps {
-  amount?: number;
   group: "salary" | "extra";
   dataSelector: any;
 }
 
 const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
-  amount,
   group,
   dataSelector,
 }) => {
@@ -28,31 +31,42 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
 
   const onIncomeClick = (income: IncomeComponent) => () => {
     dispatch(setEditableIncomeDetails(income));
-    navigate("/income/add-income")
+    navigate("/income/add-income");
   };
   return (
     <section className={classes.income_breakdown_container}>
-      {breakdownIncomes.map((income: IncomeComponent, index: number) => {
-        return (
-          <div
-            key={income.label}
-            className={classes.item_container}
-            onClick={onIncomeClick(income)}
-          >
-            <Box className={classes.item_inner__container}>
-              <Box
-                display="flex"
-                flexDirection="column"
-                padding={"0 1vw"}
-                width={"80%"}
-              >
+      <section className={classes.income_breakdown_header}>
+        <span className={classes.info}>
+          Tap the icon to customize your component
+        </span>
+      </section>
+      <section className={classes.income_component_container}>
+        {breakdownIncomes.map((income: IncomeComponent, index: number) => {
+          return (
+            <div key={income.label} className={classes.income_component}>
+              <Box display="flex" flexDirection="column">
                 <strong>{income.label}</strong>
                 <span>Rs. {income.amount}</span>
               </Box>
-            </Box>
-          </div>
-        );
-      })}
+              <Menu
+                MenuIcon={<MoreVertIcon />}
+                actions={[
+                  {
+                    label: "Modify",
+                    icon: <AppRegistrationIcon fontSize="small" />,
+                    onClick: onIncomeClick(income),
+                  },
+                  {
+                    label: "Remove",
+                    icon: <DeleteIcon fontSize="small" />,
+                    onClick: () => {},
+                  },
+                ]}
+              />
+            </div>
+          );
+        })}
+      </section>
     </section>
   );
 };

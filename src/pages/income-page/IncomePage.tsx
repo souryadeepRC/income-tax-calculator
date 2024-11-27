@@ -63,7 +63,6 @@ const IncomePage: React.FC = () => {
           element={
             <RouteLayout label={`Salary Income Rs. ${salary}`}>
               <IncomeBreakdown
-                amount={salary}
                 group="salary"
                 dataSelector={selectSalaryIncome}
               />
@@ -74,11 +73,7 @@ const IncomePage: React.FC = () => {
           path="extra"
           element={
             <RouteLayout label={`Extra Income Rs. ${extra}`}>
-              <IncomeBreakdown
-                amount={extra}
-                group="extra"
-                dataSelector={selectExtraIncome}
-              />
+              <IncomeBreakdown group="extra" dataSelector={selectExtraIncome} />
             </RouteLayout>
           }
         />
