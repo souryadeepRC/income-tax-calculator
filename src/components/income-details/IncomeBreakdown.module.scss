@@ -1,6 +1,7 @@
 @import "src/styles/variables.scss";
 
 .income_breakdown_container {
+  color: var(--primary-font-color);
   .income_breakdown_header {
     display: flex;
     .info {

@@ -7,12 +7,53 @@
   width: 75%;
   max-width: 40vw;
   margin: 0 auto;
+  :global(.MuiFormControl-root) {
+    :global(.MuiInputLabel-root) {
+      color: var(--primary-font-color);
+    }
+    :global(.MuiInputBase-root) {
+      color: var(--navigation-active-color);
+      :global(.MuiSvgIcon-root){
+        fill: var(--navigation-active-color);
+      }
+      :global(.MuiOutlinedInput-notchedOutline) {
+        border-color: var(--navigation-active-color);
+      }
+    }
+  }
+  :global(.MuiTextField-root) {
+    :global(.MuiInputLabel-root) {
+      color: var(--primary-font-color);
+      &:global(.Mui-disabled) {
+        color: var(--navigation-link-color);
+      }
+    }
+    :global(.MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline) {
+      border-color: var(--navigation-active-color);
+    }
+    :global(.MuiInputBase-root) {
+      color: var(--primary-font-color);
+
+      &:global(.Mui-focused .MuiOutlinedInput-notchedOutline) {
+        border-color: var(--navigation-active-color);
+      }
+      &:global(.Mui-disabled) {
+        color: var(--navigation-link-color);
+      }
+    }
+    :global(.MuiOutlinedInput-notchedOutline) {
+      border-color: var(--navigation-link-color);
+    }
+  }
   .action_btn__container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     gap: 0.5vw;
     width: 100%;
-    justify-content: space-between;
+    :global(.btn) {
+      font-size: 1.2vw;
+    }
     .action_btn__submit {
       width: 70%;
     }
