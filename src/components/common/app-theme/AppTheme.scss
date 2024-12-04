@@ -1,0 +1,65 @@
+@import "src/styles/variables.scss";
+
+.app_theme__switch {
+  &.MuiSwitch-root {
+    width: 80px;
+    height: 25px;
+    padding: 0;
+    .MuiSwitch-switchBase {
+      transform: translateX(0);
+      margin: 0;
+      padding: 0px;
+
+      .MuiSwitch-input {
+        left: 20%;
+      }
+      .MuiSwitch-thumb {
+        width: 25px;
+        height: 25px;
+        &::before {
+          content: "";
+          display: block;
+          width: 25px;
+          height: 25px;
+          background-image: url("https://img.freepik.com/premium-photo/there-is-cartoon-pumpkin-with-happy-face-leaves-generative-ai_791316-87457.jpg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 50%;
+        }
+      }
+      &.Mui-checked {
+        transform: translateX(55px);
+        color: #fff;
+        .MuiSwitch-input {
+          left: -220%;
+        }
+        .MuiSwitch-thumb {
+          &::before {
+            content: "";
+            background-image: url("https://images.vexels.com/content/145131/preview/sun-large-wavy-beams-icon-3f31e1.png");
+          }
+        }
+        & + .MuiSwitch-track {
+          opacity: 1;
+          background-color: var(--primary-bg-color);
+          &::before {
+            content: "Light";
+            transform: translateX(-10px);
+          }
+        }
+      }
+    }
+    .MuiSwitch-track {
+      opacity: 1;
+      background-color: var(--primary-bg-color);
+      border-radius: 20px;
+      &::before {
+        content: "Dark";
+        display: block;
+        transform: translateX(10px);
+        font-weight: bold;
+        color: var(--primary-font-color);
+      }
+    }
+  }
+}

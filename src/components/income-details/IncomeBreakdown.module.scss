@@ -1,6 +1,7 @@
 @import "src/styles/variables.scss";
 
 .income_breakdown_container {
+  color: var(--primary-font-color);
   .income_breakdown_header {
     display: flex;
     .info {
@@ -17,17 +18,17 @@
     max-height: 60vh;
     padding: 2vh 0;
     .income_component {
-      box-shadow: 1px 2px 2px $primary-color;
+      box-shadow: 1px 2px 2px var(--primary-color);
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       width: 200px;
       padding: 15px;
-      background: rgba($primary-color, 0.08);
+      background: rgba(var(--primary-color), 0.08);
       cursor: pointer;
       border-radius: 5px;
       :global(.MuiSvgIcon-root) {
-        color: $primary-color;
+        color: var(--primary-color);
       }
     }
   }

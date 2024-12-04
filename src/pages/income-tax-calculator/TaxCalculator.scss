@@ -1,9 +1,10 @@
 @import "src/styles/variables.scss";
 .tax-section {
-  height: calc(100% - 59px - 37px);
+  height: calc(100% - 46px - 37px);
+  background-color: var(--primary-bg-color);
 }
 @media screen and (max-width: $mobile-max-width) {
   .tax-section {
-    height: calc(100% - 51px - 34px);
+    height: calc(100% - 41px - 34px);
   }
 }

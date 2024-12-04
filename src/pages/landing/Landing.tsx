@@ -21,13 +21,9 @@ interface CardProps {
 }
 const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
   return (
-    <section className={`${classes.card__outer_container} ${className}`}>
-      <section className={`${classes.card__inner_container} `}>
-        <>
-          {content}
-          {actionItem}
-        </>
-      </section>
+    <section className={`${classes.card__inner_container} ${className}`}>
+      {content}
+      {actionItem}
     </section>
   );
 };
@@ -53,9 +49,7 @@ const IncomeInfo: React.FC = () => {
       content={
         <section>
           <span className={classes.label}>Annual Income</span>
-          <strong className={classes.amount}>
-            Rs.{formatNumber(total)}
-          </strong>
+          <strong className={classes.amount}>Rs.{formatNumber(total)}</strong>
           <span className={classes.description}>Including provident fund</span>
         </section>
       }

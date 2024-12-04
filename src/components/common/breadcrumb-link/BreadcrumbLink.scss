@@ -1,0 +1,18 @@
+@import "src/styles/variables.scss";
+.breadcrumb__link__container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  :global(.MuiSvgIcon-root) {
+    fill: var(--primary-bg-color);
+  }
+  span {
+    color: var(--navigation-link-color);
+  }
+  a {
+    display: flex;
+    @include font($size: $font-size-non-mobile-primary, $weight: bold);
+    color: var(--navigation-active-color);
+    text-decoration: none;
+  }
+}

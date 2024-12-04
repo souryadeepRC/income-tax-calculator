@@ -19,7 +19,7 @@ import AddIncome from "src/components/add-income/AddIncome";
 import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
 import classes from "./IncomePage.module.scss";
 const IncomeOption: React.FC = () => {
-  const { salary, extra, total } = useSelector(selectIncomeBreakdown);
+  const { salary, extra } = useSelector(selectIncomeBreakdown);
   const location = useLocation();
   const navigate = useNavigate();
   return (

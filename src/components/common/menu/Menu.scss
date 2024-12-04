@@ -2,6 +2,6 @@
 .menu__container {
   .MuiMenuItem-root {
     gap: 20px;
-    color: $primary-color;
+    color: var(--primary-color);
   }
 }
