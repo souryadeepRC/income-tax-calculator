@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTaxDetails } from "src/store/income/income-actions";
 // selectors
 import { selectDeduction } from "src/store/deduction/deduction-selectors";
-import { selectIncomeBreakdown, selectSalaryIncome } from "src/store/income/income-selectors";
+import {
+  selectIncomeBreakdown,
+  selectSalaryIncome,
+} from "src/store/income/income-selectors";
 // types
 import { AppDispatch } from "src/store/reducer-types";
 import { DeductionReducerType } from "src/types/deduction-types";
@@ -20,6 +23,6 @@ export const useTaxCalculation = () => {
 
   // effects
   useEffect(() => {
-    dispatch(updateTaxDetails(calculateTax(salaryIncome,total, deduction)));
-  }, [total, deduction, dispatch]);
+    dispatch(updateTaxDetails(calculateTax(salaryIncome, total, deduction)));
+  }, [total, deduction, dispatch, salaryIncome]);
 };
