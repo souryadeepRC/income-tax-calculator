@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import RouteLayout from "./RouteLayout";
 
 jest.mock("src/components/common/CommonComponents", () => ({
-  BackButton: () => <button>Back</button>,
+  BreadcrumbLink: () => <button>BreadcrumbLink</button>,
 }));
 
 describe("test AddIncome component", () => {
@@ -12,7 +12,7 @@ describe("test AddIncome component", () => {
         <span>Test Child Content</span>
       </RouteLayout>
     );
-    expect(screen.getByText("Back")).toBeInTheDocument();
+    expect(screen.getByText("BreadcrumbLink")).toBeInTheDocument();
     expect(screen.getByTestId("route-layout-label")).toHaveTextContent(
       "Test label"
     );
