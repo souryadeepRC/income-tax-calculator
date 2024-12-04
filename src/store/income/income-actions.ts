@@ -4,7 +4,7 @@ import {
 } from "src/types/income-types";
 import {
   MODIFY_INCOME_DETAILS,
-  SET_EDITABLE_INCOME_DETAILS,
+  REMOVE_INCOME_DETAILS,
   UPDATE_INCOME_DETAILS,
   UPDATE_TAX_DETAILS,
 } from "./income-constants";
@@ -27,9 +27,9 @@ export const updateTaxDetails = (payload: any) => {
     payload,
   };
 };
-export const setEditableIncomeDetails = (payload: any) => {
+export const removeIncomeDetails = (payload: any) => {
   return {
-    type: SET_EDITABLE_INCOME_DETAILS,
+    type: REMOVE_INCOME_DETAILS,
     payload,
   };
 };

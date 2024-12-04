@@ -88,6 +88,8 @@ const AddIncome: React.FC = () => {
     }
     dispatch(modifyIncomeDetails(incomeDetails));
     notify(`Income with Rs. ${incomeDetails.amount} saved.`);
+    setIncomeDetails(INITIAL_INCOME_DETAILS);
+    setErrors(INITIAL_ERRORS);
   };
   const onClear = () => {
     setIncomeDetails(INITIAL_INCOME_DETAILS);

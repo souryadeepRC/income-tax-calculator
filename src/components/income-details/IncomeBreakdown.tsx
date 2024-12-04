@@ -1,15 +1,8 @@
 import { memo } from "react";
 // library
-import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // components
-import { Menu } from "src/components/common/CommonComponents";
-// actions
-import { setEditableIncomeDetails } from "src/store/income/income-actions";
+import BreakdownComponent from "./BreakdownComponent";
 // types
 import { IncomeComponent } from "src/types/income-types";
 // utils
@@ -25,14 +18,8 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
   group,
   dataSelector,
 }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const breakdownIncomes = getIncomeBreakdown(group, useSelector(dataSelector));
 
-  const onIncomeClick = (income: IncomeComponent) => () => {
-    dispatch(setEditableIncomeDetails(income));
-    navigate("/income/add-income");
-  };
   return (
     <section className={classes.income_breakdown_container}>
       <section className={classes.income_breakdown_header}>
@@ -41,29 +28,14 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
         </span>
       </section>
       <section className={classes.income_component_container}>
-        {breakdownIncomes.map((income: IncomeComponent, index: number) => {
+        {breakdownIncomes.map((income: IncomeComponent) => {
           return (
-            <div key={income.label} className={classes.income_component}>
-              <Box display="flex" flexDirection="column">
-                <strong>{income.label}</strong>
-                <span>Rs. {income.amount}</span>
-              </Box>
-              <Menu
-                MenuIcon={<MoreVertIcon />}
-                actions={[
-                  {
-                    label: "Modify",
-                    icon: <AppRegistrationIcon fontSize="small" />,
-                    onClick: onIncomeClick(income),
-                  },
-                  {
-                    label: "Remove",
-                    icon: <DeleteIcon fontSize="small" />,
-                    onClick: () => {},
-                  },
-                ]}
-              />
-            </div>
+            <BreakdownComponent
+              key={income.label}
+              group={group}
+              label={income.label}
+              amount={income.amount}
+            />
           );
         })}
       </section>

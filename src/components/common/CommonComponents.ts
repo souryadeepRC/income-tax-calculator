@@ -5,16 +5,18 @@ import Button from "src/components/common/button/Button";
 import { Footer } from "src/components/common/footer/Footer";
 import { Header } from "src/components/common/header/Header";
 import Menu from "src/components/common/menu/Menu";
+import Modal from "src/components/common/modal/Modal";
 import { Navigation } from "src/components/common/navigation/Navigation";
 import RouteLayout from "src/components/common/route-layout/RouteLayout";
 
 export {
     AppTheme,
-    BackButton, BreadcrumbLink, Button,
+    BackButton,
+    BreadcrumbLink,
+    Button,
     Footer,
     Header,
-    Menu,
-    Navigation,
+    Menu, Modal, Navigation,
     RouteLayout
 };
 
