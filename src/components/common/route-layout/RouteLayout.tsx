@@ -9,15 +9,20 @@ import { BreadcrumbLink } from "src/components/common/CommonComponents";
 import classes from "./RouteLayout.module.scss";
 
 interface RouteLayoutProps {
+  parentPath: string;
   label: string;
   children: React.ReactNode;
 }
-const RouteLayout: React.FC<RouteLayoutProps> = ({ label, children }) => {
+const RouteLayout: React.FC<RouteLayoutProps> = ({
+  parentPath,
+  label,
+  children,
+}) => {
   return (
     <section className={classes.route_layout__container}>
       <Box display="flex" alignItems="center">
         <BreadcrumbLink
-          parentPath="income"
+          parentPath={parentPath}
           homeIcon={<AccountBalanceWalletIcon fontSize="small" />}
         />
         <div
