@@ -16,6 +16,7 @@ import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors"
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
+import "./IncomeTaxDeduction.scss";
 import { Box } from "@mui/material";
 const DeductionOption: React.FC = () => {
   const deductionBreakup = useSelector(selectDeductionBreakup);

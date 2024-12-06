@@ -3,6 +3,7 @@
 // Theme variables for light theme
 :root {
   --primary-bg-color: #{$primary-bg-color-light};
+  --secondary-bg-color: #{$secondary-bg-color-light};
   --primary-color: #{$primary-color-light};
   --secondary-color: #{$secondary-color-light};
   --primary-font-color: #{$primary-font-color-light};
@@ -13,6 +14,7 @@
 // Theme variables for dark theme
 [data-theme="dark"] {
   --primary-bg-color: #{$primary-bg-color-dark};
+  --secondary-bg-color: #{$secondary-bg-color-dark};
   --primary-color: #{$primary-color-dark};
   --secondary-color: #{$secondary-color-dark};
   --primary-font-color: #{$primary-font-color-dark};

@@ -1,7 +1,4 @@
-import {
-  DeductionReducerType,
-  RentDeductionType,
-} from "src/types/deduction-types";
+import { DeductionReducerType } from "src/types/deduction-types";
 
 const IS_NEW_SCHEME = true;
 const calculateByNewTaxSlab = (taxableAmount: number) => {
@@ -89,18 +86,18 @@ const calculateIncomeTax = (
     deductedAmount: deductedAmount + standardDeduction,
   };
 };
-const calculateRentDeduction = (
-  rentDeduction: RentDeductionType,
+export const calculateRentDeduction = (
+  amount: number,
+  duration: number,
+  isMetroCity: boolean,
   basic: number,
   hra: number
 ) => {
   const METRO_CITY_LIMIT = 0.5;
   const NON_METRO_CITY_LIMIT = 0.4;
-  const ruleByRent =
-    rentDeduction.amount * rentDeduction.duration - basic * 0.1;
+  const ruleByRent = amount * duration - basic * 0.1;
   const ruleByBasic =
-    basic *
-    (rentDeduction.isMetroCity ? METRO_CITY_LIMIT : NON_METRO_CITY_LIMIT);
+    basic * (isMetroCity ? METRO_CITY_LIMIT : NON_METRO_CITY_LIMIT);
 
   const comparativeAmount = Math.min(hra, ruleByRent, ruleByBasic);
   return comparativeAmount > 0 ? comparativeAmount : 0;
@@ -137,18 +134,18 @@ const calculateChapter6CDeduction = (deductionByChapter6: any) => {
   return totalDeduction;
 };
 export const calculateTax = (
-  salaryIncome:any,
+  salaryIncome: any,
   totalIncome: number,
   deductionDetail: DeductionReducerType
 ) => {
   let deductedAmount = 0;
   const taxableAmount = totalIncome - salaryIncome.pf;
 
-  deductedAmount += calculateRentDeduction(
+  /* deductedAmount += calculateRentDeduction(
     deductionDetail.rent,
     salaryIncome.basic,
     salaryIncome.hra
-  );
+  ); */
 
   deductedAmount +=
     deductionDetail.section24 > 200000 ? 200000 : deductionDetail.section24;
@@ -177,7 +174,8 @@ export const calculateTax = (
     taxBreakup.newScheme.yearlyTax - taxBreakup.oldScheme.yearlyTax;
   const bestScheme = amount < 0 ? "newScheme" : "oldScheme";
   const difference: number = amount < 0 ? amount * -1 : amount;
-  const percentage: number = (difference / taxBreakup.oldScheme.yearlyTax) * 100;
+  const percentage: number =
+    (difference / taxBreakup.oldScheme.yearlyTax) * 100;
   taxBreakup["choice"] = {
     taxAmount: {
       yearly: taxBreakup[bestScheme].yearlyTax,

@@ -1,6 +1,77 @@
-@import 'src/styles/variables.scss';
-.deduction_rent__container{
-    .deduction_rent__form{
+@import "src/styles/variables.scss";
 
+.add_rent__btn {
+  &:global(.btn) {
+    width: 30%;
+    font-size: 14px;
+  }
+}
+.rent_entry__container {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: var(--secondary-bg-color);
+  border-radius: 5px;
+  border-bottom: 1px solid var(--primary-color);
+  padding: 10px;
+  align-items: center;
+  color: var(--primary-font-color);
+  font-size: $font-size-non-mobile-primary;
+  .action_btn__container {
+    display: flex;
+    gap: 5px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    :global(.MuiIconButton-root) {
+      color: var(--primary-font-color);
     }
+  }
+}
+.add_rent_entry__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+  header {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .action_btn__container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    :global(.btn) {
+      width: 45%;
+      font-size: $font-size-non-mobile-primary;
+      padding: 5px;
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .rent_entry__container {
+    font-size: $font-size-mobile-primary;
+    .action_btn__container {
+      :global(.MuiIconButton-root) {
+        padding: 0;
+        :global(.MuiSvgIcon-root) {
+          font-size: $font-size-non-mobile-primary;
+        }
+      }
+    }
+  }
+  .add_rent_entry__form {
+    width: 85vw;
+    gap: 5px;
+    padding: 10px;
+    header {
+      font-size: 16px;
+    }
+    .action_btn__container {
+      :global(.btn) {
+        font-size: $font-size-mobile-primary;
+      }
+    }
+  }
 }

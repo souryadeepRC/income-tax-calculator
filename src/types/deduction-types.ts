@@ -1,14 +1,27 @@
 export type DeductionReducerType = {
   standardDeduction: { newScheme: number; oldScheme: number };
-  rent: {
-    amount: number;
-    duration: number;
-    isMetroCity: boolean;
-  };
+  rent: DeductionByRent;
   section24: number;
   deduction80C: DeductionType80C;
   deductionByChapter6: DeductionByChapter6Type;
 };
+// Rent Deduction
+export interface EditableRentEntry {
+  isEditable: boolean;
+  editableEntryId: string;
+}
+export interface RentEntry {
+  id?: string;
+  amount: number;
+  duration: number;
+  isMetroCity: boolean;
+}
+export interface DeductionByRent {
+  collections: RentEntry[];
+  deductedAmount: number;
+  isEditable: boolean;
+  editableEntryId: string;
+}
 export type DeductionType80C = {
   providentFund: number;
   lic: number;
