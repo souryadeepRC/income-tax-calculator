@@ -8,6 +8,7 @@ import Menu from "src/components/common/menu/Menu";
 import Modal from "src/components/common/modal/Modal";
 import { Navigation } from "src/components/common/navigation/Navigation";
 import RouteLayout from "src/components/common/route-layout/RouteLayout";
+import TextField from "src/components/common/text-field/TextField";
 
 export {
     AppTheme,
@@ -16,7 +17,9 @@ export {
     Button,
     Footer,
     Header,
-    Menu, Modal, Navigation,
-    RouteLayout
+    Menu,
+    Modal,
+    Navigation,
+    RouteLayout, TextField
 };
 

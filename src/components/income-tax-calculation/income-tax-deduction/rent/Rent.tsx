@@ -1,7 +1,11 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // library
-import { Checkbox, TextField } from "@mui/material";
+import { Checkbox, InputAdornment } from "@mui/material";
+// icons
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+// components
+import { TextField } from "src/components/common/CommonComponents";
 // hooks
 import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
@@ -54,7 +58,15 @@ export const Rent = () => {
           label="Monthly Rental Amount"
           inputRef={rentAmountRef}
           defaultValue={amount}
-          type="number"
+          error={true}
+          helperText="test Error Message"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <CurrencyRupeeIcon fontSize="small" />
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           className="deduction__option__input"
