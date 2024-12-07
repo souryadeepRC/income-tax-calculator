@@ -8,10 +8,18 @@
   .data_layout__header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin: 0 3vw;
     padding: 1vw 4vw;
     border-bottom: 2px solid var(--primary-color);
-    font-size: 2vw;
+    font-size: 20px;
     color: var(--primary-font-color);
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .data_layout__container {
+    .data_layout__header {
+      font-size: 16px;
+    }
   }
 }

@@ -3,21 +3,30 @@
 .add_income__form {
   display: flex;
   flex-direction: column;
-  gap: 3vh;
+  gap: 20px;
   width: 75%;
   max-width: 40vw;
   margin: 25px auto;
+  .income_group__select {
+    gap: 8px;
+    label {
+      padding: 0 10px;
+      font-weight: 500;
+      color: var(--primary-font-color);
+    }
+  }
   :global(.MuiFormControl-root) {
     :global(.MuiInputLabel-root) {
       color: var(--primary-font-color);
     }
     :global(.MuiInputBase-root) {
-      color: var(--navigation-active-color);
-      :global(.MuiSvgIcon-root){
+      color: var(--primary-font-color);
+      :global(.MuiSvgIcon-root) {
         fill: var(--navigation-active-color);
       }
       :global(.MuiOutlinedInput-notchedOutline) {
         border-color: var(--navigation-active-color);
+        border-radius: 15px;
       }
     }
   }
@@ -64,6 +73,23 @@
 }
 @media (max-width: $mobile-max-width) {
   .add_income__form {
-    max-width: 95%;
+    max-width: 95vw;
+    width: 95%;
+    margin: 5px auto;
+    gap: 5px;
+    .income_group__select {
+      gap: 4px;
+      :global(.MuiInputBase-root .MuiSelect-outlined) {
+        padding: 10px 15px;
+      }
+    }
+    .action_btn__container {
+      padding: 15px 0 0 0;
+      :global(.btn) {
+        font-size: 12px;
+        padding: 10px;
+        width: 45%;
+      }
+    }
   }
 }

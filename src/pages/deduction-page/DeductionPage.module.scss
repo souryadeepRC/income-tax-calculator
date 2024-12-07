@@ -1,51 +1,52 @@
 @import "src/styles/variables.scss";
 .deduction__container {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-auto-flow: column;
-  width: 100%;
   height: 100%;
-  .deduction__header {
+  .deduction_list {
+    width: 50%;
     display: flex;
-    justify-content: space-between;
-    margin: 0 3vw;
-    padding: 1vw 4vw;
-    border-bottom: 2px solid var(--primary-color);
-    font-size: 2vw;
-    color: var(--primary-font-color);
-  }
-  .income__options_container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    align-content: flex-start;
-    gap: 2vw;
-    width: 100%;
-    padding: 2vw 0;
-    color: var(--primary-font-color);
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin: 0 auto;
+    padding: 2vh 0;
+    list-style-type: none;
+    padding: 2vw;
+    font-size: 14px;
     li {
-      box-shadow: 0px 1px 1px 0px var(--primary-color);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 250px;
-      height: 100px;
-      transition: transform 0.5s ease-in;
-      cursor: pointer;
-      border-radius: 2vw;
-      &:active {
-        transform: scale(1.2);
+      width: 100%;
+      a {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        box-shadow: 0px 1px 1px 0px var(--primary-color);
+        border-radius: 5px;
+        color: var(--primary-font-color);
+        background-color: var(--secondary-bg-color);
+        text-align: center;
+        &.active {
+          background: #0a5f5a;
+          font-weight: bold;
+        }
+        .deduction_list__item {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          padding: 0 2vw;
+          align-items: center;
+        }
       }
     }
   }
 }
-@media (max-width: $mobile-max-width) {
-  .income__container {
-    .income__options_container {
-      div {
-        width: 155px;
+
+@media screen and (max-width: $mobile-max-width) {
+  .deduction__container {
+    .deduction_list {
+      width: 90%;
+      li {
+        a {
+          font-size: $font-size-mobile-primary;
+        }
       }
     }
   }

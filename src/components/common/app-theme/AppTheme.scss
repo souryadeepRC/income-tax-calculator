@@ -63,3 +63,36 @@
     }
   }
 }
+@media screen and (max-width: $mobile-max-width) {
+  .app_theme__switch {
+    &.MuiSwitch-root {
+      width: 50px;
+      height: 20px;
+      .MuiSwitch-switchBase {
+        .MuiSwitch-thumb {
+          width: 20px;
+          height: 20px;
+          &::before {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        &.Mui-checked {
+          transform: translateX(30px);
+          .MuiSwitch-input {
+            left: -150%;
+            width: 250%;
+          }
+          & + .MuiSwitch-track::before {
+            font-size: 10px;
+            transform: translate(-9px, 3px);
+          }
+        }
+      }
+      .MuiSwitch-track::before {
+        font-size: 10px;
+        transform: translate(9px, 3px);
+      }
+    }
+  }
+}

@@ -31,3 +31,20 @@
     }
   }
 }
+@media screen and (max-width: $mobile-max-width) {
+  .text_field__container {
+    gap: 4px;
+    .text_field__header {
+      font-size: 14px;
+    }
+    .text_field__input {
+      &.MuiTextField-root {
+        .MuiInputBase-root {
+          .MuiInputBase-input {
+            padding: 10px 15px;
+          }
+        }
+      }
+    }
+  }
+}

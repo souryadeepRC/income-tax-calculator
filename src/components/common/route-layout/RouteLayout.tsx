@@ -20,7 +20,7 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
 }) => {
   return (
     <section className={classes.route_layout__container}>
-      <Box display="flex" alignItems="center">
+      <Box display="flex" flexDirection="column" alignItems="flex-start">
         <BreadcrumbLink
           parentPath={parentPath}
           homeIcon={<AccountBalanceWalletIcon fontSize="small" />}

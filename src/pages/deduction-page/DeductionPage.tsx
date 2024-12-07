@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
 // icons
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import BlurOnIcon from '@mui/icons-material/BlurOn';
 // components
 import { RouteLayout } from "src/components/common/CommonComponents";
 import { Deduction80C } from "src/components/income-tax-calculation/income-tax-deduction/80C/Deduction80C";
@@ -16,7 +17,7 @@ import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors"
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
-import "./IncomeTaxDeduction.scss";
+import classes from "./DeductionPage.module.scss";
 import { Box } from "@mui/material";
 const DeductionOption: React.FC = () => {
   const deductionBreakup = useSelector(selectDeductionBreakup);
@@ -43,18 +44,18 @@ const DeductionOption: React.FC = () => {
     },
   ];
   return (
-    <section className="deduction__container">
-      <ul className="deduction-list">
+    <section className={classes.deduction__container}>
+      <ul className={classes.deduction_list}>
         {options.map((deductionOption) => {
           return (
             <li key={deductionOption.label}>
               <NavLink to={deductionOption.path}>
-                <div className="deduction-list-item">
-                  <Box display="flex" flexDirection="column">
+                <div className={classes.deduction_list__item}>
+                  <Box display="flex" flexDirection="column" alignItems="flex-start">
                     <strong>{deductionOption.label}</strong>
                     <span>{deductionOption.amount}</span>
                   </Box>
-                  <ArrowForwardIosIcon />
+                  <BlurOnIcon />
                 </div>
               </NavLink>
             </li>
@@ -69,7 +70,7 @@ const DeductionPage: React.FC = () => {
   const deductionBreakup = useSelector(selectDeductionBreakup);
   return (
     <DataLayout
-      headerText="Total availed Deduction"
+      headerText="Overall Exempted Deduction"
       aggregateAmount={formatNumber(deductionBreakup.total)}
     >
       <Routes>
