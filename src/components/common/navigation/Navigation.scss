@@ -14,6 +14,10 @@
     @include font($size: $font-size-non-mobile-primary, $weight: bold);
     color: var(--navigation-link-color);
     text-decoration: none;
+    font-size: 1.5vw;
+    .MuiSvgIcon-root{
+      font-size: 1.5vw;
+    }
     &.active {
       color: var(--navigation-active-color);
     }
@@ -23,5 +27,10 @@
   .navigation-list {
     gap: 8px;
     width: 40%;
+    li > a {
+      .MuiSvgIcon-root{
+        font-size: 14px
+      }
+    }
   }
 }

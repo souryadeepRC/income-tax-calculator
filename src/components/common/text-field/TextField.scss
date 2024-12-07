@@ -1,0 +1,50 @@
+@import "src/styles/variables.scss";
+.text_field__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  .text_field__header {
+    padding: 0 10px;
+    font-weight: 500;
+    color: var(--primary-font-color);
+  }
+  .text_field__input {
+    &.MuiTextField-root {
+      width: 100%;
+      .MuiInputBase-root {
+        border-radius: 15px;
+        color: var(--primary-font-color);
+        .MuiInputAdornment-root {
+          color: var(--navigation-link-color);
+        }
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--secondary-color);
+        }
+        &.Mui-focused {
+          .MuiOutlinedInput-notchedOutline {
+            border-color: var(--secondary-color);
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .text_field__container {
+    gap: 4px;
+    .text_field__header {
+      font-size: 14px;
+    }
+    .text_field__input {
+      &.MuiTextField-root {
+        .MuiInputBase-root {
+          .MuiInputBase-input {
+            padding: 10px 15px;
+          }
+        }
+      }
+    }
+  }
+}

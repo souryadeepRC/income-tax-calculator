@@ -1,30 +1,33 @@
 @import "src/styles/variables.scss";
 .deduction__container {
   height: 100%;
-  .deduction-list {
-    @include flexBox($justifyContent: center, $gap: 16px);
+  .deduction_list {
+    width: 50%;
+    display: flex;
     flex-direction: column;
+    gap: 16px;
     align-items: center;
     margin: 0 auto;
     padding: 2vh 0;
     list-style-type: none;
     padding: 2vw;
-    font-size: 2vw;
+    font-size: 14px;
     li {
-      width: 90%;
+      width: 100%;
       a {
         display: block;
         width: 100%;
         padding: 10px 0;
         box-shadow: 0px 1px 1px 0px var(--primary-color);
-        border-radius: 5px; 
+        border-radius: 5px;
         color: var(--primary-font-color);
+        background-color: var(--secondary-bg-color);
         text-align: center;
         &.active {
           background: #0a5f5a;
           font-weight: bold;
         }
-        .deduction-list-item{
+        .deduction_list__item {
           display: flex;
           width: 100%;
           justify-content: space-between;
@@ -38,7 +41,8 @@
 
 @media screen and (max-width: $mobile-max-width) {
   .deduction__container {
-    .deduction-list {
+    .deduction_list {
+      width: 90%;
       li {
         a {
           font-size: $font-size-mobile-primary;

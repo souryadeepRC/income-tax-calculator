@@ -1,0 +1,25 @@
+@import "src/styles/variables.scss";
+.data_layout__container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+  height: 100%;
+  .data_layout__header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 3vw;
+    padding: 1vw 4vw;
+    border-bottom: 2px solid var(--primary-color);
+    font-size: 20px;
+    color: var(--primary-font-color);
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .data_layout__container {
+    .data_layout__header {
+      font-size: 16px;
+    }
+  }
+}

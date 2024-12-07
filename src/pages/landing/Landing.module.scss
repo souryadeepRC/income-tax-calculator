@@ -26,6 +26,7 @@
     height: 100%;
     color: var(--primary-font-color);
     .card__inner_container {
+      background-color: var(--secondary-bg-color);
       backdrop-filter: blur(25px);
       display: flex;
       flex-direction: column;
@@ -35,7 +36,6 @@
       position: absolute;
       width: 50%;
       padding: 1vw;
-      background: var(--primary-bg-color);
       border: 1.5vw solid #d4994373;
       border-radius: 2vw;
       @include infinite-scale(1.05, 2s, ease-in-out);
@@ -71,4 +71,58 @@
 .tax {
   top: 30%;
   left: 45%;
+}
+@media screen and (max-width: $mobile-max-width) {
+  .page__container {
+    flex-direction: column;
+    .page__heading {
+      width: 100%;
+      padding: 15px;
+      .title {
+        font-size: 20px;
+      }
+      .description {
+        font-size: 12px;
+      }
+      :global(.btn) { 
+        width: 100%; 
+        max-width: 230px;
+      }
+    }
+    .insight__container {
+      width: 100%;
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .card__inner_container {
+        width: 80%;
+        gap: 15px;
+        position: relative;
+        top: unset;
+        left: unset;
+        border-width: 8px;
+        padding: 5px;
+        .label {
+          font-size: 14px;
+          max-width: 100%;
+        }
+        .amount {
+          max-width: 80vw;
+          font-size: 12px;
+        }
+        .description {
+          font-size: 15px;
+        }
+        .action__btn {
+          margin: 5px auto;
+          font-size: 12px;
+          width: 100%;
+          padding: 8px 0;
+          max-width: 230px;
+        }
+      }
+    }
+  }
 }

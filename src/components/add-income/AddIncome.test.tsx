@@ -44,12 +44,12 @@ describe("test AddIncome component", () => {
   };
   test("render the form with label and fields", () => {
     setup();
-    expect(screen.getByLabelText("Income label")).toBeInTheDocument();
+    expect(screen.getByText("Income Category")).toBeInTheDocument();
     expect(
       screen.getByTestId("add-income-form-label-input")
     ).toBeInTheDocument();
 
-    expect(screen.getByLabelText("Amount")).toBeInTheDocument();
+    expect(screen.getByText("Amount")).toBeInTheDocument();
     expect(
       screen.getByTestId("add-income-form-amount-input")
     ).toBeInTheDocument();

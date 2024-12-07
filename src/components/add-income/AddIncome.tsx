@@ -6,11 +6,13 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
+  InputAdornment,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+// icons
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 // components
-import { Button } from "src/components/common/CommonComponents";
+import { Button, TextField } from "src/components/common/CommonComponents";
 // icons
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
@@ -88,6 +90,8 @@ const AddIncome: React.FC = () => {
     }
     dispatch(modifyIncomeDetails(incomeDetails));
     notify(`Income with Rs. ${incomeDetails.amount} saved.`);
+    setIncomeDetails(INITIAL_INCOME_DETAILS);
+    setErrors(INITIAL_ERRORS);
   };
   const onClear = () => {
     setIncomeDetails(INITIAL_INCOME_DETAILS);
@@ -98,7 +102,7 @@ const AddIncome: React.FC = () => {
   return (
     <form className={classes.add_income__form}>
       <TextField
-        label="Income label"
+        label="Income Category"
         id="add-income-form-label"
         fullWidth
         disabled={editableIncome.label !== ""}
@@ -117,15 +121,21 @@ const AddIncome: React.FC = () => {
         onChange={onAmountChange}
         error={errors.amount}
         helperText={errors.amount && FORM_ERROR_MESSAGE.amount}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CurrencyRupeeIcon fontSize="small" />
+            </InputAdornment>
+          ),
+        }}
       />
-      <FormControl fullWidth>
-        <InputLabel id="add-income-form-group-label">Group</InputLabel>
+      <FormControl fullWidth className={classes.income_group__select}>
+        <label id="add-income-form-group-label">Group</label>
         <Select
           labelId="add-income-form-group-label"
           value={group}
           onChange={onGroupChange}
           fullWidth
-          label="Group"
         >
           <MenuItem value="salary">Salary income</MenuItem>
           <MenuItem value="extra">Extra Income</MenuItem>

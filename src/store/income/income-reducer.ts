@@ -4,7 +4,7 @@ import { IncomeComponent, IncomeReducerType } from "src/types/income-types";
 // constants
 import {
   MODIFY_INCOME_DETAILS,
-  SET_EDITABLE_INCOME_DETAILS,
+  REMOVE_INCOME_DETAILS,
   UPDATE_INCOME_DETAILS,
   UPDATE_TAX_DETAILS,
 } from "src/store/income/income-constants";
@@ -13,8 +13,8 @@ const initialState: IncomeReducerType = {
   income: {
     salary: {
       // salary: 842079653, // 1110000 1000000
-      basic: 350000, // 388500 350000 --> 35%
-      hra: 175000, // 194250 175000--? 17.5%
+      basic: 80000, // 388500 350000 --> 35%
+      hra: 60000, // 194250 175000--? 17.5%
       pf: 42000, // 46620 42000--> 42%
     },
     extra: {},
@@ -63,10 +63,17 @@ const IncomeReducer = (
         income: { ...state.income, [incomeType]: amount },
       };
     }
-    case SET_EDITABLE_INCOME_DETAILS: {
+    case REMOVE_INCOME_DETAILS: {
+      const { group, label }: IncomeComponent = payload;
+      const groupIncome = { ...state.income?.[group] };
+      delete groupIncome[label];
+
       return {
         ...state,
-        editableIncome: payload,
+        income: {
+          ...state.income,
+          [group]: groupIncome,
+        },
       };
     }
     case MODIFY_INCOME_DETAILS: {

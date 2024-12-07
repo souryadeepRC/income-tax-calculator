@@ -22,6 +22,13 @@ export const selectPf = (store: AppStoreType): number =>
 export const selectTaxDetails = (store: AppStoreType): any => store.income.tax;
 export const selectTaxChoice = (store: AppStoreType): any =>
   store.income.tax.choice;
+export const selectIsRentEligible = createSelector(
+  [selectSalaryIncome],
+  (salaryIncome) => {
+    return salaryIncome?.basic > 0 && salaryIncome?.hra > 0;
+  }
+);
+
 export const selectIncomeBreakdown: (store: AppStoreType) => {
   salary: number;
   extra: number;

@@ -8,7 +8,7 @@ jest.mock("src/components/common/CommonComponents", () => ({
 describe("test AddIncome component", () => {
   test("render component with valid label", () => {
     render(
-      <RouteLayout label="Test label">
+      <RouteLayout parentPath="test" label="Test label">
         <span>Test Child Content</span>
       </RouteLayout>
     );

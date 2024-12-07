@@ -3,18 +3,29 @@ import { ReducerActionPayloadType } from "src/store/reducer-types";
 import { DeductionReducerType } from "src/types/deduction-types";
 // constants
 import {
+  RESET_EDIT_RENT_ENTRY,
+  EDIT_RENT_ENTRY,
+  SAVE_RENT_ENTRY,
+  DELETE_RENT_ENTRY,
   UPDATE_80C_DEDUCTION,
   UPDATE_CHAPTER_6_DEDUCTION,
   UPDATE_RENT_DEDUCTION,
   UPDATE_SECTION_24_DEDUCTION,
+  SET_RENT_DEDUCTED_AMOUNT,
 } from "src/store/deduction/deduction-constants";
+import {
+  mapDeleteRentEntry,
+  mapEditRentEntry,
+  mapSaveRentEntry,
+} from "./mapper/deduction-rent-mapper";
 
 const initialState: DeductionReducerType = {
   standardDeduction: { newScheme: 75000, oldScheme: 50000 },
   rent: {
-    amount: 0,
-    duration: 12,
-    isMetroCity: true,
+    collections: [],
+    deductedAmount: 0,
+    isEditable: false,
+    editableEntryId: "",
   },
   section24: 0,
   deduction80C: {
@@ -45,6 +56,38 @@ const DeductionReducer = (
 ) => {
   const { type, payload } = action;
   switch (type) {
+    case EDIT_RENT_ENTRY: {
+      return {
+        ...state,
+        rent: mapEditRentEntry(state.rent, payload),
+      };
+    }
+    case SAVE_RENT_ENTRY: {
+      return {
+        ...state,
+        rent: mapSaveRentEntry(state.rent, payload, initialState.rent),
+      };
+    }
+    case DELETE_RENT_ENTRY: {
+      return {
+        ...state,
+        rent: mapDeleteRentEntry(state.rent, payload, initialState.rent),
+      };
+    }
+    case SET_RENT_DEDUCTED_AMOUNT: {
+      return { ...state, rent: { ...state.rent, deductedAmount: payload } };
+    }
+    case RESET_EDIT_RENT_ENTRY: {
+      const { isEditable, editableEntryId } = initialState.rent;
+      return {
+        ...state,
+        rent: {
+          ...state.rent,
+          isEditable,
+          editableEntryId,
+        },
+      };
+    }
     case UPDATE_RENT_DEDUCTION: {
       return {
         ...state,
@@ -77,4 +120,3 @@ const DeductionReducer = (
   }
 };
 export { DeductionReducer };
-

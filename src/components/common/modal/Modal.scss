@@ -1,0 +1,11 @@
+@import "src/styles/variables.scss";
+.modal__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  background-color: var(--primary-bg-color);
+  border-radius: 10px;
+}
