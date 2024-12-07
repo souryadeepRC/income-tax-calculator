@@ -3,8 +3,7 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Route, Routes } from "react-router-dom";
 // icons
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import BlurOnIcon from '@mui/icons-material/BlurOn';
+import BlurOnIcon from "@mui/icons-material/BlurOn";
 // components
 import { RouteLayout } from "src/components/common/CommonComponents";
 import { Deduction80C } from "src/components/income-tax-calculation/income-tax-deduction/80C/Deduction80C";
@@ -51,7 +50,11 @@ const DeductionOption: React.FC = () => {
             <li key={deductionOption.label}>
               <NavLink to={deductionOption.path}>
                 <div className={classes.deduction_list__item}>
-                  <Box display="flex" flexDirection="column" alignItems="flex-start">
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="flex-start"
+                  >
                     <strong>{deductionOption.label}</strong>
                     <span>{deductionOption.amount}</span>
                   </Box>
