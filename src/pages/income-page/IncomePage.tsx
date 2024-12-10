@@ -1,29 +1,19 @@
 import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
-import {
-  NavLink,
-  Route,
-  Routes
-} from "react-router-dom";
+import { NavLink, Outlet } from "react-router";
 // icons
 import AddCardIcon from "@mui/icons-material/AddCard";
 // components
 import { RouteLayout } from "src/components/common/CommonComponents";
+import DataLayout from "src/components/layout/DataLayout";
 // reducers
-import {
-  selectExtraIncome,
-  selectIncomeBreakdown,
-  selectSalaryIncome,
-} from "src/store/income/income-selectors";
+import { selectIncomeBreakdown } from "src/store/income/income-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
-import AddIncome from "src/components/add-income/AddIncome";
-import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
-import DataLayout from "src/components/layout/DataLayout";
 import classes from "./IncomePage.module.scss";
-const IncomeOption: React.FC = () => {
+export const IncomeOption: React.FC = () => {
   const { salary, extra } = useSelector(selectIncomeBreakdown);
 
   const options = [
@@ -61,48 +51,15 @@ const IncomeOption: React.FC = () => {
 };
 
 const IncomePage: React.FC = () => {
-  const { salary, extra, total } = useSelector(selectIncomeBreakdown);
+  const { total } = useSelector(selectIncomeBreakdown);
   return (
     <DataLayout
       headerText="Annual Income"
       aggregateAmount={formatNumber(total)}
     >
-      <Routes>
-        <Route path="" element={<IncomeOption />} />
-        <Route
-          path="add-income"
-          element={
-            <RouteLayout parentPath="income" label="Add a New Income Source">
-              <AddIncome />
-            </RouteLayout>
-          }
-        />
-        <Route
-          path="salary"
-          element={
-            <RouteLayout
-              parentPath="income"
-              label={`Salary Income Rs. ${salary}`}
-            >
-              <IncomeBreakdown
-                group="salary"
-                dataSelector={selectSalaryIncome}
-              />
-            </RouteLayout>
-          }
-        />
-        <Route
-          path="extra"
-          element={
-            <RouteLayout
-              parentPath="income"
-              label={`Extra Income Rs. ${extra}`}
-            >
-              <IncomeBreakdown group="extra" dataSelector={selectExtraIncome} />
-            </RouteLayout>
-          }
-        />
-      </Routes>
+      <RouteLayout parentPath="income" label="">
+        <Outlet />
+      </RouteLayout>
     </DataLayout>
   );
 };

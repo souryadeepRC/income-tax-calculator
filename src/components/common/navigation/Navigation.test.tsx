@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react";
 import { useSelector } from "react-redux";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
 import Navigation from "./Navigation";
-import { MemoryRouter, NavLink } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),

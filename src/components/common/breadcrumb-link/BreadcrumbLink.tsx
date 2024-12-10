@@ -1,6 +1,6 @@
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import React, { memo } from "react";
-import { Location, NavLink, useLocation } from "react-router-dom";
+import { Location, NavLink, useLocation } from "react-router";
 import "./BreadcrumbLink.scss";
 interface BreadcrumbLinkProps {
   parentPath?: string;

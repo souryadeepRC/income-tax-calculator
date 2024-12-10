@@ -2,7 +2,7 @@ import { memo } from "react";
 // library
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 // styles
 import classes from "./BackButton.module.scss";
 

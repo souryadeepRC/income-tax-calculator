@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useLocation } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router";
 import { BreadcrumbLink } from "src/components/common/CommonComponents";
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock("react-router", () => ({
+  ...jest.requireActual("react-router"),
   useLocation: jest.fn(),
 }));
 const mockUseLocation = useLocation as jest.MockedFunction<typeof useLocation>;
