@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 // library
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -28,13 +28,14 @@ const NavigationOption: React.FC<NavigationOptionProps> = ({
       justifyContent="space-between"
       alignItems="center"
       gap={1}
+      data-testid={label}
     >
       {icon}
       {!isMobile && <>{label}</>}
     </Box>
   );
 };
-export const Navigation = () => {
+const Navigation = () => {
   // store
   const isMobile: boolean = useSelector(selectIsMobile);
 
@@ -80,3 +81,4 @@ export const Navigation = () => {
     </ul>
   );
 };
+export default memo(Navigation);

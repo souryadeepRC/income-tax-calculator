@@ -27,6 +27,7 @@ describe("Test BreadcrumbLink component", () => {
   };
   test("render breadcrumb with default home config", () => {
     renderBreadcrumb();
+
     const firstElement = screen.getByTestId("test");
     const lastElement = screen.getByTestId("child");
     expect(firstElement).toBeInTheDocument();
