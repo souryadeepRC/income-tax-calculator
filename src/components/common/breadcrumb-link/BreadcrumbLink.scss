@@ -2,8 +2,10 @@
 .breadcrumb__link__container {
   display: flex;
   align-items: center;
-  :global(.MuiSvgIcon-root) {
-    fill: var(--primary-bg-color);
+  font-size: 1.5vw;
+  .MuiSvgIcon-root {
+    font-size: 1.5vw;
+    fill: var(--navigation-active-color);
   }
   span {
     color: var(--navigation-link-color);
@@ -13,5 +15,13 @@
     @include font($size: $font-size-non-mobile-primary, $weight: bold);
     color: var(--navigation-active-color);
     text-decoration: none;
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .breadcrumb__link__container {
+    font-size: 14px;
+    .MuiSvgIcon-root {
+      font-size: 14px;
+    }
   }
 }

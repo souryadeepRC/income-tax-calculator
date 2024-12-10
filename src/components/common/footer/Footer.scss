@@ -4,11 +4,13 @@
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   padding: 10px 0;
   background: #c8c8c8;
-  @include font($size: $font-size-non-mobile-primary, $weight: bold);
+  font-weight: 500;
+  font-size: 1vw;
   text-align: center;
+  z-index: 1;
 
   .footer__text {
     padding: 0 0 0 5px;

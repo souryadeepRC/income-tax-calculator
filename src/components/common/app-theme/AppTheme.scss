@@ -2,25 +2,27 @@
 
 .app_theme__switch {
   &.MuiSwitch-root {
-    width: 80px;
-    height: 25px;
+    width: 5vw;
+    height: 2vw;
     padding: 0;
     .MuiSwitch-switchBase {
-      transform: translateX(0);
+      transform: translateX(-1.6vw);
       margin: 0;
       padding: 0px;
+      width: 100%;
 
       .MuiSwitch-input {
-        left: 20%;
+        width: 100%;
+        left: 30%;
       }
       .MuiSwitch-thumb {
-        width: 25px;
-        height: 25px;
+        width: 2vw;
+        height: 2vw;
         &::before {
           content: "";
           display: block;
-          width: 25px;
-          height: 25px;
+          width: 2vw;
+          height: 2vw;
           background-image: url("https://img.freepik.com/premium-photo/there-is-cartoon-pumpkin-with-happy-face-leaves-generative-ai_791316-87457.jpg");
           background-repeat: no-repeat;
           background-size: contain;
@@ -28,10 +30,10 @@
         }
       }
       &.Mui-checked {
-        transform: translateX(55px);
+        transform: translateX(1.5vw);
         color: #fff;
         .MuiSwitch-input {
-          left: -220%;
+          left: -30%;
         }
         .MuiSwitch-thumb {
           &::before {
@@ -44,7 +46,7 @@
           background-color: var(--primary-bg-color);
           &::before {
             content: "Light";
-            transform: translateX(-10px);
+            transform: translate(0.4vw, 0.2vw);
           }
         }
       }
@@ -52,12 +54,14 @@
     .MuiSwitch-track {
       opacity: 1;
       background-color: var(--primary-bg-color);
-      border-radius: 20px;
+      border-radius: 1vw;
       &::before {
         content: "Dark";
         display: block;
-        transform: translateX(10px);
+        transform: translate(2.2vw, 0.2vw);
         font-weight: bold;
+        font-size: 1vw;
+        width: fit-content;
         color: var(--primary-font-color);
       }
     }
@@ -69,6 +73,7 @@
       width: 50px;
       height: 20px;
       .MuiSwitch-switchBase {
+        transform: translateX(-15px);
         .MuiSwitch-thumb {
           width: 20px;
           height: 20px;
@@ -78,20 +83,23 @@
           }
         }
         &.Mui-checked {
-          transform: translateX(30px);
+          transform: translateX(15px);
           .MuiSwitch-input {
-            left: -150%;
-            width: 250%;
+            left: -30%;
+            width: 100%;
           }
           & + .MuiSwitch-track::before {
             font-size: 10px;
-            transform: translate(-9px, 3px);
+            transform: translate(4px, 2px);
           }
         }
       }
-      .MuiSwitch-track::before {
-        font-size: 10px;
-        transform: translate(9px, 3px);
+      .MuiSwitch-track {
+        border-radius: 20px;
+        &::before {
+          font-size: 10px;
+          transform: translate(22px, 2px);
+        }
       }
     }
   }

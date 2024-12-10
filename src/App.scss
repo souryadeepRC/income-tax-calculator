@@ -1,4 +1,17 @@
-@import 'src/styles/variables.scss';
-body{
+@import "src/styles/variables.scss";
+body {
   font-family: $primary-font-family;
+}
+.MuiPaper-root {
+  .MuiMenuItem-root {
+    font-size: 1vw;
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+  .MuiPaper-root {
+    .MuiMenuItem-root {
+      font-size: 12px;
+    }
+  }
 }

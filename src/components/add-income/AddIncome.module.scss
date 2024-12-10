@@ -3,57 +3,41 @@
 .add_income__form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   width: 75%;
   max-width: 40vw;
-  margin: 25px auto;
+  align-self: center;
   .income_group__select {
     gap: 8px;
     label {
       padding: 0 10px;
       font-weight: 500;
+      font-size: 1.2vw;
       color: var(--primary-font-color);
+    }
+    &:global(.MuiFormControl-root) {
+      :global(.MuiInputLabel-root) {
+        color: var(--primary-font-color);
+      }
+      :global(.MuiInputBase-root) {
+        color: var(--primary-font-color);
+        font-size: 1vw;
+        padding: 1vw;
+        :global(.MuiSelect-select){
+          padding: 0;
+        }
+        :global(.MuiSvgIcon-root) {
+          fill: var(--navigation-active-color);
+          font-size: 2vw;
+        }
+        :global(.MuiOutlinedInput-notchedOutline) {
+          border-color: var(--navigation-active-color);
+          border-radius: 2vw;
+        }
+      }
     }
   }
-  :global(.MuiFormControl-root) {
-    :global(.MuiInputLabel-root) {
-      color: var(--primary-font-color);
-    }
-    :global(.MuiInputBase-root) {
-      color: var(--primary-font-color);
-      :global(.MuiSvgIcon-root) {
-        fill: var(--navigation-active-color);
-      }
-      :global(.MuiOutlinedInput-notchedOutline) {
-        border-color: var(--navigation-active-color);
-        border-radius: 15px;
-      }
-    }
-  }
-  :global(.MuiTextField-root) {
-    :global(.MuiInputLabel-root) {
-      color: var(--primary-font-color);
-      &:global(.Mui-disabled) {
-        color: var(--navigation-link-color);
-      }
-    }
-    :global(.MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline) {
-      border-color: var(--navigation-active-color);
-    }
-    :global(.MuiInputBase-root) {
-      color: var(--primary-font-color);
 
-      &:global(.Mui-focused .MuiOutlinedInput-notchedOutline) {
-        border-color: var(--navigation-active-color);
-      }
-      &:global(.Mui-disabled) {
-        color: var(--navigation-link-color);
-      }
-    }
-    :global(.MuiOutlinedInput-notchedOutline) {
-      border-color: var(--navigation-link-color);
-    }
-  }
   .action_btn__container {
     display: flex;
     flex-wrap: wrap;
@@ -61,7 +45,8 @@
     gap: 0.5vw;
     width: 100%;
     :global(.btn) {
-      font-size: 1.2vw;
+      font-size: 1vw;
+      padding: 0.5vw;
     }
     .action_btn__submit {
       width: 70%;
@@ -79,6 +64,24 @@
     gap: 5px;
     .income_group__select {
       gap: 4px;
+      label {
+        font-size: 14px;
+      }
+      &:global(.MuiFormControl-root) {
+        :global(.MuiInputLabel-root) {
+          color: var(--primary-font-color);
+        }
+        :global(.MuiInputBase-root) {
+          font-size: 12px;
+          padding: 10px 15px;
+          :global(.MuiSvgIcon-root) {
+            font-size: 12px;
+          }
+          :global(.MuiOutlinedInput-notchedOutline) {
+            border-radius: 15px;
+          }
+        }
+      }
       :global(.MuiInputBase-root .MuiSelect-outlined) {
         padding: 10px 15px;
       }

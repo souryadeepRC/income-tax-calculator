@@ -19,21 +19,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 250px;
-    height: 100px;
+    width: 20vw;
+    height: 7vw;
+    font-size: 1.5vw;
     transition: transform 0.5s ease-in;
     cursor: pointer;
     border-radius: 2vw;
+    :global(.MuiSvgIcon-root) {
+      font-size: 1.5vw;
+    }
     &:active {
       transform: scale(1.2);
     }
   }
 }
 @media (max-width: $mobile-max-width) {
-  .income__container {
-    .income__options_container {
-      div {
-        width: 155px;
+  .income__options_container {
+    .income__option {
+      width: 150px;
+      height: 70px;
+      font-size: 12px;
+      :global(.MuiSvgIcon-root) {
+        font-size: 12px;
       }
     }
   }

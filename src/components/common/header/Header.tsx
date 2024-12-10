@@ -11,7 +11,7 @@ export const Header = () => {
     <header className="header__container">
       <span className="header__text">Tax Calculator</span>
       <Navigation />
-      <div className="header__theme">
+       <div className="header__theme">
         <AppTheme />
       </div>
     </header>

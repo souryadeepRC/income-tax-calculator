@@ -2,11 +2,9 @@
 
 .header__container {
   @include flexBox($justifyContent: flex-start, $alignItems: center);
-  box-shadow: 1px 5px 3px rgba($color-quartz, 0.3);
   box-sizing: border-box;
-  padding: 5px 0;
-  background-color: var(--primary-color);
-  color: $color-header;
+  padding: 1.2vh 0;
+  background-color: var(--primary-color); 
   .header__text {
     width: 20%;
     text-align: center;
@@ -17,15 +15,6 @@
   .header__theme {
     width: 20%;
     text-align: center;
-  }
-  a {
-    color: var(--navigation-link-color);
-    span {
-      @include font($size: $font-size-non-mobile-primary, $weight: bold);
-    }
-    &.active {
-      color: var(--navigation-active-color);
-    }
   }
 }
 
@@ -39,9 +28,6 @@
     }
     .header__theme {
       width: 30%;
-    }
-    a > span {
-      font-size: $font-size-mobile-primary;
     }
   }
 }
