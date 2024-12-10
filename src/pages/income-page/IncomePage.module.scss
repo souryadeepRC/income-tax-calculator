@@ -33,6 +33,36 @@
     }
   }
 }
+.income__container {
+  .add_income__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5vw;
+    color: var(--primary-font-color);
+    margin: 1vw;
+    padding: 1.5vw;
+    :global(.MuiButton-root) {
+      border-radius: 3vw;
+      background-color: var(--primary-color);
+      color: var(--secondary-font-color);
+      font-size: 1vw;
+      font-weight: 700;
+      padding: 1vw 3vw;
+    }
+  }
+  .income_option_container {
+    display: flex;
+    justify-content: center;
+    gap: 2vw;
+    aside {
+      background-color: var(--secondary-bg-color);
+      width: 40%;
+      border-radius: 1vw;
+      padding: 2vw;
+    }
+  }
+}
 @media (max-width: $mobile-max-width) {
   .income__options_container {
     .income__option {
@@ -41,6 +71,33 @@
       font-size: 12px;
       :global(.MuiSvgIcon-root) {
         font-size: 12px;
+      }
+    }
+  }
+  .income__container {
+    .add_income__header {
+      flex-wrap: wrap;
+      margin: 5px;
+      padding: 10px;
+      font-size: 12px;
+      gap: 8px;
+      :global(.MuiButton-root) {
+        font-size: 10px;
+        padding: 5px 20px;
+        border-radius: 20px;
+        :global(.MuiSvgIcon-root) {
+          font-size: 10px;
+        }
+      }
+    }
+    .income_option_container {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      aside {
+        width: 85%;
+        border-radius: 5px;
+        padding: 15px;
       }
     }
   }

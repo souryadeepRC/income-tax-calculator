@@ -12,7 +12,7 @@ const BreadcrumbLink: React.FC<BreadcrumbLinkProps> = ({
 }) => {
   const { pathname }: Location = useLocation();
   const pathLinks = pathname.split("/").filter(Boolean);
-
+  if (pathLinks.length === 1) return <></>;
   return (
     <section className="breadcrumb__link__container">
       {pathLinks?.map((path: string, index: number) => {

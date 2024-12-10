@@ -11,22 +11,23 @@ import { getIncomeBreakdown } from "src/utils/income-utils";
 import classes from "./IncomeBreakdown.module.scss";
 interface IncomeBreakdownProps {
   group: "salary" | "extra";
+  amount: number;
   dataSelector: any;
 }
 
 const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
   group,
+  amount,
   dataSelector,
 }) => {
   const breakdownIncomes = getIncomeBreakdown(group, useSelector(dataSelector));
 
   return (
     <section className={classes.income_breakdown_container}>
-      <section className={classes.income_breakdown_header}>
-        <span className={classes.info}>
-          Tap the icon to customize your component
-        </span>
-      </section>
+      <header className={classes.income_breakdown_header}>
+        <span>{group} Income</span>
+        <span>Rs.{amount}</span>
+      </header>
       <section className={classes.income_component_container}>
         {breakdownIncomes.map((income: IncomeComponent) => {
           return (

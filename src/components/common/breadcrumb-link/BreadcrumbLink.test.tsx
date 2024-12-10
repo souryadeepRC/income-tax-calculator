@@ -76,4 +76,14 @@ describe("Test BreadcrumbLink component", () => {
     );
     expect(screen.queryByTestId("home")).not.toBeInTheDocument();
   });
+  test("handles single pathname (no breadcrumb)", () => {
+    renderBreadcrumb(
+      {
+        parentPath: "test",
+        homeIcon: <span>ICON HOME</span>,
+      },
+      "/home"
+    );
+    expect(screen.queryByTestId("home")).not.toBeInTheDocument();
+  });
 });
