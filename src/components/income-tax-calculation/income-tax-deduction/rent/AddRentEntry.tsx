@@ -1,27 +1,34 @@
 import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
-// components
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "@mui/material";
 //actions
 import { editRentEntry } from "src/store/deduction/deduction-actions";
 // selectors
 import { selectIsRentEligible } from "src/store/income/income-selectors";
+import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
+// types
+import { DeductionByRent } from "src/types/deduction-types";
 // styles
 import classes from "./Rent.module.scss";
 
 const AddRentEntry: React.FC = () => {
   // store
   const dispatch = useDispatch();
+  const { deductedAmount }: DeductionByRent = useSelector(selectRentDeduction);
   const isRentEligible: boolean = useSelector(selectIsRentEligible);
   const onAddRent = () => {
     dispatch(editRentEntry());
   };
   return (
     <>
-      <section aria-label="add rent option">
+      <section
+        className={classes.add_rent__container}
+        aria-label="add rent option"
+      >
+        <span>You will get an exemption of Rs.{deductedAmount} from Rent</span>
         {isRentEligible ? (
-          <Button className={classes.add_rent__btn} onClick={onAddRent}>
+          <Button variant="contained" onClick={onAddRent}>
             Add Rent
           </Button>
         ) : (

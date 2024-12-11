@@ -1,5 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
+// hooks 
+import useRentExemption from "src/hooks/useRentExemption";
 // selectors
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
 // components
@@ -8,9 +10,6 @@ import AddRentEntry from "./AddRentEntry";
 import RentEntryForm from "./RentEntryForm";
 // types
 import { DeductionByRent } from "src/types/deduction-types";
-// styles
-import "../deduction-element.scss";
-import useRentExemption from "src/hooks/useRentExemption";
 
 const TOTAL_RENT_DURATION = 12;
 
@@ -36,9 +35,10 @@ export const Rent = () => {
   const totalDuration: number = useMemo(
     () =>
       collections.reduce((acc, rentEntry) => {
+        if (rentEntry.id === editableEntryId) return acc;
         return acc + rentEntry.duration;
       }, 0),
-    [collections]
+    [collections, editableEntryId]
   );
 
   return (

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// library
-import { Button, TextField } from "@mui/material";
+// components
+import { TextField, Button } from "src/components/common/CommonComponents";
 // actions
 import { updateSection24Deduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -23,7 +23,6 @@ export const Section24 = () => {
     <section className="deduction__option">
       <section className="deduction__option-content">
         <TextField
-          className="deduction__option__input"
           variant="outlined"
           label="Section 24 - Home Loan Interest"
           inputRef={amountRef}

@@ -14,12 +14,24 @@ export const mapSaveRentEntry = (
   payload: RentEntry,
   initialRentState: DeductionByRent
 ) => {
-  const { isEditable, editableEntryId } = initialRentState;
+  let modifiedCollection = [...rent.collections];
+  const editableEntryId = rent.editableEntryId;
+  if (rent.editableEntryId) {
+    const editableEntryIndex = modifiedCollection.findIndex(
+      (rentEntry) => rentEntry.id === editableEntryId
+    );
+    modifiedCollection[editableEntryIndex] = {
+      ...modifiedCollection[editableEntryIndex],
+      ...payload,
+    };
+  } else {
+    modifiedCollection.push({ id: uuid4(), ...payload });
+  }
   return {
     ...rent,
-    isEditable,
-    editableEntryId,
-    collections: [...rent.collections, { id: uuid4(), ...payload }],
+    isEditable: initialRentState.isEditable,
+    editableEntryId: initialRentState.editableEntryId,
+    collections: modifiedCollection,
   };
 };
 export const mapDeleteRentEntry = (

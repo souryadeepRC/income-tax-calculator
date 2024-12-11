@@ -1,16 +1,12 @@
 import React, { memo, useState, useEffect } from "react";
 // library
 import { useDispatch } from "react-redux";
-import { InputAdornment, Switch } from "@mui/material";
+import { InputAdornment, Switch, Button } from "@mui/material";
 // icons
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 // components
-import {
-  Modal,
-  Button,
-  TextField,
-} from "src/components/common/CommonComponents";
+import { Modal, TextField } from "src/components/common/CommonComponents";
 // actions
 import {
   resetEditRentEntry,
@@ -53,7 +49,6 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   const dispatch = useDispatch();
   const [entryInput, setEntryInput] = useState<EntryInput>(INITIAL_RENT_ENTRY);
   const [error, setError] = useState<EntryError>(INITIAL_ERROR);
-
   useEffect(() => {
     setEntryInput(rentEntry || INITIAL_RENT_ENTRY);
   }, [rentEntry]);
@@ -96,10 +91,10 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   return (
     <Modal isOpen={true} onClose={handleFormReset}>
       <form className={classes.add_rent_entry__form}>
-        <header>Add Rent Entry</header>
         <TextField
           className="deduction__option__input"
           label="Monthly Rental Amount"
+          type="number"
           value={amount}
           onChange={onAmountChange}
           error={amountError !== ""}
@@ -116,6 +111,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           className="deduction__option__input"
           variant="outlined"
           label="Rent Duration (in Month)"
+          type="number"
           value={duration}
           onChange={onDurationChange}
           error={durationError !== ""}
@@ -139,8 +135,16 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           className={classes.action_btn__container}
           aria-label="add rent entry form action button container"
         >
-          <Button onClick={onRentEntrySave}>Save</Button>
-          <Button onClick={handleFormReset}>Cancel</Button>
+          <Button variant="text" onClick={handleFormReset}>
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.save__btn}
+            onClick={onRentEntrySave}
+          >
+            Save
+          </Button>
         </section>
       </form>
     </Modal>

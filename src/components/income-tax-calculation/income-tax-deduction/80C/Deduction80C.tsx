@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// library
-import { Button, TextField } from "@mui/material";
+// components
+import { TextField, Button } from "src/components/common/CommonComponents";
 // actions
 import { update80CDeduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -95,13 +95,13 @@ export const Deduction80C = () => {
   ];
   return (
     <section className="deduction__option">
+      <span>Max Limit is Rs. 150000</span>
       <section className="deduction__option-content">
         <section className="deduction__80c-items">
           {DEDUCTION_ITEMS.map((item, index) => {
             return (
               <TextField
                 key={index}
-                className="deduction__option__input"
                 label={item.label}
                 value={deductionAmount[item.amountKey]}
                 onChange={onDeductionChange(item.amountKey)}
@@ -112,7 +112,7 @@ export const Deduction80C = () => {
         </section>
       </section>
       <Button className="deduction__option__button" onClick={onSave}>
-        Save [Total maximum exemption: Rs. 1,50,000]
+        Save
       </Button>
     </section>
   );

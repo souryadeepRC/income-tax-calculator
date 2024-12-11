@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// library
-import { Button, TextField } from "@mui/material";
+// components
+import { TextField, Button } from "src/components/common/CommonComponents";
 // actions
 import { updateChapter6Deduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -110,7 +110,6 @@ export const DeductionChapter6 = () => {
               <TextField
                 key={index}
                 title={item.label}
-                className="deduction__option__input"
                 label={item.label}
                 value={deductionAmount[item.amountKey]}
                 onChange={onDeductionChange(item.amountKey)}
