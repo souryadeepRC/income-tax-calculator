@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 // library
 import { Box } from "@mui/material";
 import { ToastContainer } from "react-toastify";

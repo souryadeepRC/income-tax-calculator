@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, useLocation } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router";
 import { BreadcrumbLink } from "src/components/common/CommonComponents";
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock("react-router", () => ({
+  ...jest.requireActual("react-router"),
   useLocation: jest.fn(),
 }));
 const mockUseLocation = useLocation as jest.MockedFunction<typeof useLocation>;
@@ -27,6 +27,7 @@ describe("Test BreadcrumbLink component", () => {
   };
   test("render breadcrumb with default home config", () => {
     renderBreadcrumb();
+
     const firstElement = screen.getByTestId("test");
     const lastElement = screen.getByTestId("child");
     expect(firstElement).toBeInTheDocument();
@@ -72,6 +73,16 @@ describe("Test BreadcrumbLink component", () => {
         homeIcon: <span>ICON HOME</span>,
       },
       "/"
+    );
+    expect(screen.queryByTestId("home")).not.toBeInTheDocument();
+  });
+  test("handles single pathname (no breadcrumb)", () => {
+    renderBreadcrumb(
+      {
+        parentPath: "test",
+        homeIcon: <span>ICON HOME</span>,
+      },
+      "/home"
     );
     expect(screen.queryByTestId("home")).not.toBeInTheDocument();
   });

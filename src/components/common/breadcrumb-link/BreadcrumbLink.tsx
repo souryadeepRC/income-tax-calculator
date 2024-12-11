@@ -1,6 +1,6 @@
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import React, { memo } from "react";
-import { Location, NavLink, useLocation } from "react-router-dom";
+import { Location, NavLink, useLocation } from "react-router";
 import "./BreadcrumbLink.scss";
 interface BreadcrumbLinkProps {
   parentPath?: string;
@@ -12,7 +12,7 @@ const BreadcrumbLink: React.FC<BreadcrumbLinkProps> = ({
 }) => {
   const { pathname }: Location = useLocation();
   const pathLinks = pathname.split("/").filter(Boolean);
-
+  if (pathLinks.length === 1) return <></>;
   return (
     <section className="breadcrumb__link__container">
       {pathLinks?.map((path: string, index: number) => {

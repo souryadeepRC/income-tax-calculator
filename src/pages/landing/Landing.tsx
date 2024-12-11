@@ -7,7 +7,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import InsightsIcon from "@mui/icons-material/Insights";
 // styles
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import {
   selectIncomeBreakdown,
   selectTaxChoice,

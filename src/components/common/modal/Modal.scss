@@ -1,4 +1,5 @@
 @import "src/styles/variables.scss";
+
 .modal__container {
   position: absolute;
   top: 50%;
@@ -7,5 +8,12 @@
   width: auto;
   height: auto;
   background-color: var(--primary-bg-color);
-  border-radius: 10px;
+  /* box-shadow: 0 0 20px 2px var(--secondary-bg-color); */
+  border-radius: 2vw;
+ 
+}
+@media screen and (max-width: $mobile-max-width) {
+  .modal__container {
+    border-radius: 10px;
+  }
 }

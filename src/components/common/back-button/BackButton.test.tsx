@@ -1,15 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import BackButton from "./BackButton";
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock("react-router", () => ({
+  ...jest.requireActual("react-router"),
   useNavigate: jest.fn(),
 }));
 describe("test BackButton component", () => {
   const setup = () => {
     const mockNavigate = jest.fn();
-    require("react-router-dom").useNavigate.mockReturnValue(mockNavigate);
+    require("react-router").useNavigate.mockReturnValue(mockNavigate);
     render(
       <MemoryRouter>
         <BackButton />

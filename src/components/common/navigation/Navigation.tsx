@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 // library
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 // icons
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -28,13 +28,14 @@ const NavigationOption: React.FC<NavigationOptionProps> = ({
       justifyContent="space-between"
       alignItems="center"
       gap={1}
+      data-testid={label}
     >
       {icon}
       {!isMobile && <>{label}</>}
     </Box>
   );
 };
-export const Navigation = () => {
+const Navigation = () => {
   // store
   const isMobile: boolean = useSelector(selectIsMobile);
 
@@ -80,3 +81,4 @@ export const Navigation = () => {
     </ul>
   );
 };
+export default memo(Navigation);

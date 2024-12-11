@@ -1,11 +1,10 @@
-// library
-// icons
 // components
 import { AppTheme, Navigation } from "src/components/common/CommonComponents";
 // styles
 import "./Header.scss";
+import { memo } from "react";
 
-export const Header = () => {
+const Header = () => {
   // render fns
   return (
     <header className="header__container">
@@ -17,3 +16,4 @@ export const Header = () => {
     </header>
   );
 };
+export default memo(Header);

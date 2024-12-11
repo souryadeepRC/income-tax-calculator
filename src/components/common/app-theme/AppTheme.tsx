@@ -17,6 +17,9 @@ const AppTheme: React.FC = () => {
   };
   return (
     <Switch
+      inputProps={
+        { "data-testid": "app-theme" } as React.HTMLProps<HTMLInputElement>
+      }
       className="app_theme__switch"
       checked={appTheme === "light"}
       onChange={onThemeChange}

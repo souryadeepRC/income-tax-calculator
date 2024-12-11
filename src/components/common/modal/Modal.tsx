@@ -3,6 +3,8 @@ import { memo, ReactNode } from "react";
 import { Modal as MuiModal } from "@mui/material";
 // styles
 import "./Modal.scss";
+import { selectAppTheme } from "src/store/screen/screen-selectors";
+import { useSelector } from "react-redux";
 
 interface ModalProps {
   isOpen: boolean;
@@ -10,8 +12,9 @@ interface ModalProps {
   children: ReactNode;
 }
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const appTheme = useSelector(selectAppTheme);
   return (
-    <MuiModal open={isOpen} onClose={onClose}>
+    <MuiModal data-theme={appTheme} open={isOpen} onClose={onClose}>
       <div className="modal__container">{children}</div>
     </MuiModal>
   );

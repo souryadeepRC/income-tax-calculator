@@ -3,20 +3,20 @@
   box-shadow: inset 8px 6px 7px #72240c42;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  width: 60%;
-  margin: 0 auto;
-  padding: 9px;
+  gap: 2vw;
+  width: 60vw;
+  margin: 0;
+  padding: 0.5vw 0;
   background: var(--primary-bg-color);
   border-radius: 50px;
   list-style-type: none;
   li > a {
-    @include font($size: $font-size-non-mobile-primary, $weight: bold);
     color: var(--navigation-link-color);
     text-decoration: none;
-    font-size: 1.5vw;
-    .MuiSvgIcon-root{
-      font-size: 1.5vw;
+    font-size: 1vw;
+    font-weight: 500;
+    .MuiSvgIcon-root {
+      font-size: 1vw;
     }
     &.active {
       color: var(--navigation-active-color);
@@ -28,8 +28,8 @@
     gap: 8px;
     width: 40%;
     li > a {
-      .MuiSvgIcon-root{
-        font-size: 14px
+      .MuiSvgIcon-root {
+        font-size: 14px;
       }
     }
   }
