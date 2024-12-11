@@ -29,28 +29,25 @@ const RentEntry: React.FC<RentEntryProps> = ({ details }) => {
   };
   return (
     <section className={classes.rent_entry__container}>
-      <div aria-label="rent-amount">
-        <span>Rs. {amount}</span>
-      </div>
-      <div aria-label="rent-duration">
-        <span>
-          {duration} month{`${duration > 1 ? "s" : ""} `}
-        </span>
-      </div>
-      <div aria-label="rent-city">
-        <span>{isMetroCity ? "Metro" : "Non-Metro"}</span>
-      </div>
-      <div
-        aria-label="rent-entry action buttons"
-        className={classes.action_btn__container}
-      >
-        <IconButton onClick={onModify}>
-          <TuneIcon />
-        </IconButton>
-        <IconButton onClick={onDelete}>
-          <DeleteIcon />
-        </IconButton>
-      </div>
+      <IconButton onClick={onDelete} className={classes.rent_entry_action_icon}>
+        <DeleteIcon />
+      </IconButton>
+      <section>
+        <div aria-label="rent-amount">
+          <span>Rs. {amount}</span>
+        </div>
+        <div aria-label="rent-duration">
+          <span>
+            {duration} month{`${duration > 1 ? "s" : ""} `}
+          </span>
+        </div>
+        <div aria-label="rent-city">
+          <span>{isMetroCity ? "Metro" : "Non-Metro"}</span>
+        </div>
+      </section>
+      <IconButton onClick={onModify} className={classes.rent_entry_action_icon}>
+        <TuneIcon />
+      </IconButton>
     </section>
   );
 };

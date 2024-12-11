@@ -1,7 +1,10 @@
 @import "src/styles/variables.scss";
 .deduction__option {
-  @include flexBox($direction: column, $gap: 10px);
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+  padding: 2vw;
   height: calc(100% - 37px);
   box-sizing: border-box;
 }
@@ -9,38 +12,20 @@
   font-size: 12px;
   color: red;
 }
- 
+
 .deduction__option-content {
   max-height: calc(100% - 38px);
   overflow-y: auto;
-  @include flexBox($direction: column, $gap: 15px, $alignItems: center); 
-  padding: 10px 0; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vw;
+  padding: 10px 0;
 }
-.deduction__option__input {
-  &.MuiTextField-root {
-    width: 25%;
-    .MuiInputLabel-root {
-      color: black;
-    }
-    .MuiInputBase-input {
-      padding: 10px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-}
+
 .deduction__option__button {
   &.MuiButton-root {
-    padding: 9px;
-    background: darkgreen;
-    color: white;
-    font-weight: bold;
+    font-size: 1.2vw;
     width: 45%;
-    margin: 0 auto;
-    text-transform: capitalize;
-    &:hover {
-      background: darkgreen;
-    }
   }
 }
 .deduction__option__label {
@@ -60,12 +45,10 @@
   width: 100%;
 }
 @media screen and (max-width: $mobile-max-width) {
-  .deduction__option {
-    height: calc(100% - 34px);
-  }
+ 
   .deduction__option-content {
     flex-direction: column;
-    max-height: calc(100% - 42px);
+    max-height: 45vh;
     gap: 10px;
   }
 
