@@ -49,6 +49,9 @@
       font-size: 1vw;
       font-weight: 700;
       padding: 1vw 3vw;
+      :global(.MuiSvgIcon-root) {
+        font-size: 1.2vw;
+      }
     }
   }
   .income_option_container {

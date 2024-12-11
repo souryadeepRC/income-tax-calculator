@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 // library
 import {
+  Button,
   FormControl,
   MenuItem,
   Select,
@@ -9,11 +10,12 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 // icons
+import LabelIcon from "@mui/icons-material/Label";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import CancelIcon from "@mui/icons-material/Cancel";
 // components
-import { Button, TextField } from "src/components/common/CommonComponents";
+import { TextField } from "src/components/common/CommonComponents";
 // icons
-import ClearAllIcon from "@mui/icons-material/ClearAll";
 import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 // hooks
 import { useNotifyMessage } from "src/hooks/useNotifyMessage";
@@ -46,7 +48,10 @@ const INITIAL_ERRORS: IncomeFormError = {
   label: false,
   amount: false,
 };
-const AddIncome: React.FC = () => {
+interface AddIncomeProps {
+  onCancel: () => void;
+}
+const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   const { notify } = useNotifyMessage();
   const dispatch = useDispatch();
   const editableIncome = useSelector(selectEditableIncome);
@@ -70,10 +75,18 @@ const AddIncome: React.FC = () => {
       updateState("label", modifiedLabel === "" || modifiedLabel.length > 100)
     );
   };
+  const onLabelClear = () => {
+    setIncomeDetails(updateState("label", ""));
+    setErrors(updateState("label", false));
+  };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const amount: string = event.target.value;
     setIncomeDetails(updateState("amount", amount));
     setErrors(updateState("amount", !NUMERIC_REGEX.test(amount)));
+  };
+  const onAmountClear = () => {
+    setIncomeDetails(updateState("amount", ""));
+    setErrors(updateState("amount", false));
   };
   const onGroupChange = (event: SelectChangeEvent) => {
     setIncomeDetails(updateState("group", event.target.value));
@@ -92,10 +105,6 @@ const AddIncome: React.FC = () => {
     setIncomeDetails(INITIAL_INCOME_DETAILS);
     setErrors(INITIAL_ERRORS);
   };
-  const onClear = () => {
-    setIncomeDetails(INITIAL_INCOME_DETAILS);
-    setErrors(INITIAL_ERRORS);
-  };
 
   const { label, amount, group } = incomeDetails;
   return (
@@ -110,6 +119,18 @@ const AddIncome: React.FC = () => {
         onChange={onLabelChange}
         error={errors.label}
         helperText={errors.label && FORM_ERROR_MESSAGE.label}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LabelIcon fontSize="small" />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="start">
+              {label && <CancelIcon onClick={onLabelClear} fontSize="small" />}
+            </InputAdornment>
+          ),
+        }}
       />
       <TextField
         label="Amount"
@@ -124,6 +145,13 @@ const AddIncome: React.FC = () => {
           startAdornment: (
             <InputAdornment position="start">
               <CurrencyRupeeIcon fontSize="small" />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="start">
+              {amount && (
+                <CancelIcon onClick={onAmountClear} fontSize="small" />
+              )}
             </InputAdornment>
           ),
         }}
@@ -142,20 +170,21 @@ const AddIncome: React.FC = () => {
       </FormControl>
       <div className={classes.action_btn__container}>
         <Button
+          variant="outlined"
+          data-testid="add-income-form-cancel-btn"
+          onClick={onCancel}
+          className={classes.action_btn__clear}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
           data-testid="add-income-form-submit-btn"
           startIcon={<DataSaverOnIcon />}
           onClick={onAddIncome}
           className={classes.action_btn__submit}
         >
           {editableIncome.label === "" ? "Add" : "Update"}
-        </Button>
-        <Button
-          data-testid="add-income-form-clear-btn"
-          startIcon={<ClearAllIcon />}
-          onClick={onClear}
-          className={classes.action_btn__clear}
-        >
-          Clear
         </Button>
       </div>
     </form>

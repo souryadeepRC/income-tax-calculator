@@ -1,11 +1,11 @@
 import { memo, useState } from "react";
 // library
-import { Button,Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 // icons
 import AddCardIcon from "@mui/icons-material/AddCard";
 // components
-import {  Modal } from "src/components/common/CommonComponents";
+import { Modal } from "src/components/common/CommonComponents";
 import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
 import AddIncome from "src/components/add-income/AddIncome";
 // reducers
@@ -27,7 +27,7 @@ const IncomePage: React.FC = () => {
     <>
       {isAddIncome && (
         <Modal isOpen={isAddIncome} onClose={() => setIsAddIncome(false)}>
-          <AddIncome />
+          <AddIncome onCancel={() => setIsAddIncome(false)} />
         </Modal>
       )}
       <main className={classes.income__container}>

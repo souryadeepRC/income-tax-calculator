@@ -28,11 +28,12 @@ describe("test AddIncome component", () => {
     };
     mockedUseSelector.mockReturnValue(storeEditableIncome);
 
+    const mockOnCancel = jest.fn();
     // Mock the dispatch function
     const mockDispatch = jest.fn();
     mockedUseDispatch.mockReturnValue(mockDispatch);
-    render(<AddIncome />);
-    return { mockDispatch };
+    render(<AddIncome onCancel={mockOnCancel} />);
+    return { mockDispatch, mockOnCancel };
   };
   const updateTextField = (testId: string, value: string) => {
     const element = screen.getByTestId(testId);
@@ -61,9 +62,11 @@ describe("test AddIncome component", () => {
     expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
       "Add"
     );
-    expect(screen.getByTestId("add-income-form-clear-btn")).toBeInTheDocument();
-    expect(screen.getByTestId("add-income-form-clear-btn")).toHaveTextContent(
-      "Clear"
+    expect(
+      screen.getByTestId("add-income-form-cancel-btn")
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("add-income-form-cancel-btn")).toHaveTextContent(
+      "Cancel"
     );
   });
 
@@ -156,15 +159,16 @@ describe("test AddIncome component", () => {
       "Update"
     );
   });
-  test("type records in text field then clear the record", () => {
-    setup();
+  test.todo("type records in text field then clear the record");
+  test("type records in text field then cancel the form", () => {
+    const { mockOnCancel } = setup();
 
     updateTextField("add-income-form-label-input", "Test Label");
     updateTextField("add-income-form-amount-input", "200");
 
     const labelInput = screen.getByTestId("add-income-form-label-input");
     expect(labelInput).toHaveValue("Test Label");
-    fireEvent.click(screen.getByTestId("add-income-form-clear-btn"));
-    expect(labelInput).toHaveValue("");
+    fireEvent.click(screen.getByTestId("add-income-form-cancel-btn"));
+    expect(mockOnCancel).toBeCalledTimes(1);
   });
 });
