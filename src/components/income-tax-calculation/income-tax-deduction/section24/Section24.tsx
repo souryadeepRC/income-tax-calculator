@@ -2,8 +2,6 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // library
 import { Button, TextField } from "@mui/material";
-// hooks
-import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
 import { updateSection24Deduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -16,13 +14,10 @@ export const Section24 = () => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const section24Amount: number = useSelector(selectSection24);
-  // hooks
-  const { notify } = useNotifyMessage(); 
   // refs
   const amountRef = useRef<HTMLInputElement>(null);
   const onSave = () => {
     dispatch(updateSection24Deduction(Number(amountRef?.current?.value || 0)));
-    notify("Deduction by Section 24 - Home Loan Interest saved");
   };
   return (
     <section className="deduction__option">

@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { BrowserRouter } from "react-router";
 // library
 import { Box } from "@mui/material";
-import { ToastContainer } from "react-toastify";
 // components
 import { TaxCalculator } from "src/pages/income-tax-calculator/TaxCalculator";
 // styles
@@ -13,7 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <Box width={"100%"} height={"100%"} data-theme={appTheme}>
-        <ToastContainer />
         <TaxCalculator />
       </Box>
     </BrowserRouter>

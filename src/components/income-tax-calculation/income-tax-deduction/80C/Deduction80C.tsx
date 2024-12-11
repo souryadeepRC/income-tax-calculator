@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // library
 import { Button, TextField } from "@mui/material";
-// hooks
-import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
 import { update80CDeduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -20,8 +18,6 @@ export const Deduction80C = () => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const deduction80C: Deduction80CType = useSelector(selectDeduction80C);
-  // hooks
-  const { notify } = useNotifyMessage();
   // state
   const [deductionAmount, setDeductionAmount] = useState<DeductionAmountType>({
     providentFund: 0,
@@ -61,7 +57,6 @@ export const Deduction80C = () => {
         others: Number(deductionAmount.others),
       })
     );
-    notify("Deduction by 80C saved");
   };
 
   const DEDUCTION_ITEMS: { label: string; amountKey: string }[] = [

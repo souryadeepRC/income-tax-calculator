@@ -17,8 +17,6 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { TextField } from "src/components/common/CommonComponents";
 // icons
 import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
-// hooks
-import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
 import { modifyIncomeDetails } from "src/store/income/income-actions";
 // selectors
@@ -52,7 +50,6 @@ interface AddIncomeProps {
   onCancel: () => void;
 }
 const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
-  const { notify } = useNotifyMessage();
   const dispatch = useDispatch();
   const editableIncome = useSelector(selectEditableIncome);
 
@@ -101,7 +98,6 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
       return;
     }
     dispatch(modifyIncomeDetails(incomeDetails));
-    notify(`Income with Rs. ${incomeDetails.amount} saved.`);
     setIncomeDetails(INITIAL_INCOME_DETAILS);
     setErrors(INITIAL_ERRORS);
   };
