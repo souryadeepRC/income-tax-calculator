@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // library
 import { Button, TextField } from "@mui/material";
-// hooks
-import { useNotifyMessage } from "src/hooks/useNotifyMessage";
 // actions
 import { updateChapter6Deduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -22,8 +20,6 @@ export const DeductionChapter6 = () => {
   const deductionChapter6: DeductionByChapter6Type = useSelector(
     selectDeductionChapter6
   );
-  // hooks
-  const { notify } = useNotifyMessage();
   // state
   const [deductionAmount, setDeductionAmount] = useState<DeductionAmountType>({
     medicalInsuranceSelf: 0,
@@ -58,7 +54,6 @@ export const DeductionChapter6 = () => {
     }
 
     dispatch(updateChapter6Deduction(modifiedDeductedAmount));
-    notify("Deduction by Chapter VI saved");
   };
 
   const DEDUCTION_ITEMS: {

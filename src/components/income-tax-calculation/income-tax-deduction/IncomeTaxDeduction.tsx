@@ -9,7 +9,6 @@ import { Rent } from "./rent/Rent";
 import { Section24 } from "./section24/Section24";
 // styles
 import { useSelector } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
 import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors";
 import "./IncomeTaxDeduction.scss";
 import "./deduction-element.scss";
@@ -34,7 +33,7 @@ export const IncomeTaxDeduction = () => {
       <ul className="deduction-list">
         <li>
           <NavLink to="rent">
-          <div className="deduction-list-item">
+            <div className="deduction-list-item">
               <Box display="flex" flexDirection="column">
                 <strong>Rent</strong>
                 <span>Rs. {deductionBreakup.rentDeduction}</span>
@@ -45,7 +44,7 @@ export const IncomeTaxDeduction = () => {
         </li>
         <li>
           <NavLink to="section24">
-          <div className="deduction-list-item">
+            <div className="deduction-list-item">
               <Box display="flex" flexDirection="column">
                 <strong>Section 24</strong>
                 <span>Rs. {deductionBreakup.rentDeduction}</span>
@@ -56,7 +55,7 @@ export const IncomeTaxDeduction = () => {
         </li>
         <li>
           <NavLink to="80C">
-          <div className="deduction-list-item">
+            <div className="deduction-list-item">
               <Box display="flex" flexDirection="column">
                 <strong>80C</strong>
                 <span>Rs. {deductionBreakup.rentDeduction}</span>
