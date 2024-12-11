@@ -56,7 +56,7 @@ const calculateByOldTaxSlab = (taxableAmount: number) => {
   return taxAmount + (taxableAmount - 1000000) * 0.3;
 };
 const calculateCess = (incomeTax: number) => incomeTax * 0.04;
-export const formatNumber = (value: number) => {
+export const formatNumber = (value: number): number => {
   if (!value) return 0;
   return value % 1 === 0 ? value : +value.toFixed(2);
 };
@@ -141,11 +141,7 @@ export const calculateTax = (
   let deductedAmount = 0;
   const taxableAmount = totalIncome - salaryIncome.pf;
 
-  /* deductedAmount += calculateRentDeduction(
-    deductionDetail.rent,
-    salaryIncome.basic,
-    salaryIncome.hra
-  ); */
+  deductedAmount += deductionDetail.rent.deductedAmount;
 
   deductedAmount +=
     deductionDetail.section24 > 200000 ? 200000 : deductionDetail.section24;

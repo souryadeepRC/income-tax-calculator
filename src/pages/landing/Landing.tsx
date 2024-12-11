@@ -57,7 +57,7 @@ const IncomeInfo: React.FC = () => {
   );
 };
 const TaxInfo: React.FC = () => {
-  const { label, taxAmount, percentage } = useSelector(selectTaxChoice);
+  const { label, taxAmount, difference } = useSelector(selectTaxChoice);
 
   return (
     <Card
@@ -73,15 +73,21 @@ const TaxInfo: React.FC = () => {
       }
       content={
         <section>
-          <span
-            title={`Yearly Tax: Rs. ${formatNumber(taxAmount.yearly)}`}
-            className={classes.label}
-          >
-            {`Tax Rs.${formatNumber(taxAmount.monthly)}/month`}
-          </span>
-          <strong className={classes.amount}>
-            SAVE {formatNumber(percentage)}%
-          </strong>
+          {taxAmount.yearly === 0 ? (
+            <div>You don't have to pay income tax</div>
+          ) : (
+            <>
+              <span
+                title={`Yearly Tax: Rs. ${formatNumber(taxAmount.yearly)}`}
+                className={classes.label}
+              >
+                {`Tax Rs.${formatNumber(taxAmount.monthly)}/month`}
+              </span>
+              <strong className={classes.amount}>
+                SAVE Rs.{formatNumber(difference)}
+              </strong>
+            </>
+          )}
           <span className={classes.description}>
             By opting {label} Tax Regime
           </span>
