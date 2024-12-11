@@ -5,7 +5,7 @@ import { Deduction80C } from "src/components/income-tax-calculation/income-tax-d
 import { DeductionChapter6 } from "src/components/income-tax-calculation/income-tax-deduction/DeductionChapter6";
 import { Rent } from "src/components/income-tax-calculation/income-tax-deduction/rent/Rent";
 import { Section24 } from "src/components/income-tax-calculation/income-tax-deduction/section24/Section24";
-import { IncomeTaxBreakup } from "src/components/income-tax-calculation/tax-breakup/IncomeTaxBreakup";
+import TaxBreakupPage from "src/pages/tax-breakup-page/TaxBreakupPage";
 import DeductionPage, {
   DeductionOption,
 } from "src/pages/deduction-page/DeductionPage";
@@ -23,7 +23,7 @@ export const AppRoutes = () => {
         <Route path="80C" element={<Deduction80C />} />
         <Route path="Chapter-VIA" element={<DeductionChapter6 />} />
       </Route>
-      <Route path="tax-breakup" element={<IncomeTaxBreakup />} />
+      <Route path="tax-breakup" element={<TaxBreakupPage />} />
 
       <Route path="*" element={<span>Main *</span>} />
     </Routes>
