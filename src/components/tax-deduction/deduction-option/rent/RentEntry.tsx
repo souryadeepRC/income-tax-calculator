@@ -1,10 +1,8 @@
 import { memo } from "react";
 // library
-import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
-// icons
-import TuneIcon from "@mui/icons-material/Tune";
-import DeleteIcon from "@mui/icons-material/Delete";
+// components
+import DeductionEntry from "src/components/tax-deduction/deduction-entry/DeductionEntry";
 // actions
 import {
   deleteRentEntry,
@@ -12,8 +10,6 @@ import {
 } from "src/store/deduction/deduction-actions";
 // types
 import { RentEntry as RentEntryTpe } from "src/types/deduction-types";
-//styles
-import classes from "./Rent.module.scss";
 
 interface RentEntryProps {
   details: RentEntryTpe;
@@ -28,11 +24,8 @@ const RentEntry: React.FC<RentEntryProps> = ({ details }) => {
     dispatch(deleteRentEntry(id));
   };
   return (
-    <section className={classes.rent_entry__container}>
-      <IconButton onClick={onDelete} className={classes.rent_entry_action_icon}>
-        <DeleteIcon />
-      </IconButton>
-      <section>
+    <DeductionEntry onDelete={onDelete} onModify={onModify}>
+      <>
         <div aria-label="rent-amount">
           <span>Rs. {amount}</span>
         </div>
@@ -44,11 +37,8 @@ const RentEntry: React.FC<RentEntryProps> = ({ details }) => {
         <div aria-label="rent-city">
           <span>{isMetroCity ? "Metro" : "Non-Metro"}</span>
         </div>
-      </section>
-      <IconButton onClick={onModify} className={classes.rent_entry_action_icon}>
-        <TuneIcon />
-      </IconButton>
-    </section>
+      </>
+    </DeductionEntry>
   );
 };
 export default memo(RentEntry);

@@ -1,0 +1,46 @@
+@import "src/styles/variables.scss";
+.deduction__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  header {
+    font-size: 1.5vw;
+    font-weight: 500;
+  }
+  .deduction_form__container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1vw;
+    align-self: center;
+
+    :global(.MuiButton-root) {
+      width: 100%;
+      border-radius: 2vw;
+      font-size: 1.2vw;
+      padding: 1vw;
+      background-color: var(--primary-color);
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .deduction__container {
+    gap: 10px;
+    padding: 10px 0;
+    header {
+      font-size: 12px;
+    }
+    .deduction_form__container {
+      width: 90%;
+      max-width: 300px;
+      gap: 10px;
+      :global(.MuiButton-root) {
+        border-radius: 10px;
+        font-size: 12px;
+        padding: 5px;
+      }
+    }
+  }
+}

@@ -1,11 +1,20 @@
 export const UPDATE_RENT_DEDUCTION: string = "UPDATE_RENT_DEDUCTION";
 export const UPDATE_SECTION_24_DEDUCTION: string =
   "UPDATE_SECTION_24_DEDUCTION";
-export const UPDATE_80C_DEDUCTION: string = "UPDATE_80C_DEDUCTION";
-export const UPDATE_CHAPTER_6_DEDUCTION: string = "UPDATE_CHAPTER_6_DEDUCTION";
+
 export const EDIT_RENT_ENTRY: string = "EDIT_RENT_ENTRY";
 export const SAVE_RENT_ENTRY: string = "SAVE_RENT_ENTRY";
 export const DELETE_RENT_ENTRY: string = "DELETE_RENT_ENTRY";
 export const RESET_EDIT_RENT_ENTRY: string = "RESET_EDIT_RENT_ENTRY";
 export const SET_RENT_DEDUCTED_AMOUNT: string = "SET_RENT_DEDUCTED_AMOUNT";
 
+export const EDIT_80C_ENTRY: string = "EDIT_80C_ENTRY";
+export const SAVE_80C_ENTRY: string = "SAVE_80C_ENTRY";
+export const DELETE_80C_ENTRY: string = "DELETE_80C_ENTRY";
+export const RESET_EDIT_80C_ENTRY: string = "RESET_EDIT_80C_ENTRY";
+
+export const EDIT_CHAPTER_VI_ENTRY: string = "EDIT_CHAPTER_VI_ENTRY";
+export const SAVE_CHAPTER_VI_ENTRY: string = "SAVE_CHAPTER_VI_ENTRY";
+export const DELETE_CHAPTER_VI_ENTRY: string = "DELETE_CHAPTER_VI_ENTRY";
+export const RESET_EDIT_CHAPTER_VI_ENTRY: string =
+  "RESET_EDIT_CHAPTER_VI_ENTRY";

@@ -8,14 +8,16 @@ interface DataLayoutProps {
 }
 const DataLayout: React.FC<DataLayoutProps> = ({
   headerText,
-  aggregateAmount,
+  aggregateAmount = 0,
   children,
 }) => {
   return (
     <section className={classes.data_layout__container}>
       <section className={classes.data_layout__header}>
-        <strong>{headerText}</strong>
-        {aggregateAmount && <strong>Rs. {aggregateAmount}</strong>}
+        <strong data-testid="layout-header">{headerText}</strong>
+        {aggregateAmount > 0 && (
+          <strong data-testid="layout-amount">Rs. {aggregateAmount}</strong>
+        )}
       </section>
       {children}
     </section>

@@ -78,7 +78,7 @@ const calculateIncomeTax = (
   const yearlyTax = baseTax + cessAmount;
   const monthlyTax = yearlyTax / 12;
   return {
-    taxableAmount,
+    taxableAmount: taxableAmount > 0 ? taxableAmount : 0,
     baseTax,
     cessAmount,
     yearlyTax,
@@ -102,37 +102,7 @@ export const calculateRentDeduction = (
   const comparativeAmount = Math.min(hra, ruleByRent, ruleByBasic);
   return comparativeAmount > 0 ? comparativeAmount : 0;
 };
-const calculate80CDeduction = (deductionBy80C: any) => {
-  let totalDeduction = 0;
-  for (const item in deductionBy80C) {
-    totalDeduction += deductionBy80C[item];
-  }
-  return totalDeduction > 150000 ? 150000 : totalDeduction;
-};
-const calculateChapter6CDeduction = (deductionByChapter6: any) => {
-  let totalDeduction = 0;
-  for (const item in deductionByChapter6) {
-    if (item === "medicalInsuranceSelf") {
-      totalDeduction +=
-        deductionByChapter6.medicalInsuranceSelf > 25000
-          ? 25000
-          : deductionByChapter6.medicalInsuranceSelf;
-    } else if (item === "medicalInsuranceParent") {
-      totalDeduction +=
-        deductionByChapter6.medicalInsuranceParent > 50000
-          ? 50000
-          : deductionByChapter6.medicalInsuranceParent;
-    } else if (item === "additionalHomeLoanInterest") {
-      totalDeduction +=
-        deductionByChapter6.additionalHomeLoanInterest > 150000
-          ? 150000
-          : deductionByChapter6.additionalHomeLoanInterest;
-    } else {
-      totalDeduction += deductionByChapter6[item];
-    }
-  }
-  return totalDeduction;
-};
+
 export const calculateTax = (
   salaryIncome: any,
   totalIncome: number,
@@ -142,15 +112,9 @@ export const calculateTax = (
   const taxableAmount = totalIncome - salaryIncome.pf;
 
   deductedAmount += deductionDetail.rent.deductedAmount;
-
-  deductedAmount +=
-    deductionDetail.section24 > 200000 ? 200000 : deductionDetail.section24;
-
-  deductedAmount += calculate80CDeduction(deductionDetail.deduction80C);
-
-  deductedAmount += calculateChapter6CDeduction(
-    deductionDetail.deductionByChapter6
-  );
+  deductedAmount += deductionDetail.section24.deductedAmount;
+  deductedAmount += deductionDetail.deduction80C.deductedAmount;
+  deductedAmount += deductionDetail.deductionByChapter6.deductedAmount;
 
   let taxBreakup: any = {
     newScheme: calculateIncomeTax(

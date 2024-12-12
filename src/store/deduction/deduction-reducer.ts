@@ -7,17 +7,30 @@ import {
   EDIT_RENT_ENTRY,
   SAVE_RENT_ENTRY,
   DELETE_RENT_ENTRY,
-  UPDATE_80C_DEDUCTION,
-  UPDATE_CHAPTER_6_DEDUCTION,
   UPDATE_RENT_DEDUCTION,
   UPDATE_SECTION_24_DEDUCTION,
   SET_RENT_DEDUCTED_AMOUNT,
+  EDIT_80C_ENTRY,
+  SAVE_80C_ENTRY,
+  DELETE_80C_ENTRY,
+  RESET_EDIT_80C_ENTRY,
+  EDIT_CHAPTER_VI_ENTRY,
+  SAVE_CHAPTER_VI_ENTRY,
+  DELETE_CHAPTER_VI_ENTRY,
+  RESET_EDIT_CHAPTER_VI_ENTRY,
 } from "src/store/deduction/deduction-constants";
 import {
   mapDeleteRentEntry,
   mapEditRentEntry,
   mapSaveRentEntry,
 } from "./mapper/deduction-rent-mapper";
+import {
+  mapDeleteDeductionEntry,
+  mapEditDeductionCEntry,
+  mapSaveDeductionEntry,
+  resetDeductionOption,
+} from "./mapper/deduction-80C-mapper";
+import { DEDUCTION_MAX_LIMIT } from "src/constants/common-constants";
 
 const initialState: DeductionReducerType = {
   standardDeduction: { newScheme: 75000, oldScheme: 50000 },
@@ -27,27 +40,21 @@ const initialState: DeductionReducerType = {
     isEditable: false,
     editableEntryId: "",
   },
-  section24: 0,
+  section24: {
+    amount: 0,
+    deductedAmount: 0,
+  },
   deduction80C: {
-    providentFund: 46620,
-    lic: 0,
-    nps: 0,
-    ppf: 0,
-    homeLoanPrincipal: 0,
-    stampDuty: 0,
-    taxSavingFD: 0,
-    others: 0,
+    options: [],
+    deductedAmount: 0,
+    isEditable: false,
+    editableEntryId: "",
   },
   deductionByChapter6: {
-    medicalInsuranceSelf: 0,
-    medicalInsuranceParent: 0,
-    handicappedDependent: 0,
-    specifiedDiseaseTreatment: 0,
-    educationLoanInterest: 0,
-    selfDisability: 0,
-    additionalHomeLoanInterest: 0,
-    additionalNps: 0,
-    electricVehicleInterest: 0,
+    options: [],
+    deductedAmount: 0,
+    isEditable: false,
+    editableEntryId: "",
   },
 };
 const DeductionReducer = (
@@ -97,22 +104,86 @@ const DeductionReducer = (
     case UPDATE_SECTION_24_DEDUCTION: {
       return {
         ...state,
-        section24: payload,
-      };
-    }
-    case UPDATE_80C_DEDUCTION: {
-      return {
-        ...state,
-        deduction80C: {
-          ...state.deduction80C,
-          ...payload,
+        section24: {
+          amount: payload,
+          deductedAmount: payload > 2000000 ? 2000000 : payload,
         },
       };
     }
-    case UPDATE_CHAPTER_6_DEDUCTION: {
+
+    case EDIT_80C_ENTRY: {
       return {
         ...state,
-        deductionByChapter6: payload,
+        deduction80C: mapEditDeductionCEntry(state.deduction80C, payload),
+      };
+    }
+    case SAVE_80C_ENTRY: {
+      return {
+        ...state,
+        deduction80C: mapSaveDeductionEntry(
+          state.deduction80C,
+          payload,
+          initialState.deduction80C,
+          DEDUCTION_MAX_LIMIT.SECTION_80C
+        ),
+      };
+    }
+    case DELETE_80C_ENTRY: {
+      return {
+        ...state,
+        deduction80C: mapDeleteDeductionEntry(
+          state.deduction80C,
+          payload,
+          initialState.deduction80C,
+          DEDUCTION_MAX_LIMIT.SECTION_80C
+        ),
+      };
+    }
+    case RESET_EDIT_80C_ENTRY: {
+      return {
+        ...state,
+        deduction80C: resetDeductionOption(
+          state.deduction80C,
+          initialState.deduction80C
+        ),
+      };
+    }
+    case EDIT_CHAPTER_VI_ENTRY: {
+      return {
+        ...state,
+        deductionByChapter6: mapEditDeductionCEntry(
+          state.deductionByChapter6,
+          payload
+        ),
+      };
+    }
+    case SAVE_CHAPTER_VI_ENTRY: {
+      return {
+        ...state,
+        deductionByChapter6: mapSaveDeductionEntry(
+          state.deductionByChapter6,
+          payload,
+          initialState.deductionByChapter6
+        ),
+      };
+    }
+    case DELETE_CHAPTER_VI_ENTRY: {
+      return {
+        ...state,
+        deductionByChapter6: mapDeleteDeductionEntry(
+          state.deductionByChapter6,
+          payload,
+          initialState.deductionByChapter6
+        ),
+      };
+    }
+    case RESET_EDIT_CHAPTER_VI_ENTRY: {
+      return {
+        ...state,
+        deductionByChapter6: resetDeductionOption(
+          state.deductionByChapter6,
+          initialState.deductionByChapter6
+        ),
       };
     }
     default:
