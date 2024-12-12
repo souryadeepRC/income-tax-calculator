@@ -69,8 +69,6 @@ const ChapterVI: React.FC = () => {
     );
   };
   const onSave = (entryDetails: DeductionEntryType) => {
-    console.log(entryDetails);
-
     dispatch(saveChapterVIEntry(entryDetails));
   };
   const onReset = () => {

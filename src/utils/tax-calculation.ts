@@ -1,5 +1,3 @@
-import { DeductionReducerType } from "src/types/deduction-types";
-
 const IS_NEW_SCHEME = true;
 const calculateByNewTaxSlab = (taxableAmount: number) => {
   const TAX_SLAB_AMOUNT = 400000;
@@ -106,10 +104,10 @@ export const calculateRentDeduction = (
 export const calculateTax = (
   salaryIncome: any,
   totalIncome: number,
-  deductionDetail: DeductionReducerType
+  deductionDetail: any
 ) => {
   let deductedAmount = 0;
-  const taxableAmount = totalIncome - salaryIncome.pf;
+  const taxableAmount = totalIncome - (salaryIncome?.pf || 0);
 
   deductedAmount += deductionDetail.rent.deductedAmount;
   deductedAmount += deductionDetail.section24.deductedAmount;

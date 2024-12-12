@@ -1,11 +1,16 @@
 export interface IncomeReducerType {
-  income: {
-    salary: Record<string, number>;
-    extra: Record<string, number>;
-  };
-  tax: any;
-  editableIncome: IncomeComponent;
+  overallAmount: number;
+  options: IncomeOption[];
+  isEditable: boolean;
+  editableEntryId: string;
 }
+export interface IncomeOption {
+  id?: string;
+  label: string;
+  amount: number;
+  category: "salary" | "extra";
+}
+
 export interface incomeDetailsUpdateType {
   type: string;
   amount: number;

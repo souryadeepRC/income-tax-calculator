@@ -34,12 +34,8 @@ const Section24 = () => {
 
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const enteredAmount: string = event.target.value;
-    console.log({ enteredAmount });
-
     setEntryInput(enteredAmount);
     let errorMessage = "";
-    console.log({ val: !NUMERIC_REGEX.test(enteredAmount) });
-
     if (!NUMERIC_REGEX.test(enteredAmount)) {
       errorMessage = "Enter a valid amount more than 0 (e.g. 100.50 or 100)";
     }
