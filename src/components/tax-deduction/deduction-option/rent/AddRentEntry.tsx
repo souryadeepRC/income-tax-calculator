@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 //actions
 import { editRentEntry } from "src/store/deduction/deduction-actions";
 // selectors
-import { selectIsRentEligible } from "src/store/income/income-selectors";
+import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
 // types
 import { DeductionByRent } from "src/types/deduction-types";
@@ -16,7 +16,8 @@ const AddRentEntry: React.FC = () => {
   // store
   const dispatch = useDispatch();
   const { deductedAmount }: DeductionByRent = useSelector(selectRentDeduction);
-  const isRentEligible: boolean = useSelector(selectIsRentEligible);
+  const { basic, hra } = useSelector(selectRentEligibleDetails);
+  const isRentEligible: boolean = basic > 0 && hra > 0;
   const onAddRent = () => {
     dispatch(editRentEntry());
   };

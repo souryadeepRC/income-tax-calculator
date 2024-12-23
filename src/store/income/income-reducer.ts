@@ -1,54 +1,20 @@
 // types
 import { ReducerActionPayloadType } from "src/store/reducer-types";
-import { IncomeComponent, IncomeReducerType } from "src/types/income-types";
+import { IncomeReducerType } from "src/types/income-types";
 // constants
 import {
-  MODIFY_INCOME_DETAILS,
-  REMOVE_INCOME_DETAILS,
-  UPDATE_INCOME_DETAILS,
-  UPDATE_TAX_DETAILS,
+  EDIT_INCOME_ENTRY,
+  SAVE_INCOME_DETAILS,
+  DELETE_INCOME_DETAILS,
+  RESET_EDIT_INCOME_ENTRY,
 } from "src/store/income/income-constants";
+import { mapDeleteIncomeEntry, mapSaveIncomeEntry } from "./income-mapper";
 
 const initialState: IncomeReducerType = {
-  income: {
-    salary: {
-      // salary: 842079653, // 1110000 1000000
-      basic: 80000, // 388500 350000 --> 35%
-      hra: 60000, // 194250 175000--? 17.5%
-      pf: 42000, // 46620 42000--> 42%
-    },
-    extra: {},
-  },
-  tax: {
-    choice: {
-      taxAmount: {
-        monthly: 0,
-        yearly: 0,
-      },
-      difference: 0,
-      type: "New",
-      percentage: 0,
-    },
-    newScheme: {
-      baseTax: 0,
-      cessAmount: 0,
-      monthlyTax: 0,
-      taxableAmount: 0,
-      yearlyTax: 0,
-    },
-    oldScheme: {
-      baseTax: 0,
-      cessAmount: 0,
-      monthlyTax: 0,
-      taxableAmount: 0,
-      yearlyTax: 0,
-    },
-  },
-  editableIncome: {
-    amount: "",
-    label: "",
-    group: "salary",
-  },
+  overallAmount: 0,
+  options: [],
+  isEditable: false,
+  editableEntryId: "",
 };
 const IncomeReducer = (
   state = initialState,
@@ -56,44 +22,30 @@ const IncomeReducer = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case UPDATE_INCOME_DETAILS: {
-      const { type: incomeType, amount } = payload;
+    case EDIT_INCOME_ENTRY: {
       return {
         ...state,
-        income: { ...state.income, [incomeType]: amount },
+        isEditable: true,
+        ...(payload ? { editableEntryId: payload } : {}),
       };
     }
-    case REMOVE_INCOME_DETAILS: {
-      const { group, label }: IncomeComponent = payload;
-      const groupIncome = { ...state.income?.[group] };
-      delete groupIncome[label];
-
+    case RESET_EDIT_INCOME_ENTRY: {
       return {
         ...state,
-        income: {
-          ...state.income,
-          [group]: groupIncome,
-        },
+        isEditable: initialState.isEditable,
+        editableEntryId: initialState.editableEntryId,
       };
     }
-    case MODIFY_INCOME_DETAILS: {
-      const { label, group, amount }: IncomeComponent = payload;
+    case SAVE_INCOME_DETAILS: {
       return {
         ...state,
-        editableIncome: initialState.editableIncome,
-        income: {
-          ...state.income,
-          [group]: {
-            ...state.income?.[group],
-            [label]: +amount,
-          },
-        },
+        ...mapSaveIncomeEntry(state, payload, initialState),
       };
     }
-    case UPDATE_TAX_DETAILS: {
+    case DELETE_INCOME_DETAILS: {
       return {
         ...state,
-        tax: payload,
+        ...mapDeleteIncomeEntry(state, payload, initialState),
       };
     }
     default:
@@ -101,4 +53,3 @@ const IncomeReducer = (
   }
 };
 export { IncomeReducer };
-

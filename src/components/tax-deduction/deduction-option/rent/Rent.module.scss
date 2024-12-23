@@ -20,39 +20,7 @@
     }
   }
 }
-.rent_entry__container {
-  display: flex;
-  gap: 5px;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  background: var(--secondary-bg-color);
-  border-radius: 2vw;
-  border-left: 2vw solid var(--primary-color);
-  padding: 1vw;
-  align-items: center;
-  color: var(--primary-font-color);
-  font-size: 1.5vw;
 
-  section {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-    gap: 2vw;
-  }
-  .rent_entry_action_icon {
-    width: 8%;
-    background-color: var(--primary-bg-color);
-    padding: 1vw;
-    text-align: center;
-    border-radius: 1vw;
-    &:global(.MuiIconButton-root) {
-      :global(.MuiSvgIcon-root) {
-        font-size: 2vw;
-      }
-      color: var(--primary-font-color);
-    }
-  }
-}
 .add_rent_entry__form {
   display: flex;
   flex-direction: column;
@@ -94,24 +62,11 @@
       width: 30%;
     }
   }
-  .rent_entry__container {
-    font-size: 12px;
-    margin: 5px 0;
-    border-radius: 10px;
-    border-width: 15px;
-    .rent_entry_action_icon {
-      &:global(.MuiIconButton-root) {
-        :global(.MuiSvgIcon-root) {
-          font-size: 12px;
-        }
-      }
-    }
-  }
   .add_rent_entry__form {
     width: 85vw;
     gap: 5px;
     padding: 10px;
-    font-size: 16px; 
+    font-size: 16px;
     .action_btn__container {
       :global(.MuiButton-root) {
         font-size: $font-size-mobile-primary;

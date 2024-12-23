@@ -1,6 +1,6 @@
-import { useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-// hooks 
+// hooks
 import useRentExemption from "src/hooks/useRentExemption";
 // selectors
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
@@ -13,7 +13,7 @@ import { DeductionByRent } from "src/types/deduction-types";
 
 const TOTAL_RENT_DURATION = 12;
 
-export const Rent = () => {
+const Rent = () => {
   const { collections, isEditable, editableEntryId }: DeductionByRent =
     useSelector(selectRentDeduction);
 
@@ -54,3 +54,4 @@ export const Rent = () => {
     </>
   );
 };
+export default memo(Rent);

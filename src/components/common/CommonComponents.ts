@@ -9,8 +9,10 @@ import Modal from "src/components/common/modal/Modal";
 import Navigation from "src/components/common/navigation/Navigation";
 import RouteLayout from "src/components/common/route-layout/RouteLayout";
 import TextField from "src/components/common/text-field/TextField";
+import Select from "src/components/common/select/Select";
 
 export {
+  Select,
   AppTheme,
   BackButton,
   BreadcrumbLink,

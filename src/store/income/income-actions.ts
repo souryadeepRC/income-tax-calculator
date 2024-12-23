@@ -1,35 +1,27 @@
+import { IncomeOption } from "src/types/income-types";
 import {
-  IncomeComponent,
-  incomeDetailsUpdateType,
-} from "src/types/income-types";
-import {
-  MODIFY_INCOME_DETAILS,
-  REMOVE_INCOME_DETAILS,
-  UPDATE_INCOME_DETAILS,
-  UPDATE_TAX_DETAILS,
+  EDIT_INCOME_ENTRY,
+  SAVE_INCOME_DETAILS,
+  DELETE_INCOME_DETAILS,
+  RESET_EDIT_INCOME_ENTRY,
 } from "./income-constants";
+export const editIncomeEntry = (payload?: string) => {
+  return { type: EDIT_INCOME_ENTRY, payload };
+};
+export const resetEditIncomeEntry = () => {
+  return { type: RESET_EDIT_INCOME_ENTRY };
+};
 
-export const updateIncomeDetails = (payload: incomeDetailsUpdateType) => {
+export const saveIncomeDetails = (payload: IncomeOption) => {
   return {
-    type: UPDATE_INCOME_DETAILS,
+    type: SAVE_INCOME_DETAILS,
     payload,
   };
 };
-export const modifyIncomeDetails = (payload: IncomeComponent) => {
+
+export const removeIncomeDetails = (payload: string) => {
   return {
-    type: MODIFY_INCOME_DETAILS,
-    payload,
-  };
-};
-export const updateTaxDetails = (payload: any) => {
-  return {
-    type: UPDATE_TAX_DETAILS,
-    payload,
-  };
-};
-export const removeIncomeDetails = (payload: any) => {
-  return {
-    type: REMOVE_INCOME_DETAILS,
+    type: DELETE_INCOME_DETAILS,
     payload,
   };
 };

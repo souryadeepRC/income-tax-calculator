@@ -7,50 +7,43 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 // components
 import { Menu } from "src/components/common/CommonComponents";
-import ConfirmationModal from "./ConfirmationModal";
 import IncomeEditModal from "./IncomeEditModal";
 // styles
 import { useDispatch } from "react-redux";
 import {
-  modifyIncomeDetails,
   removeIncomeDetails,
+  saveIncomeDetails,
 } from "src/store/income/income-actions";
 import classes from "./IncomeBreakdown.module.scss";
 interface BreakdownComponentProps {
+  id: string;
   label: string;
-  amount: string;
-  group: "salary" | "extra";
+  amount: number;
+  category: "salary" | "extra";
 }
 const BreakdownComponent: React.FC<BreakdownComponentProps> = ({
-  group,
+  id,
+  category,
   label,
   amount,
 }) => {
   const dispatch = useDispatch();
-  const [isRemove, setIsRemove] = useState<boolean>(false);
   const [isEditable, setIsEditable] = useState<boolean>(false);
 
   const onEdit = (amount: string) => {
-    dispatch(modifyIncomeDetails({ label, group, amount }));
+    dispatch(saveIncomeDetails({ label, category, amount: +amount }));
   };
   const onRemove = () => {
-    dispatch(removeIncomeDetails({ group, label }));
+    dispatch(removeIncomeDetails(id));
   };
   return (
     <>
-      {isRemove && (
-        <ConfirmationModal
-          content={`Do you want to delete ${label} component from ${group} Income`}
-          onConfirm={onRemove}
-          onCancel={() => setIsRemove(false)}
-        />
-      )}
       {isEditable && (
         <IncomeEditModal
           isEditable={isEditable}
           onClose={() => setIsEditable(false)}
           label={label}
-          amount={amount}
+          amount={`${amount}`}
           onEdit={onEdit}
         />
       )}
@@ -70,7 +63,7 @@ const BreakdownComponent: React.FC<BreakdownComponentProps> = ({
             {
               label: "Remove",
               icon: <DeleteIcon fontSize="small" />,
-              onClick: () => setIsRemove(true),
+              onClick: onRemove,
             },
           ]}
         />

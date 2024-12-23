@@ -4,36 +4,36 @@ import { useSelector } from "react-redux";
 // components
 import BreakdownComponent from "./BreakdownComponent";
 // types
-import { IncomeComponent } from "src/types/income-types";
+import { IncomeOption } from "src/types/income-types";
 // utils
-import { getIncomeBreakdown } from "src/utils/income-utils";
+import { calculateOverallAmount } from "src/utils/income-utils";
 // styles
 import classes from "./IncomeBreakdown.module.scss";
+import { formatNumber } from "src/utils/tax-calculation";
 interface IncomeBreakdownProps {
   group: "salary" | "extra";
-  amount: number;
   dataSelector: any;
 }
 
 const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
   group,
-  amount,
   dataSelector,
 }) => {
-  const breakdownIncomes = getIncomeBreakdown(group, useSelector(dataSelector));
-
+  const breakdownIncomes: IncomeOption[] = useSelector(dataSelector);
+  const overallAmount = calculateOverallAmount(breakdownIncomes);
   return (
     <section className={classes.income_breakdown_container}>
       <header className={classes.income_breakdown_header}>
         <span>{group} Income</span>
-        <span>Rs.{amount}</span>
+        <span>Rs.{formatNumber(overallAmount)}</span>
       </header>
       <section className={classes.income_component_container}>
-        {breakdownIncomes.map((income: IncomeComponent) => {
+        {breakdownIncomes.map((income: IncomeOption) => {
           return (
             <BreakdownComponent
-              key={income.label}
-              group={group}
+              key={income.id}
+              id={income.id || ""}
+              category={group}
               label={income.label}
               amount={income.amount}
             />

@@ -35,6 +35,9 @@
           padding: 1vw 2vw;
           border-left: 1vw solid var(--primary-color);
           border-radius: 1vw;
+          strong {
+            text-align: left;
+          }
         }
       }
     }
@@ -54,7 +57,7 @@
             font-size: 25px;
           }
           .deduction_list__item {
-            padding: 15px; 
+            padding: 15px;
             border-width: 15px;
             border-radius: 8px;
           }

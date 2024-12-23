@@ -1,18 +1,9 @@
-import { IncomeComponent } from "src/types/income-types";
+import { IncomeOption } from "src/types/income-types";
 
-export const getIncomeBreakdown = (
-  group: "salary" | "extra",
-  incomeDetails: Record<string, number>
-): IncomeComponent[] => {
-  return Object.keys(incomeDetails).reduce(
-    (acc: IncomeComponent[], incomeType: string) => {
-      acc.push({
-        label: incomeType,
-        amount: `${incomeDetails[incomeType]}`,
-        group,
-      });
-      return acc;
-    },
-    []
-  );
+export const calculateOverallAmount = (
+  incomeOptions: IncomeOption[]
+): number => {
+  return incomeOptions.reduce((acc: number, { amount }: IncomeOption) => {
+    return acc + amount;
+  }, 0);
 };

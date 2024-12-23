@@ -1,11 +1,6 @@
 // types
 import { ReducerActionPayloadType } from "src/store/reducer-types";
-import {
-  DeductionByChapter6Type,
-  DeductionType80C,
-  RentDeductionType,
-  RentEntry,
-} from "src/types/deduction-types";
+import { DeductionEntry, RentEntry } from "src/types/deduction-types";
 // constants
 import {
   SET_RENT_DEDUCTED_AMOUNT,
@@ -13,10 +8,15 @@ import {
   EDIT_RENT_ENTRY,
   SAVE_RENT_ENTRY,
   DELETE_RENT_ENTRY,
-  UPDATE_80C_DEDUCTION,
-  UPDATE_CHAPTER_6_DEDUCTION,
-  UPDATE_RENT_DEDUCTION,
   UPDATE_SECTION_24_DEDUCTION,
+  DELETE_80C_ENTRY,
+  SAVE_80C_ENTRY,
+  RESET_EDIT_80C_ENTRY,
+  EDIT_80C_ENTRY,
+  EDIT_CHAPTER_VI_ENTRY,
+  SAVE_CHAPTER_VI_ENTRY,
+  DELETE_CHAPTER_VI_ENTRY,
+  RESET_EDIT_CHAPTER_VI_ENTRY,
 } from "./deduction-constants";
 export const editRentEntry = (payload?: string) => {
   return { type: EDIT_RENT_ENTRY, payload };
@@ -33,14 +33,6 @@ export const deleteRentEntry = (payload: string) => {
 export const setRentDeductedAmount = (payload: number) => {
   return { type: SET_RENT_DEDUCTED_AMOUNT, payload };
 };
-export const updateRentDeduction = (
-  payload: RentDeductionType
-): ReducerActionPayloadType => {
-  return {
-    type: UPDATE_RENT_DEDUCTION,
-    payload,
-  };
-};
 export const updateSection24Deduction = (
   payload: number
 ): ReducerActionPayloadType => {
@@ -49,19 +41,28 @@ export const updateSection24Deduction = (
     payload,
   };
 };
-export const update80CDeduction = (
-  payload: DeductionType80C | { providentFund: number }
-): ReducerActionPayloadType => {
-  return {
-    type: UPDATE_80C_DEDUCTION,
-    payload,
-  };
+export const edit80CEntry = (payload?: string) => {
+  return { type: EDIT_80C_ENTRY, payload };
 };
-export const updateChapter6Deduction = (
-  payload: DeductionByChapter6Type
-): ReducerActionPayloadType => {
-  return {
-    type: UPDATE_CHAPTER_6_DEDUCTION,
-    payload,
-  };
+export const resetEdit80CEntry = () => {
+  return { type: RESET_EDIT_80C_ENTRY };
+};
+export const save80CEntry = (payload: DeductionEntry) => {
+  return { type: SAVE_80C_ENTRY, payload };
+};
+export const delete80CEntry = (payload: string) => {
+  return { type: DELETE_80C_ENTRY, payload };
+};
+
+export const editChapterVIEntry = (payload?: string) => {
+  return { type: EDIT_CHAPTER_VI_ENTRY, payload };
+};
+export const resetEditChapterVIEntry = () => {
+  return { type: RESET_EDIT_CHAPTER_VI_ENTRY };
+};
+export const saveChapterVIEntry = (payload: DeductionEntry) => {
+  return { type: SAVE_CHAPTER_VI_ENTRY, payload };
+};
+export const deleteChapterVIEntry = (payload: string) => {
+  return { type: DELETE_CHAPTER_VI_ENTRY, payload };
 };

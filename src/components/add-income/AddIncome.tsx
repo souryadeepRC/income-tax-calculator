@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 // library
 import {
   Button,
@@ -8,21 +8,16 @@ import {
   SelectChangeEvent,
   InputAdornment,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // icons
 import LabelIcon from "@mui/icons-material/Label";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import CancelIcon from "@mui/icons-material/Cancel";
+import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 // components
 import { TextField } from "src/components/common/CommonComponents";
-// icons
-import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 // actions
-import { modifyIncomeDetails } from "src/store/income/income-actions";
-// selectors
-import { selectEditableIncome } from "src/store/income/income-selectors";
-// types
-import { IncomeComponent } from "src/types/income-types";
+import { saveIncomeDetails } from "src/store/income/income-actions";
 // utils
 import { updateState } from "src/utils/common-utils";
 // constants
@@ -37,10 +32,15 @@ const FORM_ERROR_MESSAGE = {
   label: "Enter a label within min 100 characters",
   amount: "Enter a valid amount more than 0 (e.g. 100.50 or 100)",
 };
+interface IncomeComponent {
+  label: string;
+  amount: string;
+  category: "salary" | "extra";
+}
 const INITIAL_INCOME_DETAILS: IncomeComponent = {
   label: "",
   amount: "",
-  group: "salary",
+  category: "salary",
 };
 const INITIAL_ERRORS: IncomeFormError = {
   label: false,
@@ -51,19 +51,11 @@ interface AddIncomeProps {
 }
 const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   const dispatch = useDispatch();
-  const editableIncome = useSelector(selectEditableIncome);
 
   const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
     INITIAL_INCOME_DETAILS
   );
   const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
-  useEffect(() => {
-    setIncomeDetails(editableIncome);
-    setErrors({
-      label: false,
-      amount: false,
-    });
-  }, [editableIncome]);
 
   const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const modifiedLabel: string = event.target.value;
@@ -85,8 +77,8 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
     setIncomeDetails(updateState("amount", ""));
     setErrors(updateState("amount", false));
   };
-  const onGroupChange = (event: SelectChangeEvent) => {
-    setIncomeDetails(updateState("group", event.target.value));
+  const onCategoryChange = (event: SelectChangeEvent) => {
+    setIncomeDetails(updateState("category", event.target.value));
   };
   const onAddIncome = () => {
     if (errors.label || errors.amount) return;
@@ -97,19 +89,18 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
       setErrors({ label: isInvalidLabel, amount: isInvalidAmount });
       return;
     }
-    dispatch(modifyIncomeDetails(incomeDetails));
+    dispatch(saveIncomeDetails({ ...incomeDetails, amount: +amount }));
     setIncomeDetails(INITIAL_INCOME_DETAILS);
     setErrors(INITIAL_ERRORS);
   };
 
-  const { label, amount, group } = incomeDetails;
+  const { label, amount, category } = incomeDetails;
   return (
     <form className={classes.add_income__form}>
       <TextField
         label="Income Category"
         id="add-income-form-label"
         fullWidth
-        disabled={editableIncome.label !== ""}
         inputProps={{ "data-testid": "add-income-form-label-input" }}
         value={label}
         onChange={onLabelChange}
@@ -156,8 +147,8 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
         <label id="add-income-form-group-label">Group</label>
         <Select
           labelId="add-income-form-group-label"
-          value={group}
-          onChange={onGroupChange}
+          value={category}
+          onChange={onCategoryChange}
           fullWidth
         >
           <MenuItem value="salary">Salary income</MenuItem>
@@ -180,7 +171,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
           onClick={onAddIncome}
           className={classes.action_btn__submit}
         >
-          {editableIncome.label === "" ? "Add" : "Update"}
+          Add Income
         </Button>
       </div>
     </form>

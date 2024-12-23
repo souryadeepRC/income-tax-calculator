@@ -1,20 +1,16 @@
 import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router";
+import { NavLink } from "react-router";
 import { Box } from "@mui/material";
 // icons
 import BlurOnIcon from "@mui/icons-material/BlurOn";
-// components
-import { RouteLayout } from "src/components/common/CommonComponents";
-import DataLayout from "src/components/layout/DataLayout";
 // selectors
 import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors";
-// utils
-import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./DeductionPage.module.scss";
-export const DeductionOption: React.FC = () => {
+
+const DeductionOption: React.FC = () => {
   const deductionBreakup = useSelector(selectDeductionBreakup);
   const options = [
     {
@@ -64,18 +60,4 @@ export const DeductionOption: React.FC = () => {
     </section>
   );
 };
-
-const DeductionPage: React.FC = () => {
-  const deductionBreakup = useSelector(selectDeductionBreakup);
-  return (
-    <DataLayout
-      headerText="Overall Exempted Deduction"
-      aggregateAmount={formatNumber(deductionBreakup.total)}
-    >
-      <RouteLayout parentPath="deduction" label="">
-        <Outlet />
-      </RouteLayout>
-    </DataLayout>
-  );
-};
-export default memo(DeductionPage);
+export default memo(DeductionOption);
