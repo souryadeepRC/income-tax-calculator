@@ -1,5 +1,5 @@
 const IS_NEW_SCHEME = true;
-const calculateByNewTaxSlab = (taxableAmount: number) => {
+export const calculateByNewTaxSlab = (taxableAmount: number) => {
   const TAX_SLAB_AMOUNT = 400000;
   /* ------- The income tax rebate limit : 7 Lakh ----*/
   if (taxableAmount <= 700000) {
@@ -34,16 +34,17 @@ const calculateByNewTaxSlab = (taxableAmount: number) => {
   return taxAmount + (taxableAmount - 1500000) * 0.3;
 };
 
-const calculateByOldTaxSlab = (taxableAmount: number) => {
+export const calculateByOldTaxSlab = (taxableAmount: number) => {
+  const TAX_SLAB_AMOUNT = 250000;
   /* ------- The income tax rebate limit : 5 Lakh ----*/
   if (taxableAmount <= 500000) {
     return 0;
   }
   /* --- Up to Rs.2.5Lakh  - 0% ---
      --- Rs.2.5Lakh to Rs.5Lakh  -  5% -- */
-  let taxAmount = 250000 * 0.05;
+  let taxAmount = TAX_SLAB_AMOUNT * 0.05;
 
-  /* --- Rs.5Lakh to Rs.10Lakh -  5% -- */
+  /* --- Rs.5Lakh to Rs.10Lakh -  20% -- */
   if (taxableAmount > 500000 && taxableAmount <= 1000000) {
     return taxAmount + (taxableAmount - 500000) * 0.2;
   } else {
@@ -59,7 +60,7 @@ export const formatNumber = (value: number): number => {
   return value % 1 === 0 ? value : +value.toFixed(2);
 };
 
-const calculateIncomeTax = (
+export const calculateIncomeTax = (
   income: number,
   deductedAmount: number,
   standardDeduction: number,

@@ -34,7 +34,7 @@ const TaxRegimeBreakup: React.FC<TaxRegimeBreakupProps> = ({
           </div>
           <div>
             <strong>Rs. {formatNumber(details.cessAmount)}</strong>
-            <span>Base Tax</span>
+            <span>CESS</span>
           </div>
         </div>
       </div>

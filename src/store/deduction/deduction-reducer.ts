@@ -7,7 +7,6 @@ import {
   EDIT_RENT_ENTRY,
   SAVE_RENT_ENTRY,
   DELETE_RENT_ENTRY,
-  UPDATE_RENT_DEDUCTION,
   UPDATE_SECTION_24_DEDUCTION,
   SET_RENT_DEDUCTED_AMOUNT,
   EDIT_80C_ENTRY,
@@ -26,7 +25,7 @@ import {
 } from "./mapper/deduction-rent-mapper";
 import {
   mapDeleteDeductionEntry,
-  mapEditDeductionCEntry,
+  mapEditDeductionEntry,
   mapSaveDeductionEntry,
   resetDeductionOption,
 } from "./mapper/deduction-80C-mapper";
@@ -95,12 +94,6 @@ const DeductionReducer = (
         },
       };
     }
-    case UPDATE_RENT_DEDUCTION: {
-      return {
-        ...state,
-        rent: payload,
-      };
-    }
     case UPDATE_SECTION_24_DEDUCTION: {
       return {
         ...state,
@@ -114,7 +107,7 @@ const DeductionReducer = (
     case EDIT_80C_ENTRY: {
       return {
         ...state,
-        deduction80C: mapEditDeductionCEntry(state.deduction80C, payload),
+        deduction80C: mapEditDeductionEntry(state.deduction80C, payload),
       };
     }
     case SAVE_80C_ENTRY: {
@@ -151,7 +144,7 @@ const DeductionReducer = (
     case EDIT_CHAPTER_VI_ENTRY: {
       return {
         ...state,
-        deductionByChapter6: mapEditDeductionCEntry(
+        deductionByChapter6: mapEditDeductionEntry(
           state.deductionByChapter6,
           payload
         ),
