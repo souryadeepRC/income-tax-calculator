@@ -5,12 +5,20 @@ import { IncomeOption, IncomeReducerType } from "src/types/income-types";
 
 export const selectIncome = (store: AppStoreType): IncomeReducerType =>
   store.income;
-
-export const selectSalaryIncome = (store: AppStoreType): IncomeOption[] =>
-  store.income.options.filter((income) => income.category === "salary");
-
-export const selectExtraIncome = (store: AppStoreType): IncomeOption[] =>
-  store.income.options.filter((income) => income.category === "extra");
+export const selectIncomeOptions = (store: AppStoreType): IncomeOption[] =>
+  store.income.options;
+export const selectSalaryIncome = createSelector(
+  [selectIncomeOptions],
+  (incomeOptions) => {
+    return incomeOptions.filter((income) => income.category === "salary");
+  }
+);
+export const selectExtraIncome = createSelector(
+  [selectIncomeOptions],
+  (incomeOptions) => {
+    return incomeOptions.filter((income) => income.category === "extra");
+  }
+);
 
 export const selectOverallIncomeAmount = (store: AppStoreType): number =>
   store.income.overallAmount;

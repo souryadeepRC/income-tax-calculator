@@ -28,6 +28,6 @@ export const useTaxCalculation = () => {
 
   // effects
   useEffect(() => {
-    /* dispatch(updateTaxDetails(null)); */
-  }, [taxBreakup]);
+    dispatch(updateTaxDetails(taxBreakup));
+  }, [dispatch, taxBreakup]);
 };
