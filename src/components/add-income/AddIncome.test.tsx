@@ -92,11 +92,11 @@ describe("test AddIncome component", () => {
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     expect(mockDispatch).toHaveBeenCalledWith({
       payload: {
-        amount: "200",
-        group: "extra",
+        amount: 200,
+        category: "extra",
         label: "Test Label",
       },
-      type: "MODIFY_INCOME_DETAILS",
+      type: "SAVE_INCOME_DETAILS",
     });
   });
   test("update fields with invalid inputs and check submit validation", () => {
@@ -156,7 +156,7 @@ describe("test AddIncome component", () => {
       screen.getByTestId("add-income-form-submit-btn")
     ).toBeInTheDocument();
     expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
-      "Update"
+      "Add Income"
     );
   });
   test.todo("type records in text field then clear the record");

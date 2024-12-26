@@ -8,7 +8,7 @@ import { TaxReducerType } from "src/types/tax-types";
 
 export type ReducerActionPayloadType = {
   type: string;
-  payload: any;
+  payload?: any;
 };
 
 export type AppStoreType = {

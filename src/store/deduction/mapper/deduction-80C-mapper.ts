@@ -2,7 +2,7 @@ import { v4 as uuid4 } from "uuid";
 import { DeductionOption, DeductionEntry } from "src/types/deduction-types";
 import { getDeductedAmount } from "src/utils/deduction-utils";
 
-export const mapEditDeductionCEntry = (
+export const mapEditDeductionEntry = (
   deductionOption: DeductionOption,
   payload: string
 ) => {
