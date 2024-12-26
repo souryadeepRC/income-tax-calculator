@@ -70,7 +70,8 @@
       }
     },
     "transformIgnorePatterns": [
-      "node_modules/"
+      "node_modules/",
+      "reportWebVitals.ts"
     ]
   }
 }
