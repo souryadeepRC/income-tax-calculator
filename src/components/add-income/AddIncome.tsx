@@ -114,7 +114,13 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
           ),
           endAdornment: (
             <InputAdornment position="start">
-              {label && <CancelIcon onClick={onLabelClear} fontSize="small" />}
+              {label && (
+                <CancelIcon
+                  data-testid="clear-label-btn"
+                  onClick={onLabelClear}
+                  fontSize="small"
+                />
+              )}
             </InputAdornment>
           ),
         }}
@@ -137,7 +143,11 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
           endAdornment: (
             <InputAdornment position="start">
               {amount && (
-                <CancelIcon onClick={onAmountClear} fontSize="small" />
+                <CancelIcon
+                  data-testid="clear-amount-btn"
+                  onClick={onAmountClear}
+                  fontSize="small"
+                />
               )}
             </InputAdornment>
           ),

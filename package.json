@@ -71,7 +71,7 @@
     },
     "transformIgnorePatterns": [
       "node_modules/",
-      "reportWebVitals.ts"
+      "src/reportWebVitals.ts"
     ]
   }
 }

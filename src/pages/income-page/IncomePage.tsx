@@ -8,6 +8,7 @@ import AddCardIcon from "@mui/icons-material/AddCard";
 import { Modal } from "src/components/common/CommonComponents";
 import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
 import AddIncome from "src/components/add-income/AddIncome";
+import IncomeEditModal from "src/components/income-details/IncomeEditModal";
 // reducers
 import {
   editIncomeEntry,
@@ -25,7 +26,8 @@ import classes from "./IncomePage.module.scss";
 
 const IncomePage: React.FC = () => {
   const dispatch = useDispatch();
-  const { overallAmount, isEditable } = useSelector(selectIncome);
+  const { overallAmount, isEditable, editableEntryId } =
+    useSelector(selectIncome);
   const handleEditIncomeReset = () => {
     dispatch(resetEditIncomeEntry());
   };
@@ -33,7 +35,11 @@ const IncomePage: React.FC = () => {
     <>
       {isEditable && (
         <Modal isOpen={true} onClose={handleEditIncomeReset}>
-          <AddIncome onCancel={handleEditIncomeReset} />
+          {editableEntryId ? (
+            <IncomeEditModal onCancel={handleEditIncomeReset} />
+          ) : (
+            <AddIncome onCancel={handleEditIncomeReset} />
+          )}
         </Modal>
       )}
       <main className={classes.income__container}>
@@ -45,6 +51,7 @@ const IncomePage: React.FC = () => {
           <Button
             variant="contained"
             startIcon={<AddCardIcon />}
+            data-testid="add-income-btn"
             onClick={() => dispatch(editIncomeEntry())}
           >
             Add Income

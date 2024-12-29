@@ -12,6 +12,8 @@ import {
   selectIncomeOptions,
   selectOverallIncomeAmount,
   selectRentEligibleDetails,
+  selectEditableIncomeEntryId,
+  selectEditableIncomeOption,
   selectSalaryIncome,
 } from "../income/income-selectors";
 import {
@@ -38,7 +40,7 @@ describe("test selectors", () => {
         { id: "2", label: "Test", amount: 400, category: "extra" },
       ],
       isEditable: false,
-      editableEntryId: "",
+      editableEntryId: "2",
     },
     deduction: {
       standardDeduction: { newScheme: 75000, oldScheme: 50000 },
@@ -130,6 +132,25 @@ describe("test selectors", () => {
         },
       })
     ).toEqual({ basic: 200, hra: 200 });
+    expect(selectEditableIncomeEntryId(mockState)).toEqual("2");
+    expect(selectEditableIncomeOption(mockState)).toEqual({
+      id: "2",
+      label: "Test",
+      amount: 400,
+      category: "extra",
+    });
+    const nonEditableState = {
+      ...mockState,
+      income: {
+        ...mockState.income,
+        editableEntryId: "",
+      },
+    };
+    expect(selectEditableIncomeOption(nonEditableState)).toEqual({
+      label: "",
+      amount: 0,
+      category: "salary",
+    });
   });
 
   test("Deduction selectors", () => {
