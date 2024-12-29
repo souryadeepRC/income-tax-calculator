@@ -19,7 +19,7 @@ const AddDeductionEntry: React.FC<AddDeductionEntryProps> = ({
       <span>
         You will get an exemption of Rs.{deductedAmount} from {deductionSection}
       </span>
-      <Button variant="contained" onClick={onAddDeduction}>
+      <Button variant="contained" data-testid="add-deduction-btn" onClick={onAddDeduction}>
         Add Deduction
       </Button>
     </section>

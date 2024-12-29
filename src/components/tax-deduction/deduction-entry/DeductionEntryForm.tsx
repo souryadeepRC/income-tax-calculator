@@ -4,11 +4,7 @@ import { InputAdornment, Button, MenuItem } from "@mui/material";
 // icons
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 // components
-import {
-  Modal,
-  TextField,
-  Select,
-} from "src/components/common/CommonComponents";
+import { TextField, Select } from "src/components/common/CommonComponents";
 // utils
 import { updateState } from "src/utils/common-utils";
 // constants
@@ -54,11 +50,11 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
   const [entryInput, setEntryInput] = useState<EntryInput>(INITIAL_ENTRY);
   const [error, setError] = useState<EntryError>(INITIAL_ERROR);
   useEffect(() => {
-    setEntryInput(entry || INITIAL_ENTRY);
+    if (!entry) return;
+    setEntryInput({ ...entry, amount: `${entry.amount}` });
   }, [entry]);
 
   const onEntrySave = () => {
-    if (error.category || error.amount) return;
     if (entryInput.category === "" || entryInput.amount === "") {
       if (entryInput.amount === "") {
         setError(updateState("amount", "Amount cannot be empty"));
@@ -72,7 +68,7 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
     });
   };
   const onCategoryChange = (event: any) => {
-    const enteredCategory = event.target.value;
+    const enteredCategory = event.target.value as string;
     const maxLimit = options.find(
       (option) => option.category === enteredCategory
     )?.maxLimit;
@@ -92,60 +88,66 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
   const { category, amount } = entryInput;
   const { amount: amountError } = error;
   return (
-    <Modal isOpen={true} onClose={onReset}>
-      <form className={classes.deduction_entry__form}>
-        <Select
-          label="Category"
-          value={category}
-          onChange={onCategoryChange}
-          fullWidth
-        >
-          {options.map((option) => {
-            return (
-              <MenuItem
-                key={option.category}
-                disabled={option.isAdded}
-                value={option.category}
-              >
-                {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <TextField
-          className="deduction__option__input"
-          label="Invested Amount"
-          type="number"
-          value={amount}
-          onChange={onAmountChange}
-          error={amountError !== ""}
-          helperText={amountError}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <CurrencyRupeeIcon fontSize="small" />
-              </InputAdornment>
-            ),
-          }}
-        />
+    <form className={classes.deduction_entry__form}>
+      <Select
+        label="Category"
+        value={category}
+        onChange={onCategoryChange}
+        data-testid={`category-option`}
+        fullWidth
+      >
+        {options.map((option) => {
+          return (
+            <MenuItem
+              key={option.category}
+              disabled={option.isAdded}
+              value={option.category}
+              data-testid={`category-option-${option.category}`}
+            >
+              {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
+            </MenuItem>
+          );
+        })}
+      </Select>
+      <TextField
+        className="deduction__option__input"
+        label="Invested Amount"
+        type="number"
+        value={amount}
+        onChange={onAmountChange}
+        inputProps={{ "data-testid": "deduction-amount-input" }}
+        error={amountError !== ""}
+        helperText={amountError}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CurrencyRupeeIcon fontSize="small" />
+            </InputAdornment>
+          ),
+        }}
+      />
 
-        <section
-          className={classes.action_btn__container}
-          aria-label="add rent entry form action button container"
+      <section
+        className={classes.action_btn__container}
+        aria-label="add rent entry form action button container"
+      >
+        <Button
+          variant="text"
+          data-testid="deduction-form-cancel-btn"
+          onClick={onReset}
         >
-          <Button variant="text" onClick={onReset}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            className={classes.save__btn}
-            onClick={onEntrySave}
-          >
-            Save
-          </Button>
-        </section>
-      </form>
-    </Modal>
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          data-testid="deduction-form-save-btn"
+          className={classes.save__btn}
+          onClick={onEntrySave}
+        >
+          Save
+        </Button>
+      </section>
+    </form>
   );
 };
 export default memo(DeductionEntryForm);
