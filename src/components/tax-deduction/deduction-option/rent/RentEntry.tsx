@@ -30,9 +30,7 @@ const RentEntry: React.FC<RentEntryProps> = ({ details }) => {
           <span>Rs. {amount}</span>
         </div>
         <div aria-label="rent-duration">
-          <span>
-            {duration} month{`${duration > 1 ? "s" : ""} `}
-          </span>
+          <span>{duration}&nbsp;{`Month${duration > 1 ? "s" : ""}`}</span>
         </div>
         <div aria-label="rent-city">
           <span>{isMetroCity ? "Metro" : "Non-Metro"}</span>

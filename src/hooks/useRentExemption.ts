@@ -50,6 +50,7 @@ const useRentExemption = () => {
     const totalExemption = metroExemption + nonMetroExemption;
     return totalExemption > hra ? hra : totalExemption;
   };
+
   useEffect(() => {
     const deductedAmount = calculateRentDeductedAmount(collections, basic, hra);
     dispatch(setRentDeductedAmount(deductedAmount));

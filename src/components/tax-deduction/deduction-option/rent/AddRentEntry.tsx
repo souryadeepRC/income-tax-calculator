@@ -29,7 +29,11 @@ const AddRentEntry: React.FC = () => {
       >
         <span>You will get an exemption of Rs.{deductedAmount} from Rent</span>
         {isRentEligible ? (
-          <Button variant="contained" onClick={onAddRent}>
+          <Button
+            variant="contained"
+            data-testid="add-rent-btn"
+            onClick={onAddRent}
+          >
             Add Rent
           </Button>
         ) : (
