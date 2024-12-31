@@ -34,11 +34,11 @@ describe("Landing component", () => {
     render(
       <MemoryRouter>
         <Landing />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     expect(screen.getByText(/Instant Tax Calculator:/i)).toBeInTheDocument();
     expect(
-      screen.queryByText(/You don't have to pay income tax/i)
+      screen.queryByText(/You don't have to pay income tax/i),
     ).not.toBeInTheDocument();
     expect(screen.getByText("Tax Rs.200.52/month")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("get-started-btn"));
@@ -66,10 +66,10 @@ describe("Landing component", () => {
     render(
       <MemoryRouter>
         <Landing />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     expect(
-      screen.getByText(/You don't have to pay income tax/i)
+      screen.getByText(/You don't have to pay income tax/i),
     ).toBeInTheDocument();
   });
 });

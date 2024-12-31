@@ -38,7 +38,7 @@ const Deduction80C = () => {
 
   const getEditableEntryDetails = useCallback(() => {
     const deductionEntry = options.find(
-      (deductionEntry) => deductionEntry.id === editableEntryId
+      (deductionEntry) => deductionEntry.id === editableEntryId,
     );
     if (!deductionEntry) return undefined;
     const { amount, category } = deductionEntry;
@@ -53,7 +53,7 @@ const Deduction80C = () => {
         const isAdded =
           options.findIndex(
             (option) =>
-              editableEntryId !== option.id && option.category === category
+              editableEntryId !== option.id && option.category === category,
           ) > -1;
 
         return [
@@ -61,7 +61,7 @@ const Deduction80C = () => {
           { category, label: DEDUCTION_80C_OPTIONS[category], isAdded },
         ];
       },
-      []
+      [],
     );
   };
   const onSave = (entryDetails: DeductionEntryType) => {

@@ -1,7 +1,7 @@
 import { IncomeOption } from "src/types/income-types";
 
 export const calculateOverallAmount = (
-  incomeOptions: IncomeOption[]
+  incomeOptions: IncomeOption[],
 ): number => {
   return incomeOptions.reduce((acc: number, { amount }: IncomeOption) => {
     return acc + amount;

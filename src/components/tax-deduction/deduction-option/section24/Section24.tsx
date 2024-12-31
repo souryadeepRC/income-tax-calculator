@@ -23,7 +23,7 @@ const Section24 = () => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const { amount, deductedAmount }: DeductionSection24 = useSelector(
-    selectDeductionSection24
+    selectDeductionSection24,
   );
   const [entryInput, setEntryInput] = useState<string>("");
   const [error, setError] = useState<string>("");

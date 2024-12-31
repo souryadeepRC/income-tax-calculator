@@ -2,7 +2,7 @@ import { DeductionEntry } from "src/types/deduction-types";
 
 export const getDeductedAmount = (
   options: DeductionEntry[],
-  overallMaxLimit: number = Infinity
+  overallMaxLimit: number = Infinity,
 ) => {
   const deductedAmount: number = options.reduce(
     (acc: number, option: DeductionEntry) => {
@@ -10,7 +10,7 @@ export const getDeductedAmount = (
 
       return acc + (amount > maxLimit ? maxLimit : amount);
     },
-    0
+    0,
   );
 
   return deductedAmount > overallMaxLimit ? overallMaxLimit : deductedAmount;

@@ -14,23 +14,23 @@ export const selectEditableIncomeOption: (store: AppStoreType) => IncomeOption =
     [selectEditableIncomeEntryId, selectIncomeOptions],
     (entryId, incomeOptions) => {
       const editableIncome = incomeOptions.find(
-        (income) => income.id === entryId
+        (income) => income.id === entryId,
       );
       if (!editableIncome) return { amount: 0, label: "", category: "salary" };
       return editableIncome;
-    }
+    },
   );
 export const selectSalaryIncome = createSelector(
   [selectIncomeOptions],
   (incomeOptions) => {
     return incomeOptions.filter((income) => income.category === "salary");
-  }
+  },
 );
 export const selectExtraIncome = createSelector(
   [selectIncomeOptions],
   (incomeOptions) => {
     return incomeOptions.filter((income) => income.category === "extra");
-  }
+  },
 );
 
 export const selectOverallIncomeAmount = (store: AppStoreType): number =>
@@ -54,7 +54,7 @@ export const selectRentEligibleDetails = createSelector(
         }
         return acc;
       },
-      { basic: 0, hra: 0 }
+      { basic: 0, hra: 0 },
     );
-  }
+  },
 );

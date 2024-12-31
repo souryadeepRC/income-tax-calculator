@@ -38,7 +38,7 @@ const ChapterVI: React.FC = () => {
 
   const getEditableEntryDetails = useCallback(() => {
     const deductionEntry = options.find(
-      (deductionEntry) => deductionEntry.id === editableEntryId
+      (deductionEntry) => deductionEntry.id === editableEntryId,
     );
     if (!deductionEntry) return undefined;
     const { amount, category } = deductionEntry;
@@ -53,7 +53,7 @@ const ChapterVI: React.FC = () => {
         const isAdded =
           options.findIndex(
             (option) =>
-              editableEntryId !== option.id && option.category === category
+              editableEntryId !== option.id && option.category === category,
           ) > -1;
 
         return [
@@ -66,7 +66,7 @@ const ChapterVI: React.FC = () => {
           },
         ];
       },
-      []
+      [],
     );
   };
   const onSave = (entryDetails: DeductionEntryType) => {

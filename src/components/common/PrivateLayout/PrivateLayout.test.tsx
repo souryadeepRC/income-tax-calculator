@@ -30,7 +30,7 @@ describe("test PrivateLayout Component", () => {
     render(
       <PrivateLayout>
         <span>Test Child</span>
-      </PrivateLayout>
+      </PrivateLayout>,
     );
     expect(screen.getByText("Mocked Header")).toBeInTheDocument();
     expect(screen.getByText("Test Child")).toBeInTheDocument();

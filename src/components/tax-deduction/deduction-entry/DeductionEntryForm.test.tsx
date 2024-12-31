@@ -21,7 +21,7 @@ describe("test DeductionEntryForm component", () => {
         entry={mockDeductionEntry}
         onSave={mockOnSave}
         onReset={mockOnReset}
-      />
+      />,
     );
     expect(screen.getByTestId("category-option")).toBeInTheDocument();
 
@@ -36,7 +36,7 @@ describe("test DeductionEntryForm component", () => {
     fireEvent.change(amountInput, { target: { value: "200" } });
     fireEvent.change(amountInput, { target: { value: "2Test00" } });
     expect(
-      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)")
+      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)"),
     ).toBeInTheDocument();
     fireEvent.change(amountInput, { target: { value: 200 } });
     expect(amountInput).toHaveValue(200);
@@ -51,7 +51,7 @@ describe("test DeductionEntryForm component", () => {
         entry={undefined}
         onSave={mockOnSave}
         onReset={mockOnReset}
-      />
+      />,
     );
     const amountInput = screen.getByTestId("deduction-amount-input");
     expect(amountInput).toHaveValue(null);
@@ -66,12 +66,12 @@ describe("test DeductionEntryForm component", () => {
         }}
         onSave={mockOnSave}
         onReset={mockOnReset}
-      />
+      />,
     );
 
     fireEvent.click(screen.getByTestId("deduction-form-save-btn"));
     expect(
-      screen.queryByText("Amount cannot be empty")
+      screen.queryByText("Amount cannot be empty"),
     ).not.toBeInTheDocument();
     expect(mockOnSave).not.toHaveBeenCalled();
   });
@@ -85,7 +85,7 @@ describe("test DeductionEntryForm component", () => {
         }}
         onSave={mockOnSave}
         onReset={mockOnReset}
-      />
+      />,
     );
 
     fireEvent.click(screen.getByTestId("deduction-form-save-btn"));

@@ -23,7 +23,7 @@ jest.mock(
         {children}
       </div>
     ), // Return a valid React element
-  })
+  }),
 );
 
 jest.mock(
@@ -31,7 +31,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>AddRentEntry</div>, // Return a valid React element
-  })
+  }),
 );
 
 jest.mock(
@@ -39,7 +39,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>RentEntryForm</div>, // Return a valid React element
-  })
+  }),
 );
 
 jest.mock("src/hooks/useRentExemption", () => jest.fn());
@@ -86,10 +86,16 @@ describe("Rent component", () => {
     expect(screen.getByText("AddRentEntry")).toBeInTheDocument();
 
     fireEvent.click(screen.getAllByTestId("mock-delete-btn")[0]);
-    expect(mockDispatch).toBeCalledWith({"payload": "1", "type": "DELETE_RENT_ENTRY"});
+    expect(mockDispatch).toBeCalledWith({
+      payload: "1",
+      type: "DELETE_RENT_ENTRY",
+    });
 
     fireEvent.click(screen.getAllByTestId("mock-modify-btn")[0]);
-    expect(mockDispatch).nthCalledWith(2,{"payload": "1", "type": "EDIT_RENT_ENTRY"});
+    expect(mockDispatch).nthCalledWith(2, {
+      payload: "1",
+      type: "EDIT_RENT_ENTRY",
+    });
   });
   test("renders the Rent component with different editable entry", () => {
     setup("5");

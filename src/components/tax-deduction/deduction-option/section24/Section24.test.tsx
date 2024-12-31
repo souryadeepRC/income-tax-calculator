@@ -27,7 +27,7 @@ describe("Section24 Component", () => {
 
     // Check that the exemption amount is displayed correctly
     expect(
-      screen.getByText("You will get an exemption of Rs.500 from Section 24")
+      screen.getByText("You will get an exemption of Rs.500 from Section 24"),
     ).toBeInTheDocument();
 
     // Check that the input field is pre-populated with the amount from the state
@@ -51,7 +51,7 @@ describe("Section24 Component", () => {
 
     // Check that the error message is displayed
     expect(
-      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)")
+      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)"),
     ).toBeInTheDocument();
   });
 

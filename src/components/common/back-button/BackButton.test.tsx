@@ -13,14 +13,14 @@ describe("test BackButton component", () => {
     render(
       <MemoryRouter>
         <BackButton />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
     return { mockNavigate };
   };
   test("render back button and navigate to back path after clicking", () => {
     const { mockNavigate } = setup();
     expect(screen.getByTestId("back-btn")).toHaveTextContent("Back");
-    
+
     fireEvent.click(screen.getByTestId("back-btn"));
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);

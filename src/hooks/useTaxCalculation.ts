@@ -23,7 +23,7 @@ export const useTaxCalculation = () => {
 
   const taxBreakup = useMemo(
     () => calculateTax(salaryIncome, overallAmount, deduction),
-    [salaryIncome, overallAmount, deduction]
+    [salaryIncome, overallAmount, deduction],
   );
 
   // effects

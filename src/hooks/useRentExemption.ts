@@ -13,7 +13,7 @@ const useRentExemption = () => {
   const calculateRentDeductedAmount = (
     rentCollections: RentEntry[],
     basic: number,
-    hra: number
+    hra: number,
   ) => {
     const rentBreakup = rentCollections.reduce(
       (acc: any, rentEntry: RentEntry) => {
@@ -30,7 +30,7 @@ const useRentExemption = () => {
       {
         metro: { duration: 0, amount: 0 },
         nonMetro: { duration: 0, amount: 0 },
-      }
+      },
     );
 
     const metroExemption = calculateRentDeduction(
@@ -38,14 +38,14 @@ const useRentExemption = () => {
       rentBreakup.metro.duration,
       true,
       basic,
-      hra
+      hra,
     );
     const nonMetroExemption = calculateRentDeduction(
       rentBreakup.nonMetro.amount,
       rentBreakup.nonMetro.duration,
       false,
       basic,
-      hra
+      hra,
     );
     const totalExemption = metroExemption + nonMetroExemption;
     return totalExemption > hra ? hra : totalExemption;

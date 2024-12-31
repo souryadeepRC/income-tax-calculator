@@ -13,7 +13,12 @@ function App() {
   const appTheme = useSelector(selectAppTheme);
   return (
     <BrowserRouter>
-      <Box data-testid="app-container" width={"100%"} height={"100%"} data-theme={appTheme}>
+      <Box
+        data-testid="app-container"
+        width={"100%"}
+        height={"100%"}
+        data-theme={appTheme}
+      >
         <TaxCalculator />
       </Box>
     </BrowserRouter>

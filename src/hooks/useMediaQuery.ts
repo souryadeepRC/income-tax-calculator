@@ -32,11 +32,11 @@ const useMediaQuery = (): string => {
         }
       }
     },
-    [dispatch]
+    [dispatch],
   );
   useEffect(() => {
     const media: MediaQueryList = window.matchMedia(
-      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`
+      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`,
     );
 
     media.addEventListener("change", updateMediaType);

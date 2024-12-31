@@ -13,7 +13,7 @@ const initialState: ScreenReducerType = {
 };
 const ScreenReducer = (
   state = initialState,
-  action: ReducerActionPayloadType
+  action: ReducerActionPayloadType,
 ) => {
   const { type, payload } = action;
   switch (type) {
@@ -34,4 +34,3 @@ const ScreenReducer = (
   }
 };
 export { ScreenReducer };
-

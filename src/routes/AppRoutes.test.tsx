@@ -11,12 +11,12 @@ describe("test AppRoutes", () => {
         <MemoryRouter>
           <AppRoutes />
         </MemoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     // Use findByText if content is rendered asynchronously
     const landingText = await screen.findByText(
-      "Instant Tax Calculator: Know Your Tax in Seconds!"
+      "Instant Tax Calculator: Know Your Tax in Seconds!",
     );
 
     // Check if the Landing page text is in the document

@@ -25,7 +25,7 @@ describe("test BreakdownComponent component", () => {
         category="salary"
         label="test label"
         amount={100}
-      />
+      />,
     );
     expect(screen.getByText(/test label/i)).toBeInTheDocument();
     expect(screen.getByText(/Rs. 100/i)).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("test IncomeEditModal component", () => {
       target: { value: "10Test00" },
     });
     expect(
-      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)")
+      screen.getByText("Enter a valid amount more than 0 (e.g. 100.50 or 100)"),
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId("edit-income-save"));

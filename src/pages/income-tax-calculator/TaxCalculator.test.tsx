@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { TaxCalculator } from "./TaxCalculator"; // Adjust the path based on your file structure
 import { Header, Footer } from "src/components/common/CommonComponents";
 import { useMediaQuery } from "src/hooks/useMediaQuery";

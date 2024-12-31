@@ -10,7 +10,7 @@ describe("Redux Store", () => {
     // Check if store has the rootReducer correctly applied
     expect(store.getState()).toBeDefined();
     expect(store.getState()).toEqual(
-      rootReducer(undefined, { type: "@@INIT" })
+      rootReducer(undefined, { type: "@@INIT" }),
     );
   });
 });

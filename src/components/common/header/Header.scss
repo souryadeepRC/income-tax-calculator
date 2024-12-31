@@ -4,7 +4,7 @@
   @include flexBox($justifyContent: flex-start, $alignItems: center);
   box-sizing: border-box;
   padding: 1.2vh 0;
-  background-color: var(--primary-color); 
+  background-color: var(--primary-color);
   .header__text {
     width: 20%;
     text-align: center;

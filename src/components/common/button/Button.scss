@@ -32,7 +32,7 @@
       transition: all 0.3s;
       background-color: var(--secondary-color);
     }
-    .MuiSvgIcon-root{
+    .MuiSvgIcon-root {
       font-size: 1.5vw;
     }
     &:hover {
@@ -46,7 +46,7 @@
   .btn {
     &.MuiButton-root {
       font-size: 14px;
-      .MuiSvgIcon-root{
+      .MuiSvgIcon-root {
         font-size: 14px;
       }
     }

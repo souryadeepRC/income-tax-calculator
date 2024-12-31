@@ -3,9 +3,10 @@
 https://tax-regime-calculator.netlify.app
 
 ### Web Application for Income Tax Management
+
 Build in `React-TypeScript-SASS-MaterialUI` and deployed in `Netlify`
 
-This application offers comprehensive income tax calculations based on an individual's earnings. Users can input various income components and select from multiple exemption options. Utilizing this data, the application recommends the most suitable tax regime along with a detailed tax breakdown. 
+This application offers comprehensive income tax calculations based on an individual's earnings. Users can input various income components and select from multiple exemption options. Utilizing this data, the application recommends the most suitable tax regime along with a detailed tax breakdown.
 
 ## Implemented Technologies
 

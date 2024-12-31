@@ -34,7 +34,7 @@ export const setRentDeductedAmount = (payload: number) => {
   return { type: SET_RENT_DEDUCTED_AMOUNT, payload };
 };
 export const updateSection24Deduction = (
-  payload: number
+  payload: number,
 ): ReducerActionPayloadType => {
   return {
     type: UPDATE_SECTION_24_DEDUCTION,

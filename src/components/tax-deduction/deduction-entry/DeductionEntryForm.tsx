@@ -70,7 +70,7 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
   const onCategoryChange = (event: any) => {
     const enteredCategory = event.target.value as string;
     const maxLimit = options.find(
-      (option) => option.category === enteredCategory
+      (option) => option.category === enteredCategory,
     )?.maxLimit;
     setEntryInput(updateState("category", enteredCategory));
     setEntryInput(updateState("maxLimit", maxLimit));

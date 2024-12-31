@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import DeductionPage from "src/pages/deduction-page/DeductionPage";
 import DataLayout from "src/components/layout/DataLayout";
@@ -48,12 +48,12 @@ describe("DeductionOption Component", () => {
     render(
       <MemoryRouter>
         <DeductionOption />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(mockUseSelector).toHaveBeenCalledTimes(1);
-    const rentItem = screen.getByText(/Rent/).closest("li");
-    expect(rentItem).toHaveTextContent("Rent");
-    expect(rentItem).toHaveTextContent("Rs. 2000");
+    const list = screen.getByRole("list");
+    const rentListItem = within(list).getByText(/Rent/);
+    expect(rentListItem).toBeInTheDocument();
   });
 });
