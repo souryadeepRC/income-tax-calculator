@@ -21,6 +21,7 @@ const DeductionEntry: React.FC<DeductionEntryProps> = ({
     <section className={classes.deduction_entry__container}>
       <IconButton
         onClick={onDelete}
+        data-testid="deduction-delete-icon"
         className={classes.deduction_entry_action_icon}
       >
         <DeleteIcon />
@@ -28,6 +29,7 @@ const DeductionEntry: React.FC<DeductionEntryProps> = ({
       <section>{children}</section>
       <IconButton
         onClick={onModify}
+        data-testid="deduction-edit-icon"
         className={classes.deduction_entry_action_icon}
       >
         <TuneIcon />

@@ -24,6 +24,7 @@ import {
 import { DEDUCTION_80C_OPTIONS } from "src/constants/common-constants";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
+import { Modal } from "src/components/common/CommonComponents";
 
 const Deduction80C = () => {
   // store
@@ -75,12 +76,14 @@ const Deduction80C = () => {
   return (
     <main>
       {isEditable && (
-        <DeductionEntryForm
-          entry={getEditableEntryDetails()}
-          options={getDeductionOptions()}
-          onSave={onSave}
-          onReset={onReset}
-        />
+        <Modal isOpen={true} onClose={onReset}>
+          <DeductionEntryForm
+            entry={getEditableEntryDetails()}
+            options={getDeductionOptions()}
+            onSave={onSave}
+            onReset={onReset}
+          />
+        </Modal>
       )}
       <AddDeductionEntry
         deductedAmount={deductedAmount}
@@ -92,7 +95,7 @@ const Deduction80C = () => {
         {options.map((deductionOption) => {
           return (
             <DeductionEntry
-              key={deductionOption.id}
+              key={deductionOption.category}
               onDelete={() =>
                 dispatch(delete80CEntry(deductionOption?.id || ""))
               }

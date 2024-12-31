@@ -47,13 +47,11 @@
   }
 }
 .income_edit__container {
-  padding: 5vw;
-
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 2vw;
   align-items: center;
+  padding: 5vw;
   .edit__header {
     display: flex;
     flex-direction: column;
@@ -63,15 +61,42 @@
     font-size: 2vw;
     width: 100%;
   }
-  :global(.MuiInput-input) {
+  :global(.text_field__container) {
+    width: 100%;
+  }
+  /*   :global(.MuiInput-input) {
     font-size: 2vw;
   }
   :global(.MuiFormHelperText-root) {
     font-size: 1.2vw;
-  }
-  :global(.btn) {
+  } */
+  .action_btn__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5vw;
     width: 100%;
-    font-size: 15px;
+    padding: 1vw 0 0 0;
+    :global(.MuiButton-root) {
+      width: 35%;
+      font-size: 1.2vw;
+      font-weight: bold;
+      padding: 0.5vw;
+      text-transform: capitalize;
+      border-radius: 1vw;
+      :global(.MuiSvgIcon-root) {
+        font-size: 1.2vw;
+      }
+    }
+    .action_btn__submit {
+      background-color: var(--primary-color);
+      color: var(--secondary-font-color);
+    }
+    .action_btn__clear {
+      background-color: var(--primary-bg-color);
+      color: var(--primary-font-color);
+      border-color: var(--primary-bg-color);
+    }
   }
 }
 @media screen and (max-width: $mobile-max-width) {
@@ -91,6 +116,28 @@
         font-size: 12px;
         :global(.MuiSvgIcon-root) {
           font-size: 15px;
+        }
+      }
+    }
+  }
+  .income_edit__container {
+    width: 85vw;
+    max-width: 300px;
+    .edit__header {
+      font-size: 14px;
+      label {
+        font-size: 10px;
+      }
+    }
+    .action_btn__container {
+      padding: 5px 0 0 0;
+      :global(.MuiButton-root) {
+        font-size: 12px;
+        padding: 4px;
+        width: 45%;
+        border-radius: 5px;
+        :global(.MuiSvgIcon-root) {
+          font-size: 12px;
         }
       }
     }

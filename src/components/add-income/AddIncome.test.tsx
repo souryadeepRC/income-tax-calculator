@@ -159,7 +159,18 @@ describe("test AddIncome component", () => {
       "Add Income"
     );
   });
-  test.todo("type records in text field then clear the record");
+  test("type records in text field then clear the record", () => {
+    setup();
+
+    updateTextField("add-income-form-label-input", "Test Label");
+    updateTextField("add-income-form-amount-input", "200");
+
+    fireEvent.click(screen.getByTestId("clear-label-btn"));
+    fireEvent.click(screen.getByTestId("clear-amount-btn"));
+
+    expect(screen.getByTestId("add-income-form-label-input")).toHaveValue("");
+    expect(screen.getByTestId("add-income-form-amount-input")).toHaveValue("");
+  });
   test("type records in text field then cancel the form", () => {
     const { mockOnCancel } = setup();
 

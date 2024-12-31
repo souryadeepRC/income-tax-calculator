@@ -31,7 +31,7 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
         {breakdownIncomes.map((income: IncomeOption) => {
           return (
             <BreakdownComponent
-              key={income.id}
+              key={income.label}
               id={income.id || ""}
               category={group}
               label={income.label}

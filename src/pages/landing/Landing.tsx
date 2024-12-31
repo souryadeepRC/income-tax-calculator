@@ -40,6 +40,7 @@ const IncomeInfo: React.FC = () => {
           startIcon={<CurrencyRupeeIcon />}
           className={classes.action__btn}
           onClick={onModifyIncome}
+          data-testid="modify-amount-btn"
         >
           Modify amount
         </Button>
@@ -47,7 +48,9 @@ const IncomeInfo: React.FC = () => {
       content={
         <section>
           <span className={classes.label}>Annual Income</span>
-          <strong className={classes.amount}>Rs.{formatNumber(overallAmount)}</strong>
+          <strong className={classes.amount}>
+            Rs.{formatNumber(overallAmount)}
+          </strong>
           <span className={classes.description}>Including provident fund</span>
         </section>
       }
@@ -55,6 +58,10 @@ const IncomeInfo: React.FC = () => {
   );
 };
 const TaxInfo: React.FC = () => {
+  const navigate = useNavigate();
+  const onViewBreakdown = () => {
+    navigate("/tax-breakup");
+  };
   const { label, taxAmount, difference } = useSelector(selectTaxChoice);
 
   return (
@@ -65,6 +72,8 @@ const TaxInfo: React.FC = () => {
           variant="contained"
           startIcon={<InsightsIcon />}
           className={classes.action__btn}
+          onClick={onViewBreakdown}
+          data-testid="view-breakdown-btn"
         >
           View Breakdown
         </Button>
@@ -115,6 +124,7 @@ const Landing: React.FC = () => {
           variant="contained"
           startIcon={<AppsIcon />}
           onClick={onGetStarted}
+          data-testid="get-started-btn"
         >
           Get Started
         </Button>

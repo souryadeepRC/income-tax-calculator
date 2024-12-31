@@ -55,6 +55,26 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
 
   const onRentEntrySave = () => {
     if (error.amount || error.duration) return;
+    if (!amount || !duration) {
+      if (!NUMERIC_REGEX.test(amount)) {
+        setError(
+          updateState(
+            "amount",
+            "Enter a valid amount more than 0 (e.g. 100.50 or 100)"
+          )
+        );
+      }
+      if (!NUMERIC_REGEX.test(duration)) {
+        setError(
+          updateState(
+            "duration",
+            "Enter a valid duration more than 0 (e.g. 2 or 2.5)"
+          )
+        );
+      }
+      return;
+    }
+
     dispatch(
       saveRentEntry({ amount: +amount, duration: +duration, isMetroCity })
     );
@@ -97,6 +117,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           type="number"
           value={amount}
           onChange={onAmountChange}
+          inputProps={{ "data-testid": "rent-amount-input" }}
           error={amountError !== ""}
           helperText={amountError}
           InputProps={{
@@ -114,6 +135,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           type="number"
           value={duration}
           onChange={onDurationChange}
+          inputProps={{ "data-testid": "rent-duration-input" }}
           error={durationError !== ""}
           helperText={durationError}
           InputProps={{
@@ -127,7 +149,11 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
         <section aria-label="rent metro city switch">
           <label>
             I'm residing in a
-            <Switch checked={isMetroCity} onChange={onCityChange} />
+            <Switch
+              data-testid="rent-city-switch"
+              checked={isMetroCity}
+              onChange={onCityChange}
+            />
             {isMetroCity ? "Metro" : "Non-metro"} City
           </label>
         </section>
@@ -135,12 +161,17 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           className={classes.action_btn__container}
           aria-label="add rent entry form action button container"
         >
-          <Button variant="text" onClick={handleFormReset}>
+          <Button
+            variant="text"
+            data-testid="rent-form-cancel-btn"
+            onClick={handleFormReset}
+          >
             Cancel
           </Button>
           <Button
             variant="contained"
             className={classes.save__btn}
+            data-testid="rent-form-save-btn"
             onClick={onRentEntrySave}
           >
             Save

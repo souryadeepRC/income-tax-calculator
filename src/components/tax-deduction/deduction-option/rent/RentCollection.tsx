@@ -10,8 +10,8 @@ interface RentCollectionProps {
 const RentCollection: React.FC<RentCollectionProps> = ({ collections }) => {
   return (
     <>
-      {collections?.map((rentEntry: RentEntryType) => {
-        return <RentEntry key={rentEntry.id} details={rentEntry} />;
+      {collections?.map((rentEntry: RentEntryType, index: number) => {
+        return <RentEntry key={index} details={rentEntry} />;
       })}
     </>
   );

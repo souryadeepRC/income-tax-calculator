@@ -57,6 +57,7 @@ const Section24 = () => {
           value={entryInput}
           onChange={onAmountChange}
           type="number"
+          inputProps={{ "data-testid": "section24-input" }}
           error={error !== ""}
           helperText={error}
           InputProps={{
@@ -69,6 +70,7 @@ const Section24 = () => {
               <InputAdornment position="start">
                 {entryInput && (
                   <CancelIcon
+                    data-testid="clear-section24-input"
                     onClick={() => setEntryInput("")}
                     fontSize="small"
                   />

@@ -2,6 +2,7 @@ import { memo, useCallback } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
+import { Modal } from "src/components/common/CommonComponents";
 import DeductionEntry from "src/components/tax-deduction/deduction-entry/DeductionEntry";
 import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
 import AddDeductionEntry from "src/components/tax-deduction/deduction-entry/AddDeductionEntry";
@@ -77,15 +78,18 @@ const ChapterVI: React.FC = () => {
   const onAddDeduction = () => {
     dispatch(editChapterVIEntry());
   };
+
   return (
     <main>
       {isEditable && (
-        <DeductionEntryForm
-          entry={getEditableEntryDetails()}
-          options={getDeductionOptions()}
-          onSave={onSave}
-          onReset={onReset}
-        />
+        <Modal isOpen={true} onClose={onReset}>
+          <DeductionEntryForm
+            entry={getEditableEntryDetails()}
+            options={getDeductionOptions()}
+            onSave={onSave}
+            onReset={onReset}
+          />
+        </Modal>
       )}
       <AddDeductionEntry
         deductedAmount={deductedAmount}
@@ -97,7 +101,7 @@ const ChapterVI: React.FC = () => {
         {options.map((deductionOption) => {
           return (
             <DeductionEntry
-              key={deductionOption.id}
+              key={deductionOption.category}
               onDelete={() =>
                 dispatch(deleteChapterVIEntry(deductionOption?.id || ""))
               }
