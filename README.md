@@ -43,6 +43,7 @@ $ npm run start
 # Features
  
 ## Landing Page
+In this page user can see the overview of the total income and calculated tax details based on that.
 ## Income Page
 ## Deduction
 ## Tax Breakup
