@@ -31,7 +31,7 @@ describe("App component", () => {
     // Check if the theme is applied
     expect(screen.getByTestId("app-container")).toHaveAttribute(
       "data-theme",
-      "dark"
+      "dark",
     );
   });
 });

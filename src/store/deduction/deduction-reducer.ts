@@ -58,7 +58,7 @@ const initialState: DeductionReducerType = {
 };
 const DeductionReducer = (
   state = initialState,
-  action: ReducerActionPayloadType
+  action: ReducerActionPayloadType,
 ) => {
   const { type, payload } = action;
   switch (type) {
@@ -117,7 +117,7 @@ const DeductionReducer = (
           state.deduction80C,
           payload,
           initialState.deduction80C,
-          DEDUCTION_MAX_LIMIT.SECTION_80C
+          DEDUCTION_MAX_LIMIT.SECTION_80C,
         ),
       };
     }
@@ -128,7 +128,7 @@ const DeductionReducer = (
           state.deduction80C,
           payload,
           initialState.deduction80C,
-          DEDUCTION_MAX_LIMIT.SECTION_80C
+          DEDUCTION_MAX_LIMIT.SECTION_80C,
         ),
       };
     }
@@ -137,7 +137,7 @@ const DeductionReducer = (
         ...state,
         deduction80C: resetDeductionOption(
           state.deduction80C,
-          initialState.deduction80C
+          initialState.deduction80C,
         ),
       };
     }
@@ -146,7 +146,7 @@ const DeductionReducer = (
         ...state,
         deductionByChapter6: mapEditDeductionEntry(
           state.deductionByChapter6,
-          payload
+          payload,
         ),
       };
     }
@@ -156,7 +156,7 @@ const DeductionReducer = (
         deductionByChapter6: mapSaveDeductionEntry(
           state.deductionByChapter6,
           payload,
-          initialState.deductionByChapter6
+          initialState.deductionByChapter6,
         ),
       };
     }
@@ -166,7 +166,7 @@ const DeductionReducer = (
         deductionByChapter6: mapDeleteDeductionEntry(
           state.deductionByChapter6,
           payload,
-          initialState.deductionByChapter6
+          initialState.deductionByChapter6,
         ),
       };
     }
@@ -175,7 +175,7 @@ const DeductionReducer = (
         ...state,
         deductionByChapter6: resetDeductionOption(
           state.deductionByChapter6,
-          initialState.deductionByChapter6
+          initialState.deductionByChapter6,
         ),
       };
     }

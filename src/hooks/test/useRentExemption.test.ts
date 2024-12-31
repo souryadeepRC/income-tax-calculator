@@ -1,6 +1,5 @@
 import { renderHook } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRentDeductedAmount } from "src/store/deduction/deduction-actions";
 import { calculateRentDeduction } from "src/utils/tax-calculation";
 import { selectRentCollections } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
@@ -50,14 +49,14 @@ describe("useRentExemption", () => {
       12, // Metro duration
       true, // isMetroCity
       20000, // basic salary
-      8000 // HRA
+      8000, // HRA
     );
     expect(calculateRentDeduction).toHaveBeenCalledWith(
       3000, // Non-metro amount
       6, // Non-metro duration
       false, // not a metro city
       20000, // basic salary
-      8000 // HRA
+      8000, // HRA
     );
 
     // The final rent exemption (metro + non-metro) should be dispatched
@@ -76,6 +75,9 @@ describe("useRentExemption", () => {
     renderHook(() => useRentExemption());
 
     // If the total rent exemption is greater than HRA, it should not exceed HRA
-    expect(mockDispatch).toHaveBeenCalledWith({"payload": 8000, "type": "SET_RENT_DEDUCTED_AMOUNT"}); // HRA is 8000, so exemption can't be more than that
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: 8000,
+      type: "SET_RENT_DEDUCTED_AMOUNT",
+    }); // HRA is 8000, so exemption can't be more than that
   });
 });

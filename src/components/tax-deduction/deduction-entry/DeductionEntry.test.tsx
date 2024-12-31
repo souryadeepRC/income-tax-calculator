@@ -9,7 +9,7 @@ describe("test DeductionEntry component", () => {
     render(
       <DeductionEntry onDelete={mockOnDelete} onModify={mockOnModify}>
         Test Child
-      </DeductionEntry>
+      </DeductionEntry>,
     );
     expect(screen.getByText(/Test Child/i)).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("deduction-delete-icon"));
@@ -28,10 +28,10 @@ describe("test AddDeductionEntry component", () => {
         deductedAmount={100}
         deductionSection="Sample"
         onAddDeduction={mockOnAddDeduction}
-      />
+      />,
     );
     expect(
-      screen.getByText("You will get an exemption of Rs.100 from Sample")
+      screen.getByText("You will get an exemption of Rs.100 from Sample"),
     ).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("add-deduction-btn"));
     expect(mockOnAddDeduction).toHaveBeenCalled();

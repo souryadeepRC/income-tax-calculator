@@ -47,26 +47,26 @@ describe("test AddIncome component", () => {
     setup();
     expect(screen.getByText("Income Category")).toBeInTheDocument();
     expect(
-      screen.getByTestId("add-income-form-label-input")
+      screen.getByTestId("add-income-form-label-input"),
     ).toBeInTheDocument();
 
     expect(screen.getByText("Amount")).toBeInTheDocument();
     expect(
-      screen.getByTestId("add-income-form-amount-input")
+      screen.getByTestId("add-income-form-amount-input"),
     ).toBeInTheDocument();
 
     expect(screen.getByLabelText("Group")).toBeInTheDocument();
     expect(
-      screen.getByTestId("add-income-form-submit-btn")
+      screen.getByTestId("add-income-form-submit-btn"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
-      "Add"
+      "Add",
     );
     expect(
-      screen.getByTestId("add-income-form-cancel-btn")
+      screen.getByTestId("add-income-form-cancel-btn"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("add-income-form-cancel-btn")).toHaveTextContent(
-      "Cancel"
+      "Cancel",
     );
   });
 
@@ -84,10 +84,10 @@ describe("test AddIncome component", () => {
 
     submitForm();
     expect(
-      screen.queryByTestId("add-income-form-label-helper-text")
+      screen.queryByTestId("add-income-form-label-helper-text"),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId("add-income-form-amount-helper-text")
+      screen.queryByTestId("add-income-form-amount-helper-text"),
     ).not.toBeInTheDocument();
     expect(mockDispatch).toHaveBeenCalledTimes(1);
     expect(mockDispatch).toHaveBeenCalledWith({
@@ -135,7 +135,7 @@ describe("test AddIncome component", () => {
     // validate with :: exceeding char length in label and negative amount
     updateTextField(
       "add-income-form-label-input",
-      Array(101).fill("T").join("")
+      Array(101).fill("T").join(""),
     );
     updateTextField("add-income-form-amount-input", "-10.30");
 
@@ -153,10 +153,10 @@ describe("test AddIncome component", () => {
     });
 
     expect(
-      screen.getByTestId("add-income-form-submit-btn")
+      screen.getByTestId("add-income-form-submit-btn"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("add-income-form-submit-btn")).toHaveTextContent(
-      "Add Income"
+      "Add Income",
     );
   });
   test("type records in text field then clear the record", () => {

@@ -64,7 +64,7 @@ export const calculateIncomeTax = (
   income: number,
   deductedAmount: number,
   standardDeduction: number,
-  type: any
+  type: any,
 ) => {
   const taxableAmount = income - standardDeduction;
   let baseTax = 0;
@@ -90,7 +90,7 @@ export const calculateRentDeduction = (
   duration: number,
   isMetroCity: boolean,
   basic: number,
-  hra: number
+  hra: number,
 ) => {
   const METRO_CITY_LIMIT = 0.5;
   const NON_METRO_CITY_LIMIT = 0.4;
@@ -105,7 +105,7 @@ export const calculateRentDeduction = (
 export const calculateTax = (
   salaryIncome: any,
   totalIncome: number,
-  deductionDetail: any
+  deductionDetail: any,
 ) => {
   let deductedAmount = 0;
   const taxableAmount = totalIncome - (salaryIncome?.pf || 0);
@@ -120,13 +120,13 @@ export const calculateTax = (
       taxableAmount,
       0,
       deductionDetail.standardDeduction.newScheme,
-      IS_NEW_SCHEME
+      IS_NEW_SCHEME,
     ),
     oldScheme: calculateIncomeTax(
       taxableAmount - deductedAmount,
       deductedAmount,
       deductionDetail.standardDeduction.oldScheme,
-      !IS_NEW_SCHEME
+      !IS_NEW_SCHEME,
     ),
   };
   const amount: number =

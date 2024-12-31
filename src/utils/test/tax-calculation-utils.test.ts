@@ -91,7 +91,7 @@ describe("test tax Calculation utils", () => {
     });
     test("should calculate the deducted amount correctly", () => {
       expect(
-        calculateIncomeTax(1200000, 60000, 75000, true).deductedAmount
+        calculateIncomeTax(1200000, 60000, 75000, true).deductedAmount,
       ).toEqual(135000);
     });
   });
@@ -115,7 +115,7 @@ describe("test tax Calculation utils", () => {
 
     test("should return the ruleByRent when it is the smallest amount", () => {
       expect(calculateRentDeduction(10000, 12, false, 30000, 15000)).toBe(
-        12000
+        12000,
       );
     });
 
@@ -137,7 +137,7 @@ describe("test tax Calculation utils", () => {
 
     test("should handle non-metro city limit calculation correctly", () => {
       expect(calculateRentDeduction(20000, 12, false, 30000, 12000)).toBe(
-        12000
+        12000,
       );
     });
   });
@@ -159,7 +159,7 @@ describe("test tax Calculation utils", () => {
       const result = calculateTax(
         mockSalaryIncome,
         mockTotalIncome,
-        mockDeductionDetail
+        mockDeductionDetail,
       );
       expect(result.choice.label).toEqual("New");
       expect(result.choice.difference).toEqual(37440);
@@ -192,7 +192,7 @@ describe("test tax Calculation utils", () => {
       const result = calculateTax(
         mockSalaryIncome,
         mockTotalIncome,
-        zeroDeductionDetail
+        zeroDeductionDetail,
       );
 
       // Assert tax breakup structure and values
@@ -217,7 +217,7 @@ describe("test tax Calculation utils", () => {
       const result = calculateTax(
         zeroIncome,
         zeroTotalIncome,
-        zeroDeductionDetail
+        zeroDeductionDetail,
       );
 
       // Assert tax breakup structure and values

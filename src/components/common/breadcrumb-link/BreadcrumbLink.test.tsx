@@ -22,7 +22,7 @@ describe("Test BreadcrumbLink component", () => {
     render(
       <MemoryRouter>
         <BreadcrumbLink {...props} />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   };
   test("render breadcrumb with default home config", () => {
@@ -72,7 +72,7 @@ describe("Test BreadcrumbLink component", () => {
         parentPath: "test",
         homeIcon: <span>ICON HOME</span>,
       },
-      "/"
+      "/",
     );
     expect(screen.queryByTestId("home")).not.toBeInTheDocument();
   });
@@ -82,7 +82,7 @@ describe("Test BreadcrumbLink component", () => {
         parentPath: "test",
         homeIcon: <span>ICON HOME</span>,
       },
-      "/home"
+      "/home",
     );
     expect(screen.queryByTestId("home")).not.toBeInTheDocument();
   });

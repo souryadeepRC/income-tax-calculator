@@ -31,7 +31,7 @@ describe("test TaxBreakupPage component", () => {
     MockFormatNumber.mockReturnValue(100.45);
     render(<TaxBreakupPage />);
     expect(screen.getByTestId("tax-breakup-message")).toHaveTextContent(
-      "You can save Rs.100.45 by choosing New Tax Regime"
+      "You can save Rs.100.45 by choosing New Tax Regime",
     );
 
     expect(MockTaxRegimeBreakup).toHaveBeenCalledTimes(2);
@@ -41,7 +41,7 @@ describe("test TaxBreakupPage component", () => {
         details: { taxDetails: "newSchemeDetails" },
         isBestChoice: true, // As label is "New"
       }),
-      {}
+      {},
     );
     expect(MockTaxRegimeBreakup).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -49,7 +49,7 @@ describe("test TaxBreakupPage component", () => {
         details: { taxDetails: "oldSchemeDetails" },
         isBestChoice: false, // As label is "New"
       }),
-      {}
+      {},
     );
   });
 });

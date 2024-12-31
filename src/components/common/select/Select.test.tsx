@@ -8,7 +8,7 @@ describe("Select Component", () => {
       <Select label="Test Label" value="option1">
         <MenuItem value="option1">Option 1</MenuItem>
         <MenuItem value="option2">Option 2</MenuItem>
-      </Select>
+      </Select>,
     );
 
     // Check if the label is rendered

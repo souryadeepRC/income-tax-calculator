@@ -31,7 +31,7 @@ const IncomeEditModal: React.FC<IncomeEditModalProps> = ({ onCancel }) => {
     setEditableAmount(event.target.value);
   };
   const onSave = () => {
-    if(!NUMERIC_REGEX.test(editableAmount)) return;
+    if (!NUMERIC_REGEX.test(editableAmount)) return;
     dispatch(saveIncomeDetails({ label, category, amount: +editableAmount }));
   };
   const isAmountError: boolean = !NUMERIC_REGEX.test(editableAmount);

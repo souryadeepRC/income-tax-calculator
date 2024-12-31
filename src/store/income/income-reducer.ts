@@ -18,7 +18,7 @@ const initialState: IncomeReducerType = {
 };
 const IncomeReducer = (
   state = initialState,
-  action: ReducerActionPayloadType
+  action: ReducerActionPayloadType,
 ) => {
   const { type, payload } = action;
   switch (type) {

@@ -14,7 +14,12 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const appTheme = useSelector(selectAppTheme);
   return (
-    <MuiModal data-testid="modal-container" data-theme={appTheme} open={isOpen} onClose={onClose}>
+    <MuiModal
+      data-testid="modal-container"
+      data-theme={appTheme}
+      open={isOpen}
+      onClose={onClose}
+    >
       <div className="modal__container">{children}</div>
     </MuiModal>
   );

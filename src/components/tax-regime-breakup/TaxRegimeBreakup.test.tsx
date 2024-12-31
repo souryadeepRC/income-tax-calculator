@@ -23,27 +23,27 @@ describe("test TaxRegimeBreakup Component", () => {
           taxableAmount: 400,
           deductedAmount: 500,
         }}
-      />
+      />,
     );
   };
   test("render the tax regime details with best choice alert", () => {
     setup("New", true);
     expect(screen.getByTestId("regime-label")).toHaveTextContent(
-      "New Tax Regime"
+      "New Tax Regime",
     );
     expect(screen.getByText("Best Choice")).toBeInTheDocument();
     expect(mockedFormatNumber).toHaveBeenCalledTimes(6);
-    expect(mockedFormatNumber).nthCalledWith(1,100);
-    expect(mockedFormatNumber).nthCalledWith(2,1000);
-    expect(mockedFormatNumber).nthCalledWith(3,200);
-    expect(mockedFormatNumber).nthCalledWith(4,300);
-    expect(mockedFormatNumber).nthCalledWith(5,400);
-    expect(mockedFormatNumber).nthCalledWith(6,500);
+    expect(mockedFormatNumber).nthCalledWith(1, 100);
+    expect(mockedFormatNumber).nthCalledWith(2, 1000);
+    expect(mockedFormatNumber).nthCalledWith(3, 200);
+    expect(mockedFormatNumber).nthCalledWith(4, 300);
+    expect(mockedFormatNumber).nthCalledWith(5, 400);
+    expect(mockedFormatNumber).nthCalledWith(6, 500);
   });
   test("render the tax regime details without best choice alert", () => {
     setup("Old");
     expect(screen.getByTestId("regime-label")).toHaveTextContent(
-      "Old Tax Regime"
+      "Old Tax Regime",
     );
     expect(screen.queryByText("Best Choice")).not.toBeInTheDocument();
   });

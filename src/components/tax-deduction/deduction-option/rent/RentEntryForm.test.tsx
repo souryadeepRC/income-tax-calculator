@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import RentEntryForm from "./RentEntryForm";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(),
@@ -30,16 +30,16 @@ describe("test RentEntryForm component", () => {
 
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
     expect(
-      screen.getByText(/Enter a valid amount more than 0/i)
+      screen.getByText(/Enter a valid amount more than 0/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Cannot add more than 12 months/i)
+      screen.getByText(/Cannot add more than 12 months/i),
     ).toBeInTheDocument();
     expect(mockDispatch).not.toHaveBeenCalled();
 
     fireEvent.change(durationInput, { target: { value: "" } });
     expect(
-      screen.getByText(/Enter a valid duration more than 0/i)
+      screen.getByText(/Enter a valid duration more than 0/i),
     ).toBeInTheDocument();
     expect(mockDispatch).not.toHaveBeenCalled();
 
@@ -59,10 +59,10 @@ describe("test RentEntryForm component", () => {
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
     expect(mockDispatch).not.toHaveBeenCalled();
     expect(
-      screen.getByText(/Enter a valid amount more than 0/i)
+      screen.getByText(/Enter a valid amount more than 0/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Enter a valid duration more than 0/i)
+      screen.getByText(/Enter a valid duration more than 0/i),
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId("rent-form-cancel-btn"));
@@ -76,15 +76,15 @@ describe("test RentEntryForm component", () => {
       <RentEntryForm
         durationLeft={5}
         rentEntry={{ duration: "6", amount: "", isMetroCity: false }}
-      />
+      />,
     );
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
     expect(mockDispatch).not.toHaveBeenCalled();
     expect(
-      screen.getByText(/Enter a valid amount more than 0/i)
+      screen.getByText(/Enter a valid amount more than 0/i),
     ).toBeInTheDocument();
     expect(
-      screen.queryByText(/Enter a valid duration more than 0/i)
+      screen.queryByText(/Enter a valid duration more than 0/i),
     ).not.toBeInTheDocument();
   });
 
@@ -93,15 +93,15 @@ describe("test RentEntryForm component", () => {
       <RentEntryForm
         durationLeft={5}
         rentEntry={{ duration: "", amount: "100", isMetroCity: false }}
-      />
+      />,
     );
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
     expect(mockDispatch).not.toHaveBeenCalled();
     expect(
-      screen.queryByText(/Enter a valid amount more than 0/i)
+      screen.queryByText(/Enter a valid amount more than 0/i),
     ).not.toBeInTheDocument();
     expect(
-      screen.getByText(/Enter a valid duration more than 0/i)
+      screen.getByText(/Enter a valid duration more than 0/i),
     ).toBeInTheDocument();
   });
 });

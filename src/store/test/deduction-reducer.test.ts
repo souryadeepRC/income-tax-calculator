@@ -79,7 +79,7 @@ describe("Deduction Reducer", () => {
     };
     expect(DeductionReducer(initialState, action)).toEqual(expectedState);
     expect(
-      DeductionReducer(initialState, editRentEntry()).rent.editableEntryId
+      DeductionReducer(initialState, editRentEntry()).rent.editableEntryId,
     ).toEqual("");
   });
 
@@ -95,7 +95,7 @@ describe("Deduction Reducer", () => {
     const updatedState = DeductionReducer(addedRentState, editRentEntry("1"));
     expect(
       DeductionReducer(updatedState, saveRentEntry(payload)).rent.collections
-        .length
+        .length,
     ).toEqual(2);
   });
 
@@ -143,7 +143,7 @@ describe("Deduction Reducer", () => {
       payload,
     });
     expect(
-      DeductionReducer(initialState, action).section24.deductedAmount
+      DeductionReducer(initialState, action).section24.deductedAmount,
     ).toEqual(2000000);
   });
   test("should handle UPDATE_SECTION_24_DEDUCTION within limit", () => {
@@ -154,7 +154,7 @@ describe("Deduction Reducer", () => {
       payload,
     });
     expect(
-      DeductionReducer(initialState, action).section24.deductedAmount
+      DeductionReducer(initialState, action).section24.deductedAmount,
     ).toEqual(50000);
   });
 
@@ -182,11 +182,11 @@ describe("Deduction Reducer", () => {
       payload: "1",
     });
     expect(
-      DeductionReducer(initialState, action).deduction80C.isEditable
+      DeductionReducer(initialState, action).deduction80C.isEditable,
     ).toEqual(true);
     expect(
       DeductionReducer(initialState, edit80CEntry()).deduction80C
-        .editableEntryId
+        .editableEntryId,
     ).toEqual("");
   });
   test("should handle RESET_EDIT_80C_ENTRY", () => {
@@ -198,7 +198,7 @@ describe("Deduction Reducer", () => {
       ...initialState,
       deduction80C: resetDeductionOption(
         initialState.deduction80C,
-        initialState.deduction80C
+        initialState.deduction80C,
       ),
     };
     expect(DeductionReducer(initialState, action)).toEqual(expectedState);
@@ -217,7 +217,7 @@ describe("Deduction Reducer", () => {
     const updatedState = DeductionReducer(added80CState, edit80CEntry("1"));
     expect(
       DeductionReducer(updatedState, save80CEntry(payload)).deduction80C.options
-        .length
+        .length,
     ).toEqual(2);
   });
 
@@ -249,7 +249,7 @@ describe("Deduction Reducer", () => {
       type: EDIT_CHAPTER_VI_ENTRY,
     });
     expect(
-      DeductionReducer(initialState, action).deductionByChapter6.isEditable
+      DeductionReducer(initialState, action).deductionByChapter6.isEditable,
     ).toEqual(true);
   });
   test("should handle RESET_EDIT_CHAPTER_VI_ENTRY", () => {
@@ -261,7 +261,7 @@ describe("Deduction Reducer", () => {
       ...initialState,
       deductionByChapter6: resetDeductionOption(
         initialState.deductionByChapter6,
-        initialState.deductionByChapter6
+        initialState.deductionByChapter6,
       ),
     };
     expect(DeductionReducer(initialState, action)).toEqual(expectedState);

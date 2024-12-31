@@ -12,13 +12,13 @@ export const mapEditRentEntry = (rent: DeductionByRent, payload: string) => {
 export const mapSaveRentEntry = (
   rent: DeductionByRent,
   payload: RentEntry,
-  initialRentState: DeductionByRent
+  initialRentState: DeductionByRent,
 ) => {
   let modifiedCollection = [...rent.collections];
   const editableEntryId = rent.editableEntryId;
   if (rent.editableEntryId) {
     const editableEntryIndex = modifiedCollection.findIndex(
-      (rentEntry) => rentEntry.id === editableEntryId
+      (rentEntry) => rentEntry.id === editableEntryId,
     );
     modifiedCollection[editableEntryIndex] = {
       ...modifiedCollection[editableEntryIndex],
@@ -37,7 +37,7 @@ export const mapSaveRentEntry = (
 export const mapDeleteRentEntry = (
   rent: DeductionByRent,
   payload: string,
-  initialRentState: DeductionByRent
+  initialRentState: DeductionByRent,
 ) => {
   const { isEditable, editableEntryId } = initialRentState;
   return {
@@ -45,7 +45,7 @@ export const mapDeleteRentEntry = (
     isEditable,
     editableEntryId,
     collections: [...rent.collections].filter(
-      (rentEntry) => rentEntry.id !== payload
+      (rentEntry) => rentEntry.id !== payload,
     ),
   };
 };

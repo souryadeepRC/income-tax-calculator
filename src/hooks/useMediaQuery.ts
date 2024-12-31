@@ -21,8 +21,7 @@ const useMediaQuery = (): string => {
   const initialRenderRef = useRef<boolean>(false);
   // fns
   const updateMediaType = useCallback(
-    (event: MediaQueryListEvent | MediaQueryList): void => { 
-
+    (event: MediaQueryListEvent | MediaQueryList): void => {
       if (event.matches) {
         dispatch(setMediaType(MEDIA_TYPES.TABLET));
       } else {
@@ -33,11 +32,11 @@ const useMediaQuery = (): string => {
         }
       }
     },
-    [dispatch]
+    [dispatch],
   );
   useEffect(() => {
     const media: MediaQueryList = window.matchMedia(
-      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`
+      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`,
     );
 
     media.addEventListener("change", updateMediaType);
@@ -55,4 +54,3 @@ const useMediaQuery = (): string => {
   return mediaType;
 };
 export { useMediaQuery };
-
