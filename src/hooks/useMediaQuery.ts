@@ -21,8 +21,7 @@ const useMediaQuery = (): string => {
   const initialRenderRef = useRef<boolean>(false);
   // fns
   const updateMediaType = useCallback(
-    (event: MediaQueryListEvent | MediaQueryList): void => { 
-
+    (event: MediaQueryListEvent | MediaQueryList): void => {
       if (event.matches) {
         dispatch(setMediaType(MEDIA_TYPES.TABLET));
       } else {
@@ -55,4 +54,3 @@ const useMediaQuery = (): string => {
   return mediaType;
 };
 export { useMediaQuery };
-
