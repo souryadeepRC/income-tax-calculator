@@ -13,12 +13,12 @@ describe("test Modal component", () => {
     render(
       <Modal isOpen onClose={mockOnClose}>
         <div>Test Child</div>
-      </Modal>,
+      </Modal>
     );
 
     expect(screen.getByTestId("modal-container")).toHaveAttribute(
       "data-theme",
-      "dark",
+      "dark"
     );
     expect(screen.getByText(/Test Child/i)).toBeInTheDocument();
   });

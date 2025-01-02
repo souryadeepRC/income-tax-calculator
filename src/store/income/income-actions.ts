@@ -5,23 +5,28 @@ import {
   DELETE_INCOME_DETAILS,
   RESET_EDIT_INCOME_ENTRY,
 } from "./income-constants";
-export const editIncomeEntry = (payload?: string) => {
-  return { type: EDIT_INCOME_ENTRY, payload };
-};
-export const resetEditIncomeEntry = () => {
-  return { type: RESET_EDIT_INCOME_ENTRY };
-};
+import { ReducerActionPayloadType } from "src/types/store-types";
+export const editIncomeEntry = (
+  payload?: string
+): ReducerActionPayloadType => ({
+  type: EDIT_INCOME_ENTRY,
+  payload,
+});
 
-export const saveIncomeDetails = (payload: IncomeOption) => {
-  return {
-    type: SAVE_INCOME_DETAILS,
-    payload,
-  };
-};
+export const resetEditIncomeEntry = (): ReducerActionPayloadType => ({
+  type: RESET_EDIT_INCOME_ENTRY,
+});
 
-export const removeIncomeDetails = (payload: string) => {
-  return {
-    type: DELETE_INCOME_DETAILS,
-    payload,
-  };
-};
+export const saveIncomeDetails = (
+  payload: IncomeOption
+): ReducerActionPayloadType => ({
+  type: SAVE_INCOME_DETAILS,
+  payload,
+});
+
+export const removeIncomeDetails = (
+  payload: string
+): ReducerActionPayloadType => ({
+  type: DELETE_INCOME_DETAILS,
+  payload,
+});

@@ -5,14 +5,17 @@ import { useSelector } from "react-redux";
 import TaxRegimeBreakup from "src/components/tax-regime-breakup/TaxRegimeBreakup";
 // selectors
 import { selectTaxDetails } from "src/store/tax/tax-selectors";
+// types
+import { TaxReducerType } from "src/types/tax-types";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./TaxBreakupPage.module.scss";
 
 const TaxBreakupPage: React.FC = () => {
-  const { choice, newScheme, oldScheme }: any = useSelector(selectTaxDetails);
-  const { difference, label } = choice;
+  const { choice, newScheme, oldScheme }: TaxReducerType =
+    useSelector(selectTaxDetails);
+  const { difference, type } = choice;
   return (
     <main className={classes.tax_breakup__container}>
       <header
@@ -21,18 +24,18 @@ const TaxBreakupPage: React.FC = () => {
       >
         You can save Rs.<strong>{formatNumber(difference)}</strong>&nbsp;by
         choosing&nbsp;
-        <strong>{label} Tax Regime</strong>
+        <strong>{type} Tax Regime</strong>
       </header>
       <section className={classes.tax_regime__container}>
         <TaxRegimeBreakup
           regimeType="New"
           details={newScheme}
-          isBestChoice={label === "New"}
+          isBestChoice={type === "New"}
         />
         <TaxRegimeBreakup
           regimeType="Old"
           details={oldScheme}
-          isBestChoice={label === "Old"}
+          isBestChoice={type === "Old"}
         />
       </section>
     </main>

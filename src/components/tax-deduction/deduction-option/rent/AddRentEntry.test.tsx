@@ -44,7 +44,7 @@ describe("test AddRentEntry component", () => {
     render(<AddRentEntry />);
     expect(screen.queryByTestId("add-rent-btn")).not.toBeInTheDocument();
     expect(
-      screen.getByText(/include the basic salary and HRA components/i),
+      screen.getByText(/include the basic salary and HRA components/i)
     ).toBeInTheDocument();
   });
 });

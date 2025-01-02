@@ -37,8 +37,7 @@ const DeductionOption: React.FC = () => {
   return (
     <section className={classes.deduction__container}>
       <ul className={classes.deduction_list}>
-        {options.map((deductionOption) => {
-          return (
+        {options.map((deductionOption) => (
             <li key={deductionOption.label}>
               <NavLink to={deductionOption.path}>
                 <div className={classes.deduction_list__item}>
@@ -54,8 +53,7 @@ const DeductionOption: React.FC = () => {
                 </div>
               </NavLink>
             </li>
-          );
-        })}
+          ))}
       </ul>
     </section>
   );

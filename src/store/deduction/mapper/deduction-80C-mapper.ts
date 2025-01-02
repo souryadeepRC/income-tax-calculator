@@ -4,26 +4,24 @@ import { getDeductedAmount } from "src/utils/deduction-utils";
 
 export const mapEditDeductionEntry = (
   deductionOption: DeductionOption,
-  payload: string,
-) => {
-  return {
-    ...deductionOption,
-    isEditable: true,
-    ...(payload ? { editableEntryId: payload } : {}),
-  };
-};
+  payload: string
+): DeductionOption => ({
+  ...deductionOption,
+  isEditable: true,
+  ...(payload ? { editableEntryId: payload } : {}),
+});
 
 export const mapSaveDeductionEntry = (
   deductionOption: DeductionOption,
   payload: DeductionEntry,
   initialState: DeductionOption,
-  overallMaxLimit?: number,
-) => {
-  let modifiedOptions = [...deductionOption.options];
+  overallMaxLimit?: number
+): DeductionOption => {
+  const modifiedOptions = [...deductionOption.options];
   const editableEntryId = deductionOption.editableEntryId;
   if (deductionOption.editableEntryId) {
     const editableEntryIndex = modifiedOptions.findIndex(
-      (deductionEntry) => deductionEntry.id === editableEntryId,
+      (deductionEntry) => deductionEntry.id === editableEntryId
     );
     modifiedOptions[editableEntryIndex] = {
       ...modifiedOptions[editableEntryIndex],
@@ -45,11 +43,11 @@ export const mapDeleteDeductionEntry = (
   deductionOption: DeductionOption,
   payload: string,
   initialState: DeductionOption,
-  overallMaxLimit?: number,
-) => {
+  overallMaxLimit?: number
+): DeductionOption => {
   const { isEditable, editableEntryId } = initialState;
   const modifiedOptions = [...deductionOption.options].filter(
-    (deductionEntry) => deductionEntry.id !== payload,
+    (deductionEntry) => deductionEntry.id !== payload
   );
   return {
     ...deductionOption,
@@ -61,8 +59,8 @@ export const mapDeleteDeductionEntry = (
 };
 export const resetDeductionOption = (
   deductionOption: DeductionOption,
-  initialState: DeductionOption,
-) => {
+  initialState: DeductionOption
+): DeductionOption => {
   const { isEditable, editableEntryId } = initialState;
   return {
     ...deductionOption,

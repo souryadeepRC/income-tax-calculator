@@ -4,7 +4,7 @@ import { FormControl, Select as MuiSelect, SelectProps } from "@mui/material";
 import "./Select.scss";
 
 const Select: React.FC<SelectProps> = (props) => {
-  const { label, className, children, ...rest } = props;
+  const { label, children, ...rest } = props;
   return (
     <FormControl fullWidth className="select__container">
       <label id="select-group-label">{label}</label>

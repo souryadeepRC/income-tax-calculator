@@ -5,6 +5,7 @@ import { DeductionReducer } from "./deduction/deduction-reducer";
 import { IncomeReducer } from "./income/income-reducer";
 import { ScreenReducer } from "./screen/screen-reducer";
 import { TaxReducer } from "./tax/tax-reducer";
+import { ReducerActionPayloadType } from "src/types/store-types";
 
 // Define your reducers
 const combinedReducers = combineReducers({
@@ -13,7 +14,8 @@ const combinedReducers = combineReducers({
   tax: TaxReducer,
   screen: ScreenReducer,
 });
-const rootReducer = (state: any, action: any) => {
+/* eslint-disable */
+const rootReducer = (state: any, action: ReducerActionPayloadType) => {
   return combinedReducers(state, action);
 };
 export { rootReducer };

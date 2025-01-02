@@ -15,8 +15,9 @@ import {
 // selectors
 import { selectDeduction80C } from "src/store/deduction/deduction-selectors";
 // types
-import { AppDispatch } from "src/store/reducer-types";
+import { AppDispatch } from "src/types/store-types";
 import {
+  DeductionEntryOption,
   DeductionEntry as DeductionEntryType,
   DeductionOption,
 } from "src/types/deduction-types";
@@ -38,7 +39,7 @@ const Deduction80C = () => {
 
   const getEditableEntryDetails = useCallback(() => {
     const deductionEntry = options.find(
-      (deductionEntry) => deductionEntry.id === editableEntryId,
+      (deductionEntry) => deductionEntry.id === editableEntryId
     );
     if (!deductionEntry) return undefined;
     const { amount, category } = deductionEntry;
@@ -47,13 +48,13 @@ const Deduction80C = () => {
       amount: `${amount}`,
     };
   }, [options, editableEntryId]);
-  const getDeductionOptions = () => {
-    return Object.keys(DEDUCTION_80C_OPTIONS).reduce(
-      (acc: any, category: any) => {
+  const getDeductionOptions = (): DeductionEntryOption[] =>
+    Object.keys(DEDUCTION_80C_OPTIONS).reduce(
+      (acc: DeductionEntryOption[], category: string) => {
         const isAdded =
           options.findIndex(
             (option) =>
-              editableEntryId !== option.id && option.category === category,
+              editableEntryId !== option.id && option.category === category
           ) > -1;
 
         return [
@@ -61,9 +62,8 @@ const Deduction80C = () => {
           { category, label: DEDUCTION_80C_OPTIONS[category], isAdded },
         ];
       },
-      [],
+      []
     );
-  };
   const onSave = (entryDetails: DeductionEntryType) => {
     dispatch(save80CEntry(entryDetails));
   };
@@ -92,22 +92,18 @@ const Deduction80C = () => {
       />
 
       <section>
-        {options.map((deductionOption) => {
-          return (
-            <DeductionEntry
-              key={deductionOption.category}
-              onDelete={() =>
-                dispatch(delete80CEntry(deductionOption?.id || ""))
-              }
-              onModify={() => dispatch(edit80CEntry(deductionOption.id))}
-            >
-              <>
-                <span>{DEDUCTION_80C_OPTIONS[deductionOption.category]}</span>
-                <span>Rs. {formatNumber(deductionOption.amount)}</span>
-              </>
-            </DeductionEntry>
-          );
-        })}
+        {options.map((deductionOption) => (
+          <DeductionEntry
+            key={deductionOption.category}
+            onDelete={() => dispatch(delete80CEntry(deductionOption?.id || ""))}
+            onModify={() => dispatch(edit80CEntry(deductionOption.id))}
+          >
+            <>
+              <span>{DEDUCTION_80C_OPTIONS[deductionOption.category]}</span>
+              <span>Rs. {formatNumber(deductionOption.amount)}</span>
+            </>
+          </DeductionEntry>
+        ))}
       </section>
     </main>
   );

@@ -16,8 +16,7 @@ const DeductionEntry: React.FC<DeductionEntryProps> = ({
   onDelete,
   onModify,
   children,
-}) => {
-  return (
+}) => (
     <section className={classes.deduction_entry__container}>
       <IconButton
         onClick={onDelete}
@@ -36,5 +35,4 @@ const DeductionEntry: React.FC<DeductionEntryProps> = ({
       </IconButton>
     </section>
   );
-};
 export default memo(DeductionEntry);

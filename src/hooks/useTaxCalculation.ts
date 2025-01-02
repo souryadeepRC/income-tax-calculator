@@ -9,12 +9,12 @@ import {
   selectSalaryIncome,
 } from "src/store/income/income-selectors";
 // types
-import { AppDispatch } from "src/store/reducer-types";
+import { AppDispatch } from "src/types/store-types";
 import { DeductionReducerType } from "src/types/deduction-types";
 // utils
 import { calculateTax } from "src/utils/tax-calculation";
 
-export const useTaxCalculation = () => {
+export const useTaxCalculation = (): void => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const salaryIncome = useSelector(selectSalaryIncome);
@@ -23,7 +23,7 @@ export const useTaxCalculation = () => {
 
   const taxBreakup = useMemo(
     () => calculateTax(salaryIncome, overallAmount, deduction),
-    [salaryIncome, overallAmount, deduction],
+    [salaryIncome, overallAmount, deduction]
   );
 
   // effects

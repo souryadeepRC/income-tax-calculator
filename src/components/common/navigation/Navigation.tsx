@@ -21,8 +21,7 @@ const NavigationOption: React.FC<NavigationOptionProps> = ({
   icon,
   label,
   isMobile,
-}) => {
-  return (
+}) => (
     <Box
       display="flex"
       justifyContent="space-between"
@@ -34,7 +33,6 @@ const NavigationOption: React.FC<NavigationOptionProps> = ({
       {!isMobile && <>{label}</>}
     </Box>
   );
-};
 const Navigation = () => {
   // store
   const isMobile: boolean = useSelector(selectIsMobile);

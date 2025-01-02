@@ -10,11 +10,11 @@ describe("test AddIncome component", () => {
     render(
       <RouteLayout parentPath="test" label="Test label">
         <span>Test Child Content</span>
-      </RouteLayout>,
+      </RouteLayout>
     );
     expect(screen.getByText("BreadcrumbLink")).toBeInTheDocument();
     expect(screen.getByTestId("route-layout-label")).toHaveTextContent(
-      "Test label",
+      "Test label"
     );
     expect(screen.getByText("Test Child Content")).toBeInTheDocument();
   });

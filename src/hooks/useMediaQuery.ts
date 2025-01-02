@@ -1,22 +1,19 @@
 import { useCallback, useEffect, useRef } from "react";
 // library
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // actions
 import { setMediaType } from "src/store/screen/screen-actions";
-// selectors
-import { selectMediaType } from "src/store/screen/screen-selectors";
 // types
-import { AppDispatch } from "src/store/reducer-types";
+import { AppDispatch } from "src/types/store-types";
 // constants
 import {
   MEDIA_TYPES,
   RESPONSIVE_MEDIA_QUERY,
 } from "src/constants/screen-constants";
 
-const useMediaQuery = (): string => {
+const useMediaQuery: () => void = () => {
   // store
   const dispatch: AppDispatch = useDispatch();
-  const mediaType: string = useSelector(selectMediaType);
   // refs
   const initialRenderRef = useRef<boolean>(false);
   // fns
@@ -32,11 +29,11 @@ const useMediaQuery = (): string => {
         }
       }
     },
-    [dispatch],
+    [dispatch]
   );
   useEffect(() => {
     const media: MediaQueryList = window.matchMedia(
-      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`,
+      `(min-width:${RESPONSIVE_MEDIA_QUERY.TABLET.minWidth}px) and (max-width:${RESPONSIVE_MEDIA_QUERY.TABLET.maxWidth}px)`
     );
 
     media.addEventListener("change", updateMediaType);
@@ -51,6 +48,5 @@ const useMediaQuery = (): string => {
       media.removeEventListener("change", updateMediaType);
     };
   }, [updateMediaType]);
-  return mediaType;
 };
 export { useMediaQuery };

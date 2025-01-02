@@ -12,7 +12,7 @@ import { updateSection24Deduction } from "src/store/deduction/deduction-actions"
 // selectors
 import { selectDeductionSection24 } from "src/store/deduction/deduction-selectors";
 // types
-import { AppDispatch } from "src/store/reducer-types";
+import { AppDispatch } from "src/types/store-types";
 import { DeductionSection24 } from "src/types/deduction-types";
 // constants
 import { NUMERIC_REGEX } from "src/constants/common-constants";
@@ -23,7 +23,7 @@ const Section24 = () => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const { amount, deductedAmount }: DeductionSection24 = useSelector(
-    selectDeductionSection24,
+    selectDeductionSection24
   );
   const [entryInput, setEntryInput] = useState<string>("");
   const [error, setError] = useState<string>("");

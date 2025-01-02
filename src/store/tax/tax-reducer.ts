@@ -1,5 +1,5 @@
 // types
-import { ReducerActionPayloadType } from "src/store/reducer-types";
+import { ReducerActionPayloadType } from "src/types/store-types";
 import { TaxReducerType } from "src/types/tax-types";
 // constants
 import { UPDATE_TAX_DETAILS } from "src/store/tax/tax-constants";
@@ -20,6 +20,7 @@ const initialState: TaxReducerType = {
     monthlyTax: 0,
     taxableAmount: 0,
     yearlyTax: 0,
+    deductedAmount: 0,
   },
   oldScheme: {
     baseTax: 0,
@@ -27,9 +28,13 @@ const initialState: TaxReducerType = {
     monthlyTax: 0,
     taxableAmount: 0,
     yearlyTax: 0,
+    deductedAmount: 0,
   },
 };
-const TaxReducer = (state = initialState, action: ReducerActionPayloadType) => {
+const TaxReducer = (
+  state = initialState,
+  action: ReducerActionPayloadType
+): TaxReducerType => {
   const { type, payload } = action;
   switch (type) {
     case UPDATE_TAX_DETAILS: {

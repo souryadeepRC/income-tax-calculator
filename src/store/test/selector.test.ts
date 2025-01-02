@@ -1,6 +1,6 @@
 // src/store/tax/tax-selectors.test.ts
 import { selectTaxDetails, selectTaxChoice } from "src/store/tax/tax-selectors";
-import { AppStoreType } from "src/store/reducer-types";
+import { AppStoreType } from "src/types/store-types";
 import {
   selectMediaType,
   selectIsMobile,
@@ -87,6 +87,7 @@ describe("test selectors", () => {
         monthlyTax: 0,
         taxableAmount: 0,
         yearlyTax: 0,
+        deductedAmount: 0,
       },
       oldScheme: {
         baseTax: 0,
@@ -94,6 +95,7 @@ describe("test selectors", () => {
         monthlyTax: 0,
         taxableAmount: 0,
         yearlyTax: 0,
+        deductedAmount: 0,
       },
     },
   };
@@ -130,7 +132,7 @@ describe("test selectors", () => {
             { id: "3", label: "hra", amount: 200, category: "salary" },
           ],
         },
-      }),
+      })
     ).toEqual({ basic: 200, hra: 200 });
     expect(selectEditableIncomeEntryId(mockState)).toEqual("2");
     expect(selectEditableIncomeOption(mockState)).toEqual({
@@ -157,32 +159,32 @@ describe("test selectors", () => {
     expect(selectDeduction(mockState)).toEqual(mockState.deduction);
     expect(selectRentDeduction(mockState)).toEqual(mockState.deduction.rent);
     expect(selectDeductionSection24(mockState)).toEqual(
-      mockState.deduction.section24,
+      mockState.deduction.section24
     );
     expect(selectDeduction80C(mockState)).toEqual(
-      mockState.deduction.deduction80C,
+      mockState.deduction.deduction80C
     );
     expect(selectDeductionChapter6(mockState)).toEqual(
-      mockState.deduction.deductionByChapter6,
+      mockState.deduction.deductionByChapter6
     );
     expect(selectRentCollections(mockState)).toEqual(
-      mockState.deduction.rent.collections,
+      mockState.deduction.rent.collections
     );
     expect(selectRentDeductedAmount(mockState)).toEqual(
-      mockState.deduction.rent.deductedAmount,
+      mockState.deduction.rent.deductedAmount
     );
     expect(selectEditableRentEntry(mockState)).toEqual({
       isEditable: false,
       editableEntryId: "",
     });
     expect(selectSection24DeductedAmount(mockState)).toEqual(
-      mockState.deduction.section24.deductedAmount,
+      mockState.deduction.section24.deductedAmount
     );
     expect(select80CDeductedAmount(mockState)).toEqual(
-      mockState.deduction.deduction80C.deductedAmount,
+      mockState.deduction.deduction80C.deductedAmount
     );
     expect(selectChapterVIDeductedAmount(mockState)).toEqual(
-      mockState.deduction.deductionByChapter6.deductedAmount,
+      mockState.deduction.deductionByChapter6.deductedAmount
     );
     expect(selectDeductionBreakup(mockState)).toEqual({
       rentDeduction: 0,

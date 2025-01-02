@@ -21,7 +21,7 @@ const Rent = () => {
 
   const getEditableEntryDetails = useCallback(() => {
     const rentEntry = collections.find(
-      (rentEntry) => rentEntry.id === editableEntryId,
+      (rentEntry) => rentEntry.id === editableEntryId
     );
     if (!rentEntry) return undefined;
     const { amount, duration, isMetroCity } = rentEntry;
@@ -38,7 +38,7 @@ const Rent = () => {
         if (rentEntry.id === editableEntryId) return acc;
         return acc + rentEntry.duration;
       }, 0),
-    [collections, editableEntryId],
+    [collections, editableEntryId]
   );
 
   return (

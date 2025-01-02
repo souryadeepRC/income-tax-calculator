@@ -5,14 +5,16 @@ import { useSelector } from "react-redux";
 import BreakdownComponent from "./BreakdownComponent";
 // types
 import { IncomeOption } from "src/types/income-types";
+import { AppStoreType } from "src/types/store-types";
 // utils
 import { calculateOverallAmount } from "src/utils/income-utils";
+import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./IncomeBreakdown.module.scss";
-import { formatNumber } from "src/utils/tax-calculation";
 interface IncomeBreakdownProps {
   group: "salary" | "extra";
-  dataSelector: any;
+  /* eslint-disable */
+  dataSelector: (store: AppStoreType) => IncomeOption[];
 }
 
 const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
@@ -28,17 +30,15 @@ const IncomeBreakdown: React.FC<IncomeBreakdownProps> = ({
         <span>Rs.{formatNumber(overallAmount)}</span>
       </header>
       <section className={classes.income_component_container}>
-        {breakdownIncomes.map((income: IncomeOption) => {
-          return (
-            <BreakdownComponent
-              key={income.label}
-              id={income.id || ""}
-              category={group}
-              label={income.label}
-              amount={income.amount}
-            />
-          );
-        })}
+        {breakdownIncomes.map((income: IncomeOption) => (
+          <BreakdownComponent
+            key={income.label}
+            id={income.id || ""}
+            category={group}
+            label={income.label}
+            amount={income.amount}
+          />
+        ))}
       </section>
     </section>
   );

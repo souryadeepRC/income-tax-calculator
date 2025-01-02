@@ -13,8 +13,7 @@ const AddDeductionEntry: React.FC<AddDeductionEntryProps> = ({
   deductedAmount,
   deductionSection,
   onAddDeduction,
-}) => {
-  return (
+}) => (
     <section className={classes.add_deduction__container}>
       <span>
         You will get an exemption of Rs.{deductedAmount} from {deductionSection}
@@ -28,5 +27,4 @@ const AddDeductionEntry: React.FC<AddDeductionEntryProps> = ({
       </Button>
     </section>
   );
-};
 export default memo(AddDeductionEntry);

@@ -12,7 +12,7 @@ jest.mock(
   () => ({
     __esModule: true,
     default: jest.fn(),
-  }),
+  })
 );
 
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;

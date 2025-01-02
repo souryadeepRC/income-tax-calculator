@@ -1,37 +1,44 @@
 import { render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
-import App from "./App"; // Adjust import based on file structure
-import { TaxCalculator } from "src/pages/income-tax-calculator/TaxCalculator";
+import App from "./App";
+import TaxCalculator from "src/pages/income-tax-calculator/TaxCalculator";
+import { useMediaQuery } from "./hooks/useMediaQuery";
+import { Footer, Header } from "./components/common/CommonComponents";
+import { selectAppTheme } from "./store/screen/screen-selectors";
 
-jest.mock("src/pages/income-tax-calculator/TaxCalculator", () => ({
-  TaxCalculator: jest.fn(() => <div>Tax Calculator</div>),
+jest.mock("src/components/common/CommonComponents", () => ({
+  Header: jest.fn(() => <div>Header</div>),
+  Footer: jest.fn(() => <div>Footer</div>),
 }));
+jest.mock("src/pages/income-tax-calculator/TaxCalculator", () => jest.fn());
 
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));
-jest.mock("src/store/screen/screen-selectors", () => ({
-  selectAppTheme: jest.fn(),
-}));
+
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
 const mockedTaxCalculator = TaxCalculator as jest.MockedFunction<
   typeof TaxCalculator
 >;
 
+jest.mock("src/hooks/useMediaQuery", () => ({ useMediaQuery: jest.fn() }));
 describe("App component", () => {
-  it("should render the TaxCalculator and apply the correct theme", () => {
+  test("should render the TaxCalculator and apply the correct theme", () => {
     mockUseSelector.mockReturnValue("dark");
     mockedTaxCalculator.mockReturnValue(<div>Tax Calculator</div>);
 
     render(<App />);
 
-    // Adjust this based on the actual text rendered by TaxCalculator
+    expect(Header).toBeCalledTimes(1);
+    expect(Footer).toBeCalledTimes(1);
+    expect(mockUseSelector).toHaveBeenCalledWith(selectAppTheme);
+    expect(useMediaQuery).toHaveBeenCalledTimes(1);
     expect(screen.getByText(/Tax Calculator/i)).toBeInTheDocument();
 
     // Check if the theme is applied
     expect(screen.getByTestId("app-container")).toHaveAttribute(
       "data-theme",
-      "dark",
+      "dark"
     );
   });
 });

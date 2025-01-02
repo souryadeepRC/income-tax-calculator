@@ -1,3 +1,4 @@
+import { IncomeCategory } from "src/types/income-types";
 import {
   calculateByNewTaxSlab,
   calculateByOldTaxSlab,
@@ -91,7 +92,7 @@ describe("test tax Calculation utils", () => {
     });
     test("should calculate the deducted amount correctly", () => {
       expect(
-        calculateIncomeTax(1200000, 60000, 75000, true).deductedAmount,
+        calculateIncomeTax(1200000, 60000, 75000, true).deductedAmount
       ).toEqual(135000);
     });
   });
@@ -115,7 +116,7 @@ describe("test tax Calculation utils", () => {
 
     test("should return the ruleByRent when it is the smallest amount", () => {
       expect(calculateRentDeduction(10000, 12, false, 30000, 15000)).toBe(
-        12000,
+        12000
       );
     });
 
@@ -137,18 +138,35 @@ describe("test tax Calculation utils", () => {
 
     test("should handle non-metro city limit calculation correctly", () => {
       expect(calculateRentDeduction(20000, 12, false, 30000, 12000)).toBe(
-        12000,
+        12000
       );
     });
   });
   describe("calculateTax", () => {
-    const mockSalaryIncome = { pf: 50000 };
+    const mockSalaryIncome = [
+      { label: "pf", amount: 50000, category: "salary" as IncomeCategory },
+    ];
     const mockTotalIncome = 1000000;
     const mockDeductionDetail = {
-      rent: { deductedAmount: 20000 },
-      section24: { deductedAmount: 15000 },
-      deduction80C: { deductedAmount: 50000 },
-      deductionByChapter6: { deductedAmount: 10000 },
+      rent: {
+        collections: [],
+        deductedAmount: 20000,
+        isEditable: false,
+        editableEntryId: "",
+      },
+      section24: { amount: 15000, deductedAmount: 15000 },
+      deduction80C: {
+        options: [],
+        deductedAmount: 50000,
+        isEditable: false,
+        editableEntryId: "",
+      },
+      deductionByChapter6: {
+        options: [],
+        deductedAmount: 10000,
+        isEditable: false,
+        editableEntryId: "",
+      },
       standardDeduction: {
         newScheme: 75000,
         oldScheme: 50000,
@@ -159,70 +177,71 @@ describe("test tax Calculation utils", () => {
       const result = calculateTax(
         mockSalaryIncome,
         mockTotalIncome,
-        mockDeductionDetail,
+        mockDeductionDetail
       );
-      expect(result.choice.label).toEqual("New");
+      expect(result.choice.type).toEqual("New");
       expect(result.choice.difference).toEqual(37440);
     });
 
     test("should return the old scheme if it results in lower tax amount", () => {
       const result = calculateTax(mockSalaryIncome, 900000, {
         ...mockDeductionDetail,
-        section24: { deductedAmount: 200000 },
-        deduction80C: { deductedAmount: 150000 },
+        section24: { ...mockDeductionDetail.section24, deductedAmount: 200000 },
+        deduction80C: {
+          ...mockDeductionDetail.deduction80C,
+          deductedAmount: 150000,
+        },
       });
 
       // The best scheme should be oldScheme, as it has lower yearly tax
-      expect(result.choice.label).toBe("Old");
+      expect(result.choice.type).toBe("Old");
       expect(result.choice.difference).toBe(28600);
     });
-
-    test("should handle edge case where all deducted amounts are zero", () => {
+    describe("handle zero deduction case", () => {
       const zeroDeductionDetail = {
-        rent: { deductedAmount: 0 },
-        section24: { deductedAmount: 0 },
-        deduction80C: { deductedAmount: 0 },
-        deductionByChapter6: { deductedAmount: 0 },
+        rent: { ...mockDeductionDetail.rent, deductedAmount: 0 },
+        section24: { ...mockDeductionDetail.section24, deductedAmount: 0 },
+        deduction80C: {
+          ...mockDeductionDetail.deduction80C,
+          deductedAmount: 0,
+        },
+        deductionByChapter6: {
+          ...mockDeductionDetail.deductionByChapter6,
+          deductedAmount: 0,
+        },
         standardDeduction: {
           newScheme: 0,
           oldScheme: 0,
         },
       };
+      test("should handle edge case where all deducted amounts are zero", () => {
+        const result = calculateTax(
+          mockSalaryIncome,
+          mockTotalIncome,
+          zeroDeductionDetail
+        );
 
-      const result = calculateTax(
-        mockSalaryIncome,
-        mockTotalIncome,
-        zeroDeductionDetail,
-      );
+        // Assert tax breakup structure and values
+        expect(result.choice.type).toBe("New");
+        expect(result.choice.difference).toBe(59800);
+      });
 
-      // Assert tax breakup structure and values
-      expect(result.choice.label).toBe("New");
-      expect(result.choice.difference).toBe(59800);
-    });
+      test("should return 0 when taxable amount is zero", () => {
+        const zeroIncome = [
+          { label: "pf", amount: 0, category: "salary" as IncomeCategory },
+        ];
+        const zeroTotalIncome = 0;
 
-    test("should return 0 when taxable amount is zero", () => {
-      const zeroIncome = { pf: 0 };
-      const zeroTotalIncome = 0;
-      const zeroDeductionDetail = {
-        rent: { deductedAmount: 0 },
-        section24: { deductedAmount: 0 },
-        deduction80C: { deductedAmount: 0 },
-        deductionByChapter6: { deductedAmount: 0 },
-        standardDeduction: {
-          newScheme: 0,
-          oldScheme: 0,
-        },
-      };
+        const result = calculateTax(
+          zeroIncome,
+          zeroTotalIncome,
+          zeroDeductionDetail
+        );
 
-      const result = calculateTax(
-        zeroIncome,
-        zeroTotalIncome,
-        zeroDeductionDetail,
-      );
-
-      // Assert tax breakup structure and values
-      expect(result.choice.label).toBe("Old");
-      expect(result.choice.difference).toBe(0);
+        // Assert tax breakup structure and values
+        expect(result.choice.type).toBe("Old");
+        expect(result.choice.difference).toBe(0);
+      });
     });
   });
 });

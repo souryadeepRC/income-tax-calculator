@@ -6,7 +6,7 @@ describe("ScreenReducer", () => {
   // Test case for the initial state
   test("should return the initial state by default", () => {
     const initialState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "light",
     };
     const result = ScreenReducer(undefined, { type: "@@INIT" });
@@ -16,14 +16,14 @@ describe("ScreenReducer", () => {
   // Test case for UPDATE_MEDIA_TYPE action
   test("should handle UPDATE_MEDIA_TYPE action", () => {
     const initialState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "light",
     };
-    const payload = "desktop";
+    const payload = "DESKTOP";
     const action = setMediaType(payload);
 
     const expectedState: ScreenReducerType = {
-      mediaType: "desktop",
+      mediaType: "DESKTOP",
       theme: "light",
     };
 
@@ -34,13 +34,13 @@ describe("ScreenReducer", () => {
   // Test case for TOGGLE_THEME action
   test("should handle TOGGLE_THEME action when theme is light", () => {
     const initialState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "light",
     };
     const action = toggleAppTheme();
 
     const expectedState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "dark",
     };
 
@@ -50,13 +50,13 @@ describe("ScreenReducer", () => {
 
   test("should handle TOGGLE_THEME action when theme is dark", () => {
     const initialState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "dark",
     };
     const action = toggleAppTheme();
 
     const expectedState: ScreenReducerType = {
-      mediaType: "",
+      mediaType: "DESKTOP",
       theme: "light",
     };
 

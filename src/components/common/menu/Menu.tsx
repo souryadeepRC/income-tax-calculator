@@ -6,7 +6,7 @@ import "./Menu.scss";
 interface MenuAction {
   label: string;
   icon?: ReactNode;
-  onClick: any;
+  onClick: () => void;
 }
 interface MenuProps {
   MenuIcon: ReactNode;
@@ -43,20 +43,18 @@ const Menu: React.FC<MenuProps> = ({ MenuIcon, actions }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        {actions.map((action: MenuAction) => {
-          return (
-            <MenuItem
-              key={action.label}
-              data-testid={`menu-item-${action.label}`}
-              onClick={() => {
-                action.onClick();
-                handleClose();
-              }}
-            >
-              {action.icon} {action.label}
-            </MenuItem>
-          );
-        })}
+        {actions.map((action: MenuAction) => (
+          <MenuItem
+            key={action.label}
+            data-testid={`menu-item-${action.label}`}
+            onClick={() => {
+              action.onClick();
+              handleClose();
+            }}
+          >
+            {action.icon} {action.label}
+          </MenuItem>
+        ))}
       </MuiMenu>
     </>
   );

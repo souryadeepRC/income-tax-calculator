@@ -13,7 +13,9 @@ const BackButton: React.FC = () => {
       className={classes.back__button}
       data-testid="back-btn"
       startIcon={<ChevronLeftIcon />}
-      onClick={() => navigate(-1)}
+      onClick={() => {
+        navigate(-1);
+      }}
     >
       Back
     </Button>

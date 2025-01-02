@@ -1,5 +1,5 @@
 // types
-import { ReducerActionPayloadType } from "src/store/reducer-types";
+import { ReducerActionPayloadType } from "src/types/store-types";
 import { ScreenReducerType } from "src/types/screen-types";
 // constants
 import {
@@ -8,13 +8,13 @@ import {
 } from "src/store/screen/screen-constants";
 
 const initialState: ScreenReducerType = {
-  mediaType: "",
+  mediaType: "DESKTOP",
   theme: "light",
 };
 const ScreenReducer = (
   state = initialState,
-  action: ReducerActionPayloadType,
-) => {
+  action: ReducerActionPayloadType
+): ScreenReducerType => {
   const { type, payload } = action;
   switch (type) {
     case UPDATE_MEDIA_TYPE: {

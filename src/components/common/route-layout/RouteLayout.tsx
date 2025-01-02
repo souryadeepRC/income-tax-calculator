@@ -17,8 +17,7 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
   parentPath,
   label,
   children,
-}) => {
-  return (
+}) => (
     <section className={classes.route_layout__container}>
       <Box display="flex" flexDirection="column" alignItems="flex-start">
         <BreadcrumbLink
@@ -35,5 +34,4 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
       {children}
     </section>
   );
-};
 export default memo(RouteLayout);

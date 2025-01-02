@@ -3,13 +3,18 @@ export interface TaxReducerType {
   newScheme: TaxScheme;
   oldScheme: TaxScheme;
 }
+export interface TaxBreakupType {
+  newScheme: TaxScheme;
+  oldScheme: TaxScheme;
+}
+export type TaxChoiceType = "New" | "Old";
 export interface TaxChoice {
   taxAmount: {
     monthly: number;
-    yearly: 0;
+    yearly: number;
   };
   difference: number;
-  type: "New" | "Old";
+  type: TaxChoiceType;
   percentage: number;
 }
 export interface TaxScheme {
@@ -18,4 +23,5 @@ export interface TaxScheme {
   monthlyTax: number;
   taxableAmount: number;
   yearlyTax: number;
+  deductedAmount: number;
 }

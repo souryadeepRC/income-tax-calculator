@@ -23,7 +23,7 @@ jest.mock(
         {children}
       </div>
     ), // Return a valid React element
-  }),
+  })
 );
 
 jest.mock(
@@ -31,7 +31,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>AddRentEntry</div>, // Return a valid React element
-  }),
+  })
 );
 
 jest.mock(
@@ -39,7 +39,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>RentEntryForm</div>, // Return a valid React element
-  }),
+  })
 );
 
 jest.mock("src/hooks/useRentExemption", () => jest.fn());

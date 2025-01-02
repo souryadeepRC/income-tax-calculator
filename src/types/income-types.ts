@@ -4,11 +4,12 @@ export interface IncomeReducerType {
   isEditable: boolean;
   editableEntryId: string;
 }
+export type IncomeCategory = "salary" | "extra";
 export interface IncomeOption {
   id?: string;
   label: string;
   amount: number;
-  category: "salary" | "extra";
+  category: IncomeCategory;
 }
 
 export interface incomeDetailsUpdateType {
