@@ -1,24 +1,25 @@
 import { v4 as uuid4 } from "uuid";
 import { DeductionByRent, RentEntry } from "src/types/deduction-types";
 
-export const mapEditRentEntry = (rent: DeductionByRent, payload: string) => {
-  return {
-    ...rent,
-    isEditable: true,
-    ...(payload ? { editableEntryId: payload } : {}),
-  };
-};
+export const mapEditRentEntry = (
+  rent: DeductionByRent,
+  payload: string
+): DeductionByRent => ({
+  ...rent,
+  isEditable: true,
+  ...(payload ? { editableEntryId: payload } : {}),
+});
 
 export const mapSaveRentEntry = (
   rent: DeductionByRent,
   payload: RentEntry,
-  initialRentState: DeductionByRent,
-) => {
-  let modifiedCollection = [...rent.collections];
+  initialRentState: DeductionByRent
+): DeductionByRent => {
+  const modifiedCollection = [...rent.collections];
   const editableEntryId = rent.editableEntryId;
   if (rent.editableEntryId) {
     const editableEntryIndex = modifiedCollection.findIndex(
-      (rentEntry) => rentEntry.id === editableEntryId,
+      (rentEntry) => rentEntry.id === editableEntryId
     );
     modifiedCollection[editableEntryIndex] = {
       ...modifiedCollection[editableEntryIndex],
@@ -37,15 +38,15 @@ export const mapSaveRentEntry = (
 export const mapDeleteRentEntry = (
   rent: DeductionByRent,
   payload: string,
-  initialRentState: DeductionByRent,
-) => {
+  initialRentState: DeductionByRent
+): DeductionByRent => {
   const { isEditable, editableEntryId } = initialRentState;
   return {
     ...rent,
     isEditable,
     editableEntryId,
     collections: [...rent.collections].filter(
-      (rentEntry) => rentEntry.id !== payload,
+      (rentEntry) => rentEntry.id !== payload
     ),
   };
 };

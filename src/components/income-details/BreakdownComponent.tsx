@@ -24,7 +24,6 @@ interface BreakdownComponentProps {
 }
 const BreakdownComponent: React.FC<BreakdownComponentProps> = ({
   id,
-  category,
   label,
   amount,
 }) => {

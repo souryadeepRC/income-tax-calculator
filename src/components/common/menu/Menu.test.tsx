@@ -16,7 +16,7 @@ describe("test Menu Component", () => {
             onClick: option2Func,
           },
         ]}
-      />,
+      />
     );
     const iconBtn = screen.getByTestId("menu-icon-btn");
     expect(iconBtn).toBeInTheDocument();

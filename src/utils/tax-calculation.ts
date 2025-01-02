@@ -1,5 +1,9 @@
+import { DeductionReducerType } from "src/types/deduction-types";
+import { IncomeOption } from "src/types/income-types";
+import { TaxBreakupType, TaxReducerType, TaxScheme } from "src/types/tax-types";
+
 const IS_NEW_SCHEME = true;
-export const calculateByNewTaxSlab = (taxableAmount: number) => {
+export const calculateByNewTaxSlab = (taxableAmount: number): number => {
   const TAX_SLAB_AMOUNT = 400000;
   /* ------- The income tax rebate limit : 7 Lakh ----*/
   if (taxableAmount <= 700000) {
@@ -34,7 +38,7 @@ export const calculateByNewTaxSlab = (taxableAmount: number) => {
   return taxAmount + (taxableAmount - 1500000) * 0.3;
 };
 
-export const calculateByOldTaxSlab = (taxableAmount: number) => {
+export const calculateByOldTaxSlab = (taxableAmount: number): number => {
   const TAX_SLAB_AMOUNT = 250000;
   /* ------- The income tax rebate limit : 5 Lakh ----*/
   if (taxableAmount <= 500000) {
@@ -64,8 +68,8 @@ export const calculateIncomeTax = (
   income: number,
   deductedAmount: number,
   standardDeduction: number,
-  type: any,
-) => {
+  type: boolean
+): TaxScheme => {
   const taxableAmount = income - standardDeduction;
   let baseTax = 0;
   if (type) {
@@ -90,8 +94,8 @@ export const calculateRentDeduction = (
   duration: number,
   isMetroCity: boolean,
   basic: number,
-  hra: number,
-) => {
+  hra: number
+): number => {
   const METRO_CITY_LIMIT = 0.5;
   const NON_METRO_CITY_LIMIT = 0.4;
   const ruleByRent = amount * duration - basic * 0.1;
@@ -103,30 +107,33 @@ export const calculateRentDeduction = (
 };
 
 export const calculateTax = (
-  salaryIncome: any,
+  salaryIncome: IncomeOption[],
   totalIncome: number,
-  deductionDetail: any,
-) => {
+  deductionDetail: DeductionReducerType
+): TaxReducerType => {
   let deductedAmount = 0;
-  const taxableAmount = totalIncome - (salaryIncome?.pf || 0);
+  const pfAmount =
+    salaryIncome?.find((income) => income.label.toLowerCase() === "pf")
+      ?.amount || 0;
+  const taxableAmount = totalIncome - pfAmount;
 
   deductedAmount += deductionDetail.rent.deductedAmount;
   deductedAmount += deductionDetail.section24.deductedAmount;
   deductedAmount += deductionDetail.deduction80C.deductedAmount;
   deductedAmount += deductionDetail.deductionByChapter6.deductedAmount;
 
-  let taxBreakup: any = {
+  const taxBreakup: TaxBreakupType = {
     newScheme: calculateIncomeTax(
       taxableAmount,
       0,
       deductionDetail.standardDeduction.newScheme,
-      IS_NEW_SCHEME,
+      IS_NEW_SCHEME
     ),
     oldScheme: calculateIncomeTax(
       taxableAmount - deductedAmount,
       deductedAmount,
       deductionDetail.standardDeduction.oldScheme,
-      !IS_NEW_SCHEME,
+      !IS_NEW_SCHEME
     ),
   };
   const amount: number =
@@ -135,14 +142,17 @@ export const calculateTax = (
   const difference: number = amount < 0 ? amount * -1 : amount;
   const percentage: number =
     (difference / taxBreakup.oldScheme.yearlyTax) * 100;
-  taxBreakup["choice"] = {
-    taxAmount: {
-      yearly: taxBreakup[bestScheme].yearlyTax,
-      monthly: taxBreakup[bestScheme].monthlyTax,
+
+  return {
+    ...taxBreakup,
+    choice: {
+      taxAmount: {
+        yearly: taxBreakup[bestScheme].yearlyTax,
+        monthly: taxBreakup[bestScheme].monthlyTax,
+      },
+      difference,
+      type: bestScheme === "newScheme" ? "New" : "Old",
+      percentage,
     },
-    difference,
-    label: bestScheme === "newScheme" ? "New" : "Old",
-    percentage,
   };
-  return taxBreakup;
 };

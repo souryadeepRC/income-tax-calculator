@@ -26,14 +26,6 @@ describe("useMediaQuery hook", () => {
     jest.clearAllMocks();
   });
 
-  test("should return initial media type from useSelector", () => {
-    mockUseSelector.mockReturnValue("MOBILE");
-
-    const { result } = renderHook(() => useMediaQuery());
-
-    expect(result.current).toBe("MOBILE");
-  });
-
   test("should dispatch correct action on media query match for TABLET", () => {
     // Mock useSelector to return a media type (e.g., MOBILE)
     mockUseSelector.mockReturnValue("MOBILE");

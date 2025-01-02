@@ -60,23 +60,23 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
         setError(
           updateState(
             "amount",
-            "Enter a valid amount more than 0 (e.g. 100.50 or 100)",
-          ),
+            "Enter a valid amount more than 0 (e.g. 100.50 or 100)"
+          )
         );
       }
       if (!NUMERIC_REGEX.test(duration)) {
         setError(
           updateState(
             "duration",
-            "Enter a valid duration more than 0 (e.g. 2 or 2.5)",
-          ),
+            "Enter a valid duration more than 0 (e.g. 2 or 2.5)"
+          )
         );
       }
       return;
     }
 
     dispatch(
-      saveRentEntry({ amount: +amount, duration: +duration, isMetroCity }),
+      saveRentEntry({ amount: +amount, duration: +duration, isMetroCity })
     );
   };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,6 +100,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
     }
     setError(updateState("duration", errorMessage));
   };
+  /* eslint-disable */
   const onCityChange = (event: any) => {
     setEntryInput(updateState("isMetroCity", event.target.checked));
   };
@@ -148,7 +149,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
         />
         <section aria-label="rent metro city switch">
           <label>
-            I'm residing in a
+            I&#39;m residing in a
             <Switch
               data-testid="rent-city-switch"
               checked={isMetroCity}

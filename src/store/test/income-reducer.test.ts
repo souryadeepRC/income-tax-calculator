@@ -102,7 +102,7 @@ describe("Income Reducer", () => {
     });
     const result = IncomeReducer(
       { ...mockState, editableEntryId: "1" },
-      action,
+      action
     );
     expect(result.options.length).toEqual(1);
     expect(result.options[0].label).toEqual("Test 2");

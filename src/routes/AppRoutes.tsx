@@ -10,21 +10,19 @@ import DeductionPage from "src/pages/deduction-page/DeductionPage";
 import Landing from "src/pages/landing/Landing";
 import DeductionOption from "src/pages/deduction-page/DeductionOption";
 
-export const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="" element={<Landing />} />
-      <Route path="income" element={<IncomePage />} />
-      <Route path="deduction" element={<DeductionPage />}>
-        <Route index element={<DeductionOption />} />
-        <Route path="rent" element={<Rent />} />
-        <Route path="section-24" element={<Section24 />} />
-        <Route path="80C" element={<Deduction80C />} />
-        <Route path="Chapter-VIA" element={<ChapterVI />} />
-      </Route>
-      <Route path="tax-breakup" element={<TaxBreakupPage />} />
+export const AppRoutes: React.FC = () => (
+  <Routes>
+    <Route path="" element={<Landing />} />
+    <Route path="income" element={<IncomePage />} />
+    <Route path="deduction" element={<DeductionPage />}>
+      <Route index element={<DeductionOption />} />
+      <Route path="rent" element={<Rent />} />
+      <Route path="section-24" element={<Section24 />} />
+      <Route path="80C" element={<Deduction80C />} />
+      <Route path="Chapter-VIA" element={<ChapterVI />} />
+    </Route>
+    <Route path="tax-breakup" element={<TaxBreakupPage />} />
 
-      <Route path="*" element={<span>Main *</span>} />
-    </Routes>
-  );
-};
+    <Route path="*" element={<span>Main *</span>} />
+  </Routes>
+);

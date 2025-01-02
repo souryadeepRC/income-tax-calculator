@@ -1,5 +1,5 @@
 import { TaxReducer } from "src/store/tax/tax-reducer";
-import { TaxReducerType } from "src/types/tax-types";
+import { TaxChoiceType, TaxReducerType } from "src/types/tax-types";
 import { updateTaxDetails } from "src/store/tax/tax-actions";
 import { UPDATE_TAX_DETAILS } from "src/store/tax/tax-constants";
 
@@ -20,6 +20,7 @@ describe("TaxReducer", () => {
       monthlyTax: 0,
       taxableAmount: 0,
       yearlyTax: 0,
+      deductedAmount: 0,
     },
     oldScheme: {
       baseTax: 0,
@@ -27,6 +28,7 @@ describe("TaxReducer", () => {
       monthlyTax: 0,
       taxableAmount: 0,
       yearlyTax: 0,
+      deductedAmount: 0,
     },
   };
 
@@ -43,7 +45,7 @@ describe("TaxReducer", () => {
           yearly: 60000,
         },
         difference: 1000,
-        type: "Old",
+        type: "Old" as TaxChoiceType,
         percentage: 1.5,
       },
       newScheme: {
@@ -51,6 +53,7 @@ describe("TaxReducer", () => {
         cessAmount: 500,
         monthlyTax: 1000,
         taxableAmount: 150000,
+        deductedAmount: 150000,
         yearlyTax: 12000,
       },
       oldScheme: {
@@ -58,6 +61,7 @@ describe("TaxReducer", () => {
         cessAmount: 600,
         monthlyTax: 1200,
         taxableAmount: 160000,
+        deductedAmount: 150000,
         yearlyTax: 14400,
       },
     };

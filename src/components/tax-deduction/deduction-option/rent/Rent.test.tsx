@@ -11,6 +11,7 @@ jest.mock(
   "src/components/tax-deduction/deduction-entry/DeductionEntry",
   () => ({
     __esModule: true, // If it's a default export
+    /* eslint-disable */
     default: ({ onDelete, onModify, children }: any) => (
       <div>
         DeductionEntry
@@ -23,7 +24,7 @@ jest.mock(
         {children}
       </div>
     ), // Return a valid React element
-  }),
+  })
 );
 
 jest.mock(
@@ -31,7 +32,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>AddRentEntry</div>, // Return a valid React element
-  }),
+  })
 );
 
 jest.mock(
@@ -39,7 +40,7 @@ jest.mock(
   () => ({
     __esModule: true, // If it's a default export
     default: () => <div>RentEntryForm</div>, // Return a valid React element
-  }),
+  })
 );
 
 jest.mock("src/hooks/useRentExemption", () => jest.fn());

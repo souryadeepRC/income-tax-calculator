@@ -1,4 +1,6 @@
-export const MEDIA_TYPES: Record<string, string> = {
+import { DeviceMedia } from "src/types/screen-types";
+
+export const MEDIA_TYPES: DeviceMedia = {
   MOBILE: "MOBILE",
   DESKTOP: "DESKTOP",
   TABLET: "TABLET",

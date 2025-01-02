@@ -1,0 +1,36 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "warn", // Optional rule
+    "no-console": "warn", // Optional rule
+    "@typescript-eslint/no-unused-vars": "warn",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "prefer-const": "warn",
+    "no-undef": "off",
+    "eqeqeq": ["warn", "always"],
+    "arrow-body-style": ["warn", "as-needed"],
+    "@typescript-eslint/no-explicit-any": "warn", // Optional rule to prevent 'any' type
+    "@typescript-eslint/explicit-module-boundary-types": "warn" // Optional rule to enforce explicit types for functions
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

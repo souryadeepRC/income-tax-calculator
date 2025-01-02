@@ -16,8 +16,9 @@ import {
 // selectors
 import { selectDeductionChapter6 } from "src/store/deduction/deduction-selectors";
 // types
-import { AppDispatch } from "src/store/reducer-types";
+import { AppDispatch } from "src/types/store-types";
 import {
+  DeductionEntryOption,
   DeductionEntry as DeductionEntryType,
   DeductionOption,
 } from "src/types/deduction-types";
@@ -38,7 +39,7 @@ const ChapterVI: React.FC = () => {
 
   const getEditableEntryDetails = useCallback(() => {
     const deductionEntry = options.find(
-      (deductionEntry) => deductionEntry.id === editableEntryId,
+      (deductionEntry) => deductionEntry.id === editableEntryId
     );
     if (!deductionEntry) return undefined;
     const { amount, category } = deductionEntry;
@@ -47,13 +48,13 @@ const ChapterVI: React.FC = () => {
       amount: `${amount}`,
     };
   }, [options, editableEntryId]);
-  const getDeductionOptions = () => {
-    return Object.keys(DEDUCTION_CHAPTER_VI_OPTIONS).reduce(
-      (acc: any, category: any) => {
+  const getDeductionOptions = () =>
+    Object.keys(DEDUCTION_CHAPTER_VI_OPTIONS).reduce(
+      (acc: DeductionEntryOption[], category: string) => {
         const isAdded =
           options.findIndex(
             (option) =>
-              editableEntryId !== option.id && option.category === category,
+              editableEntryId !== option.id && option.category === category
           ) > -1;
 
         return [
@@ -66,9 +67,8 @@ const ChapterVI: React.FC = () => {
           },
         ];
       },
-      [],
+      []
     );
-  };
   const onSave = (entryDetails: DeductionEntryType) => {
     dispatch(saveChapterVIEntry(entryDetails));
   };
@@ -98,24 +98,22 @@ const ChapterVI: React.FC = () => {
       />
 
       <section>
-        {options.map((deductionOption) => {
-          return (
-            <DeductionEntry
-              key={deductionOption.category}
-              onDelete={() =>
-                dispatch(deleteChapterVIEntry(deductionOption?.id || ""))
-              }
-              onModify={() => dispatch(editChapterVIEntry(deductionOption.id))}
-            >
-              <>
-                <span>
-                  {DEDUCTION_CHAPTER_VI_OPTIONS[deductionOption.category].label}
-                </span>
-                <span>Rs. {formatNumber(deductionOption.amount)}</span>
-              </>
-            </DeductionEntry>
-          );
-        })}
+        {options.map((deductionOption) => (
+          <DeductionEntry
+            key={deductionOption.category}
+            onDelete={() =>
+              dispatch(deleteChapterVIEntry(deductionOption?.id || ""))
+            }
+            onModify={() => dispatch(editChapterVIEntry(deductionOption.id))}
+          >
+            <>
+              <span>
+                {DEDUCTION_CHAPTER_VI_OPTIONS[deductionOption.category].label}
+              </span>
+              <span>Rs. {formatNumber(deductionOption.amount)}</span>
+            </>
+          </DeductionEntry>
+        ))}
       </section>
     </main>
   );

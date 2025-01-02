@@ -17,14 +17,12 @@ interface CardProps {
   actionItem?: JSX.Element;
   className?: string;
 }
-const Card: React.FC<CardProps> = ({ content, className, actionItem }) => {
-  return (
-    <section className={`${classes.card__inner_container} ${className}`}>
-      {content}
-      {actionItem}
-    </section>
-  );
-};
+const Card: React.FC<CardProps> = ({ content, className, actionItem }) => (
+  <section className={`${classes.card__inner_container} ${className}`}>
+    {content}
+    {actionItem}
+  </section>
+);
 const IncomeInfo: React.FC = () => {
   const overallAmount = useSelector(selectOverallIncomeAmount);
   const navigate = useNavigate();
@@ -62,7 +60,7 @@ const TaxInfo: React.FC = () => {
   const onViewBreakdown = () => {
     navigate("/tax-breakup");
   };
-  const { label, taxAmount, difference } = useSelector(selectTaxChoice);
+  const { type, taxAmount, difference } = useSelector(selectTaxChoice);
 
   return (
     <Card
@@ -81,7 +79,7 @@ const TaxInfo: React.FC = () => {
       content={
         <section>
           {taxAmount.yearly === 0 ? (
-            <div>You don't have to pay income tax</div>
+            <div>You don&#39;t have to pay income tax</div>
           ) : (
             <>
               <span
@@ -96,7 +94,7 @@ const TaxInfo: React.FC = () => {
             </>
           )}
           <span className={classes.description}>
-            By opting {label} Tax Regime
+            By opting {type} Tax Regime
           </span>
         </section>
       }
@@ -115,10 +113,10 @@ const Landing: React.FC = () => {
           Instant Tax Calculator: Know Your Tax in Seconds!
         </span>
         <span className={classes.description}>
-          Wondering how much tax you'll pay? Our instant tax calculator makes it
-          simple – just enter your salary to see a clear breakdown of your
-          estimated tax, deductions, and take-home pay. Perfect for planning and
-          peace of mind, all in just a few clicks!
+          Wondering how much tax you&#39;ll pay? Our instant tax calculator
+          makes it simple – just enter your salary to see a clear breakdown of
+          your estimated tax, deductions, and take-home pay. Perfect for
+          planning and peace of mind, all in just a few clicks!
         </span>
         <Button
           variant="contained"

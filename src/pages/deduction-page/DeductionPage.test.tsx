@@ -48,7 +48,7 @@ describe("DeductionOption Component", () => {
     render(
       <MemoryRouter>
         <DeductionOption />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
 
     expect(mockUseSelector).toHaveBeenCalledTimes(1);

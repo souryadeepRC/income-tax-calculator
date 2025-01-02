@@ -10,7 +10,7 @@ const mockedFormatNumber = formatNumber as jest.MockedFunction<
 
 describe("test TaxRegimeBreakup Component", () => {
   mockedFormatNumber.mockReturnValue(100.1);
-  const setup = (regimeType: string, isBestChoice: boolean = false) => {
+  const setup = (regimeType: string, isBestChoice = false) => {
     render(
       <TaxRegimeBreakup
         regimeType={regimeType}
@@ -23,13 +23,13 @@ describe("test TaxRegimeBreakup Component", () => {
           taxableAmount: 400,
           deductedAmount: 500,
         }}
-      />,
+      />
     );
   };
   test("render the tax regime details with best choice alert", () => {
     setup("New", true);
     expect(screen.getByTestId("regime-label")).toHaveTextContent(
-      "New Tax Regime",
+      "New Tax Regime"
     );
     expect(screen.getByText("Best Choice")).toBeInTheDocument();
     expect(mockedFormatNumber).toHaveBeenCalledTimes(6);
@@ -43,7 +43,7 @@ describe("test TaxRegimeBreakup Component", () => {
   test("render the tax regime details without best choice alert", () => {
     setup("Old");
     expect(screen.getByTestId("regime-label")).toHaveTextContent(
-      "Old Tax Regime",
+      "Old Tax Regime"
     );
     expect(screen.queryByText("Best Choice")).not.toBeInTheDocument();
   });

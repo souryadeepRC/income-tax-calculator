@@ -1,13 +1,12 @@
-// components
-import { Footer, Header } from "src/components/common/CommonComponents";
+import { memo } from "react";
 // hooks
-import { useMediaQuery } from "src/hooks/useMediaQuery";
 import { useTaxCalculation } from "src/hooks/useTaxCalculation";
 // routes
 import { AppRoutes } from "src/routes/AppRoutes";
 // styles
 import "./TaxCalculator.scss";
-const TaxSection = () => {
+
+const TaxCalculator = () => {
   useTaxCalculation();
   return (
     <section className="tax-section">
@@ -15,14 +14,5 @@ const TaxSection = () => {
     </section>
   );
 };
-export const TaxCalculator = () => {
-  // hooks
-  useMediaQuery();
-  return (
-    <>
-      <Header />
-      <TaxSection />
-      <Footer />
-    </>
-  );
-};
+
+export default memo(TaxCalculator);

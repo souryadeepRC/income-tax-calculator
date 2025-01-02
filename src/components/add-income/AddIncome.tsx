@@ -53,7 +53,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   const dispatch = useDispatch();
 
   const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
-    INITIAL_INCOME_DETAILS,
+    INITIAL_INCOME_DETAILS
   );
   const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
 
@@ -61,7 +61,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
     const modifiedLabel: string = event.target.value;
     setIncomeDetails(updateState("label", modifiedLabel));
     setErrors(
-      updateState("label", modifiedLabel === "" || modifiedLabel.length > 100),
+      updateState("label", modifiedLabel === "" || modifiedLabel.length > 100)
     );
   };
   const onLabelClear = () => {

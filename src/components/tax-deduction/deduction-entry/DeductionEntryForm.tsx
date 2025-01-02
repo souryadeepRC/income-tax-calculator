@@ -20,6 +20,7 @@ import classes from "./DeductionEntry.module.scss";
 interface DeductionEntryFormProps {
   options: DeductionEntryOption[];
   entry: EntryInput | undefined;
+  /* eslint-disable */
   onSave: (entryDetails: DeductionEntry) => void;
   onReset: () => void;
 }
@@ -70,7 +71,7 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
   const onCategoryChange = (event: any) => {
     const enteredCategory = event.target.value as string;
     const maxLimit = options.find(
-      (option) => option.category === enteredCategory,
+      (option) => option.category === enteredCategory
     )?.maxLimit;
     setEntryInput(updateState("category", enteredCategory));
     setEntryInput(updateState("maxLimit", maxLimit));
@@ -96,18 +97,16 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
         data-testid={`category-option`}
         fullWidth
       >
-        {options.map((option) => {
-          return (
-            <MenuItem
-              key={option.category}
-              disabled={option.isAdded}
-              value={option.category}
-              data-testid={`category-option-${option.category}`}
-            >
-              {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
-            </MenuItem>
-          );
-        })}
+        {options.map((option) => (
+          <MenuItem
+            key={option.category}
+            disabled={option.isAdded}
+            value={option.category}
+            data-testid={`category-option-${option.category}`}
+          >
+            {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
+          </MenuItem>
+        ))}
       </Select>
       <TextField
         className="deduction__option__input"

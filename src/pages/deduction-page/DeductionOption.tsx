@@ -37,25 +37,23 @@ const DeductionOption: React.FC = () => {
   return (
     <section className={classes.deduction__container}>
       <ul className={classes.deduction_list}>
-        {options.map((deductionOption) => {
-          return (
-            <li key={deductionOption.label}>
-              <NavLink to={deductionOption.path}>
-                <div className={classes.deduction_list__item}>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="flex-start"
-                  >
-                    <strong>{deductionOption.label}</strong>
-                    <span>{deductionOption.amount}</span>
-                  </Box>
-                  <BlurOnIcon />
-                </div>
-              </NavLink>
-            </li>
-          );
-        })}
+        {options.map((deductionOption) => (
+          <li key={deductionOption.label}>
+            <NavLink to={deductionOption.path}>
+              <div className={classes.deduction_list__item}>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="flex-start"
+                >
+                  <strong>{deductionOption.label}</strong>
+                  <span>{deductionOption.amount}</span>
+                </Box>
+                <BlurOnIcon />
+              </div>
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </section>
   );

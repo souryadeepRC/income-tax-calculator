@@ -1,5 +1,5 @@
 // types
-import { ReducerActionPayloadType } from "src/store/reducer-types";
+import { ReducerActionPayloadType } from "src/types/store-types";
 import { IncomeReducerType } from "src/types/income-types";
 // constants
 import {
@@ -18,8 +18,8 @@ const initialState: IncomeReducerType = {
 };
 const IncomeReducer = (
   state = initialState,
-  action: ReducerActionPayloadType,
-) => {
+  action: ReducerActionPayloadType
+): IncomeReducerType => {
   const { type, payload } = action;
   switch (type) {
     case EDIT_INCOME_ENTRY: {

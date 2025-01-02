@@ -6,10 +6,10 @@ describe("test DataLayout component", () => {
     render(
       <DataLayout headerText="Test Header" aggregateAmount={100}>
         <span>Test Child</span>
-      </DataLayout>,
+      </DataLayout>
     );
     expect(screen.getByTestId("layout-header")).toHaveTextContent(
-      "Test Header",
+      "Test Header"
     );
     expect(screen.getByTestId("layout-amount")).toHaveTextContent("Rs. 100");
     expect(screen.getByText("Test Child")).toBeInTheDocument();
@@ -18,10 +18,10 @@ describe("test DataLayout component", () => {
     render(
       <DataLayout headerText="Test Header">
         <span>Test Child</span>
-      </DataLayout>,
+      </DataLayout>
     );
     expect(screen.getByTestId("layout-header")).toHaveTextContent(
-      "Test Header",
+      "Test Header"
     );
     expect(screen.queryByTestId("layout-amount")).not.toBeInTheDocument();
     expect(screen.getByText("Test Child")).toBeInTheDocument();

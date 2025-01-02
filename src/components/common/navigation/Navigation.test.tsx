@@ -26,7 +26,7 @@ describe("test Navigation Component", () => {
     render(
       <MemoryRouter>
         <Navigation />
-      </MemoryRouter>,
+      </MemoryRouter>
     );
   };
   test("render all options with text in desktop mode", () => {

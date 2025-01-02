@@ -49,14 +49,14 @@ describe("useRentExemption", () => {
       12, // Metro duration
       true, // isMetroCity
       20000, // basic salary
-      8000, // HRA
+      8000 // HRA
     );
     expect(calculateRentDeduction).toHaveBeenCalledWith(
       3000, // Non-metro amount
       6, // Non-metro duration
       false, // not a metro city
       20000, // basic salary
-      8000, // HRA
+      8000 // HRA
     );
 
     // The final rent exemption (metro + non-metro) should be dispatched
