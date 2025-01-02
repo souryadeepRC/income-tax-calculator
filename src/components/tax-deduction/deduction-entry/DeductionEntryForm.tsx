@@ -20,7 +20,7 @@ import classes from "./DeductionEntry.module.scss";
 interface DeductionEntryFormProps {
   options: DeductionEntryOption[];
   entry: EntryInput | undefined;
-   /* eslint-disable */
+  /* eslint-disable */
   onSave: (entryDetails: DeductionEntry) => void;
   onReset: () => void;
 }
@@ -98,15 +98,15 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
         fullWidth
       >
         {options.map((option) => (
-            <MenuItem
-              key={option.category}
-              disabled={option.isAdded}
-              value={option.category}
-              data-testid={`category-option-${option.category}`}
-            >
-              {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
-            </MenuItem>
-          ))}
+          <MenuItem
+            key={option.category}
+            disabled={option.isAdded}
+            value={option.category}
+            data-testid={`category-option-${option.category}`}
+          >
+            {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
+          </MenuItem>
+        ))}
       </Select>
       <TextField
         className="deduction__option__input"

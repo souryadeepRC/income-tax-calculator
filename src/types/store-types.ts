@@ -8,6 +8,7 @@ import { TaxReducerType } from "src/types/tax-types";
 
 export type ReducerActionPayloadType = {
   type: string;
+  /* eslint-disable */
   payload?: any;
 };
 

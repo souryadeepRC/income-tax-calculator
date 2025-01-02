@@ -22,17 +22,17 @@ const NavigationOption: React.FC<NavigationOptionProps> = ({
   label,
   isMobile,
 }) => (
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      gap={1}
-      data-testid={label}
-    >
-      {icon}
-      {!isMobile && <>{label}</>}
-    </Box>
-  );
+  <Box
+    display="flex"
+    justifyContent="space-between"
+    alignItems="center"
+    gap={1}
+    data-testid={label}
+  >
+    {icon}
+    {!isMobile && <>{label}</>}
+  </Box>
+);
 const Navigation = () => {
   // store
   const isMobile: boolean = useSelector(selectIsMobile);

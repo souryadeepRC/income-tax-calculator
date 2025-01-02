@@ -11,6 +11,7 @@ jest.mock(
   "src/components/tax-deduction/deduction-entry/DeductionEntry",
   () => ({
     __esModule: true, // If it's a default export
+    /* eslint-disable */
     default: ({ onDelete, onModify, children }: any) => (
       <div>
         DeductionEntry

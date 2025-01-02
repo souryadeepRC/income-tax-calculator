@@ -18,11 +18,11 @@ interface CardProps {
   className?: string;
 }
 const Card: React.FC<CardProps> = ({ content, className, actionItem }) => (
-    <section className={`${classes.card__inner_container} ${className}`}>
-      {content}
-      {actionItem}
-    </section>
-  );
+  <section className={`${classes.card__inner_container} ${className}`}>
+    {content}
+    {actionItem}
+  </section>
+);
 const IncomeInfo: React.FC = () => {
   const overallAmount = useSelector(selectOverallIncomeAmount);
   const navigate = useNavigate();
@@ -113,10 +113,10 @@ const Landing: React.FC = () => {
           Instant Tax Calculator: Know Your Tax in Seconds!
         </span>
         <span className={classes.description}>
-          Wondering how much tax you&#39;ll pay? Our instant tax calculator makes it
-          simple – just enter your salary to see a clear breakdown of your
-          estimated tax, deductions, and take-home pay. Perfect for planning and
-          peace of mind, all in just a few clicks!
+          Wondering how much tax you&#39;ll pay? Our instant tax calculator
+          makes it simple – just enter your salary to see a clear breakdown of
+          your estimated tax, deductions, and take-home pay. Perfect for
+          planning and peace of mind, all in just a few clicks!
         </span>
         <Button
           variant="contained"

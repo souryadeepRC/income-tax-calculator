@@ -18,20 +18,20 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
   label,
   children,
 }) => (
-    <section className={classes.route_layout__container}>
-      <Box display="flex" flexDirection="column" alignItems="flex-start">
-        <BreadcrumbLink
-          parentPath={parentPath}
-          homeIcon={<AccountBalanceWalletIcon fontSize="small" />}
-        />
-        <div
-          className={classes.route_layout__label}
-          data-testid="route-layout-label"
-        >
-          {label}
-        </div>
-      </Box>
-      {children}
-    </section>
-  );
+  <section className={classes.route_layout__container}>
+    <Box display="flex" flexDirection="column" alignItems="flex-start">
+      <BreadcrumbLink
+        parentPath={parentPath}
+        homeIcon={<AccountBalanceWalletIcon fontSize="small" />}
+      />
+      <div
+        className={classes.route_layout__label}
+        data-testid="route-layout-label"
+      >
+        {label}
+      </div>
+    </Box>
+    {children}
+  </section>
+);
 export default memo(RouteLayout);

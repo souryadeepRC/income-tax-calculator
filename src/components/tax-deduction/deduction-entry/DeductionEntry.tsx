@@ -17,22 +17,22 @@ const DeductionEntry: React.FC<DeductionEntryProps> = ({
   onModify,
   children,
 }) => (
-    <section className={classes.deduction_entry__container}>
-      <IconButton
-        onClick={onDelete}
-        data-testid="deduction-delete-icon"
-        className={classes.deduction_entry_action_icon}
-      >
-        <DeleteIcon />
-      </IconButton>
-      <section>{children}</section>
-      <IconButton
-        onClick={onModify}
-        data-testid="deduction-edit-icon"
-        className={classes.deduction_entry_action_icon}
-      >
-        <TuneIcon />
-      </IconButton>
-    </section>
-  );
+  <section className={classes.deduction_entry__container}>
+    <IconButton
+      onClick={onDelete}
+      data-testid="deduction-delete-icon"
+      className={classes.deduction_entry_action_icon}
+    >
+      <DeleteIcon />
+    </IconButton>
+    <section>{children}</section>
+    <IconButton
+      onClick={onModify}
+      data-testid="deduction-edit-icon"
+      className={classes.deduction_entry_action_icon}
+    >
+      <TuneIcon />
+    </IconButton>
+  </section>
+);
 export default memo(DeductionEntry);
