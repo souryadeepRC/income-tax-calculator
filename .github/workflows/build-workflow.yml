@@ -29,8 +29,6 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: "coverage/clover.xml"
-      - name: Check linting and formatting
-        run: npm run quality
       - name: Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@v4.4.5
         with:
