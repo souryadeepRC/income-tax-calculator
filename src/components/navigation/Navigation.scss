@@ -1,0 +1,114 @@
+@import "src/styles/variables.scss";
+.navigation-list {
+  box-shadow: inset 8px 6px 7px #72240c42;
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  width: 60vw;
+  margin: 0;
+  padding: 0.5vw 0;
+  background: var(--primary-bg-color);
+  border-radius: 50px;
+  list-style-type: none;
+  li > a {
+    color: var(--navigation-link-color);
+    text-decoration: none;
+    font-size: 1vw;
+    font-weight: 500;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .MuiSvgIcon-root {
+      font-size: 1vw;
+    }
+    &.active {
+      color: var(--navigation-active-color);
+    }
+  }
+}
+.navigation_mobile__container {
+  .navigation_mobile__icon {
+    &.MuiSvgIcon-root {
+      color: var(--secondary-font-color);
+    }
+  }
+  .navigation__slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--primary-color);
+    color: var(--secondary-font-color);
+    height: 100%;
+    width: 50%;
+    z-index: 3;
+    box-shadow: 14px 3px 20px 0px var(--secondary-color);
+    animation: slideIn 0.5s ease-in-out;
+    font-size: 12px;
+    header {
+      padding: 14px;
+      border-bottom: 1vw solid var(--secondary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .MuiSvgIcon-root {
+        fill: var(--secondary-font-color);
+      }
+    }
+    ul {
+      list-style-type: none;
+      padding: 14px 0;
+      gap: 10px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      li {
+        width: 100%;
+        padding: 0 0 0 15px;
+        a {
+          width: 90%;
+          border-radius: 10px;
+          display: block;
+          color: var(--secondary-font-color);
+          &.active {
+            background-color: var(--primary-bg-color);
+            color: var(--primary-font-color);
+          }
+          div {
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes slideIn {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 65%;
+  }
+  100% {
+    width: 60%;
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .navigation-list {
+    gap: 8px;
+    width: 40%;
+    li > a {
+      .MuiSvgIcon-root {
+        font-size: 14px;
+      }
+    }
+  }
+}

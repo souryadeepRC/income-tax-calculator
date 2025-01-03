@@ -1,7 +1,6 @@
 // styles
-import { memo } from "react";
 import "./Footer.scss";
-const Footer = () => (
+const Footer: React.FC = () => (
   <footer className="footer__container">
     Developed By
     <a
@@ -15,4 +14,4 @@ const Footer = () => (
   </footer>
 );
 
-export default memo(Footer);
+export default Footer;

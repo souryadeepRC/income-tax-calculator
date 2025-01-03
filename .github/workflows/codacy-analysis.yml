@@ -1,0 +1,47 @@
+name: Codacy Static Code Analysis
+
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: ["develop"]
+
+permissions:
+  contents: read
+jobs:
+  codacy-static-analysis:
+    name: Codacy Static Code Analysis
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm install
+      - name: Check linting and formatting
+        run: npm run quality
+      - name: Test Code coverage
+        run: npm run test
+      - name: Upload coverage report to Codacy
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: "coverage/clover.xml"
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@97bf5df3c09e75f5bcd72695998f96ebd701846e
+        with:
+          tool: eslint
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          upload: true
+          max-allowed-issues: 2147483647

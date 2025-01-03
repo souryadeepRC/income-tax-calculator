@@ -9,6 +9,7 @@ Build in `React-TypeScript-SASS-MaterialUI` and deployed in `Netlify`
 This application offers comprehensive income tax calculations based on an individual's earnings. Users can input various income components and select from multiple exemption options. Utilizing this data, the application recommends the most suitable tax regime along with a detailed tax breakdown.
 
 ## Implemented Technologies
+![Codacy Badge](https://app.codacy.com/project/badge/Grade/your-project-id)
 
 ![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![image](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
