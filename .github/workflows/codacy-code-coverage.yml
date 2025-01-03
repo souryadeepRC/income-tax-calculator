@@ -1,4 +1,4 @@
-name: Codacy Static Code Analysis
+name: Codacy Coverage Variation
 
 on:
   push:
@@ -8,8 +8,8 @@ on:
     branches: ["develop"]
 
 jobs:
-  codacy-static-analysis:
-    name: Codacy Static Code Analysis
+  codacy-coverage-variation:
+    name: Codacy Coverage Variation
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -27,12 +27,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Check linting and formatting
-        run: npm run quality
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@97bf5df3c09e75f5bcd72695998f96ebd701846e
+      - name: Test Code coverage
+        run: npm run test
+      - name: Upload coverage report to Codacy
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
-          tool: eslint
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          upload: true
-          max-allowed-issues: 2147483647
+          coverage-reports: "coverage/clover.xml"
