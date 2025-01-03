@@ -2,9 +2,8 @@
 import { AppTheme, Navigation } from "src/components/common/CommonComponents";
 // styles
 import "./Header.scss";
-import { memo } from "react";
 
-const Header = () => (
+const Header: React.FC = () => (
   <header className="header__container">
     <span className="header__text">Tax Calculator</span>
     <Navigation />
@@ -14,4 +13,4 @@ const Header = () => (
   </header>
 );
 
-export default memo(Header);
+export default Header;

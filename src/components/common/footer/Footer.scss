@@ -5,22 +5,27 @@
   position: fixed;
   bottom: 0;
   width: 100vw;
-  padding: 10px 0;
-  background: #c8c8c8;
-  font-weight: 500;
-  font-size: 1vw;
+  padding: 2vw 0;
+  background: var(--secondary-bg-color);
+  color: var(--primary-font-color);
   text-align: center;
   z-index: 1;
+  font-size: 2vw;
+  font-weight: 500;
 
-  .footer__text {
-    padding: 0 0 0 5px;
-    font-family: $primary-font-family;
-    color: $color-black;
+  a {
+    padding: 0 0 0 1vw;
+    font-family: $primary-font-family; 
+    color: var(--primary-font-color);
+    font-size: 2vw;
   }
 }
 
 @media screen and (max-width: $mobile-max-width) {
   .footer__container {
     font-size: $font-size-mobile-primary;
+    a {
+      font-size: $font-size-mobile-primary;
+    }
   }
 }
