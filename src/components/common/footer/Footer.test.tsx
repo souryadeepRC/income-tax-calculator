@@ -7,6 +7,5 @@ describe("Footer Component", () => {
     const footerTextElement = screen.getByText("Souryadeep Roy Chowdhury");
     expect(footerTextElement).toBeInTheDocument();
     fireEvent.click(footerTextElement);
-    
   });
 });
