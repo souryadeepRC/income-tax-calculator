@@ -19,8 +19,8 @@ describe("test AppTheme Component", () => {
     mockUseSelector.mockReturnValue("light");
     render(<AppTheme />);
 
-    const themeSwitch = screen.getByTestId("app-theme");
-    expect(themeSwitch).toBeChecked();
+    const themeSwitch = screen.getByRole("checkbox");
+    expect(themeSwitch).not.toBeChecked();
     expect(mockedDispatch).toBeCalledTimes(0);
 
     fireEvent.click(themeSwitch);
@@ -30,7 +30,7 @@ describe("test AppTheme Component", () => {
     mockUseSelector.mockReturnValue("dark");
     render(<AppTheme />);
 
-    const themeSwitch = screen.getByTestId("app-theme");
-    expect(themeSwitch).not.toBeChecked();
+    const themeSwitch = screen.getByRole("checkbox");
+    expect(themeSwitch).toBeChecked();
   });
 });

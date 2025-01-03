@@ -10,6 +10,7 @@ import Navigation from "src/components/common/navigation/Navigation";
 import RouteLayout from "src/components/common/route-layout/RouteLayout";
 import TextField from "src/components/common/text-field/TextField";
 import Select from "src/components/common/select/Select";
+import Switch from "src/components/common/switch/Switch";
 
 export {
   Select,
@@ -24,4 +25,5 @@ export {
   Navigation,
   RouteLayout,
   TextField,
+  Switch,
 };

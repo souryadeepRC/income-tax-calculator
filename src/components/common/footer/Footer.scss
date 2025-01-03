@@ -5,19 +5,19 @@
   position: fixed;
   bottom: 0;
   width: 100vw;
-  padding: 2vw 0;
+  padding: 1vw 0;
   background: var(--secondary-bg-color);
   color: var(--primary-font-color);
   text-align: center;
   z-index: 1;
-  font-size: 2vw;
+  font-size: 1vw;
   font-weight: 500;
 
   a {
     padding: 0 0 0 1vw;
     font-family: $primary-font-family; 
     color: var(--primary-font-color);
-    font-size: 2vw;
+    font-size: 1vw;
   }
 }
 

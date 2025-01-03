@@ -1,0 +1,66 @@
+.Switch-root {
+  position: relative;
+  display: inline-flex;
+  width: 58px;
+  height: 38px;
+  align-items: center;
+  gap: 10px;
+}
+
+.Switch-switchBase {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.Switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.Switch-track {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  z-index: 1;
+}
+
+.Switch-thumb {
+  cursor: pointer;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 6px;
+  bottom: 6px;
+  background-color: white;
+  transition: 0.4s;
+  z-index: 3;
+}
+
+.Switch-checked + .Switch-track {
+  background-color: #4caf50;
+}
+
+.Switch-checked .Switch-thumb {
+  transform: translateX(20px);
+}

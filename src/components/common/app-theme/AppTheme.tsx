@@ -1,6 +1,7 @@
 // library
-import { Switch } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+// components
+import { Switch } from "src/components/common/CommonComponents";
 // actions
 import { toggleAppTheme } from "src/store/screen/screen-actions";
 // selector
@@ -21,11 +22,8 @@ const AppTheme: React.FC = () => {
 
   return (
     <Switch
-      inputProps={
-        { "data-testid": "app-theme" } as React.HTMLProps<HTMLInputElement>
-      }
       className="app_theme__switch"
-      checked={appTheme === "light"}
+      checked={appTheme === "dark"}
       onChange={onThemeChange}
     />
   );
