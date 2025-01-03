@@ -7,6 +7,8 @@ on:
     # The branches below must be a subset of the branches above
     branches: ["develop"]
 
+permissions:
+  contents: read
 jobs:
   codacy-static-analysis:
     name: Codacy Static Code Analysis
@@ -29,6 +31,13 @@ jobs:
         run: npm install
       - name: Check linting and formatting
         run: npm run quality
+      - name: Test Code coverage
+        run: npm run test
+      - name: Upload coverage report to Codacy
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: "coverage/clover.xml"
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@97bf5df3c09e75f5bcd72695998f96ebd701846e
         with:
