@@ -3,7 +3,7 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - develop
+      - feature/code-optimization
   pull_request:
     branches:
       - develop
@@ -32,7 +32,13 @@ jobs:
       - name: Checking Code Quality
         run: npm run quality
       - name: Run test coverage
-        run: npm test
+        run: npm run test
+      - name: Debug secrets
+        run: |
+          echo "SONAR_PROJECT_KEY=${{ secrets.SONAR_PROJECT_KEY }}"
+          echo "SONAR_PROJECT_NAME=${{ secrets.SONAR_PROJECT_NAME }}"
+          echo "SONAR_ORGANIZATION=${{ secrets.SONAR_ORGANIZATION }}"
+          echo "SONAR_BRANCH_NAME=${{ secrets.SONAR_BRANCH_NAME }}"
       - name: Run SonarQube Scanner
         run: |
           npm install -g sonar-scanner
@@ -41,5 +47,8 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.organization=${{ secrets.SONAR_ORG }} \
             -Dsonar.branch.name=develop \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/index.html \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+      - name: SonarQube coverage Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
