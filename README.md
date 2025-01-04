@@ -1,5 +1,7 @@
 # [Tax Regime Calculator](https://tax-regime-calculator.netlify.app)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3f215a013bae4853946d57a668f57132)](https://app.codacy.com/gh/souryadeepRC/income-tax-calculator?utm_source=github.com&utm_medium=referral&utm_content=souryadeepRC/income-tax-calculator&utm_campaign=Badge_Grade)
+
 https://tax-regime-calculator.netlify.app
 
 ### Web Application for Income Tax Management
