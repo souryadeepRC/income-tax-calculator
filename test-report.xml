@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\back-button\BackButton.test.tsx">
+    <testCase name="test BackButton component render back button and navigate to back path after clicking" duration="266"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\routes\AppRoutes.test.tsx">
+    <testCase name="test AppRoutes should render the Landing page by default" duration="521"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\add-income\AddIncome.test.tsx">
+    <testCase name="test AddIncome component render the form with label and fields" duration="838"/>
+    <testCase name="test AddIncome component update fields with valid inputs and submit records" duration="1378"/>
+    <testCase name="test AddIncome component update fields with invalid inputs and check submit validation" duration="716"/>
+    <testCase name="test AddIncome component render submit button as text update for edit case" duration="101"/>
+    <testCase name="test AddIncome component type records in text field then clear the record" duration="409"/>
+    <testCase name="test AddIncome component type records in text field then cancel the form" duration="363"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-entry\DeductionEntryForm.test.tsx">
+    <testCase name="test DeductionEntryForm component render the DeductionEntryForm component with valid entry and update the amount" duration="963"/>
+    <testCase name="test DeductionEntryForm component render the DeductionEntryForm component with empty entry" duration="165"/>
+    <testCase name="test DeductionEntryForm component validate the category change case" duration="202"/>
+    <testCase name="test DeductionEntryForm component validate the no max limit entry case" duration="300"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\rent\RentEntryForm.test.tsx">
+    <testCase name="test RentEntryForm component render the RentEntryForm component with valid entry and update the amount" duration="1555"/>
+    <testCase name="test RentEntryForm component validate with new rent entry case and cancel functionality" duration="354"/>
+    <testCase name="test RentEntryForm component validate edit rent Entry with no amount" duration="371"/>
+    <testCase name="test RentEntryForm component validate edit rent Entry with no duration" duration="436"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\income-details\IncomeDetails.test.tsx">
+    <testCase name="test BreakdownComponent component render the breakdown component with default content and check edit delete function" duration="876"/>
+    <testCase name="test IncomeBreakdown component render the ui with default content" duration="311"/>
+    <testCase name="test IncomeEditModal component render the modal with default content and edit functionality" duration="434"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\section24\Section24.test.tsx">
+    <testCase name="Section24 Component should render the exemption amount and input field" duration="373"/>
+    <testCase name="Section24 Component should show an error message for invalid input" duration="244"/>
+    <testCase name="Section24 Component should clear the input when the cancel icon is clicked" duration="342"/>
+    <testCase name="Section24 Component should dispatch updateSection24Deduction on save button click" duration="301"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\chapter-vi\ChapterVI.test.tsx">
+    <testCase name="test ChapterVI component render the ChapterVI component with default content" duration="317"/>
+    <testCase name="test ChapterVI component editable mode entry form actions" duration="752"/>
+    <testCase name="test ChapterVI component adding new deduction mode" duration="390"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\80C\Deduction80C.test.tsx">
+    <testCase name="test Deduction80C component render the Deduction80C component with default content" duration="166"/>
+    <testCase name="test Deduction80C component editable mode entry form actions" duration="153"/>
+    <testCase name="test Deduction80C component adding new deduction mode" duration="262"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\menu\Menu.test.tsx">
+    <testCase name="test Menu Component render menu button and click to get all the options" duration="948"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\app-theme\AppTheme.test.tsx">
+    <testCase name="test AppTheme Component render the theme button with light theme and toggle it" duration="381"/>
+    <testCase name="test AppTheme Component render the theme button with dark theme" duration="153"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\modal\Modal.test.tsx">
+    <testCase name="test Modal component render the modal with default content and close functionality" duration="172"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\breadcrumb-link\BreadcrumbLink.test.tsx">
+    <testCase name="Test BreadcrumbLink component render breadcrumb with default home config" duration="108"/>
+    <testCase name="Test BreadcrumbLink component render breadcrumb with parentPath" duration="53"/>
+    <testCase name="Test BreadcrumbLink component render breadcrumb with homeIcon" duration="33"/>
+    <testCase name="Test BreadcrumbLink component handles empty pathname (no breadcrumb)" duration="47"/>
+    <testCase name="Test BreadcrumbLink component handles single pathname (no breadcrumb)" duration="9"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\pages\landing\Landing.test.tsx">
+    <testCase name="Landing component render the landing page with default content" duration="311"/>
+    <testCase name="Landing component validate no tax scenario" duration="140"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\pages\deduction-page\DeductionPage.test.tsx">
+    <testCase name="DeductionPage Component render the header with expected overall amount" duration="20"/>
+    <testCase name="DeductionOption Component render the deduction options with label" duration="245"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\pages\income-page\IncomePage.test.tsx">
+    <testCase name="test IncomePage component render the page with default content and click the add income" duration="78"/>
+    <testCase name="test IncomePage component render the page with Add Income Modal Open" duration="130"/>
+    <testCase name="test IncomePage component render the page with Edit Income Modal Open" duration="81"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\navigation\Navigation.test.tsx">
+    <testCase name="NavigationDesktop Component render all navigation options with text in desktop mode" duration="92"/>
+    <testCase name="NavigationMobile Component render all navigation options and also check the close slider" duration="152"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\select\Select.test.tsx">
+    <testCase name="Select Component should render the label and children options correctly" duration="164"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\rent\AddRentEntry.test.tsx">
+    <testCase name="test AddRentEntry component render the AddRentEntry component with default content" duration="51"/>
+    <testCase name="test AddRentEntry component show the default message for no basic hra case" duration="10"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-entry\DeductionEntry.test.tsx">
+    <testCase name="test DeductionEntry component render the DeductionEntry component with default content and action icons" duration="67"/>
+    <testCase name="test AddDeductionEntry component render the AddDeductionEntry component with default content and action icons" duration="81"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\store.test.ts">
+    <testCase name="Redux Store should create a store with the correct rootReducer" duration="8"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\App.test.tsx">
+    <testCase name="App component should render the TaxCalculator and apply the correct theme" duration="31"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\route-layout\RouteLayout.test.tsx">
+    <testCase name="test AddIncome component render component with valid label" duration="33"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\layout\DataLayout.test.tsx">
+    <testCase name="test DataLayout component render the header text and aggregate amount" duration="35"/>
+    <testCase name="test DataLayout component render for no aggregate  amount" duration="10"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-regime-breakup\TaxRegimeBreakup.test.tsx">
+    <testCase name="test TaxRegimeBreakup Component render the tax regime details with best choice alert" duration="33"/>
+    <testCase name="test TaxRegimeBreakup Component render the tax regime details without best choice alert" duration="46"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\screen-reducer.test.ts">
+    <testCase name="ScreenReducer should return the initial state by default" duration="37"/>
+    <testCase name="ScreenReducer should handle UPDATE_MEDIA_TYPE action" duration="1"/>
+    <testCase name="ScreenReducer should handle TOGGLE_THEME action when theme is light" duration="1"/>
+    <testCase name="ScreenReducer should handle TOGGLE_THEME action when theme is dark" duration="1"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\hooks\test\useTaxCalculation.test.ts">
+    <testCase name="useTaxCalculation should calculate tax and dispatch updateTaxDetails" duration="90"/>
+    <testCase name="useTaxCalculation should recalculate tax and dispatch when dependencies change" duration="8"/>
+    <testCase name="useTaxCalculation should not dispatch if taxBreakup is the same" duration="4"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\utils\test\tax-calculation-utils.test.ts">
+    <testCase name="test tax Calculation utils calculateByNewTaxSlab should return 0 for taxable amount &lt;= 700000" duration="3"/>
+    <testCase name="test tax Calculation utils calculateByNewTaxSlab should calculate tax correctly for taxable amount between 700001 and 1000000" duration="2"/>
+    <testCase name="test tax Calculation utils calculateByNewTaxSlab should calculate tax correctly for taxable amount between 1000001 and 1200000" duration="1"/>
+    <testCase name="test tax Calculation utils calculateByNewTaxSlab should calculate tax correctly for taxable amount between 1200001 and 1500000" duration="3"/>
+    <testCase name="test tax Calculation utils calculateByNewTaxSlab should calculate tax correctly for taxable amount above 1500000" duration="4"/>
+    <testCase name="test tax Calculation utils calculateByOldTaxSlab should return 0 for taxable amount &lt;= 500000" duration="2"/>
+    <testCase name="test tax Calculation utils calculateByOldTaxSlab should calculate tax correctly for taxable amount between 500001 and 1000000" duration="2"/>
+    <testCase name="test tax Calculation utils calculateByOldTaxSlab should calculate tax correctly for taxable amount above 1000000" duration="1"/>
+    <testCase name="test tax Calculation utils calculateIncomeTax should calculate income tax correctly using new tax slab" duration="2"/>
+    <testCase name="test tax Calculation utils calculateIncomeTax should calculate income tax correctly using old tax slab" duration="2"/>
+    <testCase name="test tax Calculation utils calculateIncomeTax should return taxableAmount as 0 if taxable amount is negative" duration="1"/>
+    <testCase name="test tax Calculation utils calculateIncomeTax should calculate the deducted amount correctly" duration="1"/>
+    <testCase name="test tax Calculation utils formatNumber" duration="3"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should return the HRA if it is the smallest of the three amounts" duration="1"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should return the ruleByRent when it is the smallest amount" duration="1"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should return the ruleByBasic when it is the smallest amount" duration="1"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should return 0 if all calculated values are negative or 0" duration="1"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should return 0 if the comparative amount is negative" duration="1"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should handle metro city limit calculation correctly" duration="0"/>
+    <testCase name="test tax Calculation utils calculateRentDeduction should handle non-metro city limit calculation correctly" duration="0"/>
+    <testCase name="test tax Calculation utils calculateTax should correctly calculate the tax breakup for new and old schemes" duration="2"/>
+    <testCase name="test tax Calculation utils calculateTax should return the old scheme if it results in lower tax amount" duration="2"/>
+    <testCase name="test tax Calculation utils calculateTax handle zero deduction case should handle edge case where all deducted amounts are zero" duration="16"/>
+    <testCase name="test tax Calculation utils calculateTax handle zero deduction case should return 0 when taxable amount is zero" duration="2"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\pages\tax-breakup-page\TaxBreakupPage.test.tsx">
+    <testCase name="test TaxBreakupPage component render the page and match the header message" duration="53"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\header\Header.test.tsx">
+    <testCase name="test Header Component render header UI for desktop" duration="30"/>
+    <testCase name="test Header Component render header UI for mobile" duration="24"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\footer\Footer.test.tsx">
+    <testCase name="Footer Component render footer content UI" duration="41"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\utils\test\income-utils.test.ts">
+    <testCase name="test Income utils validate calculateOverallAmount with valid income data" duration="3"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\selector.test.ts">
+    <testCase name="test selectors Tax selectors" duration="3"/>
+    <testCase name="test selectors Screen selectors" duration="31"/>
+    <testCase name="test selectors Income selectors" duration="8"/>
+    <testCase name="test selectors Deduction selectors" duration="11"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\pages\income-tax-calculator\TaxCalculator.test.tsx">
+    <testCase name="TaxCalculator renders Header, TaxSection, and Footer" duration="14"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\tax-deduction\deduction-option\rent\Rent.test.tsx">
+    <testCase name="Rent component renders the Rent component with default content" duration="108"/>
+    <testCase name="Rent component renders the Rent component with different editable entry" duration="42"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\components\common\switch\Switch.test.tsx">
+    <testCase name="Switch Component render the switch component with default props" duration="133"/>
+    <testCase name="Switch Component validate the checked case" duration="47"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\hooks\test\useMediaQuery.test.ts">
+    <testCase name="useMediaQuery hook should dispatch correct action on media query match for TABLET" duration="16"/>
+    <testCase name="useMediaQuery hook should dispatch correct action on media query match for DESKTOP" duration="4"/>
+    <testCase name="useMediaQuery hook should dispatch correct action on media query match for MOBILE" duration="8"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\utils\test\deduction-utils.test.ts">
+    <testCase name="test deduction utils validate getDeductedAmount for no maxLimit options" duration="65"/>
+    <testCase name="test deduction utils validate getDeductedAmount for maxLimit options" duration="2"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\hooks\test\useRentExemption.test.ts">
+    <testCase name="useRentExemption should calculate and dispatch the rent exemption correctly" duration="13"/>
+    <testCase name="useRentExemption should handle case when rent exemption is greater than HRA" duration="29"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\tax-reducer.test.ts">
+    <testCase name="TaxReducer should return the initial state when an unknown action type is passed" duration="6"/>
+    <testCase name="TaxReducer should update the state with the payload when the action type is UPDATE_TAX_DETAILS" duration="2"/>
+    <testCase name="TaxReducer should not modify the state when an invalid action type is provided" duration="1"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\income-reducer.test.ts">
+    <testCase name="Income Reducer should return the initial state when an unknown action type is passed" duration="5"/>
+    <testCase name="Income Reducer should handle EDIT_INCOME_ENTRY" duration="1"/>
+    <testCase name="Income Reducer For creating new entry by handle EDIT_INCOME_ENTRY" duration="2"/>
+    <testCase name="Income Reducer should handle RESET_EDIT_INCOME_ENTRY" duration="2"/>
+    <testCase name="Income Reducer should handle SAVE_INCOME_DETAILS" duration="4"/>
+    <testCase name="Income Reducer should handle SAVE_INCOME_DETAILS for edit case" duration="3"/>
+    <testCase name="Income Reducer should handle DELETE_INCOME_DETAILS" duration="2"/>
+    <testCase name="Income Reducer should handle DELETE_INCOME_DETAILS for not existing id" duration="1"/>
+  </file>
+  <file path="E:\REACT PROJECT\income-tax-calculator\src\store\test\deduction-reducer.test.ts">
+    <testCase name="Deduction Reducer should return the initial state when an unknown action type is passed" duration="2"/>
+    <testCase name="Deduction Reducer should handle EDIT_RENT_ENTRY" duration="3"/>
+    <testCase name="Deduction Reducer should handle SAVE_RENT_ENTRY" duration="6"/>
+    <testCase name="Deduction Reducer should handle DELETE_RENT_ENTRY" duration="2"/>
+    <testCase name="Deduction Reducer should handle RESET_EDIT_RENT_ENTRY" duration="6"/>
+    <testCase name="Deduction Reducer should handle UPDATE_SECTION_24_DEDUCTION" duration="1"/>
+    <testCase name="Deduction Reducer should handle UPDATE_SECTION_24_DEDUCTION within limit" duration="1"/>
+    <testCase name="Deduction Reducer should handle SET_RENT_DEDUCTED_AMOUNT" duration="6"/>
+    <testCase name="Deduction Reducer should handle EDIT_80C_ENTRY" duration="3"/>
+    <testCase name="Deduction Reducer should handle RESET_EDIT_80C_ENTRY" duration="5"/>
+    <testCase name="Deduction Reducer should handle SAVE_80C_ENTRY" duration="3"/>
+    <testCase name="Deduction Reducer should handle DELETE_80C_ENTRY" duration="2"/>
+    <testCase name="Deduction Reducer should handle EDIT_CHAPTER_VI_ENTRY" duration="2"/>
+    <testCase name="Deduction Reducer should handle RESET_EDIT_CHAPTER_VI_ENTRY" duration="1"/>
+    <testCase name="Deduction Reducer should handle SAVE_CHAPTER_VI_ENTRY" duration="2"/>
+    <testCase name="Deduction Reducer should handle DELETE_CHAPTER_VI_ENTRY" duration="1"/>
+  </file>
+</testExecutions>
