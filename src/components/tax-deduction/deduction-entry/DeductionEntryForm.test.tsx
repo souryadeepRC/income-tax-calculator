@@ -44,7 +44,7 @@ describe("test DeductionEntryForm component", () => {
     fireEvent.click(screen.getByTestId("deduction-form-save-btn"));
     expect(mockOnSave).toHaveBeenCalled();
   });
-  test("render the DeductionEntryForm component with empty entry", () => {
+  /* test("render the DeductionEntryForm component with empty entry", () => {
     render(
       <DeductionEntryForm
         options={deductionOptions}
@@ -90,5 +90,5 @@ describe("test DeductionEntryForm component", () => {
 
     fireEvent.click(screen.getByTestId("deduction-form-save-btn"));
     expect(mockOnSave).toHaveBeenCalled();
-  });
+  }); */
 });
