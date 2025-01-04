@@ -3,7 +3,7 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - feature/code-optimization
+      - develop
   pull_request:
     branches:
       - develop
@@ -29,9 +29,10 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Run tests
+      - name: Checking Code Quality
+        run: npm run quality
+      - name: Run test coverage
         run: npm test
-
       - name: Run SonarQube Scanner
         run: |
           npm install -g sonar-scanner
@@ -41,6 +42,4 @@ jobs:
             -Dsonar.organization=souryadeeprc \
             -Dsonar.branch.name=develop \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov-report/index.html \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
