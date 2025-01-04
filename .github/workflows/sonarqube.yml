@@ -3,7 +3,7 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - feature/code-optimization
+      - develop
   pull_request:
     branches:
       - develop
