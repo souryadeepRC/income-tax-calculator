@@ -59,7 +59,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   );
   const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
 
-  const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const modifiedLabel: string = event.target.value;
     setIncomeDetails(updateState("label", modifiedLabel));
     setErrors(
