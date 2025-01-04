@@ -20,6 +20,8 @@ import { TextField } from "src/components/common/CommonComponents";
 import { saveIncomeDetails } from "src/store/income/income-actions";
 // utils
 import { updateState } from "src/utils/common-utils";
+// types
+import { AppDispatch } from "src/types/store-types";
 // constants
 import { NUMERIC_REGEX } from "src/constants/common-constants";
 // styles
@@ -50,7 +52,7 @@ interface AddIncomeProps {
   onCancel: () => void;
 }
 const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
     INITIAL_INCOME_DETAILS
