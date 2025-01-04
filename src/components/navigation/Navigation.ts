@@ -10,10 +10,13 @@ import NavigationMobile from "src/components/navigation/NavigationMobile";
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 
+type CustomSvgIcon = OverridableComponent<SvgIconTypeMap> & {
+  muiName?: string;
+};
 interface NavigationType {
   label: string;
   path: string;
-  Icon: OverridableComponent<SvgIconTypeMap> & { muiName: string };
+  Icon: CustomSvgIcon;
 }
 
 const NAVIGATION_LIST: NavigationType[] = [
