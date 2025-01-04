@@ -1,17 +1,10 @@
-name: Codacy Static Code Analysis
+name: Build workflow
 
 on:
-  push:
-    branches: ["develop"]
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: ["develop"]
-
-permissions:
-  contents: read
 jobs:
-  codacy-static-analysis:
-    name: Codacy Static Code Analysis
+  build:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -29,8 +22,6 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Check linting and formatting
-        run: npm run quality
       - name: Test Code coverage
         run: npm run test
       - name: Upload coverage report to Codacy
@@ -38,10 +29,9 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: "coverage/clover.xml"
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@97bf5df3c09e75f5bcd72695998f96ebd701846e
+      - name: Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@v4.4.5
         with:
-          tool: eslint
+          tool: ESLint
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           upload: true
-          max-allowed-issues: 2147483647
