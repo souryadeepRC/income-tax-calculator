@@ -4,7 +4,7 @@ import { rootReducer } from "./root-reducer";
 
 const rootStore = configureStore({
   reducer: rootReducer,
-  devTools: process.env.ENVIRONMENT !== "production",
+  devTools: import.meta.env.ENVIRONMENT !== "production",
 });
 
 export { rootStore };
