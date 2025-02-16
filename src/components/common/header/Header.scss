@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@use "src/styles/variables.scss";
 
 .header__container {
   @include flexBox($justifyContent: flex-start, $alignItems: center);

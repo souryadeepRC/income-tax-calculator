@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@use "src/styles/variables.scss";
 .data_layout__container {
   display: grid;
   grid-template-rows: auto 1fr;

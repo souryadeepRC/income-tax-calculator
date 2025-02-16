@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@use "src/styles/variables.scss";
 .navigation-list {
   box-shadow: inset 8px 6px 7px #72240c42;
   display: flex;

@@ -1,4 +1,4 @@
-@import "src/styles/variables.scss";
+@use "src/styles/variables.scss";
 .deduction_entry__container {
   display: flex;
   gap: 5px;

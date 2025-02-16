@@ -1,5 +1,5 @@
-@import "src/styles/light-theme-variables.scss";
-@import "src/styles/dark-theme-variables.scss";
+@use "src/styles/light-theme-variables.scss";
+@use "src/styles/dark-theme-variables.scss";
 // Theme variables for light theme
 :root {
   --primary-bg-color: #{$primary-bg-color-light};

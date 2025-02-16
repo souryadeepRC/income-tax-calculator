@@ -1,5 +1,5 @@
-@import "src/styles/theme-variables.scss";
-@import "src/styles/mixins.scss";
+@use "src/styles/theme-variables.scss";
+@use "src/styles/mixins.scss";
 // Font Family
 $primary-font-family: "Tahoma";
 // Font Size
