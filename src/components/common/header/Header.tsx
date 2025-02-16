@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-// components
-import { AppTheme } from "src/components/common/CommonComponents";
+import { ThemeSwitch } from "react-web-theme";
 import {
   NavigationMobile,
   NavigationDesktop,
@@ -18,7 +17,7 @@ const Header: React.FC = () => {
       <span className="header__text">TAX CALCULATOR</span>
       {!isMobile && <NavigationDesktop />}
       <div className="header__theme">
-        <AppTheme />
+        <ThemeSwitch />
       </div>
     </header>
   );
