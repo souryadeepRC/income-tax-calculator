@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   return (
     <header className="header__container">
       {isMobile && <NavigationMobile />}
-      <span className="header__text">Tax Calculator</span>
+      <span className="header__text">TAX CALCULATOR</span>
       {!isMobile && <NavigationDesktop />}
       <div className="header__theme">
         <AppTheme />

@@ -26,7 +26,7 @@ const NavigationMobile: React.FC = () => {
       {isOpen && (
         <section className="navigation__slider">
           <header>
-            <span>Tax Calculator</span>
+            <span>TAX CALCULATOR</span>
             <IconButton onClick={handleSlider} size="small">
               <CloseIcon
                 data-testid="navigation-menu-close-btn"

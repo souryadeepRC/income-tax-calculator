@@ -1,18 +1,15 @@
 .navigation-list {
-  box-shadow: inset 8px 6px 7px #72240c42;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 2vw;
   width: 60vw;
   margin: 0;
   padding: 0.5vw 0;
-  background: var(--primary-bg-color);
-  border-radius: 50px;
   list-style-type: none;
   li > a {
     color: var(--navigation-link-color);
     text-decoration: none;
-    font-size: 1vw;
+    font-size: 0.7rem;
     font-weight: 500;
     div {
       display: flex;
@@ -21,7 +18,7 @@
       gap: 8px;
     }
     .MuiSvgIcon-root {
-      font-size: 1vw;
+      font-size: 0.7rem;
     }
     &.active {
       color: var(--navigation-active-color);
@@ -31,29 +28,33 @@
 .navigation_mobile__container {
   .navigation_mobile__icon {
     &.MuiSvgIcon-root {
-      color: var(--secondary-font-color);
+      color: var(--navigation-link-color);
     }
   }
   .navigation__slider {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: var(--primary-color);
-    color: var(--secondary-font-color);
+    background-color: $header-bg-color;
+    color: var(--navigation-link-color);
     height: 100%;
-    width: 50%;
+    width: 90%;
     z-index: 3;
-    box-shadow: 14px 3px 20px 0px var(--secondary-color);
+    box-shadow: 14px 3px 20px 0px var(--navigation-link-color);
     animation: slideIn 0.5s ease-in-out;
     font-size: 12px;
+    font-weight: 900;
+    .MuiSvgIcon-root{
+      color: var(--navigation-link-color);
+    }
     header {
       padding: 14px;
-      border-bottom: 1vw solid var(--secondary-color);
+      border-bottom: 1vw solid var(--navigation-link-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
       .MuiSvgIcon-root {
-        fill: var(--secondary-font-color);
+        fill: var(--navigation-link-color);
       }
     }
     ul {
@@ -71,10 +72,10 @@
           width: 90%;
           border-radius: 10px;
           display: block;
-          color: var(--secondary-font-color);
+          color: var(--navigation-link-color);
           &.active {
             background-color: var(--primary-bg-color);
-            color: var(--primary-font-color);
+            color: var(--navigation-link-active-color);
           }
           div {
             padding: 10px;
@@ -94,10 +95,10 @@
     width: 0;
   }
   50% {
-    width: 65%;
+    width: 95%;
   }
   100% {
-    width: 60%;
+    width: 90%;
   }
 }
 @media screen and (max-width: $mobile-max-width) {
