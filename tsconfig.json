@@ -18,6 +18,6 @@
     "strictNullChecks": true,
     "baseUrl": "."
   },
-  "include": ["react-app-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["react-app-env.d.ts", "**/*.ts", "**/*.tsx", "setupTests.ts"],
   "exclude": ["node_modules"]
 }
