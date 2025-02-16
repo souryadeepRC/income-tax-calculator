@@ -1,7 +1,8 @@
-@use "src/styles/variables.scss";
-
 .header__container {
-  @include flexBox($justifyContent: flex-start, $alignItems: center);
+  //// @include flexBox($justifyContent: flex-start, $alignItems: center);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   box-sizing: border-box;
   padding: 1.2vh 0;
   background-color: var(--primary-color);

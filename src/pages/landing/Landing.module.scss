@@ -1,5 +1,3 @@
-@use "src/styles/variables.scss";
-
 .page__container {
   display: flex;
   width: 100%;
@@ -38,7 +36,7 @@
       padding: 1vw;
       border: 1.5vw solid #d4994373;
       border-radius: 2vw;
-      @include infinite-scale(1.05, 2s, ease-in-out);
+      // @include infinite-scale(1.05, 2s, ease-in-out);
       .label {
         display: block;
         max-width: 20vw;
