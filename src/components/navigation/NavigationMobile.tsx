@@ -1,11 +1,9 @@
 import { useState } from "react";
 // library
-import { NavLink } from "react-router";
 import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import WidgetsIcon from "@mui/icons-material/Widgets";
+import { Close as CloseIcon, Widgets } from "@mui/icons-material";
 // constants
-import { NAVIGATION_LIST, NavigationType } from "./Navigation";
+import { Navigation } from "./Navigation";
 // styles
 import "./Navigation.scss";
 
@@ -17,7 +15,7 @@ const NavigationMobile: React.FC = () => {
   return (
     <main className="navigation_mobile__container">
       <IconButton size="small" onClick={handleSlider}>
-        <WidgetsIcon
+        <Widgets
           data-testid="navigation-menu-btn"
           className="navigation_mobile__icon"
           fontSize="small"
@@ -34,18 +32,7 @@ const NavigationMobile: React.FC = () => {
               />
             </IconButton>
           </header>
-          <ul>
-            {NAVIGATION_LIST.map(({ label, Icon, path }: NavigationType) => (
-              <li key={label}>
-                <NavLink to={path} onClick={handleSlider}>
-                  <div>
-                    <Icon fontSize="small" />
-                    <span>{label}</span>
-                  </div>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          <Navigation handleSlider={handleSlider} />
         </section>
       )}
     </main>

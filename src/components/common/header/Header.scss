@@ -3,32 +3,44 @@
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
+  width: 100%;
   padding: 1.2vh 0;
   background-color: $header-bg-color;
+  text-align: center;
   .header__text {
     width: 20%;
-    text-align: center;
+    font-size: 1.2rem;
     font-weight: bold;
     color: var(--navigation-link-color);
-    font-weight: 900;
-    font-size: 0.8rem;
   }
   .header__theme {
-    width: 20%;
-    text-align: center;
+    width: 10%;
+    .theme_switch__root {
+      width: 50px;
+      height: 20px;
+      .theme_switch__thumb {
+        position: relative;
+        top: 3px;
+        width: 15px;
+        height: 15px;
+      }
+      .theme_switch__checked .theme_switch__thumb {
+        top: 1px;
+      }
+    }
   }
 }
 
 @media screen and (max-width: $mobile-max-width) {
   .header__container {
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 5px 10px;
     .header__text {
-      width: 30%;
+      width: 50%;
       font-size: $font-size-mobile-primary;
     }
     .header__theme {
-      width: 30%;
+      width: fit-content;
     }
   }
 }

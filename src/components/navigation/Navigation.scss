@@ -1,24 +1,21 @@
 .navigation-list {
   display: flex;
   justify-content: flex-end;
-  gap: 2vw;
-  width: 60vw;
+  gap: 20px;
+  width: 70%;
   margin: 0;
   padding: 0.5vw 0;
   list-style-type: none;
   li > a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+    font-weight: 500;
     color: var(--navigation-link-color);
     text-decoration: none;
-    font-size: 0.7rem;
-    font-weight: 500;
-    div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
     .MuiSvgIcon-root {
-      font-size: 0.7rem;
+      font-size: inherit;
     }
     &.active {
       color: var(--navigation-active-color);
@@ -26,64 +23,61 @@
   }
 }
 .navigation_mobile__container {
-  .navigation_mobile__icon {
-    &.MuiSvgIcon-root {
-      color: var(--navigation-link-color);
-    }
+  .navigation_mobile__icon.MuiSvgIcon-root {
+    color: var(--navigation-link-color);
   }
   .navigation__slider {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: $header-bg-color;
-    color: var(--navigation-link-color);
-    height: 100%;
-    width: 90%;
-    z-index: 3;
     box-shadow: 14px 3px 20px 0px var(--navigation-link-color);
-    animation: slideIn 0.5s ease-in-out;
-    font-size: 12px;
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    animation: slideIn 1s ease-in-out;
+    background-color: $header-bg-color;
+    font-size: 16px;
     font-weight: 900;
-    .MuiSvgIcon-root{
-      color: var(--navigation-link-color);
-    }
+    color: var(--navigation-link-color);
     header {
-      padding: 14px;
-      border-bottom: 1vw solid var(--navigation-link-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 14px;
+      border-bottom: 5px solid var(--navigation-link-color);
       .MuiSvgIcon-root {
         fill: var(--navigation-link-color);
       }
     }
     ul {
-      list-style-type: none;
-      padding: 14px 0;
-      gap: 10px;
-      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      gap: 10px;
+      margin: 0;
+      padding: 14px;
+      list-style-type: none;
       li {
         width: 100%;
         padding: 0 0 0 15px;
         a {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+          overflow: hidden;
           width: 90%;
+          padding: 10px;
+          animation: slideLinks 0.2s ease-in-out;
           border-radius: 10px;
-          display: block;
+          font-size: 14px;
           color: var(--navigation-link-color);
           &.active {
-            background-color: var(--primary-bg-color);
-            color: var(--navigation-link-active-color);
+            box-shadow: inset 1px 2px 5px var(--navigation-link-color);
+            color: var(--navigation-active-color);
           }
-          div {
-            padding: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 5px;
+          .MuiSvgIcon-root {
+            font-size: inherit;
           }
         }
       }
@@ -95,20 +89,24 @@
     width: 0;
   }
   50% {
-    width: 95%;
+    width: 92%;
   }
   100% {
     width: 90%;
   }
 }
-@media screen and (max-width: $mobile-max-width) {
-  .navigation-list {
-    gap: 8px;
-    width: 40%;
-    li > a {
-      .MuiSvgIcon-root {
-        font-size: 14px;
-      }
-    }
+
+@keyframes slideLinks {
+  0% {
+    width: 0;
+    font-size: 1px;
+  }
+  50% {
+    width: 50%;
+    font-size: 8px;
+  }
+  100% {
+    width: 90%;
+    font-size: 14px;
   }
 }
