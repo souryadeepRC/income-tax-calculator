@@ -9,10 +9,11 @@ import TaxBreakupPage from "src/pages/tax-breakup-page/TaxBreakupPage";
 import DeductionPage from "src/pages/deduction-page/DeductionPage";
 import Landing from "src/pages/landing/Landing";
 import DeductionOption from "src/pages/deduction-page/DeductionOption";
+import Home from "src/pages/landing/home/Home";
 
 export const AppRoutes: React.FC = () => (
   <Routes>
-    <Route path="" element={<Landing />} />
+    <Route path="" element={<Home />} />
     <Route path="income" element={<IncomePage />} />
     <Route path="deduction" element={<DeductionPage />}>
       <Route index element={<DeductionOption />} />

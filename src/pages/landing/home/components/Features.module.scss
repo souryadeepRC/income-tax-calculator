@@ -1,0 +1,63 @@
+.features__container {
+  padding: 20px 20px 40px;
+  background-color: var(--primary-color);
+  text-align: center;
+  > h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    animation: fadeIn 1.5s ease-in-out;
+  }
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  animation: fadeIn 2s ease-in-out;
+  .feature__option {
+    background-color: $color-white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px $card-shadow;
+    padding: 30px;
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: translateY(-10px);
+    }
+    div {
+      font-size: 1.5rem;
+      color: $app-secondary-color;
+      text-transform: uppercase;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $color-black;
+    }
+
+    p {
+      font-size: 1rem;
+      color: rgba($color-black, 0.5);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
