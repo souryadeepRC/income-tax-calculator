@@ -1,11 +1,6 @@
 .tax-section {
-  height: calc(100% - 46px - 37px);
+  width: 100vw;
   background-color: var(--primary-bg-color);
+  padding: 46px 0 10px 0;
   overflow: auto;
-}
-@media screen and (max-width: $mobile-max-width) {
-  .tax-section {
-    height: calc(100% - 41px - 34px);
-    padding: 0 0 10px 0;
-  }
 }
