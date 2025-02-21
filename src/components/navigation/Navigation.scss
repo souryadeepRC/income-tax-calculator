@@ -11,8 +11,8 @@
     align-items: center;
     gap: 5px;
     font-size: 1rem;
-    font-weight: 500;
-    color: var(--navigation-link-color);
+    font-weight: 500; 
+    color: var(--secondary-color);
     text-decoration: none;
     .MuiSvgIcon-root {
       font-size: inherit;
@@ -24,7 +24,7 @@
 }
 .navigation_mobile__container {
   .navigation_mobile__icon.MuiSvgIcon-root {
-    color: var(--navigation-link-color);
+    color: var(--secondary-color);
   }
   .navigation__slider {
     box-shadow: 14px 3px 20px 0px var(--navigation-link-color);
