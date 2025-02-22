@@ -1,7 +1,6 @@
 .btn {
   &.MuiButton-root {
     position: relative;
-    z-index: 1;
     width: 85%;
     padding: 1vw;
     transition: all 0.3s;
@@ -13,7 +12,6 @@
     &:after {
       content: "";
       position: absolute;
-      z-index: -2;
       bottom: 0;
       left: 0;
       width: 100%;
@@ -23,7 +21,6 @@
     &:before {
       content: "";
       position: absolute;
-      z-index: -1;
       bottom: 0;
       left: 0;
       width: 0%;
