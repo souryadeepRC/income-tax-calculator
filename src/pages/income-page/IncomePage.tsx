@@ -1,11 +1,11 @@
 import { memo } from "react";
 // library
-import { Button, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 // icons
 import AddCardIcon from "@mui/icons-material/AddCard";
 // components
-import { Modal } from "src/components/common/CommonComponents";
+import { Modal, Button } from "src/components/common/CommonComponents";
 import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
 import AddIncome from "src/components/add-income/AddIncome";
 import IncomeEditModal from "src/components/income-details/IncomeEditModal";
@@ -50,8 +50,9 @@ const IncomePage: React.FC = () => {
           </Box>
           <Button
             variant="contained"
+            border="round"
             startIcon={<AddCardIcon />}
-            data-testid="add-income-btn"
+            label="add-income"
             onClick={() => dispatch(editIncomeEntry())}
           >
             Add Income
