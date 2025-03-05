@@ -1,0 +1,43 @@
+.TUIText_field__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+}
+
+.TUIText_field__container label {
+  font-size: 1rem;
+}
+
+.TUIText_field__container input {
+  outline: none;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border: 0;
+  border-bottom: 1px solid #0000009e;
+  box-shadow: 5px 3px 12px 1px #808080a3;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: border 0.5s ease-in-out;
+}
+
+.TUIText_field__container .helper__text {
+  font-size: 0.7rem;
+  color: gray;
+}
+
+.TUIText_field__container .error__msg {
+  font-size: 0.7rem;
+  color: #d32f2f;
+}
+
+.TUIText_field__container.TUIText__error input {
+  border-color: #d32f2f;
+  border-left: 20px solid #d32f2f;
+}
+
+.TUIText_field__container.TUIText__fullWidth input {
+  width: 100%;
+}

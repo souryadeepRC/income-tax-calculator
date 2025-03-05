@@ -12,7 +12,7 @@ interface CustomButtonProps {
   startIcon?: SvgIconProps;
   border?: ButtonBorder;
   endIcon?: SvgIconProps;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 const Button: React.FC<CustomButtonProps> = (props) => {
   const {
@@ -27,13 +27,17 @@ const Button: React.FC<CustomButtonProps> = (props) => {
     variant,
   } = props;
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    onClick?.(event);
+  };
   return (
     <button
       tabIndex={tabIndex}
       aria-label={label}
       data-testid={`${label}-btn`}
       className={`Button-root ${variant || ""} ${border || ""} ${className || ""}`}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {StartIcon && <>{StartIcon}</>}
       {children}

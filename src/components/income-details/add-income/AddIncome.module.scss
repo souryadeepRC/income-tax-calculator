@@ -10,30 +10,21 @@
   padding: 3vw;
   .income_group__select {
     gap: 8px;
-    label {
-      padding: 0 10px;
-      font-weight: 500;
-      font-size: 1.2vw;
-      color: var(--primary-font-color);
-    }
+
     &:global(.MuiFormControl-root) {
       :global(.MuiInputLabel-root) {
         color: var(--primary-font-color);
       }
       :global(.MuiInputBase-root) {
-        color: var(--primary-font-color);
-        font-size: 1vw;
-        padding: 1vw;
+        font-family: inherit;
+        padding: 10px 20px;
         :global(.MuiSelect-select) {
           padding: 0;
         }
-        :global(.MuiSvgIcon-root) {
-          fill: var(--navigation-active-color);
-          font-size: 2vw;
-        }
+
         :global(.MuiOutlinedInput-notchedOutline) {
-          border-color: var(--navigation-active-color);
-          border-radius: 2vw;
+          border: none;
+          box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
         }
       }
     }
@@ -43,30 +34,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 0.5vw;
+    gap: 5px;
     width: 100%;
-    padding: 1vw 0 0 0;
-    :global(.MuiButton-root) {
-      width: 35%;
-      font-size: 1.2vw;
-      font-weight: bold;
-      padding: 0.5vw;
-      text-transform: capitalize;
-      border-radius: 1vw;
-      :global(.MuiSvgIcon-root) {
-        font-size: 1.2vw;
-      }
-    }
-    .action_btn__submit {
-      background-color: var(--primary-color);
-      color: var(--secondary-font-color);
-    }
-    .action_btn__clear {
-      width: 10%;
-      background-color: var(--primary-bg-color);
-      color: var(--primary-font-color);
-      border-color: var(--primary-bg-color);
-    }
+    padding: 10px 0 0 0;
   }
 }
 @media (max-width: $mobile-max-width) {

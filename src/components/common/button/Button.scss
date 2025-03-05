@@ -8,10 +8,8 @@
   color: var(--secondary-color);
   padding: 5px 10px;
   cursor: pointer;
-  transition: filter 0.2s ease-out;
-  &:hover {
-    filter: brightness(0.8);
-  }
+  transition: box-shadow 0.2s ease-out;
+
   &.text {
     transition: box-shadow 0.2s ease-out;
     &:hover {
@@ -21,7 +19,10 @@
   &.contained {
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    box-shadow: 2px 2px 5px 1px rgba($card-shadow, 0.5);
+    box-shadow: 4px 2px 12px 1px rgba($card-shadow, 0.5);
+    &:hover {
+      box-shadow: 9px 5px 12px 1px rgba($card-shadow, 0.5);
+    }
   }
   &.outlined {
     background-color: var(--primary-color);
