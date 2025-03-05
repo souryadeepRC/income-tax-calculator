@@ -62,7 +62,7 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = () => {
         data={incomeOptions}
         emptyRecords={"No Income option added"}
         showPagination
-        pagination={{ pageSize: 4 }}
+        pagination={{ pageSize: 10 }}
       />
     </div>
   );

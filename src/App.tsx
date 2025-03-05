@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 // library
 import { useAppTheme } from "react-web-theme";
@@ -16,6 +17,13 @@ import "./App.scss";
 const App: React.FC = () => {
   const appTheme = useAppTheme();
   useMediaQuery();
+  useEffect(() => {
+    if (appTheme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [appTheme]);
   return (
     <BrowserRouter>
       <div data-testid="app-container" data-theme={appTheme}>

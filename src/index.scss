@@ -6,10 +6,12 @@ body {
   height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  background-color: #f5f9f8;
 }
-#root {
-  /* overflow: auto; */
+.dark {
+  background-color: #15251e;
 }
+
 a {
   text-decoration: none;
 }
