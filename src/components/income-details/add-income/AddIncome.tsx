@@ -15,7 +15,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DataSaverOnIcon from "@mui/icons-material/DataSaverOn";
 // components
-import { TextField } from "src/components/common/CommonComponents";
+import { Modal, TextField } from "src/components/common/CommonComponents";
 // actions
 import { saveIncomeDetails } from "src/store/income/income-actions";
 // utils
@@ -98,95 +98,97 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
 
   const { label, amount, category } = incomeDetails;
   return (
-    <form className={classes.add_income__form}>
-      <TextField
-        label="Income Category"
-        id="add-income-form-label"
-        fullWidth
-        inputProps={{ "data-testid": "add-income-form-label-input" }}
-        value={label}
-        onChange={onLabelChange}
-        error={errors.label}
-        helperText={errors.label && FORM_ERROR_MESSAGE.label}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <LabelIcon fontSize="small" />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="start">
-              {label && (
-                <CancelIcon
-                  data-testid="clear-label-btn"
-                  onClick={onLabelClear}
-                  fontSize="small"
-                />
-              )}
-            </InputAdornment>
-          ),
-        }}
-      />
-      <TextField
-        label="Amount"
-        id="add-income-form-amount"
-        fullWidth
-        inputProps={{ "data-testid": "add-income-form-amount-input" }}
-        value={amount}
-        onChange={onAmountChange}
-        error={errors.amount}
-        helperText={errors.amount && FORM_ERROR_MESSAGE.amount}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <CurrencyRupeeIcon fontSize="small" />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="start">
-              {amount && (
-                <CancelIcon
-                  data-testid="clear-amount-btn"
-                  onClick={onAmountClear}
-                  fontSize="small"
-                />
-              )}
-            </InputAdornment>
-          ),
-        }}
-      />
-      <FormControl fullWidth className={classes.income_group__select}>
-        <label id="add-income-form-group-label">Group</label>
-        <Select
-          labelId="add-income-form-group-label"
-          value={category}
-          onChange={onCategoryChange}
+    <Modal isOpen={true} onClose={onCancel}>
+      <form className={classes.add_income__form}>
+        <TextField
+          label="Income Category"
+          id="add-income-form-label"
           fullWidth
-        >
-          <MenuItem value="salary">Salary income</MenuItem>
-          <MenuItem value="extra">Extra Income</MenuItem>
-        </Select>
-      </FormControl>
-      <div className={classes.action_btn__container}>
-        <Button
-          variant="outlined"
-          data-testid="add-income-form-cancel-btn"
-          onClick={onCancel}
-          className={classes.action_btn__clear}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          data-testid="add-income-form-submit-btn"
-          startIcon={<DataSaverOnIcon />}
-          onClick={onAddIncome}
-          className={classes.action_btn__submit}
-        >
-          Add Income
-        </Button>
-      </div>
-    </form>
+          inputProps={{ "data-testid": "add-income-form-label-input" }}
+          value={label}
+          onChange={onLabelChange}
+          error={errors.label}
+          helperText={errors.label && FORM_ERROR_MESSAGE.label}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LabelIcon fontSize="small" />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="start">
+                {label && (
+                  <CancelIcon
+                    data-testid="clear-label-btn"
+                    onClick={onLabelClear}
+                    fontSize="small"
+                  />
+                )}
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          label="Amount"
+          id="add-income-form-amount"
+          fullWidth
+          inputProps={{ "data-testid": "add-income-form-amount-input" }}
+          value={amount}
+          onChange={onAmountChange}
+          error={errors.amount}
+          helperText={errors.amount && FORM_ERROR_MESSAGE.amount}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <CurrencyRupeeIcon fontSize="small" />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="start">
+                {amount && (
+                  <CancelIcon
+                    data-testid="clear-amount-btn"
+                    onClick={onAmountClear}
+                    fontSize="small"
+                  />
+                )}
+              </InputAdornment>
+            ),
+          }}
+        />
+        <FormControl fullWidth className={classes.income_group__select}>
+          <label id="add-income-form-group-label">Group</label>
+          <Select
+            labelId="add-income-form-group-label"
+            value={category}
+            onChange={onCategoryChange}
+            fullWidth
+          >
+            <MenuItem value="salary">Salary income</MenuItem>
+            <MenuItem value="extra">Extra Income</MenuItem>
+          </Select>
+        </FormControl>
+        <div className={classes.action_btn__container}>
+          <Button
+            variant="outlined"
+            data-testid="add-income-form-cancel-btn"
+            onClick={onCancel}
+            className={classes.action_btn__clear}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            data-testid="add-income-form-submit-btn"
+            startIcon={<DataSaverOnIcon />}
+            onClick={onAddIncome}
+            className={classes.action_btn__submit}
+          >
+            Add Income
+          </Button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 export default memo(AddIncome);

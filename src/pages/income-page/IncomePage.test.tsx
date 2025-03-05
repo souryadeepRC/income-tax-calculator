@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import IncomePage from "./IncomePage";
 import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
-import AddIncome from "src/components/add-income/AddIncome";
+import AddIncome from "src/components/income-details/add-income/AddIncome";
 import IncomeEditModal from "src/components/income-details/IncomeEditModal";
 
 jest.mock("src/components/income-details/IncomeBreakdown", () => ({
