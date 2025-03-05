@@ -96,8 +96,6 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
           inputProps={{ "data-testid": "add-income-form-label-input" }}
           value={label}
           onChange={onLabelChange}
-          onKeyDown={(event: any) => console.log(event)}
-          onKeyUp={(event: any) => console.log(event)}
           helperText={FORM_ERROR_MESSAGE.label}
           errorMessage={errors.label ? FORM_ERROR_MESSAGE.amount : ""}
           placeholder="Enter income category"

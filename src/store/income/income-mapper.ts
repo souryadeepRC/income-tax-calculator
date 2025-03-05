@@ -15,12 +15,13 @@ export const mapSaveIncomeEntry = (
     const editableEntryIndex = modifiedIncomeOptions.findIndex(
       (income) => income.id === editableEntryId
     );
+    previousOverallAmount +=
+      incomeEntry.amount - modifiedIncomeOptions[editableEntryIndex].amount;
+      
     modifiedIncomeOptions[editableEntryIndex] = {
       ...modifiedIncomeOptions[editableEntryIndex],
       ...incomeEntry,
     };
-    previousOverallAmount +=
-      incomeEntry.amount - modifiedIncomeOptions[editableEntryIndex].amount;
   } else {
     modifiedIncomeOptions.push({ id: uuid4(), ...incomeEntry });
     previousOverallAmount += incomeEntry.amount;
