@@ -2,52 +2,52 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 40%;
-  padding: 1vw;
-  background-color: var(--secondary-bg-color);
-  border: 0.25vw solid var(--primary-color);
-  border-radius: 2vw;
+  width: 85vw;
+  max-width: 400px;
+  padding: 15px;
+  background-color: var(--primary-color);
+  border: 5px solid var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 15px;
   header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5vw 1vw;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
     font-weight: bold;
     .regime__choice {
-      padding: 1vw 2vw;
-      border-radius: 2vw;
-      background-color: var(--primary-color);
-      color: var(--secondary-font-color);
+      padding: 5px;
+      width: 60vw;
+      font-size: 1rem;
+      max-width: 150px;
+      text-align: center;
+      border-radius: 20px;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+      box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
     }
   }
   .tax__monthly_amount {
     width: 70%;
     text-align: center;
-    margin: 1vw auto;
-    padding: 1vw;
-    border-radius: 2vw;
-    background-color: var(--primary-bg-color);
-    font-size: 1.5vw;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 20px;
+    border: 5px solid var(--secondary-color);
+    font-size: 1.2rem;
     font-weight: bold;
   }
   .tax__breakup {
-    padding: 1vw 0.5vw 1vw 0.5vw;
-    border-radius: 2vw;
-    background-color: var(--primary-color);
-    text-align: center;
+    padding: 5px;
+    border-top: 2px solid var(--secondary-color);
     width: 100%;
     display: block;
-    color: var(--secondary-font-color);
-    font-size: 1.2vw;
-    font-weight: 500;
     .tax_details {
-      padding: 1vw;
-      margin: 1vw 0.5vw 0 0.5vw;
-      border-radius: 1vw;
-      background-color: var(--secondary-bg-color);
-      color: var(--primary-font-color);
+      padding: 10px;
+      margin: 10px 0;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
       display: flex;
       justify-content: space-between;
       div {
@@ -60,53 +60,15 @@
   .source__container {
     display: flex;
     justify-content: space-between;
-    background-color: var(--primary-bg-color);
-    margin: 2vw 0;
-    padding: 1vw 2vw;
-    border-radius: 2vw;
-    font-size: 1.2vw;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+    padding: 10px;
+    margin: 10px 0;
     div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-    }
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .regime__container {
-    width: 90%;
-    max-width: 400px;
-    padding: 6px;
-    border-width: 3px;
-    border-radius: 10px;
-    header {
-      padding: 10px 5px;
-      font-size: 14px;
-      .regime__choice {
-        padding: 5px 10px;
-      }
-    }
-    .tax__monthly_amount {
-      border-radius: 10px;
-      margin: 5px auto;
-      padding: 5px;
-      font-size: 14px;
-    }
-    .tax__breakup {
-      padding: 5px;
-      border-radius: 20px;
-      font-size: 12px;
-      .tax_details {
-        padding: 5px;
-        margin: 5px;
-        border-radius: 10px;
-      }
-    }
-    .source__container {
-      margin: 10px 0;
-      padding: 5px 10px;
-      border-radius: 10px;
-      font-size: 12px;
     }
   }
 }

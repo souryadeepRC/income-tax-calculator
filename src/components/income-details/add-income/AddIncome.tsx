@@ -1,14 +1,9 @@
 import { memo, useState } from "react";
 // library
-import {
-  FormControl,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
 // components
-import { Modal, Button } from "src/components/common/CommonComponents";
+import { Modal, Button, Select } from "src/components/common/CommonComponents";
 // actions
 import { saveIncomeDetails } from "src/store/income/income-actions";
 // utils
@@ -67,7 +62,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
     setErrors(updateState("amount", !NUMERIC_REGEX.test(amount)));
   };
 
-  const onCategoryChange = (event: SelectChangeEvent) => {
+  const onCategoryChange = (event: any) => {
     setIncomeDetails(updateState("category", event.target.value));
   };
   const onAddIncome = () => {
@@ -110,18 +105,17 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
           onChange={onAmountChange}
           errorMessage={errors.amount ? FORM_ERROR_MESSAGE.amount : ""}
         />
-        <FormControl fullWidth className={classes.income_group__select}>
-          <label id="add-income-form-group-label">Group</label>
-          <Select
-            labelId="add-income-form-group-label"
-            value={category}
-            onChange={onCategoryChange}
-            fullWidth
-          >
-            <MenuItem value="salary">Salary income</MenuItem>
-            <MenuItem value="extra">Extra Income</MenuItem>
-          </Select>
-        </FormControl>
+        <Select
+          label="Group"
+          value={category}
+          onChange={onCategoryChange}
+          data-testid={`category-option`}
+          fullWidth
+        >
+          <MenuItem value="salary">Salary income</MenuItem>
+          <MenuItem value="extra">Extra Income</MenuItem>
+        </Select>
+
         <div className={classes.action_btn__container}>
           <Button
             variant="text"

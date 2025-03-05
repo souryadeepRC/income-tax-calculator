@@ -1,65 +1,38 @@
 .deduction__container {
-  height: 100%;
   .deduction_list {
-    width: 50%;
+    width: 80%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    gap: 1.5vw;
+    gap: 10px;
     align-items: center;
     margin: 0 auto;
-    padding: 2vw 0;
+    padding: 10px 0;
     list-style-type: none;
-    font-size: 1.2vw;
+    font-size: 0.8rem;
     li {
       width: 100%;
       a {
+        box-sizing: border-box;
         display: block;
         width: 100%;
-        border-radius: 2vw;
-        color: var(--primary-font-color);
-        background-color: var(--secondary-bg-color);
+        border-radius: 10px;
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
         text-align: center;
-        :global(.MuiSvgIcon-root) {
-          font-size: 2.5vw;
-        }
-        &.active {
-          background: #0a5f5a;
-          font-weight: bold;
-        }
-        .deduction_list__item {
-          display: flex;
-          width: 100%;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1vw 2vw;
-          border-left: 1vw solid var(--primary-color);
-          border-radius: 1vw;
-          strong {
-            text-align: left;
-          }
-        }
-      }
-    }
-  }
-}
+        border-left: 20px solid var(--secondary-color);
+        box-shadow: 6px 5px 17px 0px rgba($card-shadow, 0.5);
 
-@media screen and (max-width: $mobile-max-width) {
-  .deduction__container {
-    .deduction_list {
-      width: 90%;
-      gap: 10px;
-      font-size: 12px;
-      li {
-        a {
-          border-radius: 15px;
-          :global(.MuiSvgIcon-root) {
-            font-size: 25px;
-          }
-          .deduction_list__item {
-            padding: 15px;
-            border-width: 15px;
-            border-radius: 8px;
-          }
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 15px;
+        :global(.MuiSvgIcon-root) {
+          font-size: inherit;
+        }
+        > strong {
+          text-align: left;
         }
       }
     }

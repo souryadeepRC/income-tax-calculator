@@ -1,12 +1,9 @@
 import { memo, useState, useEffect } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
-import { Button, InputAdornment } from "@mui/material";
-// icons
-import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { TUITextField } from "triva-ui";
 // components
-import { TextField } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common/CommonComponents";
 // actions
 import { updateSection24Deduction } from "src/store/deduction/deduction-actions";
 // selectors
@@ -51,39 +48,16 @@ const Section24 = () => {
         Section 24
       </header>
       <form className={classes.deduction_form__container}>
-        <TextField
-          variant="outlined"
+        <TUITextField
+          fullWidth
           label="Section 24 - Home Loan Interest"
           value={entryInput}
           onChange={onAmountChange}
           type="number"
           inputProps={{ "data-testid": "section24-input" }}
-          error={error !== ""}
-          helperText={error}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <CurrencyRupeeIcon fontSize="small" />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="start">
-                {entryInput && (
-                  <CancelIcon
-                    data-testid="clear-section24-input"
-                    onClick={() => setEntryInput("")}
-                    fontSize="small"
-                  />
-                )}
-              </InputAdornment>
-            ),
-          }}
+          errorMessage={error}
         />
-        <Button
-          variant="contained"
-          className="deduction__option__button"
-          onClick={onSave}
-        >
+        <Button variant="contained" border="round" onClick={onSave}>
           Save
         </Button>
       </form>

@@ -1,34 +1,14 @@
 .add_income__form {
   display: flex;
   flex-direction: column;
-  gap: 1vw;
-  width: 35vw;
+  gap: 10px;
+  width: 75vw;
+  max-width: 400px;
   max-height: 70vh;
   overflow: auto;
   align-items: stretch;
   justify-content: flex-start;
-  padding: 3vw;
-  .income_group__select {
-    gap: 8px;
-
-    &:global(.MuiFormControl-root) {
-      :global(.MuiInputLabel-root) {
-        color: var(--primary-font-color);
-      }
-      :global(.MuiInputBase-root) {
-        font-family: inherit;
-        padding: 10px 20px;
-        :global(.MuiSelect-select) {
-          padding: 0;
-        }
-
-        :global(.MuiOutlinedInput-notchedOutline) {
-          border: none;
-          box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
-        }
-      }
-    }
-  }
+  padding: 25px 20px;
 
   .action_btn__container {
     display: flex;
@@ -37,58 +17,5 @@
     gap: 5px;
     width: 100%;
     padding: 10px 0 0 0;
-  }
-}
-@media (max-width: $mobile-max-width) {
-  .add_income__form {
-    max-width: 300px;
-    width: 95vw;
-    gap: 5px;
-    padding: 20px;
-    .income_group__select {
-      gap: 4px;
-      label {
-        font-size: 14px;
-      }
-      &:global(.MuiFormControl-root) {
-        :global(.MuiInputLabel-root) {
-          color: var(--primary-font-color);
-        }
-        :global(.MuiInputBase-root) {
-          font-size: 12px;
-          padding: 10px 15px;
-          :global(.MuiSvgIcon-root) {
-            font-size: 12px;
-          }
-          :global(.MuiOutlinedInput-notchedOutline) {
-            border-radius: 15px;
-          }
-        }
-      }
-      :global(.MuiInputBase-root .MuiSelect-outlined) {
-        padding: 10px 15px;
-      }
-    }
-    .action_btn__container {
-      padding: 15px 0 0 0;
-      :global(.MuiButton-root) {
-        font-size: 12px;
-        padding: 4px;
-        width: 45%;
-        border-radius: 5px;
-        :global(.MuiSvgIcon-root) {
-          font-size: 12px;
-        }
-      }
-
-      .action_btn__clear {
-        width: 10%;
-      }
-    }
-  }
-}
-@media screen and (max-width: 400px) {
-  .add_income__form {
-    max-width: 200px;
   }
 }

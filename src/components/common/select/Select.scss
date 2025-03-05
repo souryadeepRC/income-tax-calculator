@@ -1,51 +1,17 @@
 .select__container {
-  gap: 0.5vw;
-  label {
-    padding: 0 1vw;
-    font-weight: 500;
-    font-size: 1.2vw;
-    color: var(--primary-font-color);
-  }
+  gap: 8px;
   &.MuiFormControl-root {
-    .MuiInputLabel-root {
-      color: var(--primary-font-color);
-    }
     .MuiInputBase-root {
-      color: var(--primary-font-color);
-      font-size: 1vw;
-      padding: 1vw;
+      padding: 10px 20px;
+      background-color: $color-white;
+      font-family: inherit;
       .MuiSelect-select {
         padding: 0;
       }
-      .MuiSvgIcon-root {
-        fill: var(--navigation-active-color);
-        font-size: 2vw;
-      }
-      .MuiOutlinedInput-notchedOutline {
-        border-color: var(--navigation-active-color);
-        border-radius: 2vw;
-      }
-    }
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .select__container {
-    gap: 8px;
-    label {
-      padding: 0 10px;
-      font-size: 14px;
-    }
-    &.MuiFormControl-root {
-      .MuiInputBase-root {
-        font-size: 12px;
-        padding: 5px 15px;
 
-        .MuiSvgIcon-root {
-          font-size: 12px;
-        }
-        .MuiOutlinedInput-notchedOutline {
-          border-radius: 10px;
-        }
+      .MuiOutlinedInput-notchedOutline {
+        box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
+        border: none;
       }
     }
   }

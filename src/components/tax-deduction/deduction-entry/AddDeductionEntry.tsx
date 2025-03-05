@@ -1,6 +1,6 @@
 import { memo } from "react";
 // library
-import { Button } from "@mui/material";
+import { Button } from "src/components/common/CommonComponents";
 // styles
 import classes from "./DeductionEntry.module.scss";
 
@@ -15,11 +15,12 @@ const AddDeductionEntry: React.FC<AddDeductionEntryProps> = ({
   onAddDeduction,
 }) => (
   <section className={classes.add_deduction__container}>
-    <span>
+    <p>
       You will get an exemption of Rs.{deductedAmount} from {deductionSection}
-    </span>
+    </p>
     <Button
       variant="contained"
+      border="round"
       data-testid="add-deduction-btn"
       onClick={onAddDeduction}
     >

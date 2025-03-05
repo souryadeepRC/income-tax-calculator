@@ -1,12 +1,10 @@
 import React, { memo, useState, useEffect } from "react";
 // library
 import { useDispatch } from "react-redux";
-import { InputAdornment, Switch, Button } from "@mui/material";
-// icons
-import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { TUITextField } from "triva-ui";
+import { Switch } from "@mui/material";
 // components
-import { Modal, TextField } from "src/components/common/CommonComponents";
+import { Modal, Button } from "src/components/common/CommonComponents";
 // actions
 import {
   resetEditRentEntry,
@@ -112,40 +110,23 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   return (
     <Modal isOpen={true} onClose={handleFormReset}>
       <form className={classes.add_rent_entry__form}>
-        <TextField
-          className="deduction__option__input"
+        <TUITextField
+          fullWidth 
           label="Monthly Rental Amount"
           type="number"
           value={amount}
           onChange={onAmountChange}
           inputProps={{ "data-testid": "rent-amount-input" }}
-          error={amountError !== ""}
-          helperText={amountError}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <CurrencyRupeeIcon fontSize="small" />
-              </InputAdornment>
-            ),
-          }}
+          errorMessage={amountError}
         />
-        <TextField
-          className="deduction__option__input"
-          variant="outlined"
+        <TUITextField
+          fullWidth 
           label="Rent Duration (in Month)"
           type="number"
           value={duration}
           onChange={onDurationChange}
           inputProps={{ "data-testid": "rent-duration-input" }}
-          error={durationError !== ""}
-          helperText={durationError}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <CalendarMonthIcon fontSize="small" />
-              </InputAdornment>
-            ),
-          }}
+          errorMessage={durationError}
         />
         <section aria-label="rent metro city switch">
           <label>
@@ -171,7 +152,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           </Button>
           <Button
             variant="contained"
-            className={classes.save__btn}
+            border="round"
             data-testid="rent-form-save-btn"
             onClick={onRentEntrySave}
           >

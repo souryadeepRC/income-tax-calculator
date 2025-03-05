@@ -1,7 +1,7 @@
 import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@mui/material";
+import { Button } from "src/components/common/CommonComponents";
 //actions
 import { editRentEntry } from "src/store/deduction/deduction-actions";
 // selectors
@@ -27,10 +27,11 @@ const AddRentEntry: React.FC = () => {
         className={classes.add_rent__container}
         aria-label="add rent option"
       >
-        <span>You will get an exemption of Rs.{deductedAmount} from Rent</span>
+        <p>You will get an exemption of Rs.{deductedAmount} from Rent</p>
         {isRentEligible ? (
           <Button
             variant="contained"
+            border="round"
             data-testid="add-rent-btn"
             onClick={onAddRent}
           >
