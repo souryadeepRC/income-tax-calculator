@@ -62,6 +62,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
     setErrors(updateState("amount", !NUMERIC_REGEX.test(amount)));
   };
 
+  
   const onCategoryChange = (event: any) => {
     setIncomeDetails(updateState("category", event.target.value));
   };
