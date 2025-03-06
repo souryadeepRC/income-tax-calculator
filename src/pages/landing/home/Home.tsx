@@ -1,6 +1,6 @@
 import AppIntro from "./components/AppIntro";
 import Features from "./components/Features";
-const Home = () => {
+const Home:React.FC = () => {
   return (
     <>
       <AppIntro />

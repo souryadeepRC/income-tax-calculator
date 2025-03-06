@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import classes from "./AppIntro.module.scss";
 
-const AppIntro = () => {
+const AppIntro:React.FC = () => {
   const navigate = useNavigate();
   const onStarted = () => {
     navigate("/income");
@@ -15,7 +15,7 @@ const AppIntro = () => {
           obligations and make informed financial decisions. This is
           specifically for Salaried individuals of India.
         </p>
-        <button onClick={onStarted}>Let's Get Started</button>
+        <button onClick={onStarted}>Let&apos;s Get Started</button>
       </div>
     </section>
   );

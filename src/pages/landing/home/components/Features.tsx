@@ -27,7 +27,7 @@ const FeatureOption: React.FC<FeatureOptionProps> = ({
     </section>
   );
 };
-const Features = () => {
+const Features: React.FC = () => {
   return (
     <section className={classes.features__container}>
       <h2>How It Works</h2>

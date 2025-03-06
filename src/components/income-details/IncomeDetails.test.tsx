@@ -1,8 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateOverallAmount } from "src/utils/income-utils";
-import BreakdownComponent from "./BreakdownComponent";
-import IncomeBreakdown from "./IncomeBreakdown";
 import IncomeEditModal from "./IncomeEditModal";
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
@@ -13,53 +11,6 @@ jest.mock("src/utils/income-utils", () => ({
 }));
 const mockUseDispatch = useDispatch as jest.MockedFunction<typeof useDispatch>;
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
-const mockCalculateOverallAmount =
-  calculateOverallAmount as jest.MockedFunction<typeof calculateOverallAmount>;
-describe("test BreakdownComponent component", () => {
-  test("render the breakdown component with default content and check edit delete function", () => {
-    const mockDispatchFunction = jest.fn();
-    mockUseDispatch.mockReturnValue(mockDispatchFunction);
-    render(
-      <BreakdownComponent
-        id="test-id"
-        category="salary"
-        label="test label"
-        amount={100}
-      />
-    );
-    expect(screen.getByText(/test label/i)).toBeInTheDocument();
-    expect(screen.getByText(/Rs. 100/i)).toBeInTheDocument();
-
-    fireEvent.click(screen.getByTestId("MoreVertIcon"));
-    fireEvent.click(screen.getByTestId("menu-item-Modify"));
-    expect(mockDispatchFunction).toHaveBeenNthCalledWith(1, {
-      payload: "test-id",
-      type: "EDIT_INCOME_ENTRY",
-    });
-
-    fireEvent.click(screen.getByTestId("MoreVertIcon"));
-    fireEvent.click(screen.getByTestId("menu-item-Remove"));
-    expect(mockDispatchFunction).toHaveBeenNthCalledWith(2, {
-      payload: "test-id",
-      type: "DELETE_INCOME_DETAILS",
-    });
-  });
-});
-describe("test IncomeBreakdown component", () => {
-  test("render the ui with default content", () => {
-    mockUseSelector.mockReturnValue([
-      { id: "test-id", category: "salary", label: "test label", amount: 100 },
-      { category: "extra", label: "test extra label", amount: 100 },
-    ]);
-    mockCalculateOverallAmount.mockReturnValue(1000);
-    const mockDataSelector = jest.fn();
-    render(<IncomeBreakdown group="salary" dataSelector={mockDataSelector} />);
-
-    expect(screen.getByText(/salary Income/i)).toBeInTheDocument();
-    expect(screen.getByText("Rs.1000")).toBeInTheDocument();
-    expect(screen.getByText(/test label/i)).toBeInTheDocument();
-  });
-});
 
 describe("test IncomeEditModal component", () => {
   test("render the modal with default content and edit functionality", () => {

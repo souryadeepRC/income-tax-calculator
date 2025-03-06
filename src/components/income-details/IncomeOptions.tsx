@@ -9,8 +9,7 @@ import {
 import classes from "./IncomeDetails.module.scss";
 import { selectIncomeOptions } from "src/store/income/income-selectors";
 
-interface IncomeOptionsProps {}
-const IncomeOptions: React.FC<IncomeOptionsProps> = () => {
+const IncomeOptions: React.FC = () => {
   const dispatch = useDispatch();
   const incomeOptions = useSelector(selectIncomeOptions);
 
