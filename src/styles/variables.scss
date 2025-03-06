@@ -1,5 +1,5 @@
-@import "src/styles/theme-variables.scss";
-@import "src/styles/mixins.scss";
+@use "./dark-theme-variables" as dark;
+@use "./light-theme-variables" as light;
 // Font Family
 $primary-font-family: "Tahoma";
 // Font Size
@@ -18,9 +18,13 @@ $color-quartz: #4a4a4a;
 $color-black: #000000;
 $color-white: #ffffff;
 
+$header-bg-color: #effbf6;
+$app-primary-color: #afe9d1;
+$app-secondary-color: #275541;
+
 $color-header: white;
-/* $color-navigation-link: #676363;
-$color-navigation-active: #72240c; */
+$card-shadow: #021a10;
+$app-theme-color: #b8860b;
 // Font Weight
 $font-weight-700: 700;
 $font-weight-500: 500;

@@ -2,9 +2,6 @@ import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
-import { Box } from "@mui/material";
-// icons
-import BlurOnIcon from "@mui/icons-material/BlurOn";
 // selectors
 import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors";
 // styles
@@ -40,17 +37,8 @@ const DeductionOption: React.FC = () => {
         {options.map((deductionOption) => (
           <li key={deductionOption.label}>
             <NavLink to={deductionOption.path}>
-              <div className={classes.deduction_list__item}>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="flex-start"
-                >
-                  <strong>{deductionOption.label}</strong>
-                  <span>{deductionOption.amount}</span>
-                </Box>
-                <BlurOnIcon />
-              </div>
+              <strong>{deductionOption.label}</strong>
+              <span>{deductionOption.amount}</span>
             </NavLink>
           </li>
         ))}

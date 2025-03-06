@@ -1,10 +1,9 @@
 import React, { memo, useState, useEffect } from "react";
 // library
-import { InputAdornment, Button, MenuItem } from "@mui/material";
-// icons
-import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import { MenuItem } from "@mui/material";
+import { TUITextField } from "triva-ui";
 // components
-import { TextField, Select } from "src/components/common/CommonComponents";
+import { Button, Select } from "src/components/common/CommonComponents";
 // utils
 import { updateState } from "src/utils/common-utils";
 // constants
@@ -108,22 +107,14 @@ const DeductionEntryForm: React.FC<DeductionEntryFormProps> = ({
           </MenuItem>
         ))}
       </Select>
-      <TextField
-        className="deduction__option__input"
+      <TUITextField
+        fullWidth
         label="Invested Amount"
         type="number"
         value={amount}
         onChange={onAmountChange}
         inputProps={{ "data-testid": "deduction-amount-input" }}
-        error={amountError !== ""}
-        helperText={amountError}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <CurrencyRupeeIcon fontSize="small" />
-            </InputAdornment>
-          ),
-        }}
+        errorMessage={amountError}
       />
 
       <section

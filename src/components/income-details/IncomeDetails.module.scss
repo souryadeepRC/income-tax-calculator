@@ -1,0 +1,97 @@
+.income_header__container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 70%;
+  margin: 0 auto;
+  padding: 14px;
+  color: var(--secondary-color);
+  .header__actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .income_amount__label {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid var(--secondary-color);
+    width: 45vw;
+    max-width: 200px;
+    > span:first-child {
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+    }
+    span {
+      padding: 8px;
+    }
+  }
+}
+.income_options__container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 14px;
+  width: 80%;
+  margin: 0 auto;
+
+  :global(.TUITable_container) {
+    color: var(--secondary-color);
+    :global(.TUITable_header h2) {
+      color: var(--secondary-color);
+    }
+    :global(.TUITable_root) {
+      :global(thead) {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+      }
+      :global(tbody tr td) {
+        color: var(--secondary-color);
+      }
+      :global(tbody tr:nth-child(even)) {
+        background-color: var(--secondary-color-light);
+        :global(td) {
+          color: var(--secondary-color);
+        }
+      }
+    }
+  }
+  :global(.TUISearch_root) {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+  .income_option__delete {
+    cursor: pointer;
+  }
+  .income__amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 5px;
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .income_header__container {
+    width: 100%;
+    .header__label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h2 {
+      font-size: 16px;
+    }
+  }
+  .income_options__container {
+    width: 95%;
+    :global(.TUITable_container .TUITable_header) {
+      flex-wrap: wrap;
+    }
+  }
+}

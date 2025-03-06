@@ -1,4 +1,3 @@
-@import "src/styles/variables.scss";
 .data_layout__container {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -9,17 +8,11 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 0 3vw;
-    padding: 1vw 4vw;
-    border-bottom: 2px solid var(--primary-color);
-    font-size: 2vw;
-    color: var(--primary-font-color);
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .data_layout__container {
-    .data_layout__header {
-      font-size: 16px;
-    }
+    width: 80%;
+    margin: 0 auto;
+    padding: 15px 10px;
+    border-bottom: 2px solid var(--secondary-color);
+    font-size: 1.2rem;
+    color: var(--secondary-color);
   }
 }

@@ -1,33 +1,37 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 // library
-import { Box } from "@mui/material";
+import { useAppTheme } from "react-web-theme";
 // components
-import { Footer, Header } from "src/components/common/CommonComponents";
+import {
+  Footer,
+  Header,
+  ScrollToTop,
+} from "src/components/common/CommonComponents";
 import TaxCalculator from "./pages/income-tax-calculator/TaxCalculator";
 // hooks
 import { useMediaQuery } from "src/hooks/useMediaQuery";
-// store
-import { selectAppTheme } from "src/store/screen/screen-selectors";
-// types
-import { AppTheme } from "src/types/screen-types";
 // styles
 import "./App.scss";
 
 const App: React.FC = () => {
+  const appTheme = useAppTheme();
   useMediaQuery();
-  const appTheme: AppTheme = useSelector(selectAppTheme);
+  useEffect(() => {
+    if (appTheme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [appTheme]);
   return (
     <BrowserRouter>
-      <Box
-        className="app__container"
-        data-testid="app-container"
-        data-theme={appTheme}
-      >
+      <div data-testid="app-container" data-theme={appTheme}>
+        <ScrollToTop />
         <Header />
         <TaxCalculator />
         <Footer />
-      </Box>
+      </div>
     </BrowserRouter>
   );
 };

@@ -1,71 +1,32 @@
 import { memo } from "react";
 // library
-import { Button, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-// icons
-import AddCardIcon from "@mui/icons-material/AddCard";
 // components
-import { Modal } from "src/components/common/CommonComponents";
-import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
-import AddIncome from "src/components/add-income/AddIncome";
+import AddIncome from "src/components/income-details/add-income/AddIncome";
 import IncomeEditModal from "src/components/income-details/IncomeEditModal";
+import IncomeHeader from "src/components/income-details/IncomeHeader";
+import IncomeOptions from "src/components/income-details/IncomeOptions";
 // reducers
-import {
-  editIncomeEntry,
-  resetEditIncomeEntry,
-} from "src/store/income/income-actions";
-import {
-  selectExtraIncome,
-  selectIncome,
-  selectSalaryIncome,
-} from "src/store/income/income-selectors";
-// utils
-import { formatNumber } from "src/utils/tax-calculation";
-// styles
-import classes from "./IncomePage.module.scss";
+import { resetEditIncomeEntry } from "src/store/income/income-actions";
+import { selectIncome } from "src/store/income/income-selectors";
 
 const IncomePage: React.FC = () => {
   const dispatch = useDispatch();
-  const { overallAmount, isEditable, editableEntryId } =
-    useSelector(selectIncome);
+  const { isEditable, editableEntryId } = useSelector(selectIncome);
   const handleEditIncomeReset = () => {
     dispatch(resetEditIncomeEntry());
   };
+
   return (
     <>
-      {isEditable && (
-        <Modal isOpen={true} onClose={handleEditIncomeReset}>
-          {editableEntryId ? (
-            <IncomeEditModal onCancel={handleEditIncomeReset} />
-          ) : (
-            <AddIncome onCancel={handleEditIncomeReset} />
-          )}
-        </Modal>
-      )}
-      <main className={classes.income__container}>
-        <header className={classes.add_income__header}>
-          <Box display="flex" flexDirection="column">
-            <strong>Annual Income</strong>
-            <span>Rs.&nbsp;{formatNumber(overallAmount)}</span>
-          </Box>
-          <Button
-            variant="contained"
-            startIcon={<AddCardIcon />}
-            data-testid="add-income-btn"
-            onClick={() => dispatch(editIncomeEntry())}
-          >
-            Add Income
-          </Button>
-        </header>
-        <section className={classes.income_option_container}>
-          <aside>
-            <IncomeBreakdown group="salary" dataSelector={selectSalaryIncome} />
-          </aside>
-          <aside>
-            <IncomeBreakdown group="extra" dataSelector={selectExtraIncome} />
-          </aside>
-        </section>
-      </main>
+      {isEditable &&
+        (editableEntryId ? (
+          <IncomeEditModal onCancel={handleEditIncomeReset} />
+        ) : (
+          <AddIncome onCancel={handleEditIncomeReset} />
+        ))}
+      <IncomeHeader />
+      <IncomeOptions />
     </>
   );
 };

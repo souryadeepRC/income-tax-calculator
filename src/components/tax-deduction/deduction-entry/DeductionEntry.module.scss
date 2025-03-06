@@ -1,66 +1,48 @@
-@import "src/styles/variables.scss";
 .deduction_entry__container {
   display: flex;
   gap: 5px;
   justify-content: space-around;
   flex-wrap: wrap;
-  background: var(--secondary-bg-color);
-  border-radius: 2vw;
-  border-left: 2vw solid var(--primary-color);
-  padding: 1vw;
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  border-left: 20px solid var(--secondary-color);
+  padding: 15px;
   align-items: center;
-  color: var(--primary-font-color);
-  font-size: 1.5vw;
-
+  color: var(--secondary-color);
+  font-size: 0.8rem;
+  box-shadow: 6px 5px 17px 0px rgba($card-shadow, 0.5);
+  width: 90vw;
+  max-width: 600px;
+  margin: 0 auto;
   section {
     width: 60%;
     display: flex;
     justify-content: space-between;
-    gap: 2vw;
+    align-items: center;
+    gap: 15px;
   }
   .deduction_entry_action_icon {
-    width: 8%;
-    background-color: var(--primary-bg-color);
-    padding: 1vw;
-    text-align: center;
-    border-radius: 1vw;
     &:global(.MuiIconButton-root) {
-      :global(.MuiSvgIcon-root) {
-        font-size: 2vw;
-      }
-      color: var(--primary-font-color);
+      color: inherit;
+      font-size: inherit;
     }
   }
 }
 .deduction_entry__form {
   display: flex;
   flex-direction: column;
-  gap: 2vw;
-  padding: 3vw;
-  width: 45vw;
+  gap: 10px;
+  padding: 25px 20px;
+  width: 85vw;
+  max-width: 400px;
   max-height: 60vh;
   overflow: auto;
-  font-size: 1.2vw;
-  color: var(--primary-font-color);
+  font-size: 1.1rem;
+
   .action_btn__container {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    :global(.MuiButton-root) {
-      width: 15%;
-      font-size: 1.2vw;
-      padding: 0.5vw;
-      text-transform: capitalize;
-      color: var(--primary-font-color);
-    }
-    .save__btn {
-      width: 45%;
-      background-color: var(--primary-color);
-      color: var(--secondary-font-color);
-      &:hover {
-        background-color: var(--primary-color);
-      }
-    }
   }
 }
 .add_deduction__container {
@@ -68,55 +50,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: var(--primary-font-color);
-  :global(.MuiButton-root) {
-    width: 15%;
-    font-size: 1.2vw;
-    font-weight: bold;
-    padding: 0.5vw;
-    text-transform: capitalize;
-    border-radius: 1vw;
-    background-color: var(--primary-color);
-    color: var(--secondary-font-color);
-    &:hover {
-      background-color: var(--primary-color);
-    }
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .deduction_entry__container {
-    font-size: 12px;
-    margin: 5px 0;
-    border-radius: 10px;
-    border-width: 15px;
-    .deduction_entry_action_icon {
-      &:global(.MuiIconButton-root) {
-        :global(.MuiSvgIcon-root) {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-  .deduction_entry__form {
-    width: 85vw;
-    gap: 5px;
-    padding: 10px;
-    font-size: 16px;
-    .action_btn__container {
-      :global(.MuiButton-root) {
-        font-size: $font-size-mobile-primary;
-      }
-    }
-  }
-  .add_deduction__container {
-    font-size: 12px;
-    :global(.MuiButton-root) {
-      font-size: 12px;
-      padding: 5px;
-      border-radius: 10px;
-      width: 30%;
-    }
-  }
+  color: var(--secondary-color);
 }

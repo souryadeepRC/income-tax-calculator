@@ -1,14 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import IncomePage from "./IncomePage";
-import IncomeBreakdown from "src/components/income-details/IncomeBreakdown";
-import AddIncome from "src/components/add-income/AddIncome";
+import AddIncome from "src/components/income-details/add-income/AddIncome";
 import IncomeEditModal from "src/components/income-details/IncomeEditModal";
 
-jest.mock("src/components/income-details/IncomeBreakdown", () => ({
-  __esModule: true,
-  default: jest.fn(() => <div>Mocked IncomeBreakdown</div>),
-}));
 jest.mock("src/components/income-details/IncomeEditModal", () => ({
   __esModule: true,
   default: jest.fn(() => <div>Mocked IncomeEditModal </div>),
@@ -30,9 +25,7 @@ jest.mock("react-redux", () => ({
 }));
 const mockUseDispatch = useDispatch as jest.MockedFunction<typeof useDispatch>;
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
-const mockIncomeBreakdown = IncomeBreakdown as jest.MockedFunction<
-  typeof IncomeBreakdown
->;
+
 const mockAddIncome = AddIncome as jest.MockedFunction<typeof AddIncome>;
 const mockIncomeEditModal = IncomeEditModal as jest.MockedFunction<
   typeof IncomeEditModal
@@ -49,8 +42,7 @@ describe("test IncomePage component", () => {
     render(<IncomePage />);
 
     expect(screen.getByText(/Annual Income/i)).toBeInTheDocument();
-    expect(screen.getByText("Rs. 500")).toBeInTheDocument();
-    expect(mockIncomeBreakdown).toHaveBeenCalledTimes(2);
+    expect(screen.getByText("Rs. 500")).toBeInTheDocument(); 
     fireEvent.click(screen.getByTestId("add-income-btn"));
     expect(mockDispatch).toBeCalledWith({
       payload: undefined,

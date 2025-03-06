@@ -10,6 +10,7 @@ import RouteLayout from "src/components/common/route-layout/RouteLayout";
 import TextField from "src/components/common/text-field/TextField";
 import Select from "src/components/common/select/Select";
 import Switch from "src/components/common/switch/Switch";
+import ScrollToTop from "src/components/common/scroll-to-top/ScrollToTop";
 
 export {
   Select,
@@ -24,4 +25,5 @@ export {
   RouteLayout,
   TextField,
   Switch,
+  ScrollToTop,
 };

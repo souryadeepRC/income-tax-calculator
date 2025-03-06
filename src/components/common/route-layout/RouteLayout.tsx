@@ -19,7 +19,7 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
   children,
 }) => (
   <section className={classes.route_layout__container}>
-    <Box display="flex" flexDirection="column" alignItems="flex-start">
+    <div>
       <BreadcrumbLink
         parentPath={parentPath}
         homeIcon={<AccountBalanceWalletIcon fontSize="small" />}
@@ -30,7 +30,7 @@ const RouteLayout: React.FC<RouteLayoutProps> = ({
       >
         {label}
       </div>
-    </Box>
+    </div>
     {children}
   </section>
 );

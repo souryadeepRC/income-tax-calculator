@@ -1,8 +1,12 @@
-$primary-bg-color-dark: #531706;
-$secondary-bg-color-dark: #972a0b;
-$primary-color-dark: #efebeb;
-$secondary-color-dark: #c1bdbd;
-$primary-font-color-dark: #ffffff;
-$secondary-font-color-dark: #000000;
-$navigation-link-color-dark: #efb4a2;
-$navigation-active-color-dark: #f1ebeb;
+[data-theme="dark"] {
+  --primary-bg-color: #15251e;
+  --secondary-bg-color: #972a0b;
+  --primary-color: #275541;
+  --secondary-color: #afe9d1;
+  --primary-font-color: #ffffff;
+  --secondary-font-color: #000000;
+
+  --navigation-active-color: #ffd774;
+  
+  --secondary-color-light: #afe9d12e;
+}

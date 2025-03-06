@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 18.18.0
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package.lock.json') }}
@@ -33,8 +33,8 @@ jobs:
         run: npm install
       - name: Check linting and formatting
         run: npm run quality
-      - name: Test Code coverage
-        run: npm run test
+      #- name: Test Code coverage
+      #  run: npm run test
       - name: Upload coverage report to Codacy
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:

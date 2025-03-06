@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "react-web-theme";
 // component
 import App from "./App";
 // style
@@ -13,8 +14,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Provider store={rootStore}>
-      <App />
-    </Provider>
+    <ThemeProvider>
+      <Provider store={rootStore}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );

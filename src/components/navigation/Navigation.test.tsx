@@ -1,7 +1,7 @@
 import { screen, render, fireEvent } from "@testing-library/react";
-import NavigationDesktop from "./NavigationDesktop";
 import { MemoryRouter } from "react-router";
 import NavigationMobile from "./NavigationMobile";
+import { NavigationDesktop } from "./Navigation";
 
 const checkNavigationOptions = () => {
   expect(screen.getByText("Home")).toBeInTheDocument();
@@ -14,7 +14,7 @@ const checkNavigationOptions = () => {
   expect(screen.getByTestId("DashboardIcon")).toBeInTheDocument();
 };
 describe("NavigationDesktop Component", () => {
-  test("render all navigation options with text in desktop mode", () => {
+  test("NavigationDesktop: render all navigation options with text in desktop mode", () => {
     render(
       <MemoryRouter>
         <NavigationDesktop />
@@ -22,9 +22,7 @@ describe("NavigationDesktop Component", () => {
     );
     checkNavigationOptions();
   });
-});
-describe("NavigationMobile Component", () => {
-  test("render all navigation options and also check the close slider", () => {
+  test("NavigationMobile: render all navigation options and also check the close slider", () => {
     render(
       <MemoryRouter>
         <NavigationMobile />
@@ -32,13 +30,10 @@ describe("NavigationMobile Component", () => {
     );
 
     expect(screen.queryByText("Home")).not.toBeInTheDocument();
-
     fireEvent.click(screen.getByTestId("navigation-menu-btn"));
-
     checkNavigationOptions();
 
     fireEvent.click(screen.getByTestId("navigation-menu-close-btn"));
-
     expect(screen.queryByText("Home")).not.toBeInTheDocument();
   });
 });

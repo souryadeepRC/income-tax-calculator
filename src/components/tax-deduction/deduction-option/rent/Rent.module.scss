@@ -1,76 +1,26 @@
-@import "src/styles/variables.scss";
 .add_rent__container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.2vw;
+  font-size: 1rem;
   font-weight: 500;
-  :global(.MuiButton-root) {
-    width: 15%;
-    font-size: 1.2vw;
-    font-weight: bold;
-    padding: 0.5vw;
-    text-transform: capitalize;
-    border-radius: 1vw;
-    background-color: var(--primary-color);
-    color: var(--secondary-font-color);
-    &:hover {
-      background-color: var(--primary-color);
-    }
-  }
+  color: var(--secondary-color);
 }
 
 .add_rent_entry__form {
   display: flex;
   flex-direction: column;
-  gap: 2vw;
-  padding: 3vw;
-  width: 45vw;
+  gap: 10px;
+  padding: 25px;
+  width: 80vw;
+  max-width: 500px;
   max-height: 60vh;
   overflow: auto;
-  font-size: 1.2vw;
-  color: var(--primary-font-color);
+  font-size: 1.1rem;
   .action_btn__container {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-    :global(.MuiButton-root) {
-      width: 15%;
-      font-size: 1.2vw;
-      padding: 0.5vw;
-      text-transform: capitalize;
-      color: var(--primary-font-color);
-    }
-    .save__btn {
-      width: 45%;
-      background-color: var(--primary-color);
-      color: var(--secondary-font-color);
-      &:hover {
-        background-color: var(--primary-color);
-      }
-    }
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .add_rent__container {
-    font-size: 12px;
-    :global(.MuiButton-root) {
-      font-size: 12px;
-      padding: 5px;
-      border-radius: 10px;
-      width: 30%;
-    }
-  }
-  .add_rent_entry__form {
-    width: 85vw;
-    gap: 5px;
-    padding: 10px;
-    font-size: 16px;
-    .action_btn__container {
-      :global(.MuiButton-root) {
-        font-size: $font-size-mobile-primary;
-      }
-    }
   }
 }

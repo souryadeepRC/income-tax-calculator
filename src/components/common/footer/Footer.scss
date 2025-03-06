@@ -1,23 +1,19 @@
-@import "src/styles/variables.scss";
-
 .footer__container {
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
-  width: 100vw;
-  padding: 1vw 0;
-  background: var(--secondary-bg-color);
-  color: var(--primary-font-color);
+  width: 100%;
+  padding: 8px 0;
+  background: var(--primary-color);
+  color: var(--secondary-color);
   text-align: center;
   z-index: 1;
-  font-size: 1vw;
+  font-size: 0.6rem;
   font-weight: 500;
 
   a {
-    padding: 0 0 0 1vw;
-    font-family: $primary-font-family; 
-    color: var(--primary-font-color);
-    font-size: 1vw;
+    padding: 0 0 0 5px;
+    color: var(--secondary-color);
   }
 }
 

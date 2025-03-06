@@ -1,28 +1,13 @@
-@import "src/styles/variables.scss";
 .breadcrumb__link__container {
   display: flex;
   align-items: center;
-  font-size: 1.5vw;
+  font-size: 1rem;
+  color: var(--secondary-color); 
   text-transform: capitalize;
-  .MuiSvgIcon-root {
-    font-size: 1.5vw;
-    fill: var(--navigation-active-color);
-  }
-  span {
-    color: var(--navigation-link-color);
-  }
   a {
     display: flex;
-    @include font($size: $font-size-non-mobile-primary, $weight: bold);
-    color: var(--navigation-active-color);
+    font-weight: bold;
     text-decoration: none;
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .breadcrumb__link__container {
-    font-size: 14px;
-    .MuiSvgIcon-root {
-      font-size: 14px;
-    }
+    color: inherit;
   }
 }
