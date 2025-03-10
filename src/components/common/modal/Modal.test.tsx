@@ -11,7 +11,7 @@ describe("test Modal component", () => {
     const mockOnClose = jest.fn();
     mockUseSelector.mockReturnValue("dark");
     render(
-      <Modal isOpen onClose={mockOnClose}>
+      <Modal onClose={mockOnClose}>
         <div>Test Child</div>
       </Modal>
     );

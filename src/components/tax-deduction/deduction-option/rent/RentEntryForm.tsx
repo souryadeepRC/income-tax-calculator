@@ -108,10 +108,10 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   const { amount, duration, isMetroCity } = entryInput;
   const { amount: amountError, duration: durationError } = error;
   return (
-    <Modal isOpen={true} onClose={handleFormReset}>
+    <Modal onClose={handleFormReset}>
       <form className={classes.add_rent_entry__form}>
         <TUITextField
-          fullWidth 
+          fullWidth
           label="Monthly Rental Amount"
           type="number"
           value={amount}
@@ -120,7 +120,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           errorMessage={amountError}
         />
         <TUITextField
-          fullWidth 
+          fullWidth
           label="Rent Duration (in Month)"
           type="number"
           value={duration}

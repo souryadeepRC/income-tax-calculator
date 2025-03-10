@@ -76,7 +76,7 @@ const Deduction80C = () => {
   return (
     <main>
       {isEditable && (
-        <Modal isOpen={true} onClose={onReset}>
+        <Modal onClose={onReset}>
           <DeductionEntryForm
             entry={getEditableEntryDetails()}
             options={getDeductionOptions()}

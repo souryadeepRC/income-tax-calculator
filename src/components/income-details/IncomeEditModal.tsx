@@ -33,7 +33,7 @@ const IncomeEditModal: React.FC<IncomeEditModalProps> = ({ onCancel }) => {
   };
   const isAmountError = !NUMERIC_REGEX.test(editableAmount);
   return (
-    <Modal isOpen={true} onClose={onCancel}>
+    <Modal onClose={onCancel}>
       <div className={classes.income_edit__container}>
         <div className={classes.edit__header}>
           <strong>Previous Amount</strong>

@@ -1,27 +1,26 @@
 import { memo, ReactNode } from "react";
-// library
-import { Modal as MuiModal } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectAppTheme } from "src/store/screen/screen-selectors";
 // styles
 import "./Modal.scss";
-import { selectAppTheme } from "src/store/screen/screen-selectors";
-import { useSelector } from "react-redux";
 
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
 }
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   const appTheme = useSelector(selectAppTheme);
   return (
-    <MuiModal
+    <div
       data-testid="modal-container"
       data-theme={appTheme}
-      open={isOpen}
-      onClose={onClose}
+      className="modal__container"
+      onClick={onClose}
     >
-      <div className="modal__container">{children}</div>
-    </MuiModal>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
   );
 };
 export default memo(Modal);

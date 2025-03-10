@@ -62,7 +62,6 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
     setErrors(updateState("amount", !NUMERIC_REGEX.test(amount)));
   };
 
-  
   const onCategoryChange = (event: any) => {
     setIncomeDetails(updateState("category", event.target.value));
   };
@@ -83,7 +82,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   const { label, amount, category } = incomeDetails;
 
   return (
-    <Modal isOpen={true} onClose={onCancel}>
+    <Modal onClose={onCancel}>
       <form className={classes.add_income__form}>
         <TUITextField
           fullWidth
