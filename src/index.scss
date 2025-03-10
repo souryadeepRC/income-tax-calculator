@@ -14,6 +14,10 @@ body {
 
 a {
   text-decoration: none;
+  color: var(--secondary-color);
+  &.active {
+    color: var(--navigation-active-color);
+  }
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

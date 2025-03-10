@@ -8,15 +8,18 @@ import {
   Header,
   ScrollToTop,
 } from "src/components/common/CommonComponents";
-import TaxCalculator from "./pages/income-tax-calculator/TaxCalculator";
+import TaxCalculator from "src/pages/income-tax-calculator/TaxCalculator";
 // hooks
 import { useMediaQuery } from "src/hooks/useMediaQuery";
 // styles
 import "./App.scss";
 
-const App: React.FC = () => {
-  const appTheme = useAppTheme();
+interface AppContainerProps {
+  children: React.ReactElement;
+}
+const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
   useMediaQuery();
+  const appTheme = useAppTheme();
   useEffect(() => {
     if (appTheme === "dark") {
       document.body.classList.add("dark");
@@ -25,14 +28,21 @@ const App: React.FC = () => {
     }
   }, [appTheme]);
   return (
-    <BrowserRouter>
-      <div data-testid="app-container" data-theme={appTheme}>
+    <div data-testid="app-container" data-theme={appTheme}>
+      {children}
+    </div>
+  );
+};
+const App: React.FC = () => {
+  return (
+    <AppContainer>
+      <BrowserRouter>
         <ScrollToTop />
         <Header />
         <TaxCalculator />
         <Footer />
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AppContainer>
   );
 };
 

@@ -24,11 +24,6 @@ interface NavigationType {
 
 const NAVIGATION_LIST: NavigationType[] = [
   {
-    label: "Home",
-    path: "",
-    Icon: HomeIcon,
-  },
-  {
     label: "Income",
     path: "income",
     Icon: AccountBalanceWalletIcon,
@@ -42,6 +37,11 @@ const NAVIGATION_LIST: NavigationType[] = [
     label: "Tax Breakup",
     path: "tax-breakup",
     Icon: DashboardIcon,
+  },
+  {
+    label: "Logout",
+    path: "",
+    Icon: HomeIcon,
   },
 ];
 interface NavigationProps {

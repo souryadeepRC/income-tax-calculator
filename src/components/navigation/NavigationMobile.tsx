@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 // library
 import { IconButton } from "@mui/material";
 import { Close as CloseIcon, Widgets } from "@mui/icons-material";
+// store
+import { selectUserName } from "src/store/auth/auth-selectors";
 // constants
 import { Navigation } from "./Navigation";
 // styles
 import "./Navigation.scss";
 
 const NavigationMobile: React.FC = () => {
+  const userName: string = useSelector(selectUserName);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleSlider = (): void => {
     setIsOpen((isOpen: boolean) => !isOpen);
@@ -24,7 +28,7 @@ const NavigationMobile: React.FC = () => {
       {isOpen && (
         <section className="navigation__slider">
           <header>
-            <span>TAX CALCULATOR</span>
+            <span>Hello {userName}</span>
             <IconButton onClick={handleSlider} size="small">
               <CloseIcon
                 data-testid="navigation-menu-close-btn"
