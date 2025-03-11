@@ -4,7 +4,16 @@
     font-family: inherit;
   }
 }
+#root {
+  .TUIModal__container {
+    background-color: rgba($card-shadow, 0.4);
 
+    .TUIModal__content {
+      background-color: var(--primary-color);
+      box-shadow: 7px 9px 9px 1px rgba($card-shadow, 0.2);
+    }
+  }
+}
 @media (max-width: $mobile-max-width) {
   .MuiPaper-root {
     .MuiMenuItem-root {

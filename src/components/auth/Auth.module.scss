@@ -1,0 +1,30 @@
+.auth__container {
+  width: 80vw;
+  max-width: 500px;
+  color: var(--secondary-color);
+  .auth__option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+  :global(.Button-root.contained) {
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+}
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 15px 0;
+  padding: 0 20px;
+}
