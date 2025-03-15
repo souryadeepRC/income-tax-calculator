@@ -1,7 +1,13 @@
+// library
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+// store
+import { selectUserName } from "src/store/auth/auth-selectors";
+// styles
 import classes from "./AppIntro.module.scss";
 
-const AppIntro:React.FC = () => {
+const AppIntro: React.FC = () => {
+  const username = useSelector(selectUserName);
   const navigate = useNavigate();
   const onStarted = () => {
     navigate("/income");
@@ -15,7 +21,9 @@ const AppIntro:React.FC = () => {
           obligations and make informed financial decisions. This is
           specifically for Salaried individuals of India.
         </p>
-        <button onClick={onStarted}>Let&apos;s Get Started</button>
+        {username && (
+          <button onClick={onStarted}>Let&apos;s Get Started</button>
+        )}
       </div>
     </section>
   );
