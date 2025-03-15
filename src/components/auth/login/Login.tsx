@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // library
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
-import { TUITextField } from "triva-ui";
+import { TUITextField, TUIPassword } from "triva-ui";
 // components
 import {
   Button,
@@ -83,7 +83,9 @@ const Login: React.FC = () => {
       <InfiniteProgressBar isLoading={isPending} />
       <h2>Login</h2>
       {isError && (
-        <span className={classes.error__message}>{getErrorMessage(errorResponse)}</span>
+        <span className={classes.error__message}>
+          {getErrorMessage(errorResponse)}
+        </span>
       )}
       <form className={classes.auth__form}>
         <TUITextField
@@ -94,10 +96,10 @@ const Login: React.FC = () => {
           onChange={onEmailChange}
           errorMessage={error.email ? "Email is required" : ""}
         />
-        <TUITextField
+
+        <TUIPassword
           fullWidth
-          isRequired
-          label="Password"
+          label="Password "
           value={password}
           onChange={onPasswordChange}
           errorMessage={error.password ? "Password is required" : ""}

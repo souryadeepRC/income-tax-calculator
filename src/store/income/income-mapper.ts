@@ -1,4 +1,3 @@
-import { v4 as uuid4 } from "uuid";
 import { IncomeReducerType, IncomeOption } from "src/types/income-types";
 
 export const mapSaveIncomeEntry = (
@@ -17,13 +16,13 @@ export const mapSaveIncomeEntry = (
     );
     previousOverallAmount +=
       incomeEntry.amount - modifiedIncomeOptions[editableEntryIndex].amount;
-      
+
     modifiedIncomeOptions[editableEntryIndex] = {
       ...modifiedIncomeOptions[editableEntryIndex],
       ...incomeEntry,
     };
   } else {
-    modifiedIncomeOptions.push({ id: uuid4(), ...incomeEntry });
+    modifiedIncomeOptions.push(incomeEntry);
     previousOverallAmount += incomeEntry.amount;
   }
   return {
@@ -40,9 +39,9 @@ export const mapDeleteIncomeEntry = (
   initialIncomeState: IncomeReducerType
 ): IncomeReducerType => {
   const { isEditable, editableEntryId } = initialIncomeState;
-  const removalEntryAmount: number =
-    existingIncome.options.find((income) => income.id === incomeEntryId)
-      ?.amount || 0;
+  const removalEntry: IncomeOption | undefined = existingIncome.options.find(
+    (income) => income.id === incomeEntryId
+  );
   return {
     ...existingIncome,
     isEditable,
@@ -50,6 +49,6 @@ export const mapDeleteIncomeEntry = (
     options: existingIncome.options.filter(
       (income) => income.id !== incomeEntryId
     ),
-    overallAmount: existingIncome.overallAmount - removalEntryAmount,
+    overallAmount: existingIncome.overallAmount - (removalEntry?.amount ?? 0),
   };
 };

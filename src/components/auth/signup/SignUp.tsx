@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 // library
 import { useDispatch } from "react-redux";
-import { TUITextField } from "triva-ui";
+import { TUITextField, TUIPassword } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
 // components
 import {
@@ -17,6 +17,7 @@ import { setFormData } from "../Auth";
 import { updateState } from "src/utils/common-utils";
 // constants
 import { EMAIL_REGEX } from "src/constants/common-constants";
+import { SignUpPasswordRules } from "src/store/auth/auth-constants";
 // styles
 import classes from "../Auth.module.scss";
 
@@ -51,6 +52,15 @@ const SignUp: React.FC = () => {
     password: false,
   });
 
+  const handleValidity = useCallback((isValid: boolean) => {
+    setError((error) => {
+      return {
+        ...error,
+        password: isValid,
+      };
+    });
+  }, []);
+
   useEffect(() => {
     if (isPending || !isSuccess || isError) return;
     dispatch(createUser({ email, name }));
@@ -66,26 +76,23 @@ const SignUp: React.FC = () => {
     }
     setSignupData(setFormData("email", event.target.value));
   };
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (isSubmitClicked.current) {
-      setError(
-        updateState("password", password.length < 6 || password.length > 20)
-      );
-    }
-    setSignupData(setFormData("password", event.target.value));
-  };
+  const onPasswordChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSignupData(setFormData("password", event.target.value));
+    },
+    []
+  );
   const onSubmit = () => {
     isSubmitClicked.current = true;
     if (error.email || error.password || error.name) return;
 
     const isInvalidName = signupData.name === "";
     const isInvalidEmail = !EMAIL_REGEX.test(signupData.email);
-    const isInvalidPassword = password.length < 6 || password.length > 20;
-    if (isInvalidName || isInvalidEmail || isInvalidPassword) {
+    if (isInvalidName || isInvalidEmail) {
       setError({
         name: isInvalidName,
         email: isInvalidEmail,
-        password: isInvalidPassword,
+        password: error.password,
       });
       return;
     }
@@ -118,17 +125,14 @@ const SignUp: React.FC = () => {
           onChange={onEmailChange}
           errorMessage={error.email ? "Please enter a valid email" : ""}
         />
-        <TUITextField
+        <TUIPassword
           fullWidth
           isRequired
           label="Password"
-          type="password"
           value={password}
           onChange={onPasswordChange}
-          helperText="Must be between 6 to 20"
-          errorMessage={
-            error.password ? "Please enter password between 6 to 20" : ""
-          }
+          rules={SignUpPasswordRules}
+          handleValidity={handleValidity}
         />
         <Button variant="contained" border="round" onClick={onSubmit}>
           Sign up
