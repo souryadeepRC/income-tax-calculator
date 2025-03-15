@@ -1,5 +1,11 @@
+import {
+  DeductionEntry,
+  DeductionSection24,
+  RentEntry,
+} from "src/types/deduction-types";
+
 type DeductionType = "Rent" | "Section24" | "80C" | "Chapter6A";
-interface DeductionResponse {
+export interface DeductionResponse {
   id: string;
   type: DeductionType;
   amount: number;
@@ -7,14 +13,94 @@ interface DeductionResponse {
   category: string;
   duration: number;
 }
-const mapDeductions = (deductions: DeductionResponse[]) => {
-  deductions.reduce((acc:any, option) => {
-    const { type } = option;
-
-    acc = {
-      ...acc,
-      [type]:  acc[type]
-    };
-    return option;
-  }, {});
+type DeductionDetails = {
+  rent: {
+    options: RentEntry[];
+    deductedAmount: number;
+  };
+  section24: DeductionSection24;
+  deduction80C: {
+    deductedAmount: number;
+    options: DeductionEntry[];
+  };
+  deductionByChapter6: {
+    deductedAmount: number;
+    options: DeductionEntry[];
+  };
+};
+const mapRent = (acc: DeductionDetails, option: DeductionResponse) => {
+  return {
+    ...acc,
+    rent: {
+      deductedAmount: (acc?.rent?.deductedAmount || 0) + option.amount,
+      options: [
+        ...(acc?.rent?.options || []),
+        {
+          id: option?.id,
+          amount: option?.amount || 0,
+          duration: option?.duration || 0,
+          isMetroCity: option?.category === "Metro",
+        },
+      ],
+    },
+  };
+};
+const mapSection24 = (acc: DeductionDetails, option: DeductionResponse) => {
+  const { amount, maxLimit, id } = option;
+  return {
+    ...acc,
+    section24: {
+      id,
+      amount: amount,
+      deductedAmount: amount > maxLimit ? maxLimit : amount,
+    },
+  };
+};
+const mapOther = (type: string, acc: any, option: DeductionResponse) => {
+  const { amount = 0, maxLimit = 0 } = option || {};
+  const effectiveAmount = maxLimit > 0 && amount > maxLimit ? maxLimit : amount;
+  return {
+    ...acc,
+    [type]: {
+      deductedAmount: (acc?.[type]?.deductedAmount || 0) + effectiveAmount,
+      options: [
+        ...(acc?.[type]?.options || []),
+        {
+          id: option?.id,
+          category: option?.category || "",
+          amount: amount,
+          maxLimit: maxLimit,
+        },
+      ],
+    },
+  };
+};
+export const mapDeductions = (
+  deductions: DeductionResponse[]
+): DeductionDetails => {
+  return deductions.reduce(
+    (acc: DeductionDetails, option: DeductionResponse) => {
+      const { type } = option;
+      if (type === "Rent") {
+        return mapRent(acc, option);
+      } else if (type === "Section24") {
+        return mapSection24(acc, option);
+      } else if (type === "80C") {
+        return mapOther("deduction80C", acc, option);
+      } else if (type === "Chapter6A") {
+        return mapOther("deductionByChapter6", acc, option);
+      }
+      return acc;
+    },
+    {
+      rent: { deductedAmount: 0, options: [] },
+      section24: {
+        id: "",
+        amount: 0,
+        deductedAmount: 0,
+      },
+      deduction80C: { deductedAmount: 0, options: [] },
+      deductionByChapter6: { deductedAmount: 0, options: [] },
+    }
+  );
 };

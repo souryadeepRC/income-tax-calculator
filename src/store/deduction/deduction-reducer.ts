@@ -17,6 +17,7 @@ import {
   SAVE_CHAPTER_VI_ENTRY,
   DELETE_CHAPTER_VI_ENTRY,
   RESET_EDIT_CHAPTER_VI_ENTRY,
+  LOAD_DEDUCTION,
 } from "src/store/deduction/deduction-constants";
 import {
   mapDeleteRentEntry,
@@ -30,16 +31,18 @@ import {
   resetDeductionOption,
 } from "./mapper/deduction-80C-mapper";
 import { DEDUCTION_MAX_LIMIT } from "src/constants/common-constants";
+import { mapDeductions } from "./mapper/deduction-mapper";
 
 const initialState: DeductionReducerType = {
   standardDeduction: { newScheme: 75000, oldScheme: 50000 },
   rent: {
-    collections: [],
+    options: [],
     deductedAmount: 0,
     isEditable: false,
     editableEntryId: "",
   },
   section24: {
+    id: "",
     amount: 0,
     deductedAmount: 0,
   },
@@ -62,6 +65,28 @@ const DeductionReducer = (
 ): DeductionReducerType => {
   const { type, payload } = action;
   switch (type) {
+    case LOAD_DEDUCTION: {
+      const details = mapDeductions(payload);
+      return {
+        ...state,
+        rent: {
+          ...state.rent,
+          ...details.rent,
+        },
+        section24: {
+          ...state.section24,
+          ...details.section24,
+        },
+        deduction80C: {
+          ...state.deduction80C,
+          ...details.deduction80C,
+        },
+        deductionByChapter6: {
+          ...state.deductionByChapter6,
+          ...details.deductionByChapter6,
+        },
+      };
+    }
     case EDIT_RENT_ENTRY: {
       return {
         ...state,
@@ -98,6 +123,7 @@ const DeductionReducer = (
       return {
         ...state,
         section24: {
+          ...state.section24,
           amount: payload,
           deductedAmount: payload > 2000000 ? 2000000 : payload,
         },

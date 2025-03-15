@@ -17,7 +17,9 @@ import {
   SAVE_CHAPTER_VI_ENTRY,
   DELETE_CHAPTER_VI_ENTRY,
   RESET_EDIT_CHAPTER_VI_ENTRY,
+  LOAD_DEDUCTION,
 } from "./deduction-constants";
+import { DeductionResponse } from "./mapper/deduction-mapper";
 export const editRentEntry = (payload?: string): ReducerActionPayloadType => ({
   type: EDIT_RENT_ENTRY,
   payload,
@@ -97,3 +99,12 @@ export const deleteChapterVIEntry = (
   type: DELETE_CHAPTER_VI_ENTRY,
   payload,
 });
+
+export const loadDeduction = (
+  payload: DeductionResponse[]
+): ReducerActionPayloadType => {
+  return {
+    type: LOAD_DEDUCTION,
+    payload,
+  };
+};

@@ -23,7 +23,7 @@ export const selectDeductionChapter6 = (store: AppStoreType): DeductionOption =>
   store.deduction.deductionByChapter6;
 
 export const selectRentCollections = (store: AppStoreType): RentEntry[] =>
-  store.deduction.rent.collections;
+  store.deduction.rent.options;
 export const selectRentDeductedAmount = (store: AppStoreType): number =>
   store.deduction.rent.deductedAmount;
 export const selectEditableRentEntry = (

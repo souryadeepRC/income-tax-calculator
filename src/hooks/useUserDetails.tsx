@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 // service
-import { loginUser } from "src/store/auth/auth-actions";
 import dbService from "src/service/Database";
+// store
+import { loginUser } from "src/store/auth/auth-actions";
 import { selectUserName } from "src/store/auth/auth-selectors";
 import { loadIncomeDetails } from "src/store/income/income-actions";
+import { loadDeduction } from "src/store/deduction/deduction-actions";
 
 const useUserDetails = (): void => {
   const dispatch = useDispatch();
@@ -34,20 +36,32 @@ const useUserDetails = (): void => {
   });
 
   useEffect(() => {
-    let timer: any;
-    if (isIncomeFetched && isIncomeSuccess) {
-      const modifiedIncome = incomeData.documents.map((option) => ({
-        id: option?.$id,
-        category: option.category,
-        amount: option.amount,
-        group: option.group,
-      }));
-      dispatch(loadIncomeDetails(modifiedIncome));
-    }
+    if (!isIncomeFetched || !isIncomeSuccess || !incomeData) return;
+    const modifiedIncome = incomeData.documents.map((option) => ({
+      id: option?.$id,
+      category: option.category,
+      amount: option.amount,
+      group: option.group,
+    }));
+    dispatch(loadIncomeDetails(modifiedIncome));
+  }, [isIncomeFetched, isIncomeSuccess, incomeData]);
 
-    if (isDeductionFetched && isDeductionSuccess) {
-      console.log("Load Deduction Details", deductionData);
-    }
+  useEffect(() => {
+    if (!isDeductionFetched || !isDeductionSuccess || !deductionData) return;
+    const modifiedDeduction = deductionData.documents.map((option) => ({
+      id: option?.$id,
+      type: option.type,
+      category: option.category,
+      amount: option.amount,
+      maxLimit: option.maxLimit,
+      duration: option.duration,
+    }));
+    dispatch(loadDeduction(modifiedDeduction));
+  }, [isDeductionFetched, isDeductionSuccess, deductionData]);
+
+  useEffect(() => {
+    let timer: any;
+
     if (isIncomeFetched && isDeductionFetched) {
       timer = setTimeout(() => {
         dispatch(loginUser());

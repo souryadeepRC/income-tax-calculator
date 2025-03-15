@@ -14,13 +14,13 @@ import { DeductionByRent } from "src/types/deduction-types";
 const TOTAL_RENT_DURATION = 12;
 
 const Rent = () => {
-  const { collections, isEditable, editableEntryId }: DeductionByRent =
+  const { options, isEditable, editableEntryId }: DeductionByRent =
     useSelector(selectRentDeduction);
 
   useRentExemption();
 
   const getEditableEntryDetails = useCallback(() => {
-    const rentEntry = collections.find(
+    const rentEntry = options.find(
       (rentEntry) => rentEntry.id === editableEntryId
     );
     if (!rentEntry) return undefined;
@@ -30,15 +30,15 @@ const Rent = () => {
       duration: `${duration}`,
       isMetroCity,
     };
-  }, [collections, editableEntryId]);
+  }, [options, editableEntryId]);
 
   const totalDuration: number = useMemo(
     () =>
-      collections.reduce((acc, rentEntry) => {
+      options.reduce((acc, rentEntry) => {
         if (rentEntry.id === editableEntryId) return acc;
         return acc + rentEntry.duration;
       }, 0),
-    [collections, editableEntryId]
+    [options, editableEntryId]
   );
 
   return (
@@ -50,7 +50,7 @@ const Rent = () => {
         />
       )}
       <AddRentEntry />
-      <RentCollection collections={collections} />
+      <RentCollection collections={options} />
     </>
   );
 };
