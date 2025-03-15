@@ -2,13 +2,17 @@ import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
-import AddIncome from "src/components/income-details/add-income/AddIncome";
-import IncomeEditModal from "src/components/income-details/IncomeEditModal";
-import IncomeHeader from "src/components/income-details/IncomeHeader";
-import IncomeOptions from "src/components/income-details/IncomeOptions";
-// reducers
+import {
+  AddIncome,
+  EditIncome,
+  IncomeHeader,
+  IncomeOptions,
+} from "src/components/income-details";
+import { Modal } from "src/components/common/CommonComponents";
+// store
 import { resetEditIncomeEntry } from "src/store/income/income-actions";
 import { selectIncome } from "src/store/income/income-selectors";
+import DeleteIncome from "src/components/income-details/DeleteIncome";
 
 const IncomePage: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,12 +23,12 @@ const IncomePage: React.FC = () => {
 
   return (
     <>
-      {isEditable &&
-        (editableEntryId ? (
-          <IncomeEditModal onCancel={handleEditIncomeReset} />
-        ) : (
-          <AddIncome onCancel={handleEditIncomeReset} />
-        ))}
+      {isEditable && (
+        <Modal onClose={handleEditIncomeReset}>
+          {editableEntryId ? <EditIncome /> : <AddIncome />}
+        </Modal>
+      )}
+      <DeleteIncome />
       <IncomeHeader />
       <IncomeOptions />
     </>

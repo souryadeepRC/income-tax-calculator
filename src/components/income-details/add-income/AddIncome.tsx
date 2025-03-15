@@ -42,8 +42,8 @@ interface IncomeComponent {
   group: "salary" | "extra";
 }
 const INITIAL_INCOME_DETAILS: IncomeComponent = {
-  category: "BASIC",
-  amount: "23.2355",
+  category: "",
+  amount: "",
   group: "salary",
 };
 const INITIAL_ERRORS: IncomeFormError = {
@@ -64,7 +64,7 @@ const AddIncome: React.FC = () => {
   const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
 
   useEffect(() => {
-    if (isSuccess) return;
+    if (!isSuccess) return;
     dispatch(saveIncomeDetails({ ...incomeDetails, amount: +amount }));
     setIncomeDetails(INITIAL_INCOME_DETAILS);
     setErrors(INITIAL_ERRORS);

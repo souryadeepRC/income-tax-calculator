@@ -3,6 +3,7 @@ export interface IncomeReducerType {
   options: IncomeOption[];
   isEditable: boolean;
   editableEntryId: string;
+  deleteEntry: IncomeDeleteEntry | undefined;
 }
 export type IncomeGroup = "salary" | "extra";
 export interface IncomeOption {
@@ -10,6 +11,10 @@ export interface IncomeOption {
   category: string;
   amount: number;
   group: IncomeGroup;
+}
+export interface IncomeDeleteEntry {
+  id: string;
+  category: string;
 }
 
 export interface incomeDetailsUpdateType {

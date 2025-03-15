@@ -1,4 +1,5 @@
 export const NUMERIC_REGEX = /^(?!0(\.0{1,2})?$)\d+(\.\d{1,2})?$/;
+export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 export const DEDUCTION_80C_OPTIONS: Record<string, string> = {
   providentFund: "Provident Fund",
