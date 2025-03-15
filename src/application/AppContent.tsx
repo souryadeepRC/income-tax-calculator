@@ -1,13 +1,13 @@
-import { memo } from "react";
 // hooks
-import { useTaxCalculation } from "src/hooks/useTaxCalculation";
+import { useTaxCalculation, useUserDetails } from "src/hooks";
 // routes
 import { AppRoutes } from "src/routes/AppRoutes";
 // styles
-import "./TaxCalculator.scss";
+import "./App.scss";
 
-const TaxCalculator = () => {
+const AppContent = () => {
   useTaxCalculation();
+  useUserDetails();
   return (
     <section className="tax-section">
       <AppRoutes />
@@ -15,4 +15,4 @@ const TaxCalculator = () => {
   );
 };
 
-export default memo(TaxCalculator);
+export default AppContent;

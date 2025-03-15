@@ -1,0 +1,29 @@
+/* InfiniteProgressBar.css */
+.TUIProgress__container {
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.TUIProgress__content {
+  width: 200px;
+  height: 100%;
+  display: block;
+  background-color: var(--secondary-color);
+  transform: translateX(-200%);
+  animation: progressAnimation 0.5s infinite ease-in;
+}
+
+@keyframes progressAnimation {
+  0% {
+    transform: translateX(-200%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}

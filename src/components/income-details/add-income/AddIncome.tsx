@@ -1,9 +1,17 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 // library
+import { useMutation } from "@tanstack/react-query";
 import { MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
 // components
-import { Modal, Button, Select } from "src/components/common/CommonComponents";
+import {
+  Modal,
+  Button,
+  Select,
+  InfiniteProgressBar,
+} from "src/components/common/CommonComponents";
+// service
+import dbService from "src/service/Database";
 // actions
 import { saveIncomeDetails } from "src/store/income/income-actions";
 // utils
@@ -24,14 +32,14 @@ const FORM_ERROR_MESSAGE = {
   amount: "Enter a valid amount more than 0 (e.g. 100.50 or 100)",
 };
 interface IncomeComponent {
-  label: string;
+  category: string;
   amount: string;
-  category: "salary" | "extra";
+  group: "salary" | "extra";
 }
 const INITIAL_INCOME_DETAILS: IncomeComponent = {
-  label: "",
+  category: "",
   amount: "",
-  category: "salary",
+  group: "salary",
 };
 const INITIAL_ERRORS: IncomeFormError = {
   label: false,
@@ -42,17 +50,32 @@ interface AddIncomeProps {
 }
 const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   const dispatch: AppDispatch = useDispatch();
+  const { mutate, isPending, isSuccess, isError } = useMutation({
+    mutationFn: (incomeDetails: object) =>
+      dbService.createDetails("income", incomeDetails),
+  });
 
   const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
     INITIAL_INCOME_DETAILS
   );
   const [errors, setErrors] = useState<IncomeFormError>(INITIAL_ERRORS);
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(saveIncomeDetails({ ...incomeDetails, amount: +amount }));
+      setIncomeDetails(INITIAL_INCOME_DETAILS);
+      setErrors(INITIAL_ERRORS);
+    }
+  }, [isSuccess]);
+
   const onLabelChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const modifiedLabel: string = event.target.value;
-    setIncomeDetails(updateState("label", modifiedLabel));
+    setIncomeDetails(updateState("category", modifiedLabel));
     setErrors(
-      updateState("label", modifiedLabel === "" || modifiedLabel.length > 100)
+      updateState(
+        "category",
+        modifiedLabel === "" || modifiedLabel.length > 100
+      )
     );
   };
 
@@ -63,33 +86,32 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
   };
 
   const onCategoryChange = (event: any) => {
-    setIncomeDetails(updateState("category", event.target.value));
+    setIncomeDetails(updateState("group", event.target.value));
   };
   const onAddIncome = () => {
     if (errors.label || errors.amount) return;
 
-    const isInvalidLabel = incomeDetails.label === "";
+    const isInvalidLabel = incomeDetails.category === "";
     const isInvalidAmount = !NUMERIC_REGEX.test(incomeDetails.amount);
     if (isInvalidLabel || isInvalidAmount) {
       setErrors({ label: isInvalidLabel, amount: isInvalidAmount });
       return;
     }
-    dispatch(saveIncomeDetails({ ...incomeDetails, amount: +amount }));
-    setIncomeDetails(INITIAL_INCOME_DETAILS);
-    setErrors(INITIAL_ERRORS);
+    mutate({ ...incomeDetails, amount: +amount });
   };
 
-  const { label, amount, category } = incomeDetails;
+  const { category, amount, group } = incomeDetails;
 
   return (
     <Modal onClose={onCancel}>
       <form className={classes.add_income__form}>
+        <InfiniteProgressBar isLoading={isPending} />
         <TUITextField
           fullWidth
           label="Income Category"
           id="add-income-form-label"
           inputProps={{ "data-testid": "add-income-form-label-input" }}
-          value={label}
+          value={category}
           onChange={onLabelChange}
           helperText={FORM_ERROR_MESSAGE.label}
           errorMessage={errors.label ? FORM_ERROR_MESSAGE.amount : ""}
@@ -107,7 +129,7 @@ const AddIncome: React.FC<AddIncomeProps> = ({ onCancel }) => {
         />
         <Select
           label="Group"
-          value={category}
+          value={group}
           onChange={onCategoryChange}
           data-testid={`category-option`}
           fullWidth

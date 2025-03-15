@@ -20,6 +20,11 @@
     font-weight: 900;
   }
 }
+.error__message {
+  color: var(--error-color);
+  text-align: center;
+  display: block;
+}
 .auth__form {
   display: flex;
   flex-direction: column;

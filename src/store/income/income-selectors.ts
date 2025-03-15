@@ -2,7 +2,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { AppStoreType } from "src/types/store-types";
 import {
-  IncomeCategory,
+  IncomeGroup,
   IncomeOption,
   IncomeReducerType,
 } from "src/types/income-types";
@@ -20,7 +20,12 @@ export const selectEditableIncomeOption = createSelector(
       (income) => income.id === entryId
     );
     if (!editableIncome)
-      return { amount: 0, label: "", category: "salary" as IncomeCategory };
+      return {
+        id: "",
+        amount: 0,
+        category: "",
+        group: "salary" as IncomeGroup,
+      };
     return editableIncome;
   }
 );
@@ -43,12 +48,12 @@ export const selectRentEligibleDetails = createSelector(
   (salaryIncome) =>
     salaryIncome.reduce(
       (acc, income) => {
-        if (income.label.toLowerCase() === "basic") {
+        if (income.category.toLowerCase() === "basic") {
           return {
             ...acc,
             basic: income.amount,
           };
-        } else if (income.label.toLowerCase() === "hra") {
+        } else if (income.category.toLowerCase() === "hra") {
           return {
             ...acc,
             hra: income.amount,

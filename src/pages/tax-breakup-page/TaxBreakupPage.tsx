@@ -41,4 +41,4 @@ const TaxBreakupPage: React.FC = () => {
     </main>
   );
 };
-export default memo(TaxBreakupPage);
+export default TaxBreakupPage;

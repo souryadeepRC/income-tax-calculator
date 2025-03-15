@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
 import App from "./App";
 import TaxCalculator from "src/pages/income-tax-calculator/TaxCalculator";
-import { useMediaQuery } from "./hooks/useMediaQuery";
-import { Footer, Header } from "./components/common/CommonComponents";
-import { selectAppTheme } from "./store/screen/screen-selectors";
+import { useMediaQuery } from "src/hooks";
+import { Footer, Header } from "src/components/common/CommonComponents";
+import { selectAppTheme } from "src/store/screen/screen-selectors";
 
 jest.mock("src/components/common/CommonComponents", () => ({
   Header: jest.fn(() => <div>Header</div>),

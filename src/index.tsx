@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// library
+import { BrowserRouter } from "react-router";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "react-web-theme";
 // component
-import App from "./App";
+import { App, AppDependency } from "src/application";
 // style
 import "./index.scss";
 // store
@@ -16,7 +18,11 @@ root.render(
   <React.StrictMode>
     <ThemeProvider>
       <Provider store={rootStore}>
-        <App />
+        <BrowserRouter>
+          <AppDependency>
+            <App />
+          </AppDependency>
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>

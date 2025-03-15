@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // library
 import { IconButton } from "@mui/material";
 import { Close as CloseIcon, Widgets } from "@mui/icons-material";
+//components
+import LogOutButton from "src/components/log-out/LogOutButton";
 // store
 import { selectUserName } from "src/store/auth/auth-selectors";
 // constants
@@ -37,6 +39,9 @@ const NavigationMobile: React.FC = () => {
             </IconButton>
           </header>
           <Navigation handleSlider={handleSlider} />
+          <div className="navigation__options">
+            <LogOutButton />
+          </div>
         </section>
       )}
     </main>

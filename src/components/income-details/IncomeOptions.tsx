@@ -33,8 +33,8 @@ const IncomeOptions: React.FC = () => {
         />
       ),
     },
-    { key: "label", label: "Category" },
-    { key: "category", label: "Group" },
+    { key: "category", label: "Category" },
+    { key: "group", label: "Group" },
     {
       key: "amount",
       label: "Amount",

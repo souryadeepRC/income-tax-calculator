@@ -7,6 +7,7 @@ interface CustomButtonProps {
   className?: string;
   tabIndex?: number;
   label?: string;
+  disabled?: boolean;
   variant: ButtonVariant;
   children: JSX.Element | string;
   startIcon?: SvgIconProps;
@@ -22,6 +23,7 @@ const Button: React.FC<CustomButtonProps> = (props) => {
     startIcon: StartIcon,
     endIcon: EndIcon,
     label,
+    disabled,
     border,
     onClick,
     variant,
@@ -35,8 +37,9 @@ const Button: React.FC<CustomButtonProps> = (props) => {
     <button
       tabIndex={tabIndex}
       aria-label={label}
+      disabled={disabled}
       data-testid={`${label}-btn`}
-      className={`Button-root ${variant || ""} ${border || ""} ${className || ""}`}
+      className={`Button-root ${variant || ""} ${border || ""} ${disabled && "Button-disabled"} ${className || ""}`}
       onClick={handleClick}
     >
       {StartIcon && <>{StartIcon}</>}

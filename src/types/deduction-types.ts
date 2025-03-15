@@ -1,5 +1,6 @@
 export type DeductionReducerType = {
   standardDeduction: { newScheme: number; oldScheme: number };
+  
   rent: DeductionByRent;
   section24: DeductionSection24;
   deduction80C: DeductionOption;

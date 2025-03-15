@@ -1,17 +1,19 @@
-import { memo } from "react";
 import { NavLink } from "react-router";
 // icons
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import HomeIcon from "@mui/icons-material/Home";
 import SavingsIcon from "@mui/icons-material/Savings";
 // components
+import LogOutButton from "src/components/log-out/LogOutButton";
 import NavigationMobile from "src/components/navigation/NavigationMobile";
 // types
 import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 // styles
 import "./Navigation.scss";
+import { Button } from "../common/CommonComponents";
+import { useDispatch } from "react-redux";
+import { setLogoutActive } from "src/store/auth/auth-actions";
 
 type CustomSvgIcon = OverridableComponent<SvgIconTypeMap> & {
   muiName?: string;
@@ -37,11 +39,6 @@ const NAVIGATION_LIST: NavigationType[] = [
     label: "Tax Breakup",
     path: "tax-breakup",
     Icon: DashboardIcon,
-  },
-  {
-    label: "Logout",
-    path: "",
-    Icon: HomeIcon,
   },
 ];
 interface NavigationProps {
@@ -71,8 +68,13 @@ export const Navigation: React.FC<NavigationProps> = ({
   );
 };
 
-const NavigationDesktop = memo(() => (
-  <Navigation className="navigation-list" />
-));
+const NavigationDesktop = () => {
+  return (
+    <>
+      <Navigation className="navigation-list" />
+      <LogOutButton />
+    </>
+  );
+};
 
 export { NavigationDesktop, NavigationMobile };

@@ -2,9 +2,9 @@
   display: flex;
   justify-content: flex-end;
   gap: 20px;
-  width: 70%;
   margin: 0;
-  padding: 0.5vw 0;
+  padding: 0 10px;
+  width: 70%;
   list-style-type: none;
   li > a {
     display: flex;
@@ -17,6 +17,9 @@
       font-size: inherit;
     }
   }
+}
+.navigation__logout {
+  font-size: 1rem;
 }
 .navigation_mobile__container {
   .navigation_mobile__icon.MuiSvgIcon-root {
@@ -78,6 +81,11 @@
           }
         }
       }
+    }
+    .navigation__options {
+      padding: 14px;
+      border-top: 1px solid;
+      padding: 15px 30px;
     }
   }
 }
