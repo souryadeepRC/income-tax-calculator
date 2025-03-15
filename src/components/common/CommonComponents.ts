@@ -12,6 +12,7 @@ import Select from "src/components/common/select/Select";
 import Switch from "src/components/common/switch/Switch";
 import ScrollToTop from "src/components/common/scroll-to-top/ScrollToTop";
 import InfiniteProgressBar from "src/components/common/tui-progress-bar/TUIProgressBar";
+import ErrorMessage from "src/components/common/error-message/ErrorMessage";
 
 export {
   Select,
@@ -28,4 +29,5 @@ export {
   Switch,
   ScrollToTop,
   InfiniteProgressBar,
+  ErrorMessage,
 };
