@@ -2,6 +2,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { AppStoreType } from "src/types/store-types";
 import {
+  IncomeDeleteEntry,
   IncomeGroup,
   IncomeOption,
   IncomeReducerType,
@@ -13,6 +14,10 @@ export const selectIncomeOptions = (store: AppStoreType): IncomeOption[] =>
   store.income.options;
 export const selectEditableIncomeEntryId = (store: AppStoreType): string =>
   store.income.editableEntryId;
+export const selectDeleteIncomeEntry = (
+  store: AppStoreType
+): IncomeDeleteEntry | undefined => store.income.deleteEntry;
+
 export const selectEditableIncomeOption = createSelector(
   [selectEditableIncomeEntryId, selectIncomeOptions],
   (entryId, incomeOptions) => {

@@ -7,6 +7,7 @@ import {
   Modal,
   Button,
   InfiniteProgressBar,
+  ErrorMessage,
 } from "src/components/common/CommonComponents";
 // service
 import authService from "src/service/Auth";
@@ -40,11 +41,7 @@ const LogoutPage: React.FC = () => {
     <Modal onClose={onCancel}>
       <div className={classes.logout__container}>
         <InfiniteProgressBar isLoading={isPending} />
-        {isError && (
-          <span className={classes.error__message}>
-            Oops! Something went wrong. Please try again.
-          </span>
-        )}
+        {isError && <ErrorMessage />}
         <div className={classes.logout__message}>
           <h1>Are you sure you want to logout?</h1>
         </div>

@@ -5,9 +5,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   removeIncomeDetails,
   editIncomeEntry,
+  deleteIncomeEntry,
 } from "src/store/income/income-actions";
 import classes from "./IncomeDetails.module.scss";
 import { selectIncomeOptions } from "src/store/income/income-selectors";
+import { IncomeDeleteEntry } from "src/types/income-types";
 
 const IncomeOptions: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,8 +18,8 @@ const IncomeOptions: React.FC = () => {
   const onEdit = (id: string) => {
     dispatch(editIncomeEntry(id));
   };
-  const onRemove = (id: string) => {
-    dispatch(removeIncomeDetails(id));
+  const onRemove = (details: IncomeDeleteEntry) => {
+    dispatch(deleteIncomeEntry(details));
   };
   const columns = [
     {
@@ -29,7 +31,9 @@ const IncomeOptions: React.FC = () => {
           role="button"
           aria-label="income option delete icon button"
           tabIndex={0}
-          onClick={() => onRemove(rowData.id)}
+          onClick={() =>
+            onRemove({ id: rowData.id, category: rowData.category })
+          }
         />
       ),
     },

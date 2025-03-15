@@ -8,6 +8,7 @@ import {
   DELETE_INCOME_DETAILS,
   RESET_EDIT_INCOME_ENTRY,
   LOAD_INCOME_DETAILS,
+  DELETE_INCOME_ENTRY,
 } from "src/store/income/income-constants";
 import { mapDeleteIncomeEntry, mapSaveIncomeEntry } from "./income-mapper";
 
@@ -16,6 +17,7 @@ const initialState: IncomeReducerType = {
   options: [],
   isEditable: false,
   editableEntryId: "",
+  deleteEntry: undefined,
 };
 const IncomeReducer = (
   state = initialState,
@@ -40,6 +42,12 @@ const IncomeReducer = (
         ...(payload ? { editableEntryId: payload } : {}),
       };
     }
+    case DELETE_INCOME_ENTRY: {
+      return {
+        ...state,
+        deleteEntry: payload,
+      };
+    }
     case RESET_EDIT_INCOME_ENTRY: {
       return {
         ...state,
@@ -57,6 +65,7 @@ const IncomeReducer = (
       return {
         ...state,
         ...mapDeleteIncomeEntry(state, payload, initialState),
+        deleteEntry: undefined,
       };
     }
     default:
