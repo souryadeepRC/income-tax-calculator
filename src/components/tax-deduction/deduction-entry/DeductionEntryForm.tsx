@@ -3,7 +3,7 @@ import React, { memo, useState, useEffect } from "react";
 import { MenuItem } from "@mui/material";
 import { TUITextField } from "triva-ui";
 // components
-import { Button, Select } from "src/components/common/CommonComponents";
+import { Button, Select } from "src/components/common";
 // utils
 import { updateState } from "src/utils/common-utils";
 // constants

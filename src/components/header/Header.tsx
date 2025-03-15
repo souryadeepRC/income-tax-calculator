@@ -7,7 +7,7 @@ import { ThemeButton } from "react-web-theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { Button, Modal } from "src/components/common/CommonComponents";
+import { Button, Modal } from "src/components/common";
 const Auth = lazy(() => import("src/components/auth/Auth"));
 import {
   NavigationMobile,

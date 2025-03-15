@@ -8,7 +8,7 @@ import {
   IncomeHeader,
   IncomeOptions,
 } from "src/components/income-details";
-import { Modal } from "src/components/common/CommonComponents";
+import { Modal } from "src/components/common";
 // store
 import { resetEditIncomeEntry } from "src/store/income/income-actions";
 import { selectIncome } from "src/store/income/income-selectors";

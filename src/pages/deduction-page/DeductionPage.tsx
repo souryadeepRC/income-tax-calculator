@@ -3,7 +3,7 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router";
 // components
-import { RouteLayout } from "src/components/common/CommonComponents";
+import { RouteLayout } from "src/components/common";
 import DataLayout from "src/components/layout/DataLayout";
 // selectors
 import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors";

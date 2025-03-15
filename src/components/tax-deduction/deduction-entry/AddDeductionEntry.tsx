@@ -1,6 +1,6 @@
 import { memo } from "react";
 // library
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 // styles
 import classes from "./DeductionEntry.module.scss";
 

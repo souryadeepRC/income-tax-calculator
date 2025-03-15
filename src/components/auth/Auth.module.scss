@@ -44,6 +44,9 @@
     .TUIPassword_rule_popover__container .TUIPassword_rule_popover__content
   ) {
     background-color: var(--primary-color);
+    max-width: 400px;
+    overflow: auto;
+    transform: translateX(60%) translateY(-105%);
     :global(.pass) {
       color: var(--secondary-color);
     }

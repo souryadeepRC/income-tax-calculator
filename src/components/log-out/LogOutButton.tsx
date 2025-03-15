@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 // components
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 // store
 import { setLogoutActive } from "src/store/auth/auth-actions";
 

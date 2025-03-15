@@ -19,6 +19,16 @@
   padding: 46px 0 10px 0;
   overflow: auto;
 }
+body {
+  .TUIText_field__container {
+    label {
+      color: var(--secondary-color);
+    }
+    .error__msg {
+      color: var(--error-color);
+    }
+  }
+}
 
 @media (max-width: $mobile-max-width) {
   .MuiPaper-root {

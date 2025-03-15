@@ -2,7 +2,7 @@ import { memo, useCallback } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
-import { Modal } from "src/components/common/CommonComponents";
+import { Modal } from "src/components/common";
 import DeductionEntry from "src/components/tax-deduction/deduction-entry/DeductionEntry";
 import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
 import AddDeductionEntry from "src/components/tax-deduction/deduction-entry/AddDeductionEntry";

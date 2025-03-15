@@ -1,9 +1,7 @@
 // components
-import {
-  Footer,
-  Header,
-  ScrollToTop,
-} from "src/components/common/CommonComponents";
+import { ScrollToTop } from "src/components/common";
+import Header from "src/components/header/Header";
+import Footer from "src/components/footer/Footer";
 import AppContent from "./AppContent";
 import { LogoutPage, FallbackPage } from "src/pages";
 // hooks

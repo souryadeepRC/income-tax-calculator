@@ -8,7 +8,7 @@ import {
   Button,
   InfiniteProgressBar,
   ErrorMessage,
-} from "src/components/common/CommonComponents";
+} from "src/components/common";
 // service
 import authService from "src/service/Auth";
 // store

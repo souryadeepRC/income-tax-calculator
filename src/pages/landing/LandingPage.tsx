@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 // components
 import AppIntro from "./components/AppIntro";
 import Features from "./components/Features";
-import { Modal } from "src/components/common/CommonComponents";
+import { Modal } from "src/components/common";
 // store
 import {
   selectIsDataLoading,

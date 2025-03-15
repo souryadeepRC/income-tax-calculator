@@ -25,7 +25,7 @@ import {
 import { DEDUCTION_80C_OPTIONS } from "src/constants/common-constants";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
-import { Modal } from "src/components/common/CommonComponents";
+import { Modal } from "src/components/common";
 
 const Deduction80C = () => {
   // store

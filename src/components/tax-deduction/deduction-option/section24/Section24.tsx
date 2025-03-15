@@ -3,7 +3,7 @@ import { memo, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TUITextField } from "triva-ui";
 // components
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 // actions
 import { updateSection24Deduction } from "src/store/deduction/deduction-actions";
 // selectors

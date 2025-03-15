@@ -1,4 +1,4 @@
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 // icons
 import AddCardIcon from "@mui/icons-material/AddCard";
 import classes from "./IncomeDetails.module.scss";

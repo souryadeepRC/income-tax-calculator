@@ -1,7 +1,7 @@
 import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 //actions
 import { editRentEntry } from "src/store/deduction/deduction-actions";
 // selectors

@@ -5,7 +5,7 @@ import { useToggle } from "triva-ui";
 // components
 import Login from "src/components/auth/login/Login";
 import SignUp from "src/components/auth/signup/SignUp";
-import { Button } from "src/components/common/CommonComponents";
+import { Button } from "src/components/common";
 // store
 import { createUser, loginUser } from "src/store/auth/auth-actions";
 // types

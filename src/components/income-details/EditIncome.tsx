@@ -8,7 +8,7 @@ import {
   ErrorMessage,
   Button,
   InfiniteProgressBar,
-} from "src/components/common/CommonComponents";
+} from "src/components/common";
 // service
 import dbService from "src/service/Database";
 // store

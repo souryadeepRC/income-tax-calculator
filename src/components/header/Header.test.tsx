@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { AppTheme } from "src/components/common/CommonComponents";
+import { AppTheme } from "src/components/common";
 import {
   NavigationDesktop,
   NavigationMobile,
@@ -14,7 +14,7 @@ jest.mock("src/components/navigation/Navigation", () => ({
   NavigationDesktop: jest.fn(),
   NavigationMobile: jest.fn(),
 }));
-jest.mock("src/components/common/CommonComponents", () => ({
+jest.mock("src/components/common", () => ({
   AppTheme: jest.fn(),
 }));
 const MockNavigationDesktop = NavigationDesktop as jest.MockedFunction<

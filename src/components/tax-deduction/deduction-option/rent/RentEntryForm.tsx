@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { TUITextField } from "triva-ui";
 import { Switch } from "@mui/material";
 // components
-import { Modal, Button } from "src/components/common/CommonComponents";
+import { Modal, Button } from "src/components/common";
 // actions
 import {
   resetEditRentEntry,

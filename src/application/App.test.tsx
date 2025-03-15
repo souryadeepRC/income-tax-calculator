@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import App from "./App";
 import TaxCalculator from "src/pages/income-tax-calculator/TaxCalculator";
 import { useMediaQuery } from "src/hooks";
-import { Footer, Header } from "src/components/common/CommonComponents";
+import { Footer, Header } from "src/components/common";
 import { selectAppTheme } from "src/store/screen/screen-selectors";
 
-jest.mock("src/components/common/CommonComponents", () => ({
+jest.mock("src/components/common", () => ({
   Header: jest.fn(() => <div>Header</div>),
   Footer: jest.fn(() => <div>Footer</div>),
 }));

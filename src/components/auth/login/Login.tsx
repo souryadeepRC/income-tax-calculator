@@ -7,7 +7,7 @@ import { TUITextField, TUIPassword } from "triva-ui";
 import {
   Button,
   InfiniteProgressBar,
-} from "src/components/common/CommonComponents";
+} from "src/components/common";
 // service
 import authService from "src/service/Auth";
 // store
