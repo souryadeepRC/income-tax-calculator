@@ -9,6 +9,7 @@ import Switch from "src/components/common/switch/Switch";
 import ScrollToTop from "src/components/common/scroll-to-top/ScrollToTop";
 import ErrorMessage from "src/components/common/error-message/ErrorMessage";
 import InfiniteProgressBar from "src/components/common/infinite-progress-bar/InfiniteProgressBar";
+import { Card, CardWrapper } from "src/components/common/card/Card";
 
 export {
   Select,
@@ -21,4 +22,6 @@ export {
   ScrollToTop,
   ErrorMessage,
   InfiniteProgressBar,
+  Card,
+  CardWrapper,
 };
