@@ -24,3 +24,10 @@
     flex-wrap: wrap;
   }
 }
+.card__wrapper {
+  display: flex;
+  gap: 15px;
+  overflow: auto;
+  max-width: 80vw;
+  padding: 15px;
+}

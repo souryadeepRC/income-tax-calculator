@@ -2,9 +2,8 @@ import { memo, useCallback } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
-import DeductionEntry from "src/components/tax-deduction/deduction-entry/DeductionEntry";
+import DeductionHeader from "src/components/tax-deduction/DeductionHeader";
 import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
-import AddDeductionEntry from "src/components/tax-deduction/deduction-entry/AddDeductionEntry";
 // actions
 import {
   delete80CEntry,
@@ -25,7 +24,7 @@ import {
 import { DEDUCTION_80C_OPTIONS } from "src/constants/common-constants";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
-import { Modal } from "src/components/common";
+import { Card, CardWrapper, Modal } from "src/components/common";
 
 const Deduction80C = () => {
   // store
@@ -85,26 +84,30 @@ const Deduction80C = () => {
           />
         </Modal>
       )}
-      <AddDeductionEntry
-        deductedAmount={deductedAmount}
-        deductionSection="Section 80C"
-        onAddDeduction={onAddDeduction}
+      <DeductionHeader
+        title="Section 80C"
+        amount={deductedAmount}
+        addAction={onAddDeduction}
       />
 
-      <section>
+      <CardWrapper>
         {options.map((deductionOption) => (
-          <DeductionEntry
+          <Card
+            content={{
+              amountLabel: `Rs. ${formatNumber(deductionOption.amount)}`,
+              title: DEDUCTION_80C_OPTIONS[deductionOption.category],
+              description: deductionOption.maxLimit
+                ? `Max Limit : ${deductionOption.maxLimit}`
+                : undefined,
+            }}
             key={deductionOption.category}
-            onDelete={() => dispatch(delete80CEntry(deductionOption?.id || ""))}
-            onModify={() => dispatch(edit80CEntry(deductionOption.id))}
-          >
-            <>
-              <span>{DEDUCTION_80C_OPTIONS[deductionOption.category]}</span>
-              <span>Rs. {formatNumber(deductionOption.amount)}</span>
-            </>
-          </DeductionEntry>
+            deleteAction={() =>
+              dispatch(delete80CEntry(deductionOption?.id || ""))
+            }
+            editAction={() => dispatch(edit80CEntry(deductionOption.id))}
+          />
         ))}
-      </section>
+      </CardWrapper>
     </main>
   );
 };

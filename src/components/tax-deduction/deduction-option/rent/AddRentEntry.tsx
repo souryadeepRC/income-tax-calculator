@@ -1,6 +1,8 @@
 import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
+// components
+import { DeductionHeader } from "src/components/tax-deduction";
 import { Button } from "src/components/common";
 //actions
 import { editRentEntry } from "src/store/deduction/deduction-actions";
@@ -27,22 +29,16 @@ const AddRentEntry: React.FC = () => {
         className={classes.add_rent__container}
         aria-label="add rent option"
       >
-        <p>You will get an exemption of Rs.{deductedAmount} from Rent</p>
-        {isRentEligible ? (
-          <Button
-            variant="contained"
-            border="round"
-            data-testid="add-rent-btn"
-            onClick={onAddRent}
-          >
-            Add Rent
-          </Button>
-        ) : (
-          <span>
-            To add rent details, please include the basic salary and HRA
-            components of your income.
-          </span>
-        )}
+        <DeductionHeader
+          title="Rent"
+          amount={deductedAmount}
+          addAction={isRentEligible ? onAddRent : undefined}
+        />
+
+        <span>
+          To add rent details, please include the basic salary and HRA
+          components of your income.
+        </span>
       </section>
     </>
   );

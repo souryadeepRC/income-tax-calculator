@@ -2,10 +2,9 @@ import { memo, useCallback } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
-import { Modal } from "src/components/common";
-import DeductionEntry from "src/components/tax-deduction/deduction-entry/DeductionEntry";
+import { Card, CardWrapper, Modal } from "src/components/common";
+import DeductionHeader from "src/components/tax-deduction/DeductionHeader";
 import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
-import AddDeductionEntry from "src/components/tax-deduction/deduction-entry/AddDeductionEntry";
 // actions
 import {
   deleteChapterVIEntry,
@@ -91,30 +90,32 @@ const ChapterVI: React.FC = () => {
           />
         </Modal>
       )}
-      <AddDeductionEntry
-        deductedAmount={deductedAmount}
-        deductionSection="Chapter VIA"
-        onAddDeduction={onAddDeduction}
+
+      <DeductionHeader
+        title="Chapter VIA"
+        amount={deductedAmount}
+        addAction={onAddDeduction}
       />
 
-      <section>
+      <CardWrapper>
         {options.map((deductionOption) => (
-          <DeductionEntry
+          <Card
             key={deductionOption.category}
-            onDelete={() =>
+            deleteAction={() =>
               dispatch(deleteChapterVIEntry(deductionOption?.id || ""))
             }
-            onModify={() => dispatch(editChapterVIEntry(deductionOption.id))}
-          >
-            <>
-              <span>
-                {DEDUCTION_CHAPTER_VI_OPTIONS[deductionOption.category].label}
-              </span>
-              <span>Rs. {formatNumber(deductionOption.amount)}</span>
-            </>
-          </DeductionEntry>
+            editAction={() => dispatch(editChapterVIEntry(deductionOption.id))}
+            content={{
+              title:
+                DEDUCTION_CHAPTER_VI_OPTIONS[deductionOption.category].label,
+              amountLabel: `Rs. ${formatNumber(deductionOption.amount)}`,
+              description: deductionOption.maxLimit
+                ? `Max Limit: ${deductionOption.maxLimit}`
+                : "",
+            }}
+          />
         ))}
-      </section>
+      </CardWrapper>
     </main>
   );
 };

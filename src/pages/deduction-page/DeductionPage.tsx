@@ -1,7 +1,7 @@
 import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 // components
 import { RouteLayout } from "src/components/common";
 // selectors
@@ -10,20 +10,26 @@ import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors"
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./DeductionPage.module.scss";
+import DeductionNavigation from "./DeductionNavigation";
 
 const DeductionPage: React.FC = () => {
   const deductionBreakup = useSelector(selectDeductionBreakup);
+
   return (
     <>
-      <div className={classes.deduction_page__container}>
-        <strong data-testid="layout-header">Overall Exempted Deduction</strong>
-        <strong data-testid="layout-amount">
-          Rs. {formatNumber(deductionBreakup.total)}
-        </strong>
-      </div>
-      <RouteLayout parentPath="deduction" label="">
+      <section className={classes.deduction_page__container}>
+        <div className={classes.deduction_page__header}>
+          <h2>Track Your Deduction with Ease</h2>
+          <div className={classes.deduction_amount__label}>
+            <span>Rs.</span>
+            <span>{formatNumber(deductionBreakup.total)}</span>
+          </div>
+        </div>
+        <DeductionNavigation />
+      </section>
+      <div className={classes.deduction_outlet__container}>
         <Outlet />
-      </RouteLayout>
+      </div>
     </>
   );
 };

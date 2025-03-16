@@ -19,21 +19,3 @@ describe("test DeductionEntry component", () => {
     expect(mockOnModify).toHaveBeenCalled();
   });
 });
-
-describe("test AddDeductionEntry component", () => {
-  test("render the AddDeductionEntry component with default content and action icons", () => {
-    const mockOnAddDeduction = jest.fn();
-    render(
-      <AddDeductionEntry
-        deductedAmount={100}
-        deductionSection="Sample"
-        onAddDeduction={mockOnAddDeduction}
-      />
-    );
-    expect(
-      screen.getByText("You will get an exemption of Rs.100 from Sample")
-    ).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId("add-deduction-btn"));
-    expect(mockOnAddDeduction).toHaveBeenCalled();
-  });
-});
