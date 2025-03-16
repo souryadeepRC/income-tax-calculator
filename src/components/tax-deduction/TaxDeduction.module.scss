@@ -19,3 +19,40 @@
     font-size: 1.1rem;
   }
 }
+
+.deduction_delete__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  width: 60vw;
+  max-width: 400px;
+
+  .delete__message {
+    h1 {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: var(--secondary-color);
+
+      span {
+        font-size: 1.2rem;
+        font-style: italic;
+        font-weight: 900;
+      }
+    }
+  }
+  .action__buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+    :global(.Button-root) {
+      padding: 10px 20px;
+    }
+  }
+}

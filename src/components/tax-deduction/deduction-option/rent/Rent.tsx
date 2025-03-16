@@ -1,44 +1,51 @@
 import { memo, useCallback, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // hooks
-import useRentExemption from "src/hooks/useRentExemption";
+import { useDeductionActionEntry, useRentExemption } from "src/hooks";
 // selectors
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
 // components
-import RentCollection from "./RentCollection";
+import RentOptions from "./RentOptions";
 import AddRentEntry from "./AddRentEntry";
 import RentEntryForm from "./RentEntryForm";
+import { DeleteDeduction } from "src/components/tax-deduction";
+// store
+import { deleteRentEntry } from "src/store/deduction/deduction-actions";
+// constants
+import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // types
 import { DeductionByRent } from "src/types/deduction-types";
 
 const TOTAL_RENT_DURATION = 12;
 
 const Rent = () => {
-  const { options, isEditable, editableEntryId }: DeductionByRent =
-    useSelector(selectRentDeduction);
+  const dispatch = useDispatch();
+  const { isEditable, entryId, isDelete } = useDeductionActionEntry(
+    DEDUCTION_TYPE.RENT
+  );
+  const { options }: DeductionByRent = useSelector(selectRentDeduction);
 
   useRentExemption();
 
   const getEditableEntryDetails = useCallback(() => {
-    const rentEntry = options.find(
-      (rentEntry) => rentEntry.id === editableEntryId
-    );
+    const rentEntry = options.find((rentEntry) => rentEntry.id === entryId);
     if (!rentEntry) return undefined;
-    const { amount, duration, isMetroCity } = rentEntry;
+    const { id, amount, duration, isMetroCity } = rentEntry;
     return {
+      id,
       amount: `${amount}`,
       duration: `${duration}`,
       isMetroCity,
     };
-  }, [options, editableEntryId]);
+  }, [options, entryId]);
 
   const totalDuration: number = useMemo(
     () =>
       options.reduce((acc, rentEntry) => {
-        if (rentEntry.id === editableEntryId) return acc;
+        if (rentEntry.id === entryId) return acc;
         return acc + rentEntry.duration;
       }, 0),
-    [options, editableEntryId]
+    [options, entryId]
   );
 
   return (
@@ -49,8 +56,15 @@ const Rent = () => {
           rentEntry={getEditableEntryDetails()}
         />
       )}
+      {isDelete && entryId && (
+        <DeleteDeduction
+          title="Rent"
+          entryId={entryId}
+          onDelete={() => dispatch(deleteRentEntry(entryId))}
+        />
+      )}
       <AddRentEntry />
-      <RentCollection collections={options} />
+      <RentOptions options={options} />
     </>
   );
 };

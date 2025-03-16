@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 // components
 import { Card, CardWrapper, Modal } from "src/components/common";
 import DeductionHeader from "src/components/tax-deduction/DeductionHeader";
-import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
 // actions
 import {
   deleteChapterVIEntry,
@@ -25,6 +24,7 @@ import {
 import { DEDUCTION_CHAPTER_VI_OPTIONS } from "src/constants/common-constants";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
+import Section80CEntryForm from "../../deduction-entry/Section80CEntryForm";
 
 const ChapterVI: React.FC = () => {
   // store
@@ -82,11 +82,9 @@ const ChapterVI: React.FC = () => {
     <main>
       {isEditable && (
         <Modal onClose={onReset}>
-          <DeductionEntryForm
+          <Section80CEntryForm
             entry={getEditableEntryDetails()}
             options={getDeductionOptions()}
-            onSave={onSave}
-            onReset={onReset}
           />
         </Modal>
       )}

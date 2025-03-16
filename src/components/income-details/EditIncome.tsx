@@ -2,41 +2,41 @@ import { useEffect, useState } from "react";
 // library
 import { TUITextField } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // components
-import {
-  ErrorMessage,
-  Button,
-  InfiniteProgressBar,
-} from "src/components/common";
+import { EntryFormModal } from "src/components/common";
 // service
 import dbService from "src/service/Database";
 // store
 import {
-  resetEditIncomeEntry,
+  resetActionIncomeEntry,
   saveIncomeDetails,
 } from "src/store/income/income-actions";
-import { selectEditableIncomeOption } from "src/store/income/income-selectors";
-// constants
-import { NUMERIC_REGEX } from "src/constants/common-constants";
+// types
+import { IncomeOption } from "src/types/income-types";
+// utils
+import { getAmountError } from "src/utils/income-utils";
 // styles
-import classes from "./IncomeEditModal.module.scss";
+import classes from "./IncomeDetails.module.scss";
 
-const EditIncome: React.FC = () => {
+interface EditIncomeProps {
+  entry: IncomeOption;
+}
+const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
   const dispatch = useDispatch();
-  const { mutate, isPending, isSuccess, isError } = useMutation({
+
+  const { id, amount, group, category } = entry;
+  const [editableAmount, setEditableAmount] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const { mutate, isPending, isError } = useMutation({
     mutationFn: (incomeDetails: any) =>
       dbService.updateDetails("income", incomeDetails),
+    onSuccess: (data) => {
+      const { $id: id, group, category, amount } = data || {};
+      dispatch(saveIncomeDetails({ id, group, category, amount }));
+    },
   });
-  const { id, amount, group, category } = useSelector(
-    selectEditableIncomeOption
-  );
-  const [editableAmount, setEditableAmount] = useState<string>("");
-
-  useEffect(() => {
-    if (!isSuccess) return;
-    dispatch(saveIncomeDetails({ group, category, amount: +editableAmount }));
-  }, [isSuccess]);
 
   useEffect(() => {
     setEditableAmount(`${amount}`);
@@ -44,57 +44,49 @@ const EditIncome: React.FC = () => {
 
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditableAmount(event.target.value);
+    setError(getAmountError(event.target.value));
   };
   const onCancel = () => {
-    dispatch(resetEditIncomeEntry());
+    dispatch(resetActionIncomeEntry());
   };
   const onSave = () => {
-    if (!NUMERIC_REGEX.test(editableAmount)) return;
+    if (error) return;
+    const errorMessage = getAmountError(editableAmount);
+    if (errorMessage) {
+      setError(errorMessage);
+      return;
+    }
+
     mutate({ id, group, category, amount: +editableAmount });
   };
-  const isAmountError = !NUMERIC_REGEX.test(editableAmount);
 
   return (
-    <div className={classes.income_edit__container}>
-      <InfiniteProgressBar isLoading={isPending} />
-      {isError && <ErrorMessage />}
-      <div className={classes.edit__header}>
-        <strong>Previous Amount</strong>
-        <label>
-          {category}: Rs. {amount}
-        </label>
+    <EntryFormModal
+      isPending={isPending}
+      isError={isError}
+      onCancel={onCancel}
+      onSave={onSave}
+      saveBtnLabel="Modify Income"
+    >
+      <div className={classes.income_edit__container}>
+        <div className={classes.edit__header}>
+          <strong>Previous Amount</strong>
+          <label>
+            {category}: Rs. {amount}
+          </label>
+        </div>
+        <TUITextField
+          isRequired
+          fullWidth
+          label="Amount"
+          id="edit-income-amount"
+          inputProps={{ "data-testid": "edit-income-amount-input" }}
+          value={editableAmount}
+          onChange={onAmountChange}
+          errorMessage={error}
+        />
       </div>
-      <TUITextField
-        fullWidth
-        label="Amount"
-        id="edit-income-amount"
-        inputProps={{ "data-testid": "edit-income-amount-input" }}
-        value={editableAmount}
-        onChange={onAmountChange}
-        errorMessage={
-          isAmountError
-            ? "Enter a valid amount ( max 2 decimal ) more than 0 (e.g. 100.50 or 100)"
-            : ""
-        }
-      />
-      <div className={classes.action_btn__container}>
-        <Button
-          variant="text"
-          data-testid="edit-income-cancel"
-          onClick={onCancel}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          border="round"
-          data-testid="edit-income-save"
-          onClick={onSave}
-        >
-          Save
-        </Button>
-      </div>
-    </div>
+    </EntryFormModal>
   );
 };
 export default EditIncome;

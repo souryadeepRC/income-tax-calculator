@@ -1,71 +1,58 @@
-import { useEffect } from "react";
 // library
 import { useMutation } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // components
-import {
-  ErrorMessage,
-  Modal,
-  Button,
-  InfiniteProgressBar,
-} from "src/components/common";
+import { EntryFormModal } from "src/components/common";
 // service
 import dbService from "src/service/Database";
 // store
 import {
-  deleteIncomeEntry,
   removeIncomeDetails,
+  resetActionIncomeEntry,
 } from "src/store/income/income-actions";
-import { selectDeleteIncomeEntry } from "src/store/income/income-selectors";
+// types
+import { IncomeOption } from "src/types/income-types";
 // styles
 import classes from "./IncomeDetails.module.scss";
 
-const DeleteIncome: React.FC = () => {
+interface DeleteIncomeProps {
+  entry: IncomeOption;
+}
+const DeleteIncome: React.FC<DeleteIncomeProps> = ({ entry }) => {
   const dispatch = useDispatch();
+  const { id, category } = entry;
+
   const { mutate, isPending, isSuccess, isError } = useMutation({
     mutationFn: (id: string) => dbService.deleteDetails("income", id),
+    onSuccess: () => {
+      dispatch(removeIncomeDetails(id));
+    },
   });
-  const { id = "", category = "" } = useSelector(selectDeleteIncomeEntry) || {};
-
-  useEffect(() => {
-    if (!isSuccess) return;
-    dispatch(removeIncomeDetails(id));
-  }, [isSuccess]);
 
   const onCancel = () => {
-    dispatch(deleteIncomeEntry(undefined));
+    dispatch(resetActionIncomeEntry());
   };
   const onRemove = () => {
     mutate(id);
   };
 
-  if (!id) return <></>;
   return (
-    <Modal onClose={onCancel}>
+    <EntryFormModal
+      isPending={isPending}
+      isError={isError}
+      onCancel={onCancel}
+      onSave={onRemove}
+      saveBtnLabel="Yes, Remove"
+    >
       <div className={classes.income_delete__container}>
-        <InfiniteProgressBar isLoading={isPending} />
-        {isError && <ErrorMessage />}
         <div className={classes.delete__message}>
           <h1>
             Are you sure you want to Delete&nbsp;
             <span>{category}</span>&nbsp;Income?
           </h1>
         </div>
-        <div className={classes.action__buttons}>
-          <Button
-            variant="contained"
-            border="round"
-            className="btn-home"
-            onClick={onRemove}
-          >
-            Yes,&nbsp;Remove
-          </Button>
-          <Button variant="text" className="btn-login" onClick={onCancel}>
-            Cancel
-          </Button>
-        </div>
       </div>
-    </Modal>
+    </EntryFormModal>
   );
 };
 export default DeleteIncome;

@@ -15,9 +15,11 @@ import { mapDeleteIncomeEntry, mapSaveIncomeEntry } from "./income-mapper";
 const initialState: IncomeReducerType = {
   overallAmount: 0,
   options: [],
-  isEditable: false,
-  editableEntryId: "",
-  deleteEntry: undefined,
+  actionEntry: {
+    entryId: "",
+    isEditable: false,
+    isDelete: false,
+  },
 };
 const IncomeReducer = (
   state = initialState,
@@ -38,34 +40,41 @@ const IncomeReducer = (
     case EDIT_INCOME_ENTRY: {
       return {
         ...state,
-        isEditable: true,
-        ...(payload ? { editableEntryId: payload } : {}),
+        actionEntry: {
+          ...state.actionEntry,
+          isEditable: true,
+          ...(payload ? { entryId: payload } : {}),
+        },
       };
     }
     case DELETE_INCOME_ENTRY: {
       return {
         ...state,
-        deleteEntry: payload,
+        actionEntry: {
+          ...state.actionEntry,
+          isDelete: true,
+          entryId: payload,
+        },
       };
     }
     case RESET_EDIT_INCOME_ENTRY: {
       return {
         ...state,
-        isEditable: initialState.isEditable,
-        editableEntryId: initialState.editableEntryId,
+        actionEntry: initialState.actionEntry,
       };
     }
     case SAVE_INCOME_DETAILS: {
       return {
         ...state,
-        ...mapSaveIncomeEntry(state, payload, initialState),
+        ...mapSaveIncomeEntry(state, payload),
+        actionEntry: initialState.actionEntry,
       };
     }
     case DELETE_INCOME_DETAILS: {
       return {
         ...state,
-        ...mapDeleteIncomeEntry(state, payload, initialState),
-        deleteEntry: undefined,
+        ...mapDeleteIncomeEntry(state, payload),
+        actionEntry: initialState.actionEntry,
       };
     }
     default:

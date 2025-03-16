@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRentDeductedAmount } from "src/store/deduction/deduction-actions";
-import { selectRentCollections } from "src/store/deduction/deduction-selectors";
+import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 import { RentEntry } from "src/types/deduction-types";
 import { calculateRentDeduction } from "src/utils/tax-calculation";
@@ -11,7 +11,7 @@ type RentBreakup = {
 };
 const useRentExemption = (): void => {
   const dispatch = useDispatch();
-  const collections = useSelector(selectRentCollections);
+  const options = useSelector(selectRentOptions);
   const { basic, hra } = useSelector(selectRentEligibleDetails);
   const calculateRentDeductedAmount = (
     rentCollections: RentEntry[],
@@ -55,8 +55,8 @@ const useRentExemption = (): void => {
   };
 
   useEffect(() => {
-    const deductedAmount = calculateRentDeductedAmount(collections, basic, hra);
+    const deductedAmount = calculateRentDeductedAmount(options, basic, hra);
     dispatch(setRentDeductedAmount(deductedAmount));
-  }, [dispatch, basic, hra, collections]);
+  }, [dispatch, basic, hra, options]);
 };
 export default useRentExemption;

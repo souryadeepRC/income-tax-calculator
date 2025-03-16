@@ -4,10 +4,7 @@ import { useDispatch } from "react-redux";
 import { TUITextField, TUIPassword } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
 // components
-import {
-  Button,
-  InfiniteProgressBar,
-} from "src/components/common";
+import { Button, InfiniteProgressBar } from "src/components/common";
 // service
 import authService from "src/service/Auth";
 // store
@@ -96,7 +93,13 @@ const SignUp: React.FC = () => {
       });
       return;
     }
-    mutate(signupData);
+
+    const { name, email, password } = signupData;
+    mutate({
+      name: name.trim(),
+      email: email.trim(),
+      password: password.trim(),
+    });
   };
   const { name, email, password } = signupData;
   return (

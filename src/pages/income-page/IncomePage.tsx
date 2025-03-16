@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
@@ -8,29 +8,35 @@ import {
   IncomeHeader,
   IncomeOptions,
 } from "src/components/income-details";
-import { Modal } from "src/components/common";
 // store
 import { resetEditIncomeEntry } from "src/store/income/income-actions";
-import { selectIncome } from "src/store/income/income-selectors";
+import {
+  selectIncomeActionEntry,
+  selectIncomeOptions,
+} from "src/store/income/income-selectors";
 import DeleteIncome from "src/components/income-details/DeleteIncome";
 
 const IncomePage: React.FC = () => {
   const dispatch = useDispatch();
-  const { isEditable, editableEntryId } = useSelector(selectIncome);
-  const handleEditIncomeReset = () => {
-    dispatch(resetEditIncomeEntry());
-  };
+  const options = useSelector(selectIncomeOptions);
+  const { isEditable, entryId, isDelete } = useSelector(
+    selectIncomeActionEntry
+  );
+  const actionEntry = useMemo(() => {
+    return options.find((option) => option.id === entryId);
+  }, [isDelete, isEditable]);
 
   return (
     <>
-      {isEditable && (
-        <Modal onClose={handleEditIncomeReset}>
-          {editableEntryId ? <EditIncome /> : <AddIncome />}
-        </Modal>
-      )}
-      <DeleteIncome />
+      {isEditable &&
+        (entryId && actionEntry ? (
+          <EditIncome entry={actionEntry} />
+        ) : (
+          <AddIncome />
+        ))}
+      {isDelete && actionEntry && <DeleteIncome entry={actionEntry} />}
       <IncomeHeader />
-      <IncomeOptions />
+      <IncomeOptions options={options} />
     </>
   );
 };

@@ -1,13 +1,16 @@
 export interface IncomeReducerType {
   overallAmount: number;
   options: IncomeOption[];
+  actionEntry: ActionEntry;
+}
+export interface ActionEntry {
+  entryId: string;
   isEditable: boolean;
-  editableEntryId: string;
-  deleteEntry: IncomeDeleteEntry | undefined;
+  isDelete: boolean;
 }
 export type IncomeGroup = "salary" | "extra";
 export interface IncomeOption {
-  id?: string;
+  id: string;
   category: string;
   amount: number;
   group: IncomeGroup;

@@ -2,6 +2,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { AppStoreType } from "src/types/store-types";
 import {
+  ActionEntry,
   IncomeDeleteEntry,
   IncomeGroup,
   IncomeOption,
@@ -10,39 +11,18 @@ import {
 
 export const selectIncome = (store: AppStoreType): IncomeReducerType =>
   store.income;
+export const selectIncomeActionEntry = (store: AppStoreType): ActionEntry =>
+  store.income.actionEntry;
 export const selectIncomeOptions = (store: AppStoreType): IncomeOption[] =>
   store.income.options;
-export const selectEditableIncomeEntryId = (store: AppStoreType): string =>
-  store.income.editableEntryId;
-export const selectDeleteIncomeEntry = (
-  store: AppStoreType
-): IncomeDeleteEntry | undefined => store.income.deleteEntry;
 
-export const selectEditableIncomeOption = createSelector(
-  [selectEditableIncomeEntryId, selectIncomeOptions],
-  (entryId, incomeOptions) => {
-    const editableIncome = incomeOptions.find(
-      (income) => income.id === entryId
-    );
-    if (!editableIncome)
-      return {
-        id: "",
-        amount: 0,
-        category: "",
-        group: "salary" as IncomeGroup,
-      };
-    return editableIncome;
-  }
-);
 export const selectSalaryIncome = createSelector(
   [selectIncomeOptions],
-  (incomeOptions) =>
-    incomeOptions.filter((income) => income.category === "salary")
+  (incomeOptions) => incomeOptions.filter((income) => income.group === "salary")
 );
 export const selectExtraIncome = createSelector(
   [selectIncomeOptions],
-  (incomeOptions) =>
-    incomeOptions.filter((income) => income.category === "extra")
+  (incomeOptions) => incomeOptions.filter((income) => income.group === "extra")
 );
 
 export const selectOverallIncomeAmount = (store: AppStoreType): number =>

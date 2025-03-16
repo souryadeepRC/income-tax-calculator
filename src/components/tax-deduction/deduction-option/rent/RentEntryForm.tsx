@@ -1,25 +1,28 @@
 import React, { memo, useState, useEffect } from "react";
 // library
 import { useDispatch } from "react-redux";
+import { useMutation } from "@tanstack/react-query";
 import { TUITextField } from "triva-ui";
 import { Switch } from "@mui/material";
 // components
-import { Modal, Button } from "src/components/common";
+import { EntryFormModal } from "src/components/common";
+// service
+import dbService from "src/service/Database";
 // actions
 import {
-  resetEditRentEntry,
+  resetDeductionAction,
   saveRentEntry,
 } from "src/store/deduction/deduction-actions";
 // utils
 import { updateState } from "src/utils/common-utils";
 // constants
-import { NUMERIC_REGEX } from "src/constants/common-constants";
+import { DEDUCTION_TYPE, NUMERIC_REGEX } from "src/constants/common-constants";
 // styles
 import classes from "./Rent.module.scss";
 
 interface RentEntryFormProps {
   durationLeft: number;
-  rentEntry: EntryInput | undefined;
+  rentEntry: any;
 }
 interface EntryInput {
   amount: string;
@@ -43,6 +46,22 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   durationLeft,
   rentEntry,
 }) => {
+  const { mutate, isPending, isError } = useMutation({
+    mutationFn: (deduction: object) =>
+      dbService.storeDetails("deduction", deduction),
+    onSuccess: (data) => {
+      const { $id: id, amount, duration, category } = data || {};
+      dispatch(
+        saveRentEntry({
+          id,
+          amount,
+          duration,
+          isMetroCity: category === "Metro",
+        })
+      );
+    },
+  });
+
   // store
   const dispatch = useDispatch();
   const [entryInput, setEntryInput] = useState<EntryInput>(INITIAL_RENT_ENTRY);
@@ -72,10 +91,13 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
       }
       return;
     }
-
-    dispatch(
-      saveRentEntry({ amount: +amount, duration: +duration, isMetroCity })
-    );
+    mutate({
+      type: DEDUCTION_TYPE.RENT,
+      id: rentEntry?.id || undefined,
+      amount: +amount,
+      duration: +duration,
+      category: isMetroCity ? "Metro" : "Non-Metro",
+    });
   };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const enteredAmount: string = event.target.value;
@@ -102,14 +124,20 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
   const onCityChange = (event: any) => {
     setEntryInput(updateState("isMetroCity", event.target.checked));
   };
-  const handleFormReset = () => {
-    dispatch(resetEditRentEntry());
+  const onReset = () => {
+    dispatch(resetDeductionAction());
   };
   const { amount, duration, isMetroCity } = entryInput;
   const { amount: amountError, duration: durationError } = error;
   return (
-    <Modal onClose={handleFormReset}>
-      <form className={classes.add_rent_entry__form}>
+    <EntryFormModal
+      isPending={isPending}
+      isError={isError}
+      onSave={onRentEntrySave}
+      onCancel={onReset}
+      saveBtnLabel="Add Rent"
+    >
+      <div className={classes.rent_entry__container}>
         <TUITextField
           fullWidth
           label="Monthly Rental Amount"
@@ -139,28 +167,8 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
             {isMetroCity ? "Metro" : "Non-metro"} City
           </label>
         </section>
-        <section
-          className={classes.action_btn__container}
-          aria-label="add rent entry form action button container"
-        >
-          <Button
-            variant="text"
-            data-testid="rent-form-cancel-btn"
-            onClick={handleFormReset}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            border="round"
-            data-testid="rent-form-save-btn"
-            onClick={onRentEntrySave}
-          >
-            Save
-          </Button>
-        </section>
-      </form>
-    </Modal>
+      </div>
+    </EntryFormModal>
   );
 };
-export default memo(RentEntryForm);
+export default RentEntryForm;

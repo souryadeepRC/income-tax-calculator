@@ -1,0 +1,16 @@
+.entry__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  overflow: auto;
+  width: fit-content;
+  max-height: 60vh;
+  font-size: 1.1rem;
+  .action_btn__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}

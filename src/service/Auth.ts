@@ -1,6 +1,7 @@
 import { Account, Client, ID } from "appwrite";
 import APIConfig from "./api-config";
 import { CreateUserParam, LoginUserParam } from "src/types/AppServiceTypes";
+import dbService from "./Database";
 
 class AuthService {
   client = new Client();
@@ -11,7 +12,23 @@ class AuthService {
   }
   async createUser({ email, password, name }: CreateUserParam) {
     await this.account.create(ID.unique(), email, password, name);
-    return this.account.createEmailPasswordSession(email, password);
+    await this.account.createEmailPasswordSession(email, password);
+    await dbService.createDetails("income", {
+      category: "BASIC",
+      amount: 0,
+      group: "salary",
+    });
+    await dbService.createDetails("income", {
+      category: "HRA",
+      amount: 0,
+      group: "salary",
+    });
+    await dbService.createDetails("income", {
+      category: "PF",
+      amount: 0,
+      group: "salary",
+    });
+    return;
   }
 
   async login({ email, password }: LoginUserParam) {

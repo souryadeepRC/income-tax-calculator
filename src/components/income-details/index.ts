@@ -1,4 +1,4 @@
-import AddIncome from "src/components/income-details/add-income/AddIncome";
+import AddIncome from "src/components/income-details/AddIncome";
 import EditIncome from "src/components/income-details/EditIncome";
 import IncomeHeader from "src/components/income-details/IncomeHeader";
 import IncomeOptions from "src/components/income-details/IncomeOptions";

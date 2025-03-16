@@ -1,4 +1,4 @@
-import { IncomeDeleteEntry, IncomeOption } from "src/types/income-types";
+import { IncomeOption } from "src/types/income-types";
 import {
   EDIT_INCOME_ENTRY,
   SAVE_INCOME_DETAILS,
@@ -8,6 +8,7 @@ import {
   DELETE_INCOME_ENTRY,
 } from "./income-constants";
 import { ReducerActionPayloadType } from "src/types/store-types";
+
 export const editIncomeEntry = (
   payload?: string
 ): ReducerActionPayloadType => ({
@@ -15,7 +16,7 @@ export const editIncomeEntry = (
   payload,
 });
 
-export const resetEditIncomeEntry = (): ReducerActionPayloadType => ({
+export const resetActionIncomeEntry = (): ReducerActionPayloadType => ({
   type: RESET_EDIT_INCOME_ENTRY,
 });
 
@@ -42,7 +43,7 @@ export const loadIncomeDetails = (
 };
 
 export const deleteIncomeEntry = (
-  payload: IncomeDeleteEntry | undefined
+  payload: string
 ): ReducerActionPayloadType => {
   return {
     type: DELETE_INCOME_ENTRY,

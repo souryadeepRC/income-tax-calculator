@@ -2,9 +2,10 @@ import {
   DeductionEntry,
   DeductionSection24,
   RentEntry,
+  DeductionType,
+  Section24Entry,
 } from "src/types/deduction-types";
 
-type DeductionType = "Rent" | "Section24" | "80C" | "Chapter6A";
 export interface DeductionResponse {
   id: string;
   type: DeductionType;
@@ -18,7 +19,10 @@ type DeductionDetails = {
     options: RentEntry[];
     deductedAmount: number;
   };
-  section24: DeductionSection24;
+  section24: {
+    deductedAmount: number;
+    options: Section24Entry[];
+  };
   deduction80C: {
     deductedAmount: number;
     options: DeductionEntry[];
@@ -46,13 +50,21 @@ const mapRent = (acc: DeductionDetails, option: DeductionResponse) => {
   };
 };
 const mapSection24 = (acc: DeductionDetails, option: DeductionResponse) => {
-  const { amount, maxLimit, id } = option;
+  const { amount, id } = option;
+  const updatedAmount = (acc?.section24?.deductedAmount || 0) + amount;
+  const maxLimit = 200000;
+  const effectiveAmount = updatedAmount > maxLimit ? maxLimit : updatedAmount;
   return {
     ...acc,
     section24: {
-      id,
-      amount: amount,
-      deductedAmount: amount > maxLimit ? maxLimit : amount,
+      deductedAmount: effectiveAmount,
+      options: [
+        ...(acc?.section24?.options || []),
+        {
+          id: option?.id,
+          amount: amount,
+        },
+      ],
     },
   };
 };
@@ -94,11 +106,7 @@ export const mapDeductions = (
     },
     {
       rent: { deductedAmount: 0, options: [] },
-      section24: {
-        id: "",
-        amount: 0,
-        deductedAmount: 0,
-      },
+      section24: { deductedAmount: 0, options: [] },
       deduction80C: { deductedAmount: 0, options: [] },
       deductionByChapter6: { deductedAmount: 0, options: [] },
     }

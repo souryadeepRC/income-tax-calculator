@@ -113,7 +113,7 @@ export const calculateTax = (
 ): TaxReducerType => {
   let deductedAmount = 0;
   const pfAmount =
-    salaryIncome?.find((income) => income.label.toLowerCase() === "pf")
+    salaryIncome?.find((income) => income.category.toLowerCase() === "pf")
       ?.amount || 0;
   const taxableAmount = totalIncome - pfAmount;
 

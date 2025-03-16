@@ -8,21 +8,23 @@ import {
   DeductionOption,
   DeductionSection24,
   RentEntry,
+  ActionEntry,
 } from "src/types/deduction-types";
 
+export const selectDeductionActionEntry = (store: AppStoreType): ActionEntry =>
+  store.deduction.actionEntry;
 export const selectDeduction = (store: AppStoreType): DeductionReducerType =>
   store.deduction;
 export const selectRentDeduction = (store: AppStoreType): DeductionByRent =>
   store.deduction.rent;
-export const selectDeductionSection24 = (
-  store: AppStoreType
-): DeductionSection24 => store.deduction.section24;
+export const selectDeductionSection24 = (store: AppStoreType): any =>
+  store.deduction.section24;
 export const selectDeduction80C = (store: AppStoreType): DeductionOption =>
   store.deduction.deduction80C;
 export const selectDeductionChapter6 = (store: AppStoreType): DeductionOption =>
   store.deduction.deductionByChapter6;
 
-export const selectRentCollections = (store: AppStoreType): RentEntry[] =>
+export const selectRentOptions = (store: AppStoreType): RentEntry[] =>
   store.deduction.rent.options;
 export const selectRentDeductedAmount = (store: AppStoreType): number =>
   store.deduction.rent.deductedAmount;

@@ -111,10 +111,27 @@
     }
   }
 }
-
+.income_edit__container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 25px 20px;
+  align-items: flex-start;
+  width: 50vw;
+  max-width: 400px;
+  color: var(--secondary-color);
+  .edit__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+  }
+}
 @media screen and (max-width: $mobile-max-width) {
   .income_header__container {
-    width: 100%;
+    width: 80%;
     .header__label {
       display: flex;
       flex-direction: column;

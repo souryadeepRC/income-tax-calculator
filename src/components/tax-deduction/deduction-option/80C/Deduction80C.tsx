@@ -3,11 +3,13 @@ import { memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // components
 import DeductionHeader from "src/components/tax-deduction/DeductionHeader";
-import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
 // actions
 import {
   delete80CEntry,
+  deleteDeduction,
   edit80CEntry,
+  editDeduction,
+  resetDeductionAction,
   resetEdit80CEntry,
   save80CEntry,
 } from "src/store/deduction/deduction-actions";
@@ -21,24 +23,29 @@ import {
   DeductionOption,
 } from "src/types/deduction-types";
 // constants
-import { DEDUCTION_80C_OPTIONS } from "src/constants/common-constants";
+import {
+  DEDUCTION_80C_OPTIONS,
+  DEDUCTION_TYPE,
+} from "src/constants/common-constants";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 import { Card, CardWrapper, Modal } from "src/components/common";
+import { useDeductionActionEntry } from "src/hooks";
+import DeleteDeduction from "../../DeleteDeduction";
+import Section80CEntryForm from "../../deduction-entry/Section80CEntryForm";
 
 const Deduction80C = () => {
+  const { isEditable, entryId, isDelete } = useDeductionActionEntry(
+    DEDUCTION_TYPE.SECTION80C
+  );
   // store
   const dispatch: AppDispatch = useDispatch();
-  const {
-    options,
-    deductedAmount,
-    isEditable,
-    editableEntryId,
-  }: DeductionOption = useSelector(selectDeduction80C);
+  const { options, deductedAmount }: DeductionOption =
+    useSelector(selectDeduction80C);
 
   const getEditableEntryDetails = useCallback(() => {
     const deductionEntry = options.find(
-      (deductionEntry) => deductionEntry.id === editableEntryId
+      (deductionEntry) => deductionEntry.id === entryId
     );
     if (!deductionEntry) return undefined;
     const { amount, category } = deductionEntry;
@@ -46,14 +53,13 @@ const Deduction80C = () => {
       category,
       amount: `${amount}`,
     };
-  }, [options, editableEntryId]);
+  }, [options, entryId]);
   const getDeductionOptions = (): DeductionEntryOption[] =>
     Object.keys(DEDUCTION_80C_OPTIONS).reduce(
       (acc: DeductionEntryOption[], category: string) => {
         const isAdded =
           options.findIndex(
-            (option) =>
-              editableEntryId !== option.id && option.category === category
+            (option) => entryId !== option.id && option.category === category
           ) > -1;
 
         return [
@@ -67,22 +73,26 @@ const Deduction80C = () => {
     dispatch(save80CEntry(entryDetails));
   };
   const onReset = () => {
-    dispatch(resetEdit80CEntry());
+    dispatch(resetDeductionAction());
   };
   const onAddDeduction = () => {
-    dispatch(edit80CEntry());
+    dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION80C }));
   };
   return (
     <main>
       {isEditable && (
         <Modal onClose={onReset}>
-          <DeductionEntryForm
+          <Section80CEntryForm
             entry={getEditableEntryDetails()}
             options={getDeductionOptions()}
-            onSave={onSave}
-            onReset={onReset}
           />
         </Modal>
+      )}
+      {isDelete && entryId && (
+        <DeleteDeduction
+          entryId={entryId}
+          onDelete={() => dispatch(delete80CEntry(entryId))}
+        />
       )}
       <DeductionHeader
         title="Section 80C"
@@ -102,9 +112,21 @@ const Deduction80C = () => {
             }}
             key={deductionOption.category}
             deleteAction={() =>
-              dispatch(delete80CEntry(deductionOption?.id || ""))
+              dispatch(
+                deleteDeduction({
+                  type: DEDUCTION_TYPE.SECTION80C,
+                  entryId: deductionOption?.id || "",
+                })
+              )
             }
-            editAction={() => dispatch(edit80CEntry(deductionOption.id))}
+            editAction={() =>
+              dispatch(
+                editDeduction({
+                  type: DEDUCTION_TYPE.SECTION80C,
+                  entryId: deductionOption.id,
+                })
+              )
+            }
           />
         ))}
       </CardWrapper>

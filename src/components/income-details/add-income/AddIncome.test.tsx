@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import { IncomeComponent } from "src/types/income-types";
-import AddIncome from "./AddIncome";
+import AddIncome from "../AddIncome";
 
 // Mock the useSelector and useDispatch hooks
 jest.mock("react-redux", () => ({

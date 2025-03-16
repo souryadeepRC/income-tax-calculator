@@ -39,6 +39,12 @@ class DBService {
       updatedValue
     );
   }
+  async storeDetails(type: DocumentType, data: any) {
+    if (data?.id) {
+      return this.updateDetails(type, data);
+    }
+    return this.createDetails(type, data);
+  }
   async deleteDetails(type: DocumentType, documentId: string) {
     return await this.database.deleteDocument(
       APIConfig.databaseId,
