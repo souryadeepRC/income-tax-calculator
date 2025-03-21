@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 // library
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
@@ -14,15 +14,15 @@ import {
   saveRentEntry,
 } from "src/store/deduction/deduction-actions";
 // utils
-import { updateState } from "src/utils/common-utils";
+import { ErrorMessage } from "src/utils/common-utils";
 // constants
-import { DEDUCTION_TYPE, NUMERIC_REGEX } from "src/constants/common-constants";
+import { DEDUCTION_TYPE, RENT_CITY } from "src/constants/common-constants";
 // styles
 import classes from "./Rent.module.scss";
 
 interface RentEntryFormProps {
-  durationLeft: number;
-  rentEntry: any;
+  maxDuration: number;
+  entry: any;
 }
 interface EntryInput {
   amount: string;
@@ -33,19 +33,22 @@ interface EntryError {
   amount: string;
   duration: string;
 }
-const INITIAL_ERROR = {
-  amount: "",
-  duration: "",
-};
-const INITIAL_RENT_ENTRY = {
-  amount: "",
-  duration: "",
-  isMetroCity: false,
-};
-const RentEntryForm: React.FC<RentEntryFormProps> = ({
-  durationLeft,
-  rentEntry,
-}) => {
+
+const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
+  const { entry, maxDuration } = props;
+
+  // store
+  const dispatch = useDispatch();
+  const userActivity = useRef<boolean>(false);
+  const [rentEntry, setRentEntry] = useState<EntryInput>({
+    amount: "",
+    duration: "",
+    isMetroCity: false,
+  });
+  const [error, setError] = useState<EntryError>({
+    amount: "",
+    duration: "",
+  });
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
@@ -56,79 +59,70 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           id,
           amount,
           duration,
-          isMetroCity: category === "Metro",
+          isMetroCity: category === RENT_CITY.METRO,
         })
       );
     },
   });
 
-  // store
-  const dispatch = useDispatch();
-  const [entryInput, setEntryInput] = useState<EntryInput>(INITIAL_RENT_ENTRY);
-  const [error, setError] = useState<EntryError>(INITIAL_ERROR);
+  // set previous rent entry details for Edit scenario
   useEffect(() => {
-    setEntryInput(rentEntry || INITIAL_RENT_ENTRY);
-  }, [rentEntry]);
+    if (!entry) return;
+    setRentEntry(entry);
+  }, [entry]);
 
+  // Change Rent Entry
+  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.name);
+    const { name = "", value = "" } = event?.target || {};
+    const errorMessage: string =
+      name === "amount"
+        ? ErrorMessage.amountInput(value)
+        : ErrorMessage.rentDuration(value, maxDuration);
+    setRentEntry((rentEntry) => ({
+      ...rentEntry,
+      [name]: value,
+    }));
+    setError((error) => ({
+      ...error,
+      [name]: errorMessage,
+    }));
+    userActivity.current = true;
+  }, []);
+
+  /* eslint-disable */
+  const onCityChange = (event: any) => {
+    setRentEntry((rentEntry) => ({
+      ...rentEntry,
+      isMetroCity: event.target.checked,
+    }));
+  };
+  // Save Rent Entry and call API
   const onRentEntrySave = () => {
     if (error.amount || error.duration) return;
-    if (!amount || !duration) {
-      if (!NUMERIC_REGEX.test(amount)) {
-        setError(
-          updateState(
-            "amount",
-            "Enter a valid amount more than 0 (e.g. 100.50 or 100)"
-          )
-        );
+    if (!userActivity.current) {
+      const errorMessage = {
+        amount: ErrorMessage.amountInput(amount),
+        duration: ErrorMessage.rentDuration(duration, maxDuration),
+      };
+      if (errorMessage.amount || errorMessage.duration) {
+        setError(errorMessage);
+        return;
       }
-      if (!NUMERIC_REGEX.test(duration)) {
-        setError(
-          updateState(
-            "duration",
-            "Enter a valid duration more than 0 (e.g. 2 or 2.5)"
-          )
-        );
-      }
-      return;
     }
     mutate({
       type: DEDUCTION_TYPE.RENT,
-      id: rentEntry?.id || undefined,
+      id: entry?.id,
       amount: +amount,
       duration: +duration,
-      category: isMetroCity ? "Metro" : "Non-Metro",
+      category: isMetroCity ? RENT_CITY.METRO : RENT_CITY.NON_METRO,
     });
   };
-  const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredAmount: string = event.target.value;
-    setEntryInput(updateState("amount", event.target.value));
-    let errorMessage = "";
-    if (!NUMERIC_REGEX.test(enteredAmount)) {
-      errorMessage = "Enter a valid amount more than 0 (e.g. 100.50 or 100)";
-    }
-    setError(updateState("amount", errorMessage));
-  };
-  const onDurationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredDuration: string = event.target.value;
-    setEntryInput(updateState("duration", event.target.value));
-    let errorMessage = "";
-    if (!NUMERIC_REGEX.test(enteredDuration)) {
-      errorMessage = "Enter a valid duration more than 0 (e.g. 2 or 2.5)";
-    } else if (Number(enteredDuration) > durationLeft) {
-      errorMessage =
-        "Cannot add more than 12 months for a FY.Please check other entries";
-    }
-    setError(updateState("duration", errorMessage));
-  };
-  /* eslint-disable */
-  const onCityChange = (event: any) => {
-    setEntryInput(updateState("isMetroCity", event.target.checked));
-  };
+
   const onReset = () => {
     dispatch(resetDeductionAction());
   };
-  const { amount, duration, isMetroCity } = entryInput;
-  const { amount: amountError, duration: durationError } = error;
+  const { amount, duration, isMetroCity } = rentEntry;
   return (
     <EntryFormModal
       isPending={isPending}
@@ -142,19 +136,21 @@ const RentEntryForm: React.FC<RentEntryFormProps> = ({
           fullWidth
           label="Monthly Rental Amount"
           type="number"
+          name="amount"
           value={amount}
-          onChange={onAmountChange}
+          onChange={onChange}
           inputProps={{ "data-testid": "rent-amount-input" }}
-          errorMessage={amountError}
+          errorMessage={error.amount}
         />
         <TUITextField
           fullWidth
           label="Rent Duration (in Month)"
           type="number"
+          name="duration"
           value={duration}
-          onChange={onDurationChange}
+          onChange={onChange}
           inputProps={{ "data-testid": "rent-duration-input" }}
-          errorMessage={durationError}
+          errorMessage={error.duration}
         />
         <section aria-label="rent metro city switch">
           <label>

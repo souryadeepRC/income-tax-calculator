@@ -59,3 +59,7 @@ export const DEDUCTION_TYPE: { [key: string]: DeductionType } = {
   SECTION80C: "80C",
   CHAPTER6A: "Chapter6A",
 };
+export const RENT_CITY: Record<string, "Metro" | "Non-Metro"> = {
+  METRO: "Metro",
+  NON_METRO: "Non-Metro",
+};

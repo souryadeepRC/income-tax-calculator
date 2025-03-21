@@ -1,24 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+// library
 import { useDispatch, useSelector } from "react-redux";
+// store
 import { setRentDeductedAmount } from "src/store/deduction/deduction-actions";
 import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
+// types
 import { RentEntry } from "src/types/deduction-types";
+// utils
 import { calculateRentDeduction } from "src/utils/tax-calculation";
+
 type RentBreakup = {
   metro: { duration: number; amount: number };
   nonMetro: { duration: number; amount: number };
 };
+
 const useRentExemption = (): void => {
   const dispatch = useDispatch();
-  const options = useSelector(selectRentOptions);
+  const options: RentEntry[] = useSelector(selectRentOptions);
   const { basic, hra } = useSelector(selectRentEligibleDetails);
-  const calculateRentDeductedAmount = (
-    rentCollections: RentEntry[],
-    basic: number,
-    hra: number
-  ) => {
-    const rentBreakup = rentCollections.reduce(
+
+  const rentBreakup: RentBreakup = useMemo(() => {
+    return options.reduce(
       (acc: RentBreakup, rentEntry: RentEntry) => {
         const { amount, duration, isMetroCity } = rentEntry;
         const field = isMetroCity ? "metro" : "nonMetro";
@@ -35,7 +38,9 @@ const useRentExemption = (): void => {
         nonMetro: { duration: 0, amount: 0 },
       }
     );
+  }, [options]);
 
+  const totalExemption = useMemo(() => {
     const metroExemption = calculateRentDeduction(
       rentBreakup.metro.amount,
       rentBreakup.metro.duration,
@@ -50,13 +55,11 @@ const useRentExemption = (): void => {
       basic,
       hra
     );
-    const totalExemption = metroExemption + nonMetroExemption;
-    return totalExemption > hra ? hra : totalExemption;
-  };
+    return Math.min(metroExemption + nonMetroExemption, hra);
+  }, [rentBreakup, basic, hra]);
 
   useEffect(() => {
-    const deductedAmount = calculateRentDeductedAmount(options, basic, hra);
-    dispatch(setRentDeductedAmount(deductedAmount));
-  }, [dispatch, basic, hra, options]);
+    dispatch(setRentDeductedAmount(totalExemption));
+  }, [dispatch, totalExemption]);
 };
 export default useRentExemption;

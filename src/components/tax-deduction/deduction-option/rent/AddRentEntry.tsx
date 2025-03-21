@@ -24,29 +24,24 @@ const AddRentEntry: React.FC = () => {
 
   return (
     <>
-      <section
-        className={classes.add_rent__container}
-        aria-label="add rent option"
-      >
-        <DeductionHeader
-          title="Rent"
-          amount={deductedAmount}
-          addAction={
-            isRentEligible
-              ? () => {
-                  dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
-                }
-              : undefined
-          }
-        />
+      <DeductionHeader
+        title="Rent"
+        amount={deductedAmount}
+        addAction={
+          !isRentEligible
+            ? () => {
+                dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
+              }
+            : undefined
+        }
+      />
 
-        {!isRentEligible && (
-          <span>
-            To add rent details, please include the basic salary and HRA
-            components of your income.
-          </span>
-        )}
-      </section>
+      {!isRentEligible && (
+        <span>
+          To add rent details, please include the basic salary and HRA
+          components of your income.
+        </span>
+      )}
     </>
   );
 };
