@@ -31,7 +31,7 @@ const EntryFormModal: React.FC<EntryFormModalProps> = ({
       <form className="entry__form">
         <InfiniteProgressBar isLoading={isPending} />
         {isError && <ErrorMessage />}
-        <>{children}</>
+        <div className="form_input__container">{children}</div>
         <section className="action_btn__container" aria-label={ariaLabel}>
           <Button
             variant="text"

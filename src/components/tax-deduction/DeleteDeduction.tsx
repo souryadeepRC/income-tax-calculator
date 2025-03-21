@@ -48,8 +48,6 @@ const DeleteDeduction: React.FC<DeleteDeductionProps> = ({
       saveBtnLabel="Yes, Remove"
     >
       <div className={classes.deduction_delete__container}>
-        <InfiniteProgressBar isLoading={isPending} />
-        {isError && <ErrorMessage />}
         <div className={classes.delete__message}>
           <h1>
             Are you sure you want to Delete this&nbsp;<span>{title}</span>

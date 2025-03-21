@@ -1,24 +1,21 @@
-import React, { memo, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 // library
-import { MenuItem } from "@mui/material";
-import { TUITextField } from "triva-ui";
-// components
-import { Button, Select } from "src/components/common";
-// utils
-import { updateState } from "src/utils/common-utils";
-// constants
-import { DEDUCTION_TYPE, NUMERIC_REGEX } from "src/constants/common-constants";
-// types
-import {
-  DeductionEntry,
-  DeductionEntryOption,
-} from "src/types/deduction-types";
-// styles
 import { useDispatch } from "react-redux";
-import { resetDeductionAction } from "src/store/deduction/deduction-actions";
+import { TUITextField } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
+// components
+import { EntryFormModal } from "src/components/common";
+//service
 import dbService from "src/service/Database";
-import DeductionEntryForm from "../../DeductionEntryForm";
+//store
+import {
+  resetDeductionAction,
+  saveSection24Entry,
+} from "src/store/deduction/deduction-actions";
+// utils
+import { ErrorMessage } from "src/utils/common-utils";
+// constants
+import { DEDUCTION_TYPE } from "src/constants/common-constants";
 
 interface Section24EntryFormProps {
   entry: any;
@@ -26,50 +23,53 @@ interface Section24EntryFormProps {
 
 const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
   const dispatch = useDispatch();
+  const userActivity = useRef<boolean>(false);
+  const [amount, setAmount] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
     onSuccess: (data) => {
-      console.log(data);
+      const { $id: id, amount } = data || {};
+      dispatch(saveSection24Entry({ id, amount }));
     },
   });
-  // store
-  const [amount, setAmount] = useState<string>("");
-  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     if (!entry) return;
-    setAmount(`${amount}`);
+    setAmount(`${entry.amount}`);
   }, [entry]);
 
   const onEntrySave = () => {
-    if (amount === "") {
-      setError("Amount is required");
-      return;
+    if (error) return;
+    if (!userActivity.current) {
+      const errorMessage = ErrorMessage.amountInput(amount);
+      if (errorMessage) {
+        setError(errorMessage);
+        return;
+      }
     }
     mutate({
-      id: entry?.id || undefined,
+      id: entry?.id,
       type: DEDUCTION_TYPE.SECTION24,
       amount: +amount,
     });
   };
 
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredAmount: string = event.target.value;
-    setAmount(enteredAmount);
-    let errorMessage = "";
-    if (!NUMERIC_REGEX.test(enteredAmount)) {
-      errorMessage =
-        "Enter a valid amount (up to 2 decimal) more than 0 (e.g. 100.50 or 100)";
+    const amount: string = event.target.value;
+    setAmount(amount);
+    setError(ErrorMessage.amountInput(amount));
+    if (!userActivity.current) {
+      userActivity.current = true;
     }
-    setError(errorMessage);
   };
   const onReset = () => {
     dispatch(resetDeductionAction());
   };
 
   return (
-    <DeductionEntryForm
+    <EntryFormModal
       isPending={isPending}
       isError={isError}
       onSave={onEntrySave}
@@ -80,11 +80,10 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
         label="Section 24 - Home Loan Interest"
         value={amount}
         onChange={onAmountChange}
-        type="number"
         inputProps={{ "data-testid": "section24-input" }}
         errorMessage={error}
       />
-    </DeductionEntryForm>
+    </EntryFormModal>
   );
 };
 export default Section24EntryForm;

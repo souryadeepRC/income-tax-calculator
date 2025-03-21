@@ -73,7 +73,6 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
 
   // Change Rent Entry
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
     const { name = "", value = "" } = event?.target || {};
     const errorMessage: string =
       name === "amount"
@@ -87,7 +86,9 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       ...error,
       [name]: errorMessage,
     }));
-    userActivity.current = true;
+    if (!userActivity.current) {
+      userActivity.current = true;
+    }
   }, []);
 
   /* eslint-disable */
@@ -131,39 +132,37 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       onCancel={onReset}
       saveBtnLabel="Add Rent"
     >
-      <div className={classes.rent_entry__container}>
-        <TUITextField
-          fullWidth
-          label="Monthly Rental Amount"
-          type="number"
-          name="amount"
-          value={amount}
-          onChange={onChange}
-          inputProps={{ "data-testid": "rent-amount-input" }}
-          errorMessage={error.amount}
-        />
-        <TUITextField
-          fullWidth
-          label="Rent Duration (in Month)"
-          type="number"
-          name="duration"
-          value={duration}
-          onChange={onChange}
-          inputProps={{ "data-testid": "rent-duration-input" }}
-          errorMessage={error.duration}
-        />
-        <section aria-label="rent metro city switch">
-          <label>
-            I&#39;m residing in a
-            <Switch
-              data-testid="rent-city-switch"
-              checked={isMetroCity}
-              onChange={onCityChange}
-            />
-            {isMetroCity ? "Metro" : "Non-metro"} City
-          </label>
-        </section>
-      </div>
+      <TUITextField
+        fullWidth
+        label="Monthly Rental Amount"
+        type="number"
+        name="amount"
+        value={amount}
+        onChange={onChange}
+        inputProps={{ "data-testid": "rent-amount-input" }}
+        errorMessage={error.amount}
+      />
+      <TUITextField
+        fullWidth
+        label="Rent Duration (in Month)"
+        type="number"
+        name="duration"
+        value={duration}
+        onChange={onChange}
+        inputProps={{ "data-testid": "rent-duration-input" }}
+        errorMessage={error.duration}
+      />
+      <section aria-label="rent metro city switch">
+        <label>
+          I&#39;m residing in a
+          <Switch
+            data-testid="rent-city-switch"
+            checked={isMetroCity}
+            onChange={onCityChange}
+          />
+          {isMetroCity ? "Metro" : "Non-metro"} City
+        </label>
+      </section>
     </EntryFormModal>
   );
 };
