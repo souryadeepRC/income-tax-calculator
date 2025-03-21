@@ -7,11 +7,7 @@ export const calculateOverallAmount = (incomeOptions: IncomeOption[]): number =>
     0
   );
 export const isReservedCategory = (category: string) => {
-  return (
-    category.toLowerCase() === "basic" ||
-    category.toLowerCase() === "hra" ||
-    category.toLowerCase() === "pf"
-  );
+  return category.toLowerCase() === "basic" || category.toLowerCase() === "hra";
 };
 export const getCategoryError = (category: string): string => {
   if (category === "") {
@@ -19,7 +15,7 @@ export const getCategoryError = (category: string): string => {
   } else if (category.length > 100) {
     return "Enter a label within min 100 characters";
   } else if (isReservedCategory(category)) {
-    return "Reserved category [e.g. BASIC, HRA, PF]";
+    return "Reserved category [e.g. BASIC, HRA]";
   }
   return "";
 };

@@ -106,6 +106,7 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
   };
   const { category, amount } = entryInput;
   const { amount: amountError } = error;
+
   return (
     <DeductionEntryForm
       isPending={isPending}
@@ -120,16 +121,21 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
         data-testid={`category-option`}
         fullWidth
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option.category}
-            disabled={option.isAdded}
-            value={option.category}
-            data-testid={`category-option-${option.category}`}
-          >
-            {option.label}&nbsp;{option.isAdded && <i>(Already Added)</i>}
-          </MenuItem>
-        ))}
+        {options.map((option) => {
+          const isDisabled: boolean =
+            option.isAdded && option.category !== entry?.category;
+          return (
+            <MenuItem
+              key={option.category}
+              disabled={isDisabled}
+              value={option.category}
+              data-testid={`category-option-${option.category}`}
+            >
+              {option.label}&nbsp;
+              {isDisabled && <i>(Already Added)</i>}
+            </MenuItem>
+          );
+        })}
       </Select>
       <TUITextField
         fullWidth

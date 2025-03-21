@@ -60,12 +60,11 @@ export interface DeductionOption {
   editableEntryId: string;
 }
 export interface Section24Entry {
-  id?: string;
+  id: string;
   amount: number;
-  maxLimit?: number;
 }
 export interface DeductionEntry {
-  id?: string;
+  id: string;
   category: string;
   amount: number;
   maxLimit?: number;

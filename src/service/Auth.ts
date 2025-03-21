@@ -23,11 +23,7 @@ class AuthService {
       amount: 0,
       group: "salary",
     });
-    await dbService.createDetails("income", {
-      category: "PF",
-      amount: 0,
-      group: "salary",
-    });
+
     return;
   }
 

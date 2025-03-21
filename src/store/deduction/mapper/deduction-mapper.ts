@@ -1,9 +1,10 @@
+import { SECTION_24_MAX_LIMIT } from "src/constants/common-constants";
 import {
   DeductionEntry,
-  DeductionSection24,
   RentEntry,
   DeductionType,
   Section24Entry,
+  DeductionReducerType,
 } from "src/types/deduction-types";
 
 export interface DeductionResponse {
@@ -50,9 +51,9 @@ const mapRent = (acc: DeductionDetails, option: DeductionResponse) => {
   };
 };
 const mapSection24 = (acc: DeductionDetails, option: DeductionResponse) => {
-  const { amount, id } = option;
+  const { amount } = option;
   const updatedAmount = (acc?.section24?.deductedAmount || 0) + amount;
-  const maxLimit = 200000;
+  const maxLimit = SECTION_24_MAX_LIMIT;
   const effectiveAmount = updatedAmount > maxLimit ? maxLimit : updatedAmount;
   return {
     ...acc,
@@ -88,9 +89,10 @@ const mapOther = (type: string, acc: any, option: DeductionResponse) => {
   };
 };
 export const mapDeductions = (
+  state: DeductionReducerType,
   deductions: DeductionResponse[]
-): DeductionDetails => {
-  return deductions.reduce(
+): DeductionReducerType => {
+  const details = deductions.reduce(
     (acc: DeductionDetails, option: DeductionResponse) => {
       const { type } = option;
       if (type === "Rent") {
@@ -111,4 +113,23 @@ export const mapDeductions = (
       deductionByChapter6: { deductedAmount: 0, options: [] },
     }
   );
+  return {
+    ...state,
+    rent: {
+      ...state.rent,
+      ...details.rent,
+    },
+    section24: {
+      ...state.section24,
+      ...details.section24,
+    },
+    deduction80C: {
+      ...state.deduction80C,
+      ...details.deduction80C,
+    },
+    deductionByChapter6: {
+      ...state.deductionByChapter6,
+      ...details.deductionByChapter6,
+    },
+  };
 };
