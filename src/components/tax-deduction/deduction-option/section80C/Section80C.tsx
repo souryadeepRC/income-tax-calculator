@@ -1,22 +1,21 @@
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
 import { Card, CardWrapper } from "src/components/common";
-import Section80CEntryForm from "src/components/tax-deduction/deduction-entry/Section80CEntryForm";
+import Section80CEntryForm from "./Section80CEntryForm";
 import { DeleteDeduction, DeductionHeader } from "src/components/tax-deduction";
 // hooks
 import { useDeductionActionEntry } from "src/hooks";
-// actions
+// store
 import {
-  delete80CEntry,
+  deleteSection80CEntry,
   editDeduction,
 } from "src/store/deduction/deduction-actions";
-// selectors
-import { selectDeduction80C } from "src/store/deduction/deduction-selectors";
+import { selectSection80CDeduction } from "src/store/deduction/deduction-selectors";
 // types
 import { AppDispatch } from "src/types/store-types";
-import { DeductionOption } from "src/types/deduction-types";
+import { DeductionEntry, DeductionOption } from "src/types/deduction-types";
 // constants
 import {
   DEDUCTION_80C_OPTIONS,
@@ -25,24 +24,20 @@ import {
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 
-const Deduction80C = () => {
+const Section80C = () => {
   const { isEditable, entryId, isDelete } = useDeductionActionEntry(
     DEDUCTION_TYPE.SECTION80C
   );
   // store
   const dispatch: AppDispatch = useDispatch();
-  const { options, deductedAmount }: DeductionOption =
-    useSelector(selectDeduction80C);
 
-  const actionEntry = useMemo(() => {
-    const entry = options.find(
-      (deductionEntry) => deductionEntry.id === entryId
-    );
-    if (!entry) return undefined;
-    return {
-      ...entry,
-      amount: `${entry.amount}`,
-    };
+  const { options, deductedAmount }: DeductionOption = useSelector(
+    selectSection80CDeduction
+  );
+  console.log({ options, deductedAmount });
+
+  const actionEntry: DeductionEntry | undefined = useMemo(() => {
+    return options.find((deductionEntry) => deductionEntry.id === entryId);
   }, [isEditable, isDelete]);
 
   const entryOptions = useMemo(() => {
@@ -67,7 +62,7 @@ const Deduction80C = () => {
         <DeleteDeduction
           title="Section 80C"
           entryId={entryId}
-          onDelete={() => dispatch(delete80CEntry(entryId))}
+          onDelete={() => dispatch(deleteSection80CEntry(entryId))}
         />
       )}
       <DeductionHeader
@@ -94,4 +89,4 @@ const Deduction80C = () => {
     </main>
   );
 };
-export default memo(Deduction80C);
+export default Section80C;

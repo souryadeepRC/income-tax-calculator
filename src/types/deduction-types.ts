@@ -10,7 +10,7 @@ export type DeductionReducerType = {
     isEditable: boolean;
     editableEntryId: string;
   };
-  deduction80C: DeductionOption;
+  section80C: DeductionOption;
   deductionByChapter6: DeductionOption;
 };
 export interface DeductionResponse {

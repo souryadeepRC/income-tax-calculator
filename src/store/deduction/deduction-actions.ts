@@ -16,6 +16,8 @@ import {
   DELETE_RENT_ENTRY,
   SAVE_SECTION_24_ENTRY,
   DELETE_SECTION_24_ENTRY,
+  SAVE_SECTION_80C_ENTRY,
+  DELETE_SECTION_80C_ENTRY,
   DELETE_80C_ENTRY,
   SAVE_80C_ENTRY,
   RESET_EDIT_80C_ENTRY,
@@ -79,6 +81,23 @@ export const setRentDeductedAmount = (
   payload,
 });
 
+export const saveSection80CEntry = (payload: {
+  id: string;
+  category: string;
+  amount: number;
+}): ReducerActionPayloadType => ({
+  type: SAVE_SECTION_80C_ENTRY,
+  payload,
+});
+export const deleteSection80CEntry = (
+  payload: string
+): ReducerActionPayloadType => {
+  return {
+    type: DELETE_SECTION_80C_ENTRY,
+    payload,
+  };
+};
+
 export const saveSection24Entry = (payload: {
   id: string;
   amount: number;
@@ -94,6 +113,7 @@ export const deleteSection24Entry = (
     payload,
   };
 };
+
 export const edit80CEntry = (payload?: string): ReducerActionPayloadType => ({
   type: EDIT_80C_ENTRY,
   payload,

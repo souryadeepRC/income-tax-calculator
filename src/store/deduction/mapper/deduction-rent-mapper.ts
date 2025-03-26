@@ -1,5 +1,9 @@
 import { SECTION_24_MAX_LIMIT } from "src/constants/common-constants";
-import { RentEntry, Section24Entry } from "src/types/deduction-types";
+import {
+  DeductionEntry,
+  RentEntry,
+  Section24Entry,
+} from "src/types/deduction-types";
 
 export const mapSaveRentEntry = (
   options: RentEntry[],
@@ -19,10 +23,20 @@ export const mapSaveRentEntry = (
   return options;
 };
 
-export const mapSection24Entry = (details: any, payload: any) => {
+// Save Entry in store for Section 24 | section 80C
+type EntryType = {
+  options: (Section24Entry | DeductionEntry)[];
+  deductedAmount: number;
+};
+type saveEntryPayload = Section24Entry | DeductionEntry;
+
+export const mapSaveEntry = (
+  details: EntryType,
+  payload: saveEntryPayload,
+  limit: number
+): EntryType => {
   const { deductedAmount, options } = details;
-  const maxLimit = 200000;
-  let updatedAmount = deductedAmount + payload.amount;
+  let updatedAmount: number = deductedAmount + payload.amount;
   const entryIndex = options.findIndex((entry: any) => entry.id === payload.id);
   if (entryIndex > -1) {
     options[entryIndex] = {
@@ -33,20 +47,20 @@ export const mapSection24Entry = (details: any, payload: any) => {
   } else {
     options.push(payload);
   }
-  const effectiveAmount = Math.min(updatedAmount, SECTION_24_MAX_LIMIT);
-  return { options, deductedAmount: effectiveAmount };
+  return { options, deductedAmount: Math.min(updatedAmount, limit) };
 };
-export const mapSection24DeleteEntry = (
-  options: Section24Entry[],
-  payload: any
-) => {
-  const entryIndex = options.findIndex((entry) => entry.id === payload.id);
-  const effectiveAmount = Math.min(
-    options[entryIndex].amount,
-    SECTION_24_MAX_LIMIT
-  );
+
+// Delete Entry in store for Section 24 | section 80C
+type DeleteEntryOptions = (Section24Entry | DeductionEntry)[];
+
+export const mapDeleteEntry = (
+  options: DeleteEntryOptions,
+  entryId: string,
+  limit: number
+): EntryType => {
+  const entryIndex = options.findIndex((entry) => entry.id === entryId);
   return {
-    options: options.filter((entry) => entry.id !== payload),
-    deductedAmount: effectiveAmount,
+    options: options.filter((entry) => entry.id !== entryId),
+    deductedAmount: Math.min(options[entryIndex].amount, limit),
   };
 };

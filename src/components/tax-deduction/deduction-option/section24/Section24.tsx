@@ -9,8 +9,6 @@ import { Card, CardWrapper } from "src/components/common";
 import { useDeductionActionEntry } from "src/hooks";
 // actions
 import {
-  delete80CEntry,
-  deleteDeduction,
   deleteSection24Entry,
   editDeduction,
 } from "src/store/deduction/deduction-actions";

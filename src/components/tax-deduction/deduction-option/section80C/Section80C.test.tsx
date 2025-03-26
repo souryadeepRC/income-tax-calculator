@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import Deduction80C from "./Deduction80C";
+import Deduction80C from "./Section80C";
 import { useDispatch, useSelector } from "react-redux";
 import DeductionEntryForm from "src/components/tax-deduction/deduction-entry/DeductionEntryForm";
 jest.mock("react-redux", () => ({

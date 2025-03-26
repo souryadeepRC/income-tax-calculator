@@ -64,3 +64,4 @@ export const RENT_CITY: Record<string, "Metro" | "Non-Metro"> = {
   NON_METRO: "Non-Metro",
 };
 export const SECTION_24_MAX_LIMIT: number = 200000;
+export const SECTION_80C_MAX_LIMIT: number = 150000;

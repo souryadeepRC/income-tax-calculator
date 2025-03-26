@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router";
 // components
-import Deduction80C from "src/components/tax-deduction/deduction-option/80C/Deduction80C";
+import Section80C from "src/components/tax-deduction/deduction-option/section80C/Section80C";
 import ChapterVI from "src/components/tax-deduction/deduction-option/chapter-vi/ChapterVI";
 import Rent from "src/components/tax-deduction/deduction-option/rent/Rent";
 import Section24 from "src/components/tax-deduction/deduction-option/section24/Section24";
@@ -25,7 +25,7 @@ const AppUserRoutes = () => {
         <Route path="" element={<Navigate to="/deduction/80C" />} />
         <Route path="rent" element={<Rent />} />
         <Route path="section-24" element={<Section24 />} />
-        <Route path="80C" element={<Deduction80C />} />
+        <Route path="80C" element={<Section80C />} />
         <Route path="Chapter-VIA" element={<ChapterVI />} />
       </Route>
       <Route path="tax-breakup" element={<TaxBreakupPage />} />

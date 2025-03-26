@@ -19,8 +19,8 @@ export const selectRentDeduction = (store: AppStoreType): DeductionByRent =>
   store.deduction.rent;
 export const selectDeductionSection24 = (store: AppStoreType): any =>
   store.deduction.section24;
-export const selectDeduction80C = (store: AppStoreType): DeductionOption =>
-  store.deduction.deduction80C;
+export const selectSection80CDeduction = (store: AppStoreType): DeductionOption =>
+  store.deduction.section80C;
 export const selectDeductionChapter6 = (store: AppStoreType): DeductionOption =>
   store.deduction.deductionByChapter6;
 
@@ -38,7 +38,7 @@ export const selectEditableRentEntry = (
 export const selectSection24DeductedAmount = (store: AppStoreType): number =>
   store.deduction.section24.deductedAmount;
 export const select80CDeductedAmount = (store: AppStoreType): number =>
-  store.deduction.deduction80C.deductedAmount;
+  store.deduction.section80C.deductedAmount;
 export const selectChapterVIDeductedAmount = (store: AppStoreType): number =>
   store.deduction.deductionByChapter6.deductedAmount;
 
