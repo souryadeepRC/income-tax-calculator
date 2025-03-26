@@ -1,4 +1,4 @@
-import { SECTION_24_MAX_LIMIT } from "src/constants/common-constants";
+ 
 import {
   DeductionEntry,
   RentEntry,

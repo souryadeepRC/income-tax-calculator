@@ -45,7 +45,7 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
         saveSection80CEntry({
           id,
           category,
-          amount: +amount,
+          amount,
         })
       );
     },

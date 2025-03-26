@@ -4,7 +4,6 @@ import {
   ActionEditEntryPayload,
   ActionDeleteEntryPayload,
   DeductionEntry,
-  RentEntry,
 } from "src/types/deduction-types";
 // constants
 import {
@@ -98,6 +97,23 @@ export const deleteSection80CEntry = (
   };
 };
 
+export const saveChapterVIEntry = (payload: {
+  id: string;
+  category: string;
+  amount: number;
+}): ReducerActionPayloadType => ({
+  type: SAVE_CHAPTER_VI_ENTRY,
+  payload,
+});
+export const deleteChapterVIEntry = (
+  payload: string
+): ReducerActionPayloadType => {
+  return {
+    type: DELETE_CHAPTER_VI_ENTRY,
+    payload,
+  };
+};
+
 export const saveSection24Entry = (payload: {
   id: string;
   amount: number;
@@ -144,20 +160,6 @@ export const editChapterVIEntry = (
 
 export const resetEditChapterVIEntry = (): ReducerActionPayloadType => ({
   type: RESET_EDIT_CHAPTER_VI_ENTRY,
-});
-
-export const saveChapterVIEntry = (
-  payload: DeductionEntry
-): ReducerActionPayloadType => ({
-  type: SAVE_CHAPTER_VI_ENTRY,
-  payload,
-});
-
-export const deleteChapterVIEntry = (
-  payload: string
-): ReducerActionPayloadType => ({
-  type: DELETE_CHAPTER_VI_ENTRY,
-  payload,
 });
 
 export const loadDeduction = (

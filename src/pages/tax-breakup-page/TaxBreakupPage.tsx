@@ -3,6 +3,8 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 // components
 import TaxRegimeBreakup from "src/components/tax-regime-breakup/TaxRegimeBreakup";
+// hooks
+import { useTaxCalculation } from "src/hooks";
 // selectors
 import { selectTaxDetails } from "src/store/tax/tax-selectors";
 // types
@@ -15,6 +17,7 @@ import classes from "./TaxBreakupPage.module.scss";
 const TaxBreakupPage: React.FC = () => {
   const { choice, newScheme, oldScheme }: TaxReducerType =
     useSelector(selectTaxDetails);
+  useTaxCalculation();
   const { difference, type } = choice;
   return (
     <main className={classes.tax_breakup__container}>

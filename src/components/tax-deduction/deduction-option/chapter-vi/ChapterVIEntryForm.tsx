@@ -1,60 +1,53 @@
-import React, { memo, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 // library
+import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
 import { MenuItem } from "@mui/material";
 import { TUITextField } from "triva-ui";
 // components
-import { Button, Select } from "src/components/common";
+import { EntryFormModal, Select } from "src/components/common";
+// service
+import dbService from "src/service/Database";
+// store
+import {
+  resetDeductionAction,
+  saveChapterVIEntry,
+} from "src/store/deduction/deduction-actions";
 // utils
 import { ErrorMessage, updateState } from "src/utils/common-utils";
-// constants
-import { NUMERIC_REGEX } from "src/constants/common-constants";
 // types
 import {
-  DeductionEntry,
   DeductionEntryOption,
+  DeductionEntry,
 } from "src/types/deduction-types";
-// styles
-import classes from "./DeductionEntry.module.scss";
-import DeductionEntryForm from "../DeductionEntryForm";
-import { useMutation } from "@tanstack/react-query";
-import dbService from "src/service/Database";
-import { resetDeductionAction } from "src/store/deduction/deduction-actions";
-import { useDispatch } from "react-redux";
 
 interface DeductionEntryFormProps {
   options: DeductionEntryOption[];
-  entry: any;
+  entry: DeductionEntry | undefined;
 }
 interface EntryInput {
   category: string;
   amount: string;
-  maxLimit?: number;
 }
-interface EntryError {
-  category: string;
-  amount: string;
-}
-const INITIAL_ERROR = {
-  category: "",
-  amount: "",
-};
-const INITIAL_ENTRY = {
-  category: "",
-  amount: "",
-};
-const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
+
+const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
   options,
   entry,
 }) => {
+  const userActivity = useRef<boolean>(false);
   const dispatch = useDispatch();
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
     onSuccess: (data) => {
-      console.log(data);
-      /*  dispatch(
-        saveRentEntry({ amount: +amount, duration: +duration, isMetroCity })
-      ); */
+      const { $id: id, category, amount } = data;
+      dispatch(
+        saveChapterVIEntry({
+          id,
+          category,
+          amount,
+        })
+      );
     },
   });
   // store
@@ -65,51 +58,44 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
   const [error, setError] = useState<string>("");
   useEffect(() => {
     if (!entry) return;
-    setEntryInput({ ...entry, amount: `${entry.amount}` });
+    const { category, amount } = entry;
+    setEntryInput({ category, amount: `${amount}` });
   }, [entry]);
 
   const onEntrySave = () => {
-    if (entryInput.category === "" || entryInput.amount === "") {
-      if (entryInput.amount === "") {
-        setError(updateState("amount", "Amount cannot be empty"));
+    if (error) return;
+    if (userActivity.current) {
+      const amountError: string = ErrorMessage.amountInput(entryInput.amount);
+      if (amountError) {
+        setError(amountError);
+        return;
       }
-      return;
     }
+
     mutate({
-      id: entry?.id || undefined,
+      id: entry?.id,
       category: entryInput.category,
       amount: +entryInput.amount,
     });
-    /* onSave({
-      category: entryInput.category,
-      amount: +entryInput.amount,
-      ...(entryInput?.maxLimit ? { maxLimit: entryInput.maxLimit } : {}),
-    }); */
   };
   const onCategoryChange = (event: any) => {
-    const enteredCategory = event.target.value as string;
-    const maxLimit = options.find(
-      (option) => option.category === enteredCategory
-    )?.maxLimit;
-    setEntryInput(updateState("category", enteredCategory));
-    setEntryInput(updateState("maxLimit", maxLimit));
+    setEntryInput(updateState("category", event.target.value as string));
   };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const amount: string = event.target.value;
-    setEntryInput((entry) => ({
-      ...entry,
-      amount,
-    }));
+    setEntryInput(updateState("amount", amount));
     setError(ErrorMessage.amountInput(amount));
+    if (!userActivity.current) {
+      userActivity.current = true;
+    }
   };
 
   const onReset = () => {
     dispatch(resetDeductionAction());
   };
-  const { category, amount } = entryInput;
 
   return (
-    <DeductionEntryForm
+    <EntryFormModal
       isPending={isPending}
       isError={isError}
       onSave={onEntrySave}
@@ -117,7 +103,7 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
     >
       <Select
         label="Category"
-        value={category}
+        value={entryInput.category}
         onChange={onCategoryChange}
         data-testid={`category-option`}
         fullWidth
@@ -141,13 +127,12 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
       <TUITextField
         fullWidth
         label="Invested Amount"
-        type="number"
-        value={amount}
+        value={entryInput.amount}
         onChange={onAmountChange}
         inputProps={{ "data-testid": "deduction-amount-input" }}
         errorMessage={error}
       />
-    </DeductionEntryForm>
+    </EntryFormModal>
   );
 };
-export default Section80CEntryForm;
+export default ChapterVIEntryForm;

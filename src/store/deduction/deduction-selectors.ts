@@ -19,10 +19,11 @@ export const selectRentDeduction = (store: AppStoreType): DeductionByRent =>
   store.deduction.rent;
 export const selectDeductionSection24 = (store: AppStoreType): any =>
   store.deduction.section24;
-export const selectSection80CDeduction = (store: AppStoreType): DeductionOption =>
-  store.deduction.section80C;
-export const selectDeductionChapter6 = (store: AppStoreType): DeductionOption =>
-  store.deduction.deductionByChapter6;
+export const selectSection80CDeduction = (
+  store: AppStoreType
+): DeductionOption => store.deduction.section80C;
+export const selectChapter6Deduction = (store: AppStoreType): DeductionOption =>
+  store.deduction.chapter6;
 
 export const selectRentOptions = (store: AppStoreType): RentEntry[] =>
   store.deduction.rent.options;
@@ -40,7 +41,7 @@ export const selectSection24DeductedAmount = (store: AppStoreType): number =>
 export const select80CDeductedAmount = (store: AppStoreType): number =>
   store.deduction.section80C.deductedAmount;
 export const selectChapterVIDeductedAmount = (store: AppStoreType): number =>
-  store.deduction.deductionByChapter6.deductedAmount;
+  store.deduction.chapter6.deductedAmount;
 
 export const selectDeductionBreakup = createSelector(
   [

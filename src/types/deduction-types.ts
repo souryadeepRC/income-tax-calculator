@@ -11,7 +11,7 @@ export type DeductionReducerType = {
     editableEntryId: string;
   };
   section80C: DeductionOption;
-  deductionByChapter6: DeductionOption;
+  chapter6: DeductionOption;
 };
 export interface DeductionResponse {
   id: string;

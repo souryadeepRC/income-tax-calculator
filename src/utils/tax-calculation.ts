@@ -120,7 +120,7 @@ export const calculateTax = (
   deductedAmount += deductionDetail.rent.deductedAmount;
   deductedAmount += deductionDetail.section24.deductedAmount;
   deductedAmount += deductionDetail.section80C.deductedAmount;
-  deductedAmount += deductionDetail.deductionByChapter6.deductedAmount;
+  deductedAmount += deductionDetail.chapter6.deductedAmount;
 
   const taxBreakup: TaxBreakupType = {
     newScheme: calculateIncomeTax(
