@@ -1,16 +1,25 @@
 .income_header__container {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  justify-content: space-between;
   width: 70%;
-  margin: 0 auto;
+  margin: 15px auto;
   color: var(--secondary-color);
+  flex-wrap: wrap;
   .header__actions {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 10px;
     flex-wrap: wrap;
+    .header__title {
+      margin: 0;
+    }
+    :global(.Button-root.contained) {
+      box-shadow: 2px 2px 3px 1px rgba($card-shadow, 0.3);
+      padding: 10px 25px;
+    }
   }
   .income_amount__label {
     display: flex;
@@ -18,6 +27,7 @@
     border: 2px solid var(--secondary-color);
     width: 45vw;
     max-width: 200px;
+    font-size: 1rem;
     > span:first-child {
       background-color: var(--secondary-color);
       color: var(--primary-color);
@@ -50,9 +60,12 @@
       }
       :global(tbody tr td) {
         color: var(--secondary-color);
+        :global(.MuiSvgIcon-root) {
+          font-size: 1rem;
+        }
       }
       :global(tbody tr:nth-child(even)) {
-        background-color: var(--secondary-color-light);
+        //background-color: var(--secondary-color-light);
         :global(td) {
           color: var(--secondary-color);
         }
@@ -60,9 +73,24 @@
     }
   }
   :global(.TUISearch_root) {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 1px;
+    gap: 2px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: none;
+    box-shadow: 3px 3px 4px 1px rgba($card-shadow, 0.2);
+    :global(.MuiSvgIcon-root) {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--secondary-color);
+    }
+    :global(.TUISearch_input) {
+      background-color: transparent;
+      border-radius: 20px;
+      color: var(--secondary-color);
+    }
   }
   .income_option__delete {
     cursor: pointer;
@@ -112,33 +140,33 @@
   }
 }
 .income_edit__container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  padding: 25px 20px;
-  align-items: flex-start;
-  width: 50vw;
-  max-width: 400px;
-  color: var(--secondary-color);
-  .edit__header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-size: 1.2rem;
-  }
-}
-@media screen and (max-width: $mobile-max-width) {
-  .income_header__container {
-    width: 80%;
-    .header__label {
+  :global(.form_input__container) {
+    padding: 25px 20px;
+    .edit__header {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-between;
+      font-size: 1.2rem;
     }
-    h2 {
-      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .income_header__container {
+    width: 90%;
+    gap: 5px;
+    .header__actions {
+      .header__title {
+        font-size: 14px;
+      }
+      :global(.Button-root.contained) {
+        padding: 5px 10px;
+      }
+    }
+    .income_amount__label {
+      margin: 0 0 0 auto;
+      width: 40vw;
+      font-size: 14px;
     }
   }
   .income_options__container {

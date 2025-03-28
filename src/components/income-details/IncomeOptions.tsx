@@ -22,24 +22,11 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
   const dispatch = useDispatch();
 
   const columns = [
-    {
-      key: "deleteAction",
-      label: "",
-      render: (rowData: any) => {
-        if (isReservedCategory(rowData.category)) return <></>;
-        return (
-          <DeleteIcon
-            className={classes.income_option__delete}
-            role="button"
-            aria-label="income option delete icon button"
-            tabIndex={0}
-            onClick={() => dispatch(deleteIncomeEntry(rowData.id))}
-          />
-        );
-      },
-    },
     { key: "category", label: "Category" },
-    { key: "group", label: "Group" },
+    {
+      key: "group",
+      label: "Group",
+    },
     {
       key: "amount",
       label: "Amount",
@@ -55,6 +42,22 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
           <EditIcon />
         </div>
       ),
+    },
+    {
+      key: "deleteAction",
+      label: "",
+      render: (rowData: any) => {
+        if (isReservedCategory(rowData.category)) return <></>;
+        return (
+          <DeleteIcon
+            className={classes.income_option__delete}
+            role="button"
+            aria-label="income option delete icon button"
+            tabIndex={0}
+            onClick={() => dispatch(deleteIncomeEntry(rowData.id))}
+          />
+        );
+      },
     },
   ];
 

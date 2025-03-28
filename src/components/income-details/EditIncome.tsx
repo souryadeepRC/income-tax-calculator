@@ -67,25 +67,24 @@ const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
       onCancel={onCancel}
       onSave={onSave}
       saveBtnLabel="Modify Income"
+      className={classes.income_edit__container}
     >
-      <div className={classes.income_edit__container}>
-        <div className={classes.edit__header}>
-          <strong>Previous Amount</strong>
-          <label>
-            {category}: Rs. {amount}
-          </label>
-        </div>
-        <TUITextField
-          isRequired
-          fullWidth
-          label="Amount"
-          id="edit-income-amount"
-          inputProps={{ "data-testid": "edit-income-amount-input" }}
-          value={editableAmount}
-          onChange={onAmountChange}
-          errorMessage={error}
-        />
+      <div className={classes.edit__header}>
+        <strong>Previous Amount</strong>
+        <label>
+          {category}: Rs. {amount}
+        </label>
       </div>
+      <TUITextField
+        isRequired
+        fullWidth
+        label="Amount"
+        id="edit-income-amount"
+        inputProps={{ "data-testid": "edit-income-amount-input" }}
+        value={editableAmount}
+        onChange={onAmountChange}
+        errorMessage={error}
+      />
     </EntryFormModal>
   );
 };

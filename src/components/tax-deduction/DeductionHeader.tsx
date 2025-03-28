@@ -1,6 +1,6 @@
 // library
 import { useSelector } from "react-redux";
-import AddCardIcon from "@mui/icons-material/AddCard";
+import AddCardIcon from "@mui/icons-material/Tune";
 // components
 import { Button } from "src/components/common";
 // store
@@ -22,8 +22,8 @@ const DeductionHeader: React.FC<DeductionHeaderProps> = ({
   return (
     <section className={classes.deduction_header__container}>
       <div>
-        <h2>{title}</h2>
-        <p>Total Exempted : Rs. {amount}</p>
+        <h2 className={classes.deduction__title}>{title}</h2>
+        <p className={classes.deduction__amount}>Exempted : Rs. {amount}</p>
       </div>
 
       {addAction && (
@@ -34,7 +34,7 @@ const DeductionHeader: React.FC<DeductionHeaderProps> = ({
           onClick={addAction}
           startIcon={<AddCardIcon />}
         >
-          {isMobile ? "Add" : "New Deduction"}
+          Add
         </Button>
       )}
     </section>

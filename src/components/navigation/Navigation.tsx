@@ -11,9 +11,6 @@ import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 // styles
 import "./Navigation.scss";
-import { Button } from "../common/CommonComponents";
-import { useDispatch } from "react-redux";
-import { setLogoutActive } from "src/store/auth/auth-actions";
 
 type CustomSvgIcon = OverridableComponent<SvgIconTypeMap> & {
   muiName?: string;

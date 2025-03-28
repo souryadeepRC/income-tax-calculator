@@ -1,25 +1,29 @@
-import { Button } from "src/components/common";
-// icons
-import AddCardIcon from "@mui/icons-material/AddCard";
-import classes from "./IncomeDetails.module.scss";
-import { selectOverallIncomeAmount } from "src/store/income/income-selectors";
+// library
+import AddCardIcon from "@mui/icons-material/DataSaverOn";
 import { useDispatch, useSelector } from "react-redux";
+// components
+import { Button } from "src/components/common";
+// store
+import { selectOverallIncomeAmount } from "src/store/income/income-selectors";
 import { editIncomeEntry } from "src/store/income/income-actions";
+import { selectIsMobile } from "src/store/screen/screen-selectors";
+// styles
+import classes from "./IncomeDetails.module.scss";
 
 const IncomeHeader: React.FC = () => {
   const dispatch = useDispatch();
+  const isMobile: boolean = useSelector(selectIsMobile);
   const totalIncome = useSelector(selectOverallIncomeAmount);
   const addIncome = () => {
     dispatch(editIncomeEntry());
   };
   return (
     <section className={classes.income_header__container}>
-      <h2>Track Your Income with Ease</h2>
       <div className={classes.header__actions}>
-        <div className={classes.income_amount__label}>
-          <span>Rs.</span>
-          <span>{totalIncome}</span>
-        </div>
+        {!isMobile && (
+          <h2 className={classes.header__title}>Track Your Income with Ease</h2>
+        )}
+
         <Button
           variant="contained"
           border="round"
@@ -29,6 +33,10 @@ const IncomeHeader: React.FC = () => {
         >
           Add Income
         </Button>
+      </div>
+      <div className={classes.income_amount__label}>
+        <span>Rs.</span>
+        <span>{totalIncome}</span>
       </div>
     </section>
   );

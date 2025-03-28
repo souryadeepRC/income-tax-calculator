@@ -53,8 +53,7 @@ const HeaderLanding: React.FC = () => {
         <AppTitle />
         {!username && (
           <Button
-            variant="contained"
-            border="round"
+            variant="text"
             onClick={handleAuth}
             startIcon={<AccountCircleIcon />}
           >
@@ -75,8 +74,7 @@ const AppTitle: React.FC = () => {
     </div>
   );
 };
-const Header: React.FC = () => { 
-
+const Header: React.FC = () => {
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   return isLoggedIn ? <HeaderUser /> : <HeaderLanding />;
 };

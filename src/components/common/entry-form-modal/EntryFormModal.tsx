@@ -16,6 +16,7 @@ interface EntryFormModalProps {
   onCancel: () => void;
   onSave: () => void;
   saveBtnLabel?: string;
+  className?: string;
 }
 const EntryFormModal: React.FC<EntryFormModalProps> = ({
   ariaLabel = "Entry form modal",
@@ -25,10 +26,11 @@ const EntryFormModal: React.FC<EntryFormModalProps> = ({
   onCancel,
   onSave,
   saveBtnLabel = "Save",
+  className = "",
 }: any) => {
   return (
     <Modal onClose={onCancel}>
-      <form className="entry__form">
+      <form className={`entry__form ${className}`}>
         <InfiniteProgressBar isLoading={isPending} />
         {isError && <ErrorMessage />}
         <div className="form_input__container">{children}</div>

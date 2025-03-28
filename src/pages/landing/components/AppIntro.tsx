@@ -1,6 +1,8 @@
 // library
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+// component
+import { Button } from "src/components/common";
 // store
 import { selectUserName } from "src/store/auth/auth-selectors";
 // styles
@@ -22,7 +24,9 @@ const AppIntro: React.FC = () => {
           specifically for Salaried individuals of India.
         </p>
         {username && (
-          <button onClick={onStarted}>Let&apos;s Get Started</button>
+          <Button variant="contained" onClick={onStarted}>
+            Let&apos;s Get Started
+          </Button>
         )}
       </div>
     </section>

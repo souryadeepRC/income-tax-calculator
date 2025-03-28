@@ -34,20 +34,13 @@
       font-weight: 500;
       color: var(--primary-color);
     }
-    button {
-      box-shadow: inset 1px 1px 5px 0 var(--secondary-color);
+    :global(.Button-root) {
       padding: 15px 30px;
-      transition: transform 0.3s ease;
+      border-radius: 50px;
       background-color: var(--primary-color);
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
       font-size: 1rem;
       font-weight: 900;
       color: var(--secondary-color);
-      &:hover {
-        transform: scale(1.01);
-      }
     }
   }
 }
