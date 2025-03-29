@@ -34,19 +34,19 @@
     width: 90%;
     height: 100vh;
     animation: slideIn 1s ease-in-out;
-    background-color: $header-bg-color;
+    background-color: var(--primary-color);
     font-size: 16px;
     font-weight: 900;
-    color: var(--navigation-link-color);
+    color: var(--secondary-color);
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 14px;
-      border-bottom: 5px solid var(--navigation-link-color);
+      border-bottom: 5px solid var(--secondary-color);
       animation: slideLinks 0.2s ease-in-out;
       .MuiSvgIcon-root {
-        fill: var(--navigation-link-color);
+        fill: var(--secondary-color);
       }
     }
     ul {
@@ -71,11 +71,7 @@
           animation: slideLinks 0.2s ease-in-out;
           border-radius: 10px;
           font-size: 14px;
-          color: var(--navigation-link-color);
-          &.active {
-            box-shadow: inset 1px 2px 5px var(--navigation-link-color);
-            color: var(--navigation-active-color);
-          }
+
           .MuiSvgIcon-root {
             font-size: inherit;
           }
