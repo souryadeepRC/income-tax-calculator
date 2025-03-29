@@ -11,6 +11,7 @@ import ErrorMessage from "src/components/common/error-message/ErrorMessage";
 import InfiniteProgressBar from "src/components/common/infinite-progress-bar/InfiniteProgressBar";
 import { Card, CardWrapper } from "src/components/common/card/Card";
 import EntryFormModal from "src/components/common/entry-form-modal/EntryFormModal";
+import AmountLabel from "src/components/common/amount-label/AmountLabel";
 
 export {
   Select,
@@ -26,4 +27,5 @@ export {
   Card,
   CardWrapper,
   EntryFormModal,
+  AmountLabel,
 };

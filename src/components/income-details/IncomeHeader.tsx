@@ -2,7 +2,7 @@
 import AddCardIcon from "@mui/icons-material/DataSaverOn";
 import { useDispatch, useSelector } from "react-redux";
 // components
-import { Button } from "src/components/common";
+import { AmountLabel, Button } from "src/components/common";
 // store
 import { selectOverallIncomeAmount } from "src/store/income/income-selectors";
 import { editIncomeEntry } from "src/store/income/income-actions";
@@ -34,10 +34,7 @@ const IncomeHeader: React.FC = () => {
           Add Income
         </Button>
       </div>
-      <div className={classes.income_amount__label}>
-        <span>Rs.</span>
-        <span>{totalIncome}</span>
-      </div>
+      <AmountLabel amount={`${totalIncome}`} />
     </section>
   );
 };
