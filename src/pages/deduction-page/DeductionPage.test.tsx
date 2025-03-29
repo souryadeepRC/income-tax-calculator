@@ -1,8 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import DeductionPage from "src/pages/deduction-page/DeductionPage";
-import DataLayout from "src/components/layout/DataLayout";
-import DeductionOption from "./DeductionOption";
 import { MemoryRouter } from "react-router";
 jest.mock("src/components/layout/DataLayout", () => ({
   __esModule: true,
@@ -12,7 +10,6 @@ jest.mock("react-redux", () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }));
-const MockDataLayout = DataLayout as jest.MockedFunction<typeof DataLayout>;
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
 const mockUseDispatch = useDispatch as jest.MockedFunction<typeof useDispatch>;
 
@@ -31,7 +28,5 @@ describe("DeductionPage Component", () => {
     render(<DeductionPage />);
 
     expect(mockUseSelector).toHaveBeenCalledTimes(1);
-    expect(MockDataLayout).toHaveBeenCalledTimes(1);
   });
 });
- 

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateOverallAmount } from "src/utils/income-utils";
-import IncomeEditModal from "./IncomeEditModal";
+import EditIncome from "./EditIncome";
 jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(),
@@ -22,7 +22,7 @@ describe("test IncomeEditModal component", () => {
       label: "Test label",
       category: "salary",
     });
-    render(<IncomeEditModal onCancel={mockOnClose} />);
+    render(<EditIncome entry={{id:"12", amount: 2000, group: "salary", category: "Test label" }}/>);
 
     expect(screen.getByText(/Edit Test label Details/i)).toBeInTheDocument();
     expect(screen.getByText("Previous Amount: Rs. 500")).toBeInTheDocument();
