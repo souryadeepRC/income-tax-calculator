@@ -1,22 +1,17 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // actions
-import { updateTaxDetails } from "src/store/tax/tax-actions";
 // selectors
-import {
-  selectTotalDeduction,
-  selectStandardDeduction,
-} from "src/store/deduction/deduction-selectors";
+import { selectTotalDeduction } from "src/store/deduction/deduction-selectors";
 import {
   selectOverallIncomeAmount,
   selectSalaryIncome,
 } from "src/store/income/income-selectors";
 // types
 import { AppDispatch } from "src/types/store-types";
-import { DeductionReducerType } from "src/types/deduction-types";
+import { TaxBreakup } from "src/types/tax-types";
 // utils
 import { calculateTax } from "src/utils/tax-calculation";
-import { TaxBreakup, TaxReducerType } from "src/types/tax-types";
 
 export const useTaxCalculation = (): TaxBreakup => {
   // store

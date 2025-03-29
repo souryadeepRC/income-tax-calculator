@@ -2,11 +2,11 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import IncomePage from "./IncomePage";
 import AddIncome from "src/components/income-details/AddIncome";
-import IncomeEditModal from "src/components/income-details/IncomeEditModal";
+import EditIncome from "src/components/income-details/EditIncome";
 
-jest.mock("src/components/income-details/IncomeEditModal", () => ({
+jest.mock("src/components/income-details/EditIncome", () => ({
   __esModule: true,
-  default: jest.fn(() => <div>Mocked IncomeEditModal </div>),
+  default: jest.fn(() => <div>Mocked EditIncome </div>),
 }));
 jest.mock("src/components/add-income/AddIncome", () => ({
   __esModule: true,
@@ -27,8 +27,8 @@ const mockUseDispatch = useDispatch as jest.MockedFunction<typeof useDispatch>;
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;
 
 const mockAddIncome = AddIncome as jest.MockedFunction<typeof AddIncome>;
-const mockIncomeEditModal = IncomeEditModal as jest.MockedFunction<
-  typeof IncomeEditModal
+const mockIncomeEditModal = EditIncome as jest.MockedFunction<
+  typeof EditIncome
 >;
 describe("test IncomePage component", () => {
   test("render the page with default content and click the add income", () => {
@@ -42,7 +42,7 @@ describe("test IncomePage component", () => {
     render(<IncomePage />);
 
     expect(screen.getByText(/Annual Income/i)).toBeInTheDocument();
-    expect(screen.getByText("Rs. 500")).toBeInTheDocument(); 
+    expect(screen.getByText("Rs. 500")).toBeInTheDocument();
     fireEvent.click(screen.getByTestId("add-income-btn"));
     expect(mockDispatch).toBeCalledWith({
       payload: undefined,
@@ -50,12 +50,9 @@ describe("test IncomePage component", () => {
     });
   });
   test("render the page with Add Income Modal Open", () => {
-    mockAddIncome.mockImplementation(({ onCancel }) => (
+    mockAddIncome.mockImplementation(() => (
       <div>
-        Mocked AddIncome{" "}
-        <button data-testid="cancel-btn" onClick={onCancel}>
-          Cancel
-        </button>
+        Mocked AddIncome <button data-testid="cancel-btn">Cancel</button>
       </div>
     ));
     const mockDispatch = jest.fn();

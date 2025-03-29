@@ -17,7 +17,7 @@ describe("test RentEntryForm component", () => {
     mockUseDispatch.mockReturnValue(mockDispatch);
   });
   test("render the RentEntryForm component with valid entry and update the amount", () => {
-    render(<RentEntryForm durationLeft={5} rentEntry={mockRentEntry} />);
+    render(<RentEntryForm maxDuration={5} entry={mockRentEntry} />);
 
     const amountInput = screen.getByTestId("rent-amount-input");
     expect(amountInput).toHaveValue(100);
@@ -55,7 +55,7 @@ describe("test RentEntryForm component", () => {
     });
   });
   test("validate with new rent entry case and cancel functionality", () => {
-    render(<RentEntryForm durationLeft={5} rentEntry={undefined} />);
+    render(<RentEntryForm maxDuration={5} entry={undefined} />);
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
     expect(mockDispatch).not.toHaveBeenCalled();
     expect(
@@ -74,8 +74,8 @@ describe("test RentEntryForm component", () => {
   test("validate edit rent Entry with no amount", () => {
     render(
       <RentEntryForm
-        durationLeft={5}
-        rentEntry={{ duration: "6", amount: "", isMetroCity: false }}
+        maxDuration={5}
+        entry={{ duration: "6", amount: "", isMetroCity: false }}
       />
     );
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));
@@ -91,8 +91,8 @@ describe("test RentEntryForm component", () => {
   test("validate edit rent Entry with no duration", () => {
     render(
       <RentEntryForm
-        durationLeft={5}
-        rentEntry={{ duration: "", amount: "100", isMetroCity: false }}
+        maxDuration={5}
+        entry={{ duration: "", amount: "100", isMetroCity: false }}
       />
     );
     fireEvent.click(screen.getByTestId("rent-form-save-btn"));

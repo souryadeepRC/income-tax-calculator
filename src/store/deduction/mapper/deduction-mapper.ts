@@ -123,12 +123,12 @@ export const mapDeductions = (
       ...state.section24,
       ...details.section24,
     },
-    deduction80C: {
-      ...state.deduction80C,
+    section80C: {
+      ...state.section80C,
       ...details.deduction80C,
     },
-    deductionByChapter6: {
-      ...state.deductionByChapter6,
+    chapter6: {
+      ...state.chapter6,
       ...details.deductionByChapter6,
     },
   };

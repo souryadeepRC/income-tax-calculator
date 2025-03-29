@@ -32,7 +32,7 @@ describe("test AddIncome component", () => {
     // Mock the dispatch function
     const mockDispatch = jest.fn();
     mockedUseDispatch.mockReturnValue(mockDispatch);
-    render(<AddIncome onCancel={mockOnCancel} />);
+    render(<AddIncome  />);
     return { mockDispatch, mockOnCancel };
   };
   const updateTextField = (testId: string, value: string) => {

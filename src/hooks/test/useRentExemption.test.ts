@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateRentDeduction } from "src/utils/tax-calculation";
-import { selectRentCollections } from "src/store/deduction/deduction-selectors";
+import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 import useRentExemption from "../useRentExemption";
 jest.mock("react-redux", () => ({
@@ -27,7 +27,7 @@ describe("useRentExemption", () => {
     ];
     const mockData2 = { basic: 20000, hra: 8000 };
     mockUseSelector.mockImplementation((selector) => {
-      if (selector === selectRentCollections) return mockData1;
+      if (selector === selectRentOptions) return mockData1;
       if (selector === selectRentEligibleDetails) return mockData2;
       return undefined;
     });
