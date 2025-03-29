@@ -9,8 +9,6 @@ import { AmountLabel, Button, Modal } from "src/components/common";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
-// constants
-import { TAX_SLAB } from "src/constants/tax-constants";
 // types
 import { TaxChoiceType, TaxScheme } from "src/types/tax-types";
 // styles
@@ -50,7 +48,7 @@ const TaxRegimeBreakup: React.FC<TaxRegimeBreakupProps> = ({
         <h2 className={classes.regime__title} data-testid="regime-label">
           {type} Tax Regime
         </h2>
-        <TaxSlabView taxSlab={TAX_SLAB[type]} />
+        <TaxSlabView type={type} />
       </div>
       <AmountLabel amount={`${formatNumber(monthlyTax)}/month`} />
       {isMobile ? (

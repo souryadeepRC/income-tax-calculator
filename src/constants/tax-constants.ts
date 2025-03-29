@@ -11,7 +11,7 @@ export type TaxSlabType = {
   label: string;
 };
 export const TAX_SLAB: Record<string, TaxSlabType[]> = {
-  NEW: [
+  New: [
     {
       minLimit: 0,
       maxLimit: 400000,
@@ -55,7 +55,7 @@ export const TAX_SLAB: Record<string, TaxSlabType[]> = {
       label: "Above ₹24,00,000",
     },
   ],
-  OLD: [
+  Old: [
     {
       minLimit: 0,
       maxLimit: 250000,
