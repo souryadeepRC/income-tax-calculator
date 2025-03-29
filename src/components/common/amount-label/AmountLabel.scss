@@ -1,0 +1,18 @@
+.amount_label__container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 200px;
+  width: fit-content;
+  border: 2px solid var(--secondary-color);
+  font-size: 1rem;
+  font-weight: bold;
+  .label {
+    padding: 8px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+  .amount {
+    padding: 8px;
+    word-break: break-all;
+  }
+}

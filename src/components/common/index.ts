@@ -12,6 +12,7 @@ import InfiniteProgressBar from "src/components/common/infinite-progress-bar/Inf
 import { Card, CardWrapper } from "src/components/common/card/Card";
 import EntryFormModal from "src/components/common/entry-form-modal/EntryFormModal";
 import AmountLabel from "src/components/common/amount-label/AmountLabel";
+import ToggleView from "src/components/common/toggle-view/ToggleView";
 
 export {
   Select,
@@ -28,4 +29,5 @@ export {
   CardWrapper,
   EntryFormModal,
   AmountLabel,
+  ToggleView,
 };
