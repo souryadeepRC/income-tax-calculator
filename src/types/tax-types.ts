@@ -1,27 +1,35 @@
 export interface TaxReducerType {
   choice: TaxChoice;
-  newScheme: TaxScheme;
-  oldScheme: TaxScheme;
+  new: TaxScheme;
+  old: TaxScheme;
 }
 export interface TaxBreakupType {
-  newScheme: TaxScheme;
-  oldScheme: TaxScheme;
+  new: TaxScheme;
+  old: TaxScheme;
 }
 export type TaxChoiceType = "New" | "Old";
-export interface TaxChoice {
-  taxAmount: {
-    monthly: number;
-    yearly: number;
-  };
+export interface TaxChoice { 
   difference: number;
-  type: TaxChoiceType;
-  percentage: number;
+  type: TaxChoiceType; 
 }
 export interface TaxScheme {
-  baseTax: number;
-  cessAmount: number;
-  monthlyTax: number;
+  tax: {
+    baseTax: number;
+    cessAmount: number;
+    monthlyTax: number;
+    yearlyTax: number;
+  };
   taxableAmount: number;
-  yearlyTax: number;
-  deductedAmount: number;
+  deduction: {
+    standardDeduction: number;
+    other: number;
+    total: number;
+  };
 }
+export interface TaxBreakup {
+  choice: TaxChoice;
+  new: TaxScheme;
+  old: TaxScheme;
+}
+
+export type TaxDetails = {};

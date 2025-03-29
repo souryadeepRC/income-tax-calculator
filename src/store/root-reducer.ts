@@ -5,7 +5,6 @@ import AuthReducer from "./auth/auth-reducer";
 import { DeductionReducer } from "./deduction/deduction-reducer";
 import { IncomeReducer } from "./income/income-reducer";
 import { ScreenReducer } from "./screen/screen-reducer";
-import { TaxReducer } from "./tax/tax-reducer";
 import { ReducerActionPayloadType } from "src/types/store-types";
 
 // Define your reducers
@@ -13,7 +12,6 @@ const combinedReducers = combineReducers({
   auth: AuthReducer,
   income: IncomeReducer,
   deduction: DeductionReducer,
-  tax: TaxReducer,
   screen: ScreenReducer,
 });
 /* eslint-disable */

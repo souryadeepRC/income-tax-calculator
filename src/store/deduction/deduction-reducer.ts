@@ -59,7 +59,7 @@ const initialState: DeductionReducerType = {
   },
   section80C: {
     options: [],
-    deductedAmount: 500,
+    deductedAmount: 0,
     isEditable: false,
     editableEntryId: "",
   },

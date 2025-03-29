@@ -43,19 +43,15 @@ export const select80CDeductedAmount = (store: AppStoreType): number =>
 export const selectChapterVIDeductedAmount = (store: AppStoreType): number =>
   store.deduction.chapter6.deductedAmount;
 
-export const selectDeductionBreakup = createSelector(
+export const selectStandardDeduction = (store: AppStoreType) =>
+  store.deduction.standardDeduction;
+export const selectTotalDeduction = createSelector(
   [
     selectRentDeductedAmount,
     selectSection24DeductedAmount,
     select80CDeductedAmount,
     selectChapterVIDeductedAmount,
   ],
-  (rentDeduction, deductionSection24, deduction80C, deductionChapter6) => ({
-    rentDeduction,
-    deductionSection24,
-    deduction80C,
-    deductionChapter6,
-    total:
-      rentDeduction + deductionSection24 + deduction80C + deductionChapter6,
-  })
+  (rentDeduction, deductionSection24, deduction80C, deductionChapter6) =>
+    rentDeduction + deductionSection24 + deduction80C + deductionChapter6
 );

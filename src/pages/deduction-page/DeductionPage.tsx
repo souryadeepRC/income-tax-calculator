@@ -5,7 +5,7 @@ import { Outlet, useLocation } from "react-router";
 // components
 import { RouteLayout } from "src/components/common";
 // selectors
-import { selectDeductionBreakup } from "src/store/deduction/deduction-selectors";
+import { selectTotalDeduction } from "src/store/deduction/deduction-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
@@ -13,7 +13,7 @@ import classes from "./DeductionPage.module.scss";
 import DeductionNavigation from "./DeductionNavigation";
 
 const DeductionPage: React.FC = () => {
-  const deductionBreakup = useSelector(selectDeductionBreakup);
+  const amount: number = useSelector(selectTotalDeduction);
 
   return (
     <>
@@ -22,7 +22,7 @@ const DeductionPage: React.FC = () => {
           <h2>Track Your Deduction with Ease</h2>
           <div className={classes.deduction_amount__label}>
             <span>Rs.</span>
-            <span>{formatNumber(deductionBreakup.total)}</span>
+            <span>{formatNumber(amount)}</span>
           </div>
         </div>
         <DeductionNavigation />
