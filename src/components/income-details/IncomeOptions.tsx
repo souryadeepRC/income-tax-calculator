@@ -1,40 +1,32 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TUITable } from "triva-ui";
+// library
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+// store
 import {
-  removeIncomeDetails,
   editIncomeEntry,
+  deleteIncomeEntry,
 } from "src/store/income/income-actions";
+// types
+import { IncomeDeleteEntry, IncomeOption } from "src/types/income-types";
+// utils
+import { isReservedCategory } from "src/utils/income-utils";
+// styles
 import classes from "./IncomeDetails.module.scss";
-import { selectIncomeOptions } from "src/store/income/income-selectors";
 
-const IncomeOptions: React.FC = () => {
+interface IncomeOptionsProps {
+  options: IncomeOption[];
+}
+const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
   const dispatch = useDispatch();
-  const incomeOptions = useSelector(selectIncomeOptions);
 
-  const onEdit = (id: string) => {
-    dispatch(editIncomeEntry(id));
-  };
-  const onRemove = (id: string) => {
-    dispatch(removeIncomeDetails(id));
-  };
   const columns = [
+    { key: "category", label: "Category" },
     {
-      key: "deleteAction",
-      label: "",
-      render: (rowData: any) => (
-        <DeleteIcon
-          className={classes.income_option__delete}
-          role="button"
-          aria-label="income option delete icon button"
-          tabIndex={0}
-          onClick={() => onRemove(rowData.id)}
-        />
-      ),
+      key: "group",
+      label: "Group",
     },
-    { key: "label", label: "Category" },
-    { key: "category", label: "Group" },
     {
       key: "amount",
       label: "Amount",
@@ -44,12 +36,28 @@ const IncomeOptions: React.FC = () => {
           aria-label="income amount editable"
           tabIndex={0}
           className={classes.income__amount}
-          onClick={() => onEdit(rowData.id)}
+          onClick={() => dispatch(editIncomeEntry(rowData.id))}
         >
           <span>{rowData.amount}</span>
           <EditIcon />
         </div>
       ),
+    },
+    {
+      key: "deleteAction",
+      label: "",
+      render: (rowData: any) => {
+        if (isReservedCategory(rowData.category)) return <></>;
+        return (
+          <DeleteIcon
+            className={classes.income_option__delete}
+            role="button"
+            aria-label="income option delete icon button"
+            tabIndex={0}
+            onClick={() => dispatch(deleteIncomeEntry(rowData.id))}
+          />
+        );
+      },
     },
   ];
 
@@ -58,7 +66,7 @@ const IncomeOptions: React.FC = () => {
       <TUITable
         title="Income Options"
         columns={columns}
-        data={incomeOptions}
+        data={options}
         emptyRecords={"No Income option added"}
         showPagination
         pagination={{ pageSize: 10 }}

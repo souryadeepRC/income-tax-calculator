@@ -1,52 +1,66 @@
-import { v4 as uuid4 } from "uuid";
-import { DeductionByRent, RentEntry } from "src/types/deduction-types";
-
-export const mapEditRentEntry = (
-  rent: DeductionByRent,
-  payload: string
-): DeductionByRent => ({
-  ...rent,
-  isEditable: true,
-  ...(payload ? { editableEntryId: payload } : {}),
-});
+ 
+import {
+  DeductionEntry,
+  RentEntry,
+  Section24Entry,
+} from "src/types/deduction-types";
 
 export const mapSaveRentEntry = (
-  rent: DeductionByRent,
-  payload: RentEntry,
-  initialRentState: DeductionByRent
-): DeductionByRent => {
-  const modifiedCollection = [...rent.collections];
-  const editableEntryId = rent.editableEntryId;
-  if (rent.editableEntryId) {
-    const editableEntryIndex = modifiedCollection.findIndex(
-      (rentEntry) => rentEntry.id === editableEntryId
-    );
-    modifiedCollection[editableEntryIndex] = {
-      ...modifiedCollection[editableEntryIndex],
+  options: RentEntry[],
+  payload: RentEntry
+): RentEntry[] => {
+  const entryIndex = options.findIndex(
+    (rentEntry) => rentEntry.id === payload.id
+  );
+  if (entryIndex > -1) {
+    options[entryIndex] = {
+      ...options[entryIndex],
       ...payload,
     };
   } else {
-    modifiedCollection.push({ id: uuid4(), ...payload });
+    options.push(payload);
   }
-  return {
-    ...rent,
-    isEditable: initialRentState.isEditable,
-    editableEntryId: initialRentState.editableEntryId,
-    collections: modifiedCollection,
-  };
+  return options;
 };
-export const mapDeleteRentEntry = (
-  rent: DeductionByRent,
-  payload: string,
-  initialRentState: DeductionByRent
-): DeductionByRent => {
-  const { isEditable, editableEntryId } = initialRentState;
+
+// Save Entry in store for Section 24 | section 80C
+type EntryType = {
+  options: (Section24Entry | DeductionEntry)[];
+  deductedAmount: number;
+};
+type saveEntryPayload = Section24Entry | DeductionEntry;
+
+export const mapSaveEntry = (
+  details: EntryType,
+  payload: saveEntryPayload,
+  limit: number
+): EntryType => {
+  const { deductedAmount, options } = details;
+  let updatedAmount: number = deductedAmount + payload.amount;
+  const entryIndex = options.findIndex((entry: any) => entry.id === payload.id);
+  if (entryIndex > -1) {
+    options[entryIndex] = {
+      ...options[entryIndex],
+      ...payload,
+    };
+    updatedAmount += payload.amount - options[entryIndex].amount;
+  } else {
+    options.push(payload);
+  }
+  return { options, deductedAmount: Math.min(updatedAmount, limit) };
+};
+
+// Delete Entry in store for Section 24 | section 80C
+type DeleteEntryOptions = (Section24Entry | DeductionEntry)[];
+
+export const mapDeleteEntry = (
+  options: DeleteEntryOptions,
+  entryId: string,
+  limit: number
+): EntryType => {
+  const entryIndex = options.findIndex((entry) => entry.id === entryId);
   return {
-    ...rent,
-    isEditable,
-    editableEntryId,
-    collections: [...rent.collections].filter(
-      (rentEntry) => rentEntry.id !== payload
-    ),
+    options: options.filter((entry) => entry.id !== entryId),
+    deductedAmount: Math.min(options[entryIndex].amount, limit),
   };
 };

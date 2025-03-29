@@ -8,19 +8,32 @@
   color: var(--secondary-color);
 }
 
-.add_rent_entry__form {
+.rent_entry__container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 25px;
-  width: 80vw;
+  width: 70vw;
   max-width: 500px;
   max-height: 60vh;
   overflow: auto;
   font-size: 1.1rem;
+  color: var(--secondary-color);
+  :global(
+    .MuiButtonBase-root.MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track
+  ) {
+    background-color: var(--secondary-color);
+  }
+  :global(.MuiSwitch-thumb) {
+    background-color: var(--secondary-color);
+  }
   .action_btn__container {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
+    gap: 15px;
+    :global(.Button-root.contained) {
+      padding: 10px 45px;
+    }
   }
 }

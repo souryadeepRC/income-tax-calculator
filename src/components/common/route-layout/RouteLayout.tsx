@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 // icons
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // components
-import { BreadcrumbLink } from "src/components/common/CommonComponents";
+import { BreadcrumbLink } from "src/components/common";
 // styles
 import classes from "./RouteLayout.module.scss";
 

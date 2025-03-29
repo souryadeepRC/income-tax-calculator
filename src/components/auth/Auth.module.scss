@@ -1,0 +1,63 @@
+.auth__container {
+  width: 80vw;
+  max-width: 500px;
+  color: var(--secondary-color);
+  .auth__option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+  }
+  h2 {
+    margin: 0;
+    text-align: center;
+  }
+  :global(.Button-root.contained) {
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+}
+.error__message {
+  color: var(--error-color);
+  text-align: center;
+  display: block;
+}
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 15px 0;
+  padding: 0 20px;
+
+  :global(.TUIPassword_rule_popover__container .MuiIconButton-root) {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    &:global(.MuiIconButton-root:hover) {
+      background-color: var(--secondary-color);
+    }
+  }
+  :global(
+    .TUIPassword_rule_popover__container .TUIPassword_rule_popover__content
+  ) {
+    background-color: var(--primary-color);
+    max-width: 400px;
+    overflow: auto;
+    transform: translateX(60%) translateY(-105%);
+    :global(.pass) {
+      color: var(--secondary-color);
+    }
+    :global(.fail) {
+      color: var(--error-color);
+    }
+  }
+  :global(.TUIPassword_field__container .rule__outer) {
+    background-color: var(--error-color);
+    :global(.rule__inner) {
+      background-color: var(--secondary-color);
+    }
+  }
+}

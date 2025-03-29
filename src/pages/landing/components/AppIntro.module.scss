@@ -1,0 +1,52 @@
+.intro__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 70vh;
+  padding: 20px;
+  background: linear-gradient(
+      5deg,
+      var(--secondary-color),
+      rgba($app-secondary-color, 65%) 95%
+    ),
+    url("src/assets/intro_image.jpg");
+  background-position: center;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  .intro__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 85%;
+    margin: 0 auto;
+    text-align: left;
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px $app-secondary-color;
+    }
+    p {
+      width: 60%;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+    :global(.Button-root) {
+      padding: 15px 30px;
+      border-radius: 50px;
+      background-color: var(--primary-color);
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--secondary-color);
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .intro__container .intro__content p {
+    width: 80%;
+    font-size: 1rem;
+  }
+}

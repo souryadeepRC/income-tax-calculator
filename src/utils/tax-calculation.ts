@@ -1,64 +1,70 @@
-import { DeductionReducerType } from "src/types/deduction-types";
+import { STANDARD_DEDUCTION } from "src/constants/common-constants";
+import {
+  SURCHARGE_SLAB,
+  TAX_REBATE,
+  TAX_SCHEME,
+  TAX_SLAB,
+} from "src/constants/tax-constants";
 import { IncomeOption } from "src/types/income-types";
-import { TaxBreakupType, TaxReducerType, TaxScheme } from "src/types/tax-types";
+import {
+  SurChargeSlabType,
+  TaxBreakupType,
+  TaxReducerType,
+  TaxScheme,
+  TaxSlabType,
+} from "src/types/tax-types";
 
-const IS_NEW_SCHEME = true;
-export const calculateByNewTaxSlab = (taxableAmount: number): number => {
-  const TAX_SLAB_AMOUNT = 400000;
-  /* ------- The income tax rebate limit : 7 Lakh ----*/
-  if (taxableAmount <= 700000) {
-    return 0;
+export const calculateTaxAmount = (
+  taxableAmount: number,
+  taxSlab: TaxSlabType[],
+  rebateAmount: number
+): number => {
+  if (taxableAmount <= rebateAmount) return 0;
+
+  let tax = 0;
+  for (var i = 0; i < taxSlab.length; i++) {
+    const slab = taxSlab[i];
+    if (taxableAmount > slab.maxLimit) {
+      const effectiveAmount = slab.maxLimit - slab.minLimit;
+      const calculatedTax = effectiveAmount * (slab.taxRate / 100);
+
+      tax = tax + calculatedTax;
+    } else {
+      const effectiveAmount = taxableAmount - slab.minLimit;
+      console.log({ effectiveAmount });
+      const calculatedTax = effectiveAmount * (slab.taxRate / 100);
+      return tax + calculatedTax;
+    }
   }
-  /* -------  Up to Rs.3 lakh - 0% ------- 
-     ------- Rs.3 lakh to Rs.7 lakh - 5% ---- */
-  let taxAmount = TAX_SLAB_AMOUNT * 0.05;
-
-  /* ------- Rs.7 lakh to Rs.10 lakh - 10% ----*/
-  if (taxableAmount > 700000 && taxableAmount <= 1000000) {
-    return taxAmount + (taxableAmount - 700000) * 0.1;
-  } else {
-    taxAmount += (1000000 - 700000) * 0.1;
-  }
-
-  /* ------- Rs.10 lakh to Rs.12 lakh - 15% ----*/
-  if (taxableAmount > 1000000 && taxableAmount <= 1200000) {
-    return taxAmount + (taxableAmount - 1000000) * 0.15;
-  } else {
-    taxAmount += (1200000 - 1000000) * 0.15;
-  }
-
-  /* ------- Rs.12 lakh to Rs.15 lakh - 20% ----*/
-  if (taxableAmount > 1200000 && taxableAmount <= 1500000) {
-    return taxAmount + (taxableAmount - 1200000) * 0.2;
-  } else {
-    taxAmount += (1500000 - 1200000) * 0.2;
-  }
-
-  /* ------- Above Rs.15 lakh - 30% ----*/
-  return taxAmount + (taxableAmount - 1500000) * 0.3;
+  return tax;
 };
-
-export const calculateByOldTaxSlab = (taxableAmount: number): number => {
-  const TAX_SLAB_AMOUNT = 250000;
-  /* ------- The income tax rebate limit : 5 Lakh ----*/
-  if (taxableAmount <= 500000) {
-    return 0;
-  }
-  /* --- Up to Rs.2.5Lakh  - 0% ---
-     --- Rs.2.5Lakh to Rs.5Lakh  -  5% -- */
-  let taxAmount = TAX_SLAB_AMOUNT * 0.05;
-
-  /* --- Rs.5Lakh to Rs.10Lakh -  20% -- */
-  if (taxableAmount > 500000 && taxableAmount <= 1000000) {
-    return taxAmount + (taxableAmount - 500000) * 0.2;
+const calculateBaseTax = (taxableAmount: number, isNewRegime: boolean) => {
+  if (isNewRegime) {
+    return calculateTaxAmount(taxableAmount, TAX_SLAB.New, TAX_REBATE.New);
   } else {
-    taxAmount += 500000 * 0.2;
+    return calculateTaxAmount(taxableAmount, TAX_SLAB.Old, TAX_REBATE.Old);
   }
-
-  /* ------- Above Rs.10 lakh - 30% ----*/
-  return taxAmount + (taxableAmount - 1000000) * 0.3;
 };
 const calculateCess = (incomeTax: number) => incomeTax * 0.04;
+const calculateSurcharge = (
+  taxableAmount: number,
+  incomeTax: number,
+  isNewRegime: boolean
+) => {
+  const slabLimits: SurChargeSlabType[] = isNewRegime
+    ? SURCHARGE_SLAB.New
+    : SURCHARGE_SLAB.Old;
+
+  const surchargeRate: number =
+    slabLimits.find(
+      (slabLimit) =>
+        taxableAmount >= slabLimit.minLimit &&
+        taxableAmount <= slabLimit.maxLimit
+    )?.surchargeRate || 0;
+
+  return incomeTax * (surchargeRate / 100);
+};
+
 export const formatNumber = (value: number): number => {
   if (!value) return 0;
   return value % 1 === 0 ? value : +value.toFixed(2);
@@ -68,25 +74,28 @@ export const calculateIncomeTax = (
   income: number,
   deductedAmount: number,
   standardDeduction: number,
-  type: boolean
+  isNewRegime: boolean
 ): TaxScheme => {
-  const taxableAmount = income - standardDeduction;
-  let baseTax = 0;
-  if (type) {
-    baseTax = calculateByNewTaxSlab(taxableAmount);
-  } else {
-    baseTax = calculateByOldTaxSlab(taxableAmount);
-  }
-  const cessAmount = calculateCess(baseTax);
-  const yearlyTax = baseTax + cessAmount;
+  const totalDeduction = deductedAmount + standardDeduction;
+  const difference = income - totalDeduction;
+  const taxableAmount = difference > 0 ? difference : income;
+
+  const baseTax = calculateBaseTax(taxableAmount, isNewRegime);
+  const surcharge = calculateSurcharge(taxableAmount, baseTax, isNewRegime);
+  const cess = calculateCess(baseTax + surcharge);
+  const yearlyTax = baseTax + surcharge + cess;
   const monthlyTax = yearlyTax / 12;
   return {
-    taxableAmount: taxableAmount > 0 ? taxableAmount : 0,
-    baseTax,
-    cessAmount,
-    yearlyTax,
-    monthlyTax,
-    deductedAmount: deductedAmount + standardDeduction,
+    income: {
+      netIncome: income,
+      taxableIncome: taxableAmount > 0 ? taxableAmount : 0,
+    },
+    tax: { baseTax, surcharge, cess, yearlyTax, monthlyTax },
+    deduction: {
+      standard: income > standardDeduction ? standardDeduction : 0,
+      other: income - standardDeduction > deductedAmount ? deductedAmount : 0,
+      total: income > totalDeduction ? totalDeduction : 0,
+    },
   };
 };
 export const calculateRentDeduction = (
@@ -106,53 +115,47 @@ export const calculateRentDeduction = (
   return comparativeAmount > 0 ? comparativeAmount : 0;
 };
 
+const getPFAmount = (salaryIncome: IncomeOption[]): number => {
+  return (
+    salaryIncome?.find(
+      (income) =>
+        income.category.toLowerCase() === "pf" ||
+        income.category.toLowerCase() === "provident fund" ||
+        income.category.toLowerCase() === "providentfund"
+    )?.amount || 0
+  );
+};
+
+const IS_NEW_SCHEME = true;
 export const calculateTax = (
   salaryIncome: IncomeOption[],
   totalIncome: number,
-  deductionDetail: DeductionReducerType
+  deductedAmount: number
 ): TaxReducerType => {
-  let deductedAmount = 0;
-  const pfAmount =
-    salaryIncome?.find((income) => income.label.toLowerCase() === "pf")
-      ?.amount || 0;
-  const taxableAmount = totalIncome - pfAmount;
-
-  deductedAmount += deductionDetail.rent.deductedAmount;
-  deductedAmount += deductionDetail.section24.deductedAmount;
-  deductedAmount += deductionDetail.deduction80C.deductedAmount;
-  deductedAmount += deductionDetail.deductionByChapter6.deductedAmount;
+  const taxableAmount = totalIncome - getPFAmount(salaryIncome);
 
   const taxBreakup: TaxBreakupType = {
-    newScheme: calculateIncomeTax(
+    new: calculateIncomeTax(
       taxableAmount,
       0,
-      deductionDetail.standardDeduction.newScheme,
+      STANDARD_DEDUCTION.NEW,
       IS_NEW_SCHEME
     ),
-    oldScheme: calculateIncomeTax(
-      taxableAmount - deductedAmount,
+    old: calculateIncomeTax(
+      taxableAmount,
       deductedAmount,
-      deductionDetail.standardDeduction.oldScheme,
+      STANDARD_DEDUCTION.OLD,
       !IS_NEW_SCHEME
     ),
   };
   const amount: number =
-    taxBreakup.newScheme.yearlyTax - taxBreakup.oldScheme.yearlyTax;
-  const bestScheme = amount < 0 ? "newScheme" : "oldScheme";
-  const difference: number = amount < 0 ? amount * -1 : amount;
-  const percentage: number =
-    (difference / taxBreakup.oldScheme.yearlyTax) * 100;
+    taxBreakup.new.tax.yearlyTax - taxBreakup.old.tax.yearlyTax;
 
   return {
     ...taxBreakup,
     choice: {
-      taxAmount: {
-        yearly: taxBreakup[bestScheme].yearlyTax,
-        monthly: taxBreakup[bestScheme].monthlyTax,
-      },
-      difference,
-      type: bestScheme === "newScheme" ? "New" : "Old",
-      percentage,
+      difference: Math.abs(amount),
+      type: amount < 0 ? TAX_SCHEME.NEW : TAX_SCHEME.OLD,
     },
   };
 };

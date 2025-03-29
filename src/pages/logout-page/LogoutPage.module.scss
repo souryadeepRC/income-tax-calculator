@@ -1,0 +1,29 @@
+.logout__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  width: 60vw;
+  max-width: 400px;
+
+  .logout__message {
+    h1 {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--secondary-color);
+    }
+  }
+  .action__buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+    :global(.Button-root) {
+      padding: 10px 20px;
+    }
+  }
+}

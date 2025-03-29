@@ -1,67 +1,70 @@
-import { memo, useState, useEffect } from "react";
+import { memo, useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
-import { TUITextField } from "triva-ui";
 // components
-import { Button } from "src/components/common/CommonComponents";
+import Section24EntryForm from "./Section24EntryForm";
+import { DeductionHeader, DeleteDeduction } from "src/components/tax-deduction";
+import { Card, CardWrapper } from "src/components/common";
+// hooks
+import { useDeductionActionEntry } from "src/hooks";
 // actions
-import { updateSection24Deduction } from "src/store/deduction/deduction-actions";
+import {
+  deleteSection24Entry,
+  editDeduction,
+} from "src/store/deduction/deduction-actions";
 // selectors
 import { selectDeductionSection24 } from "src/store/deduction/deduction-selectors";
 // types
 import { AppDispatch } from "src/types/store-types";
-import { DeductionSection24 } from "src/types/deduction-types";
 // constants
-import { NUMERIC_REGEX } from "src/constants/common-constants";
+import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // styles
-import classes from "../IncomeTaxDeduction.module.scss";
 import { formatNumber } from "src/utils/tax-calculation";
+
 const Section24 = () => {
+  const { isEditable, entryId, isDelete } = useDeductionActionEntry(
+    DEDUCTION_TYPE.SECTION24
+  );
   // store
   const dispatch: AppDispatch = useDispatch();
-  const { amount, deductedAmount }: DeductionSection24 = useSelector(
-    selectDeductionSection24
-  );
-  const [entryInput, setEntryInput] = useState<string>("");
-  const [error, setError] = useState<string>("");
-  useEffect(() => {
-    if (!amount) return;
-    setEntryInput(`${amount}`);
-  }, [amount]);
+  const { options, deductedAmount } = useSelector(selectDeductionSection24);
 
-  const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const enteredAmount: string = event.target.value;
-    setEntryInput(enteredAmount);
-    let errorMessage = "";
-    if (!NUMERIC_REGEX.test(enteredAmount)) {
-      errorMessage = "Enter a valid amount more than 0 (e.g. 100.50 or 100)";
-    }
-    setError(errorMessage);
-  };
-  const onSave = () => {
-    dispatch(updateSection24Deduction(+entryInput));
-  };
+  const actionEntry = useMemo(() => {
+    return options.find((entry: any) => entry.id === entryId);
+  }, [isEditable, isDelete]);
+
   return (
-    <section className={classes.deduction__container}>
-      <header>
-        You will get an exemption of Rs.{formatNumber(deductedAmount)} from
-        Section 24
-      </header>
-      <form className={classes.deduction_form__container}>
-        <TUITextField
-          fullWidth
-          label="Section 24 - Home Loan Interest"
-          value={entryInput}
-          onChange={onAmountChange}
-          type="number"
-          inputProps={{ "data-testid": "section24-input" }}
-          errorMessage={error}
+    <>
+      {isEditable && <Section24EntryForm entry={actionEntry} />}
+      {isDelete && entryId && (
+        <DeleteDeduction
+          title="Section 24"
+          entryId={entryId}
+          onDelete={() => dispatch(deleteSection24Entry(entryId))}
         />
-        <Button variant="contained" border="round" onClick={onSave}>
-          Save
-        </Button>
-      </form>
-    </section>
+      )}
+      <DeductionHeader
+        title="Section 24"
+        amount={deductedAmount}
+        addAction={() =>
+          dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION24 }))
+        }
+      />
+
+      <CardWrapper>
+        {options.map((option: any) => (
+          <Card
+            key={option.id}
+            content={{
+              amountLabel: `Rs. ${formatNumber(option.amount)}`,
+              title: "",
+            }}
+            entryId={option.id}
+            type={DEDUCTION_TYPE.SECTION24}
+          />
+        ))}
+      </CardWrapper>
+    </>
   );
 };
 

@@ -1,17 +1,25 @@
 .income_header__container {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  align-items: center;
+  justify-content: space-between;
   width: 70%;
-  margin: 0 auto;
-  padding: 14px;
+  margin: 15px auto;
   color: var(--secondary-color);
+  flex-wrap: wrap;
   .header__actions {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 10px;
     flex-wrap: wrap;
+    .header__title {
+      margin: 0;
+    }
+    :global(.Button-root.contained) {
+      box-shadow: 2px 2px 3px 1px rgba($card-shadow, 0.3);
+      padding: 10px 25px;
+    }
   }
   .income_amount__label {
     display: flex;
@@ -19,6 +27,7 @@
     border: 2px solid var(--secondary-color);
     width: 45vw;
     max-width: 200px;
+    font-size: 1rem;
     > span:first-child {
       background-color: var(--secondary-color);
       color: var(--primary-color);
@@ -51,9 +60,12 @@
       }
       :global(tbody tr td) {
         color: var(--secondary-color);
+        :global(.MuiSvgIcon-root) {
+          font-size: 1rem;
+        }
       }
       :global(tbody tr:nth-child(even)) {
-        background-color: var(--secondary-color-light);
+        //background-color: var(--secondary-color-light);
         :global(td) {
           color: var(--secondary-color);
         }
@@ -61,9 +73,24 @@
     }
   }
   :global(.TUISearch_root) {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 1px;
+    gap: 2px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: none;
+    box-shadow: 3px 3px 4px 1px rgba($card-shadow, 0.2);
+    :global(.MuiSvgIcon-root) {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--secondary-color);
+    }
+    :global(.TUISearch_input) {
+      background-color: transparent;
+      border-radius: 20px;
+      color: var(--secondary-color);
+    }
   }
   .income_option__delete {
     cursor: pointer;
@@ -76,16 +103,70 @@
     gap: 5px;
   }
 }
-@media screen and (max-width: $mobile-max-width) {
-  .income_header__container {
-    width: 100%;
-    .header__label {
+.income_delete__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  width: 60vw;
+  max-width: 400px;
+
+  .delete__message {
+    h1 {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-weight: 400;
+      color: var(--secondary-color);
+
+      span {
+        font-size: 1.2rem;
+        font-style: italic;
+        font-weight: 900;
+      }
+    }
+  }
+  .action__buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    flex-wrap: wrap;
+    :global(.Button-root) {
+      padding: 10px 20px;
+    }
+  }
+}
+.income_edit__container {
+  :global(.form_input__container) {
+    padding: 25px 20px;
+    .edit__header {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-between;
+      font-size: 1.2rem;
     }
-    h2 {
-      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: $mobile-max-width) {
+  .income_header__container {
+    width: 90%;
+    gap: 5px;
+    .header__actions {
+      .header__title {
+        font-size: 14px;
+      }
+      :global(.Button-root.contained) {
+        padding: 5px 10px;
+      }
+    }
+    .income_amount__label {
+      margin: 0 0 0 auto;
+      width: 40vw;
+      font-size: 14px;
     }
   }
   .income_options__container {

@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 // actions
 import { updateTaxDetails } from "src/store/tax/tax-actions";
 // selectors
-import { selectDeduction } from "src/store/deduction/deduction-selectors";
+import {
+  selectTotalDeduction,
+  selectStandardDeduction,
+} from "src/store/deduction/deduction-selectors";
 import {
   selectOverallIncomeAmount,
   selectSalaryIncome,
@@ -13,21 +16,20 @@ import { AppDispatch } from "src/types/store-types";
 import { DeductionReducerType } from "src/types/deduction-types";
 // utils
 import { calculateTax } from "src/utils/tax-calculation";
+import { TaxBreakup, TaxReducerType } from "src/types/tax-types";
 
-export const useTaxCalculation = (): void => {
+export const useTaxCalculation = (): TaxBreakup => {
   // store
   const dispatch: AppDispatch = useDispatch();
   const salaryIncome = useSelector(selectSalaryIncome);
   const overallAmount = useSelector(selectOverallIncomeAmount);
-  const deduction: DeductionReducerType = useSelector(selectDeduction);
+  const deductedAmount = useSelector(selectTotalDeduction);
 
   const taxBreakup = useMemo(
-    () => calculateTax(salaryIncome, overallAmount, deduction),
-    [salaryIncome, overallAmount, deduction]
+    () => calculateTax(salaryIncome, overallAmount, deductedAmount),
+    [salaryIncome, overallAmount, deductedAmount]
   );
 
   // effects
-  useEffect(() => {
-    dispatch(updateTaxDetails(taxBreakup));
-  }, [dispatch, taxBreakup]);
+  return taxBreakup;
 };

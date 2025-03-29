@@ -1,9 +1,39 @@
+export type DeductionType = "Rent" | "Section24" | "80C" | "Chapter6A";
 export type DeductionReducerType = {
   standardDeduction: { newScheme: number; oldScheme: number };
+  actionEntry: ActionEntry;
+  options: DeductionResponse[];
   rent: DeductionByRent;
-  section24: DeductionSection24;
-  deduction80C: DeductionOption;
-  deductionByChapter6: DeductionOption;
+  section24: {
+    options: Section24Entry[];
+    deductedAmount: number;
+    isEditable: boolean;
+    editableEntryId: string;
+  };
+  section80C: DeductionOption;
+  chapter6: DeductionOption;
+};
+export interface DeductionResponse {
+  id: string;
+  type: DeductionType;
+  amount: number;
+  maxLimit?: number;
+  category?: string;
+  duration?: number;
+}
+export interface ActionEntry {
+  type: DeductionType | undefined;
+  entryId: string;
+  isEditable: boolean;
+  isDelete: boolean;
+}
+export type ActionEditEntryPayload = {
+  type: DeductionType;
+  entryId?: string;
+};
+export type ActionDeleteEntryPayload = {
+  type: DeductionType;
+  entryId: string;
 };
 // Rent Deduction
 export interface EditableRentEntry {
@@ -17,7 +47,7 @@ export interface RentEntry {
   isMetroCity: boolean;
 }
 export interface DeductionByRent {
-  collections: RentEntry[];
+  options: RentEntry[];
   deductedAmount: number;
   isEditable: boolean;
   editableEntryId: string;
@@ -29,8 +59,12 @@ export interface DeductionOption {
   isEditable: boolean;
   editableEntryId: string;
 }
+export interface Section24Entry {
+  id: string;
+  amount: number;
+}
 export interface DeductionEntry {
-  id?: string;
+  id: string;
   category: string;
   amount: number;
   maxLimit?: number;
@@ -43,6 +77,7 @@ export interface DeductionEntryOption {
 }
 
 export interface DeductionSection24 {
+  id: string;
   amount: number;
   deductedAmount: number;
 }

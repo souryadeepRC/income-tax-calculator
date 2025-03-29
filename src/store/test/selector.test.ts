@@ -30,9 +30,18 @@ import {
   selectRentDeduction,
   selectSection24DeductedAmount,
 } from "../deduction/deduction-selectors";
+import {
+  selectIsLoggedIn,
+  selectUser,
+  selectUserName,
+} from "../auth/auth-selectors";
 
 describe("test selectors", () => {
   const mockState: AppStoreType = {
+    auth: {
+      user: undefined,
+      isLoggedIn: false,
+    },
     income: {
       overallAmount: 1000,
       options: [
@@ -193,5 +202,20 @@ describe("test selectors", () => {
       deductionChapter6: 0,
       total: 0,
     });
+  });
+
+  test("Auth selectors", () => {
+    expect(selectIsLoggedIn(mockState)).toEqual(false);
+    expect(selectUser(mockState)).toEqual(undefined);
+    expect(selectUserName(mockState)).toEqual("");
+    const loggedInUserState = {
+      ...mockState,
+      auth: {
+        user: { name: "Test", email: "test@mail.com" },
+        isLoggedIn: true,
+      },
+    };
+    expect(selectUser(loggedInUserState)).toEqual({ name: "Test", email: "test@mail.com" });
+    expect(selectUserName(loggedInUserState)).toEqual("Test");
   });
 });

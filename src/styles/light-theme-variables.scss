@@ -1,13 +1,15 @@
 :root {
   --primary-bg-color: #f5f9f8;
   --secondary-bg-color: #fffdfd;
-  --primary-color: #ebfff7;
+  --primary-color: white; // #ebfff7;
   --secondary-color: #275541;
   --primary-font-color: #000000;
   --secondary-font-color: #ffffff;
 
   --navigation-link-color: #215a4b;
-  --navigation-active-color: #d8a526;
+  --navigation-active-color: #58042d;
 
   --secondary-color-light: #15251e2e;
+
+  --error-color: #c10b0b;
 }

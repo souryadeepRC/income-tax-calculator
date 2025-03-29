@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import RouteLayout from "./RouteLayout";
 
-jest.mock("src/components/common/CommonComponents", () => ({
+jest.mock("src/components/common", () => ({
   BreadcrumbLink: () => <button>BreadcrumbLink</button>,
 }));
 

@@ -1,55 +1,43 @@
-import { v4 as uuid4 } from "uuid";
 import { IncomeReducerType, IncomeOption } from "src/types/income-types";
 
 export const mapSaveIncomeEntry = (
-  existingIncome: IncomeReducerType,
-  incomeEntry: IncomeOption,
-  initialIncomeState: IncomeReducerType
+  income: IncomeReducerType,
+  entry: IncomeOption
 ): IncomeReducerType => {
-  let modifiedIncomeOptions = [];
-  let previousOverallAmount = existingIncome.overallAmount;
+  let previousOverallAmount = income.overallAmount;
 
-  modifiedIncomeOptions = [...existingIncome.options];
-  const editableEntryId = existingIncome.editableEntryId;
-  if (editableEntryId) {
-    const editableEntryIndex = modifiedIncomeOptions.findIndex(
-      (income) => income.id === editableEntryId
-    );
+  let modifiedIncomeOptions = [...income.options];
+  const editableEntryIndex = modifiedIncomeOptions.findIndex(
+    (option) => option.id === entry.id
+  );
+  if (editableEntryIndex > -1) {
     previousOverallAmount +=
-      incomeEntry.amount - modifiedIncomeOptions[editableEntryIndex].amount;
-      
+      entry.amount - modifiedIncomeOptions[editableEntryIndex].amount;
+
     modifiedIncomeOptions[editableEntryIndex] = {
       ...modifiedIncomeOptions[editableEntryIndex],
-      ...incomeEntry,
+      ...entry,
     };
   } else {
-    modifiedIncomeOptions.push({ id: uuid4(), ...incomeEntry });
-    previousOverallAmount += incomeEntry.amount;
+    modifiedIncomeOptions.push(entry);
+    previousOverallAmount += entry.amount;
   }
   return {
-    ...existingIncome,
-    isEditable: initialIncomeState.isEditable,
-    editableEntryId: initialIncomeState.editableEntryId,
+    ...income,
     options: modifiedIncomeOptions,
     overallAmount: previousOverallAmount,
   };
 };
 export const mapDeleteIncomeEntry = (
-  existingIncome: IncomeReducerType,
-  incomeEntryId: string,
-  initialIncomeState: IncomeReducerType
+  income: IncomeReducerType,
+  entryId: string
 ): IncomeReducerType => {
-  const { isEditable, editableEntryId } = initialIncomeState;
-  const removalEntryAmount: number =
-    existingIncome.options.find((income) => income.id === incomeEntryId)
-      ?.amount || 0;
+  const removalEntry: IncomeOption | undefined = income.options.find(
+    (income) => income.id === entryId
+  );
   return {
-    ...existingIncome,
-    isEditable,
-    editableEntryId,
-    options: existingIncome.options.filter(
-      (income) => income.id !== incomeEntryId
-    ),
-    overallAmount: existingIncome.overallAmount - removalEntryAmount,
+    ...income,
+    options: income.options.filter((income) => income.id !== entryId),
+    overallAmount: income.overallAmount - (removalEntry?.amount ?? 0),
   };
 };

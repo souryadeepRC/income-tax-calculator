@@ -1,33 +1,41 @@
-import { memo } from "react";
+import { useMemo } from "react";
 // library
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // components
-import AddIncome from "src/components/income-details/add-income/AddIncome";
-import IncomeEditModal from "src/components/income-details/IncomeEditModal";
-import IncomeHeader from "src/components/income-details/IncomeHeader";
-import IncomeOptions from "src/components/income-details/IncomeOptions";
-// reducers
-import { resetEditIncomeEntry } from "src/store/income/income-actions";
-import { selectIncome } from "src/store/income/income-selectors";
+import {
+  AddIncome,
+  EditIncome,
+  IncomeHeader,
+  IncomeOptions,
+} from "src/components/income-details";
+import DeleteIncome from "src/components/income-details/DeleteIncome";
+// store
+import {
+  selectIncomeActionEntry,
+  selectIncomeOptions,
+} from "src/store/income/income-selectors";
 
 const IncomePage: React.FC = () => {
-  const dispatch = useDispatch();
-  const { isEditable, editableEntryId } = useSelector(selectIncome);
-  const handleEditIncomeReset = () => {
-    dispatch(resetEditIncomeEntry());
-  };
+  const options = useSelector(selectIncomeOptions);
+  const { isEditable, entryId, isDelete } = useSelector(
+    selectIncomeActionEntry
+  );
+  const actionEntry = useMemo(() => {
+    return options.find((option) => option.id === entryId);
+  }, [isDelete, isEditable]);
 
   return (
     <>
       {isEditable &&
-        (editableEntryId ? (
-          <IncomeEditModal onCancel={handleEditIncomeReset} />
+        (entryId && actionEntry ? (
+          <EditIncome entry={actionEntry} />
         ) : (
-          <AddIncome onCancel={handleEditIncomeReset} />
+          <AddIncome />
         ))}
+      {isDelete && actionEntry && <DeleteIncome entry={actionEntry} />}
       <IncomeHeader />
-      <IncomeOptions />
+      <IncomeOptions options={options} />
     </>
   );
 };
-export default memo(IncomePage);
+export default IncomePage;

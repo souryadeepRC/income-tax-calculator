@@ -1,27 +1,51 @@
 export interface TaxReducerType {
   choice: TaxChoice;
-  newScheme: TaxScheme;
-  oldScheme: TaxScheme;
+  new: TaxScheme;
+  old: TaxScheme;
 }
 export interface TaxBreakupType {
-  newScheme: TaxScheme;
-  oldScheme: TaxScheme;
+  new: TaxScheme;
+  old: TaxScheme;
 }
 export type TaxChoiceType = "New" | "Old";
 export interface TaxChoice {
-  taxAmount: {
-    monthly: number;
-    yearly: number;
-  };
   difference: number;
   type: TaxChoiceType;
-  percentage: number;
 }
 export interface TaxScheme {
-  baseTax: number;
-  cessAmount: number;
-  monthlyTax: number;
-  taxableAmount: number;
-  yearlyTax: number;
-  deductedAmount: number;
+  tax: {
+    baseTax: number;
+    surcharge: number;
+    cess: number;
+    monthlyTax: number;
+    yearlyTax: number;
+  };
+  income: {
+    netIncome: number;
+    taxableIncome: number;
+  };
+  deduction: {
+    standard: number;
+    other: number;
+    total: number;
+  };
 }
+export interface TaxBreakup {
+  choice: TaxChoice;
+  new: TaxScheme;
+  old: TaxScheme;
+}
+
+export type TaxDetails = {};
+export type TaxSlabType = {
+  minLimit: number;
+  maxLimit: number;
+  taxRate: number;
+  label: string;
+};
+export type SurChargeSlabType = {
+  minLimit: number;
+  maxLimit: number;
+  surchargeRate: number;
+  label: string;
+};

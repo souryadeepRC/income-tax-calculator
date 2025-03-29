@@ -1,11 +1,10 @@
-import { memo } from "react";
 import { NavLink } from "react-router";
 // icons
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import HomeIcon from "@mui/icons-material/Home";
 import SavingsIcon from "@mui/icons-material/Savings";
 // components
+import LogOutButton from "src/components/log-out/LogOutButton";
 import NavigationMobile from "src/components/navigation/NavigationMobile";
 // types
 import { SvgIconTypeMap } from "@mui/material";
@@ -23,11 +22,6 @@ interface NavigationType {
 }
 
 const NAVIGATION_LIST: NavigationType[] = [
-  {
-    label: "Home",
-    path: "",
-    Icon: HomeIcon,
-  },
   {
     label: "Income",
     path: "income",
@@ -71,8 +65,13 @@ export const Navigation: React.FC<NavigationProps> = ({
   );
 };
 
-const NavigationDesktop = memo(() => (
-  <Navigation className="navigation-list" />
-));
+const NavigationDesktop = () => {
+  return (
+    <>
+      <Navigation className="navigation-list" />
+      <LogOutButton />
+    </>
+  );
+};
 
 export { NavigationDesktop, NavigationMobile };

@@ -1,53 +1,68 @@
-import { memo } from "react";
+// library
+import { useToggle } from "triva-ui";
+import { useSelector } from "react-redux";
+// components
+import TaxRegimeDetails from "./TaxRegimeDetails";
+import TaxSlabView from "./TaxSlabView";
+import { AmountLabel, Button, Modal } from "src/components/common";
+// store
+import { selectIsMobile } from "src/store/screen/screen-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
+// types
+import { TaxChoiceType, TaxScheme } from "src/types/tax-types";
 // styles
 import classes from "./TaxRegimeBreakup.module.scss";
-import { TaxScheme } from "src/types/tax-types";
 
 interface TaxRegimeBreakupProps {
-  regimeType: string;
+  type: TaxChoiceType;
   details: TaxScheme;
   isBestChoice?: boolean;
 }
+
 const TaxRegimeBreakup: React.FC<TaxRegimeBreakupProps> = ({
-  regimeType,
+  type,
   details,
   isBestChoice,
-}) => (
-  <main className={classes.regime__container}>
-    <header>
-      <span data-testid="regime-label">{regimeType} Tax Regime</span>
-      {isBestChoice && (
-        <span className={classes.regime__choice}>Best Choice</span>
+}) => {
+  const monthlyTax = details?.tax?.monthlyTax || 0;
+  const [isDetailsVisible, toggleVisibility] = useToggle(false);
+  const isMobile: boolean = useSelector(selectIsMobile);
+  return (
+    <div className={classes.regime__container}>
+      {isMobile && isDetailsVisible && (
+        <Modal onClose={toggleVisibility}>
+          <div className={classes.tax_breakup__container}>
+            <h2 className={classes.regime__title} data-testid="regime-label">
+              {type} Tax Regime
+            </h2>
+            <TaxRegimeDetails details={details} />
+          </div>
+        </Modal>
       )}
-    </header>
-    <div className={classes.tax__monthly_amount}>
-      Rs. {formatNumber(details.monthlyTax)}/month
-    </div>
-    <div className={classes.tax__breakup}>
-      <span>Net Annual Tax: Rs. {formatNumber(details.yearlyTax)}</span>
-      <div className={classes.tax_details}>
-        <div>
-          <strong>Rs. {formatNumber(details.baseTax)}</strong>
-          <span>Base Tax</span>
-        </div>
-        <div>
-          <strong>Rs. {formatNumber(details.cessAmount)}</strong>
-          <span>CESS</span>
-        </div>
+
+      <div className={classes.regime__header}>
+        {isBestChoice && (
+          <div className={classes.regime__choice}>Best Choice</div>
+        )}
+        <h2 className={classes.regime__title} data-testid="regime-label">
+          {type} Tax Regime
+        </h2>
+        <TaxSlabView type={type} />
       </div>
+      <AmountLabel amount={`${formatNumber(monthlyTax)}/month`} />
+      {isMobile ? (
+        <Button
+          className={classes.regime_details__btn}
+          variant="text"
+          onClick={toggleVisibility}
+        >
+          {"See details >>>"}
+        </Button>
+      ) : (
+        <TaxRegimeDetails details={details} />
+      )}
     </div>
-    <div className={classes.source__container}>
-      <div>
-        <strong>Rs. {formatNumber(details.taxableAmount)}</strong>
-        <span>Taxable Income</span>
-      </div>
-      <div>
-        <strong>Rs. {formatNumber(details.deductedAmount)}</strong>
-        <span>Deducted Amount</span>
-      </div>
-    </div>
-  </main>
-);
-export default memo(TaxRegimeBreakup);
+  );
+};
+export default TaxRegimeBreakup;

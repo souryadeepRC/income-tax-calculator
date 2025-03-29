@@ -2,37 +2,27 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { AppStoreType } from "src/types/store-types";
 import {
-  IncomeCategory,
+  ActionEntry,
+  IncomeDeleteEntry,
+  IncomeGroup,
   IncomeOption,
   IncomeReducerType,
 } from "src/types/income-types";
 
 export const selectIncome = (store: AppStoreType): IncomeReducerType =>
   store.income;
+export const selectIncomeActionEntry = (store: AppStoreType): ActionEntry =>
+  store.income.actionEntry;
 export const selectIncomeOptions = (store: AppStoreType): IncomeOption[] =>
   store.income.options;
-export const selectEditableIncomeEntryId = (store: AppStoreType): string =>
-  store.income.editableEntryId;
-export const selectEditableIncomeOption = createSelector(
-  [selectEditableIncomeEntryId, selectIncomeOptions],
-  (entryId, incomeOptions) => {
-    const editableIncome = incomeOptions.find(
-      (income) => income.id === entryId
-    );
-    if (!editableIncome)
-      return { amount: 0, label: "", category: "salary" as IncomeCategory };
-    return editableIncome;
-  }
-);
+
 export const selectSalaryIncome = createSelector(
   [selectIncomeOptions],
-  (incomeOptions) =>
-    incomeOptions.filter((income) => income.category === "salary")
+  (incomeOptions) => incomeOptions.filter((income) => income.group === "salary")
 );
 export const selectExtraIncome = createSelector(
   [selectIncomeOptions],
-  (incomeOptions) =>
-    incomeOptions.filter((income) => income.category === "extra")
+  (incomeOptions) => incomeOptions.filter((income) => income.group === "extra")
 );
 
 export const selectOverallIncomeAmount = (store: AppStoreType): number =>
@@ -43,12 +33,12 @@ export const selectRentEligibleDetails = createSelector(
   (salaryIncome) =>
     salaryIncome.reduce(
       (acc, income) => {
-        if (income.label.toLowerCase() === "basic") {
+        if (income.category.toLowerCase() === "basic") {
           return {
             ...acc,
             basic: income.amount,
           };
-        } else if (income.label.toLowerCase() === "hra") {
+        } else if (income.category.toLowerCase() === "hra") {
           return {
             ...acc,
             hra: income.amount,

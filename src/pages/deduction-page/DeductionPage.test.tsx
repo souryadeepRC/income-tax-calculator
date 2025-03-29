@@ -34,26 +34,4 @@ describe("DeductionPage Component", () => {
     expect(MockDataLayout).toHaveBeenCalledTimes(1);
   });
 });
-describe("DeductionOption Component", () => {
-  test("render the deduction options with label", () => {
-    mockUseDispatch.mockReturnValue(mockDispatch);
-    mockUseSelector.mockReturnValue({
-      rentDeduction: 2000,
-      deductionSection24: 3000,
-      deduction80C: 4000,
-      deductionChapter6: 5000,
-      total: 14000,
-    });
-
-    render(
-      <MemoryRouter>
-        <DeductionOption />
-      </MemoryRouter>
-    );
-
-    expect(mockUseSelector).toHaveBeenCalledTimes(1);
-    const list = screen.getByRole("list");
-    const rentListItem = within(list).getByText(/Rent/);
-    expect(rentListItem).toBeInTheDocument();
-  });
-});
+ 
