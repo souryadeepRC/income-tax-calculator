@@ -1,16 +1,15 @@
 import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
-import { Outlet, useLocation } from "react-router";
+import { Outlet } from "react-router";
 // components
-import { RouteLayout } from "src/components/common";
+import DeductionNavigation from "./DeductionNavigation";
 // selectors
 import { selectTotalDeduction } from "src/store/deduction/deduction-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./DeductionPage.module.scss";
-import DeductionNavigation from "./DeductionNavigation";
 
 const DeductionPage: React.FC = () => {
   const amount: number = useSelector(selectTotalDeduction);
@@ -33,4 +32,4 @@ const DeductionPage: React.FC = () => {
     </>
   );
 };
-export default memo(DeductionPage);
+export default DeductionPage;

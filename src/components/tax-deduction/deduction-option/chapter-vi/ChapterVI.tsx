@@ -82,7 +82,7 @@ const ChapterVI: React.FC = () => {
         title="Chapter VI-A"
         amount={deductedAmount}
         addAction={() => {
-          dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION80C }));
+          dispatch(editDeduction({ type: DEDUCTION_TYPE.CHAPTER6A }));
         }}
       />
 

@@ -17,8 +17,6 @@ import {
 import { ErrorMessage } from "src/utils/common-utils";
 // constants
 import { DEDUCTION_TYPE, RENT_CITY } from "src/constants/common-constants";
-// styles
-import classes from "./Rent.module.scss";
 
 interface RentEntryFormProps {
   maxDuration: number;

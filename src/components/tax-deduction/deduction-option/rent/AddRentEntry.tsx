@@ -28,7 +28,7 @@ const AddRentEntry: React.FC = () => {
         title="Rent"
         amount={deductedAmount}
         addAction={
-          !isRentEligible
+          isRentEligible
             ? () => {
                 dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
               }
@@ -45,4 +45,4 @@ const AddRentEntry: React.FC = () => {
     </>
   );
 };
-export default memo(AddRentEntry);
+export default AddRentEntry;
