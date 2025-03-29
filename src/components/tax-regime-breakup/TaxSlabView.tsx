@@ -3,7 +3,9 @@ import { useToggle } from "triva-ui";
 // components
 import { Button, Modal } from "src/components/common";
 // constants
-import { TAX_SLAB, TaxSlabType } from "src/constants/tax-constants";
+import { TAX_SLAB } from "src/constants/tax-constants";
+// types
+import { TaxSlabType } from "src/types/tax-types";
 // style
 import classes from "./TaxRegimeBreakup.module.scss";
 
@@ -23,7 +25,7 @@ const TaxSlabView: React.FC<TaxSlabViewProps> = ({ type }) => {
               {taxSlab?.map((slab, index) => (
                 <li key={index}>
                   <span>{slab.label}</span>
-                  <span>{slab.taxPercentage}%</span>
+                  <span>{slab.taxRate}%</span>
                 </li>
               ))}
             </ul>

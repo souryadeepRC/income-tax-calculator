@@ -25,16 +25,18 @@ interface TaxRegimeDetailsProps {
   details: TaxScheme;
 }
 const TaxRegimeDetails: React.FC<TaxRegimeDetailsProps> = ({ details }) => {
-  const { tax, deduction, taxableAmount } = details || {};
+  const { tax, deduction, income } = details || {};
   return (
     <div className={classes.tax__breakup}>
       <ToggleView header="Tax">
         <BreakupItem label="Annual Tax" amount={tax.yearlyTax} />
-        <BreakupItem label="Base Tax" amount={tax.baseTax} />
-        <BreakupItem label="CESS" amount={tax.cessAmount} />
+        <BreakupItem label="Tax after Rebate" amount={tax.baseTax} />
+        <BreakupItem label="Surcharge" amount={tax.surcharge} />
+        <BreakupItem label="Health & Education Cess" amount={tax.cess} />
       </ToggleView>
       <ToggleView header="Income">
-        <BreakupItem label="Taxable Income" amount={taxableAmount} />
+        <BreakupItem label="Net Income" amount={income.netIncome} />
+        <BreakupItem label="Taxable Income" amount={income.taxableIncome} />
       </ToggleView>
       <ToggleView header="Deduction">
         <BreakupItem label="Total deduction" amount={deduction.total} />
