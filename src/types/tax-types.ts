@@ -21,7 +21,7 @@ export interface TaxScheme {
   };
   taxableAmount: number;
   deduction: {
-    standardDeduction: number;
+    standard: number;
     other: number;
     total: number;
   };

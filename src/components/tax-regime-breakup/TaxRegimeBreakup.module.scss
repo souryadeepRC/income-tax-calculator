@@ -1,74 +1,61 @@
 .regime__container {
+  box-shadow: 2px 2px 3px rgba($card-shadow, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: stretch;
+  gap: 15px;
+  position: relative;
   width: 85vw;
   max-width: 400px;
-  padding: 15px;
+  padding: 25px;
   background-color: var(--primary-color);
-  border: 5px solid var(--secondary-color);
-  color: var(--secondary-color);
   border-radius: 15px;
-  header {
+  color: var(--secondary-color);
+  .regime__header {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    .regime__choice {
-      padding: 5px;
-      width: 60vw;
-      font-size: 1rem;
-      max-width: 150px;
-      text-align: center;
-      border-radius: 20px;
-      background-color: var(--secondary-color);
-      color: var(--primary-color);
-      box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
+    justify-content: space-between;
+    .regime__title {
+      margin: 5px 0;
     }
   }
-  .tax__monthly_amount {
-    width: 70%;
-    text-align: center;
-    margin: 10px auto;
-    padding: 10px;
+  .regime__choice {
+    box-shadow: 1px 2px 4px rgba($card-shadow, 0.5);
+    position: absolute;
+    top: -10px;
+    max-width: 150px;
+    padding: 5px 15px;
+    background-color: var(--secondary-color);
     border-radius: 20px;
-    border: 5px solid var(--secondary-color);
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+  }
+  .regime_details__btn {
+    margin: 0 0 0 auto;
+    font-weight: 900;
   }
   .tax__breakup {
-    padding: 5px;
-    border-top: 2px solid var(--secondary-color);
-    width: 100%;
-    display: block;
-    .tax_details {
-      padding: 10px;
-      margin: 10px 0;
-      background-color: var(--secondary-color);
-      color: var(--primary-color);
-      display: flex;
-      justify-content: space-between;
-      div {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  }
-  .source__container {
     display: flex;
-    justify-content: space-between;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-
-    padding: 10px;
-    margin: 10px 0;
-    div {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    overflow: hidden auto;
+    max-height: 40vh;
+    padding: 15px 20px;
+    border-top: 2px solid var(--secondary-color);
+  }
+}
+.breakup__item {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: $mobile-max-width) {
+  .tax_breakup__container {
+    width: 75vw;
+    max-height: 60vh;
+    .regime__title {
+      margin: 5px 0;
     }
   }
 }

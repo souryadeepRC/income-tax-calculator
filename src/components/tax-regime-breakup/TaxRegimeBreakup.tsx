@@ -1,99 +1,70 @@
-import { memo, useState } from "react";
+// library
+import { useToggle } from "triva-ui";
+import { useSelector } from "react-redux";
+// components
+import TaxRegimeDetails from "./TaxRegimeDetails";
+import TaxSlabView from "./TaxSlabView";
+import { AmountLabel, Button, Modal } from "src/components/common";
+// store
+import { selectIsMobile } from "src/store/screen/screen-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
+// constants
+import { TAX_SLAB } from "src/constants/tax-constants";
+// types
+import { TaxChoiceType, TaxScheme } from "src/types/tax-types";
 // styles
 import classes from "./TaxRegimeBreakup.module.scss";
-import { TaxChoiceType, TaxScheme } from "src/types/tax-types";
-import { Button, Modal } from "../common";
-import { useToggle } from "triva-ui";
 
 interface TaxRegimeBreakupProps {
   type: TaxChoiceType;
   details: TaxScheme;
   isBestChoice?: boolean;
 }
-const TaxRegimeDetails = ({ tax, deduction, taxableAmount }: any) => {
-  return (
-    <div>
-      <div className={classes.tax__breakup}>
-        <span>Net Annual Tax: Rs. {formatNumber(tax.yearlyTax)}</span>
-        <div className={classes.tax_details}>
-          <div>
-            <strong>Rs. {formatNumber(tax.baseTax)}</strong>
-            <span>Base Tax</span>
-          </div>
-          <div>
-            <strong>Rs. {formatNumber(tax.cessAmount)}</strong>
-            <span>CESS</span>
-          </div>
-        </div>
-      </div>
-      <div className={classes.source__container}>
-        <div>
-          <strong>Rs. {formatNumber(taxableAmount)}</strong>
-          <span>Taxable Income</span>
-        </div>
-        <div>
-          <strong>Rs. {formatNumber(deduction.total)}</strong>
-          <span>Deducted Amount</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+
 const TaxRegimeBreakup: React.FC<TaxRegimeBreakupProps> = ({
   type,
   details,
   isBestChoice,
 }) => {
-  const { tax, deduction } = details;
+  const monthlyTax = details?.tax?.monthlyTax || 0;
   const [isDetailsVisible, toggleVisibility] = useToggle(false);
+  const isMobile: boolean = useSelector(selectIsMobile);
   return (
     <div className={classes.regime__container}>
-      {isDetailsVisible && (
+      {isMobile && isDetailsVisible && (
         <Modal onClose={toggleVisibility}>
-          <TaxRegimeDetails
-            tax={tax}
-            deduction={deduction}
-            taxableAmount={details.taxableAmount}
-          />
+          <div className={classes.tax_breakup__container}>
+            <h2 className={classes.regime__title} data-testid="regime-label">
+              {type} Tax Regime
+            </h2>
+            <TaxRegimeDetails details={details} />
+          </div>
         </Modal>
       )}
-      <header>
-        <span data-testid="regime-label">{type} Tax Regime</span>
+
+      <div className={classes.regime__header}>
         {isBestChoice && (
-          <span className={classes.regime__choice}>Best Choice</span>
+          <div className={classes.regime__choice}>Best Choice</div>
         )}
-      </header>
-      <div className={classes.tax__monthly_amount}>
-        <Button variant="text" onClick={toggleVisibility}>
-          <>Rs. {formatNumber(tax.monthlyTax)}/month</>
+        <h2 className={classes.regime__title} data-testid="regime-label">
+          {type} Tax Regime
+        </h2>
+        <TaxSlabView taxSlab={TAX_SLAB[type]} />
+      </div>
+      <AmountLabel amount={`${formatNumber(monthlyTax)}/month`} />
+      {isMobile ? (
+        <Button
+          className={classes.regime_details__btn}
+          variant="text"
+          onClick={toggleVisibility}
+        >
+          {"See details >>>"}
         </Button>
-      </div>
-      {/*  <div className={classes.tax__breakup}>
-        <span>Net Annual Tax: Rs. {formatNumber(tax.yearlyTax)}</span>
-        <div className={classes.tax_details}>
-          <div>
-            <strong>Rs. {formatNumber(tax.baseTax)}</strong>
-            <span>Base Tax</span>
-          </div>
-          <div>
-            <strong>Rs. {formatNumber(tax.cessAmount)}</strong>
-            <span>CESS</span>
-          </div>
-        </div>
-      </div>
-      <div className={classes.source__container}>
-        <div>
-          <strong>Rs. {formatNumber(details.taxableAmount)}</strong>
-          <span>Taxable Income</span>
-        </div>
-        <div>
-          <strong>Rs. {formatNumber(deduction.total)}</strong>
-          <span>Deducted Amount</span>
-        </div>
-      </div> */}
+      ) : (
+        <TaxRegimeDetails details={details} />
+      )}
     </div>
   );
 };
-export default memo(TaxRegimeBreakup);
+export default TaxRegimeBreakup;

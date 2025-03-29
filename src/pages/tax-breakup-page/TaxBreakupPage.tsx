@@ -7,7 +7,7 @@ import { TaxBreakup } from "src/types/tax-types";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // constants
-import { TAX_SCHEME } from "src/constants/common-constants";
+import { TAX_SCHEME } from "src/constants/tax-constants";
 // styles
 import classes from "./TaxBreakupPage.module.scss";
 
@@ -16,15 +16,15 @@ const TaxBreakupPage: React.FC = () => {
   const { difference, type } = taxDetails.choice;
 
   return (
-    <main className={classes.tax_breakup__container}>
-      <header
+    <div className={classes.tax_breakup__container}>
+      <div
         className={classes.tax__message}
         data-testid="tax-breakup-message"
       >
         You can save Rs.<strong>{formatNumber(difference)}</strong>&nbsp;by
         choosing&nbsp;
         <strong>{type} Tax Regime</strong>
-      </header>
+      </div>
       <section className={classes.tax_regime__container}>
         <TaxRegimeBreakup
           type={TAX_SCHEME.NEW}
@@ -37,7 +37,7 @@ const TaxBreakupPage: React.FC = () => {
           isBestChoice={type === TAX_SCHEME.OLD}
         />
       </section>
-    </main>
+    </div>
   );
 };
 export default TaxBreakupPage;

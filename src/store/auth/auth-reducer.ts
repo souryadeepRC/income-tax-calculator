@@ -8,8 +8,8 @@ import {
 } from "./auth-constants";
 
 const initialState: AuthReducerType = {
-  user: undefined,
-  isLoggedIn: false,
+  user: { email: "test@mail.com", name: "Test" },
+  isLoggedIn: true,
   isDataLoading: false,
   isLogoutActive: false,
 };

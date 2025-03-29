@@ -1,5 +1,4 @@
 import { DeductionType } from "src/types/deduction-types";
-import { TaxChoiceType } from "src/types/tax-types";
 
 export const NUMERIC_REGEX = /^(?!0(\.0{1,2})?$)\d+(\.\d{1,2})?$/;
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -69,8 +68,4 @@ export const SECTION_80C_MAX_LIMIT: number = 150000;
 export const STANDARD_DEDUCTION = {
   NEW: 75000,
   OLD: 50000,
-};
-export const TAX_SCHEME: Record<string, TaxChoiceType> = {
-  NEW: "New",
-  OLD: "Old",
 };

@@ -1,5 +1,5 @@
-import { STANDARD_DEDUCTION, TAX_SCHEME } from "src/constants/common-constants";
-import { DeductionReducerType } from "src/types/deduction-types";
+import { STANDARD_DEDUCTION } from "src/constants/common-constants";
+import { TAX_SCHEME } from "src/constants/tax-constants";
 import { IncomeOption } from "src/types/income-types";
 import { TaxBreakupType, TaxReducerType, TaxScheme } from "src/types/tax-types";
 
@@ -88,8 +88,8 @@ export const calculateIncomeTax = (
     taxableAmount: taxableAmount > 0 ? taxableAmount : 0,
     tax: { baseTax, cessAmount, yearlyTax, monthlyTax },
     deduction: {
-      standardDeduction,
-      other: deductedAmount,
+      standard: income > standardDeduction ? standardDeduction : 0,
+      other: income - standardDeduction > deductedAmount ? deductedAmount : 0,
       total: income > totalDeduction ? totalDeduction : 0,
     },
   };
