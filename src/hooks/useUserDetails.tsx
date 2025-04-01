@@ -6,13 +6,14 @@ import { useQuery } from "@tanstack/react-query";
 import dbService from "src/service/Database";
 // store
 import { loginUser } from "src/store/auth/auth-actions";
-import { selectUserName } from "src/store/auth/auth-selectors";
+import { selectUserName, selectIsLoggedIn } from "src/store/auth/auth-selectors";
 import { loadIncomeDetails } from "src/store/income/income-actions";
 import { loadDeduction } from "src/store/deduction/deduction-actions";
 
 const useUserDetails = (): void => {
   const dispatch = useDispatch();
   const username = useSelector(selectUserName);
+  const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
 
   const {
     isFetched: isIncomeFetched,
@@ -22,7 +23,7 @@ const useUserDetails = (): void => {
     queryKey: ["user-income-details"],
     queryFn: () => dbService.getAllDetails("income"),
     retry: 0,
-    enabled: !!username,
+    enabled: !!username && !isLoggedIn,
   });
   const {
     isFetched: isDeductionFetched,
@@ -32,7 +33,7 @@ const useUserDetails = (): void => {
     queryKey: ["user-deduction-details"],
     queryFn: () => dbService.getAllDetails("deduction"),
     retry: 0,
-    enabled: !!username,
+    enabled: !!username && !isLoggedIn,
   });
 
   useEffect(() => {
