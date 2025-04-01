@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // library
+import { useToggle } from "triva-ui";
 import { IconButton } from "@mui/material";
 import { Close as CloseIcon, Widgets } from "@mui/icons-material";
 //components
@@ -14,10 +14,8 @@ import "./Navigation.scss";
 
 const NavigationMobile: React.FC = () => {
   const userName: string = useSelector(selectUserName);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const handleSlider = (): void => {
-    setIsOpen((isOpen: boolean) => !isOpen);
-  };
+  const [isOpen, handleSlider] = useToggle(false);
+
   return (
     <main className="navigation_mobile__container">
       <IconButton size="small" onClick={handleSlider}>
@@ -39,8 +37,8 @@ const NavigationMobile: React.FC = () => {
             </IconButton>
           </header>
           <Navigation handleSlider={handleSlider} />
-          <div className="navigation__options">
-            <LogOutButton />
+          <div className="navigation__options" >
+            <LogOutButton onClick={handleSlider} />
           </div>
         </section>
       )}

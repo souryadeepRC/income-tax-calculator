@@ -50,8 +50,8 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
       }
     }
     mutate({
-      id: entry?.id,
       type: DEDUCTION_TYPE.SECTION24,
+      id: entry?.id,
       amount: +amount,
     });
   };

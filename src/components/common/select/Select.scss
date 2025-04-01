@@ -1,10 +1,16 @@
 .select__container {
   gap: 8px;
+
+  .error {
+    color: var(--error-color)
+  }
+
   &.MuiFormControl-root {
     .MuiInputBase-root {
       padding: 10px 20px;
       background-color: $color-white;
       font-family: inherit;
+
       .MuiSelect-select {
         padding: 0;
       }
