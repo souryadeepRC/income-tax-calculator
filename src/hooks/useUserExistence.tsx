@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
 // library
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 // store
 import { createUser } from "src/store/auth/auth-actions";
+import { selectIsLoggedIn } from "src/store/auth/auth-selectors";
 // service
 import authService from "src/service/Auth";
 
 const useUserExistence = (): { isLoading: boolean; isUserExist: boolean } => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   const { isFetched, data, isSuccess } = useQuery({
     queryKey: ["user-existence"],
     queryFn: () => authService.getCurrentUser(),
     retry: 0,
-  }); 
+    enabled: !isLoggedIn
+  });
 
   useEffect(() => {
     if (!isFetched) return;

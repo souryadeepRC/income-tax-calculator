@@ -34,7 +34,6 @@ const Section80C = () => {
   const { options, deductedAmount }: DeductionOption = useSelector(
     selectSection80CDeduction
   );
-  console.log({ options, deductedAmount });
 
   const actionEntry: DeductionEntry | undefined = useMemo(() => {
     return options.find((deductionEntry) => deductionEntry.id === entryId);

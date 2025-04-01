@@ -31,7 +31,6 @@ export const calculateTaxAmount = (
       tax = tax + calculatedTax;
     } else {
       const effectiveAmount = taxableAmount - slab.minLimit;
-      console.log({ effectiveAmount });
       const calculatedTax = effectiveAmount * (slab.taxRate / 100);
       return tax + calculatedTax;
     }
