@@ -6,15 +6,24 @@ import { Button } from "src/components/common";
 // store
 import { setLogoutActive } from "src/store/auth/auth-actions";
 
-const LogOutButton: React.FC = () => {
+interface LogOutButtonProps {
+  onClick?: () => void;
+}
+const LogOutButton: React.FC<LogOutButtonProps> = ({ onClick }) => {
   const dispatch = useDispatch();
+
+  const onLogout = () => {
+    onClick?.();
+    dispatch(setLogoutActive(true))
+  }
+
   return (
     <Button
       className="navigation__logout"
       variant="text"
       border="round"
       startIcon={<LogoutIcon />}
-      onClick={() => dispatch(setLogoutActive(true))}
+      onClick={onLogout}
     >
       Logout
     </Button>

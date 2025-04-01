@@ -1,4 +1,3 @@
-import { memo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
@@ -30,8 +29,8 @@ const AddRentEntry: React.FC = () => {
         addAction={
           isRentEligible
             ? () => {
-                dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
-              }
+              dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
+            }
             : undefined
         }
       />

@@ -10,8 +10,6 @@ export const updateState = (field: string, value: any) => (object: any) => {
 
 export const ErrorMessage = {
   amountInput: (amount: string): string => {
-    console.log({ amount });
-
     if (amount === "") {
       return "Amount is required";
     } else if (!NUMERIC_REGEX.test(amount)) {
@@ -30,4 +28,8 @@ export const ErrorMessage = {
     }
     return "";
   },
+  category: (value: string) => {
+    if (!value) return "Category  is required."
+    return ""
+  }
 };

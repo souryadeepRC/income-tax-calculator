@@ -1,6 +1,12 @@
 import { DeductionEntry } from "src/types/deduction-types";
 import { DEDUCTION_CHAPTER_VI_OPTIONS } from "src/constants/common-constants";
 
+const getEffectiveAmount = (category: string, amount: number) => {
+
+  const deductedMaxLimit =
+    DEDUCTION_CHAPTER_VI_OPTIONS[category]?.maxLimit || 0;
+  return Math.min(amount, deductedMaxLimit);
+}
 export const mapSaveDeductionEntry = (
   options: any,
   deductedAmount: number,
@@ -11,18 +17,16 @@ export const mapSaveDeductionEntry = (
 
   let updatedAmount = 0;
   if (entryIndex > -1) {
+    const { category, amount: previousAmount } = options[entryIndex];
+    updatedAmount = deductedAmount - getEffectiveAmount(category, previousAmount);
     options[entryIndex] = {
       ...options[entryIndex],
       ...payload,
     };
-    updatedAmount = deductedAmount - options[entryIndex].amount;
   } else {
     options.push(payload);
   }
-  const deductedMaxLimit =
-    DEDUCTION_CHAPTER_VI_OPTIONS[category]?.maxLimit || 0;
-  const modifiedAmount = Math.min(amount, deductedMaxLimit);
-  updatedAmount = updatedAmount + modifiedAmount;
+  updatedAmount = updatedAmount + getEffectiveAmount(category, amount);
   return {
     options,
     deductedAmount: updatedAmount,
@@ -34,8 +38,9 @@ export const mapDeleteDeductionEntry = (
   entryId: string
 ) => {
   const entryIndex = options.findIndex((entry: any) => entry.id === entryId);
+  const { category, amount: previousAmount } = options[entryIndex];
   return {
     options: options.filter((entry: any) => entry.id !== entryId),
-    deductedAmount: deductedAmount - options[entryIndex].amount,
+    deductedAmount: deductedAmount - getEffectiveAmount(category, previousAmount)
   };
 };

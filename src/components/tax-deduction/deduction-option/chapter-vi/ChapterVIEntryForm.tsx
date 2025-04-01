@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // library
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,8 @@ import {
 } from "src/store/deduction/deduction-actions";
 // utils
 import { ErrorMessage, updateState } from "src/utils/common-utils";
+// constants
+import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // types
 import {
   DeductionEntryOption,
@@ -34,7 +36,6 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
   options,
   entry,
 }) => {
-  const userActivity = useRef<boolean>(false);
   const dispatch = useDispatch();
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
@@ -55,7 +56,7 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
     category: "",
     amount: "",
   });
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<EntryInput>({ category: "", amount: "" });
   useEffect(() => {
     if (!entry) return;
     const { category, amount } = entry;
@@ -63,16 +64,20 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
   }, [entry]);
 
   const onEntrySave = () => {
-    if (error) return;
-    if (userActivity.current) {
-      const amountError: string = ErrorMessage.amountInput(entryInput.amount);
-      if (amountError) {
-        setError(amountError);
-        return;
-      }
+    if (error.category || error.amount) return;
+
+    const errorMessage = {
+      category: ErrorMessage.category(entryInput.category),
+      amount: ErrorMessage.amountInput(entryInput.amount)
+    };
+
+    if (errorMessage.category || errorMessage.amount) {
+      setError(errorMessage);
+      return;
     }
 
     mutate({
+      type: DEDUCTION_TYPE.CHAPTER6A,
       id: entry?.id,
       category: entryInput.category,
       amount: +entryInput.amount,
@@ -80,14 +85,13 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
   };
   const onCategoryChange = (event: any) => {
     setEntryInput(updateState("category", event.target.value as string));
+    setError(updateState("category", ErrorMessage.category(event.target.value as string)));
   };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const amount: string = event.target.value;
     setEntryInput(updateState("amount", amount));
-    setError(ErrorMessage.amountInput(amount));
-    if (!userActivity.current) {
-      userActivity.current = true;
-    }
+    setError(updateState("amount", ErrorMessage.amountInput(amount)));
+
   };
 
   const onReset = () => {
@@ -107,6 +111,7 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
         onChange={onCategoryChange}
         data-testid={`category-option`}
         fullWidth
+        errorMessage={error.category}
       >
         {options.map((option) => {
           const isDisabled: boolean =
@@ -130,7 +135,7 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
         value={entryInput.amount}
         onChange={onAmountChange}
         inputProps={{ "data-testid": "deduction-amount-input" }}
-        errorMessage={error}
+        errorMessage={error.amount}
       />
     </EntryFormModal>
   );

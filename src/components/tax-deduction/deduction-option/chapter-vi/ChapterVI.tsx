@@ -93,8 +93,8 @@ const ChapterVI: React.FC = () => {
             content={{
               title: DEDUCTION_CHAPTER_VI_OPTIONS[option.category].label,
               amountLabel: `Rs. ${formatNumber(option.amount)}`,
-              description: option.maxLimit
-                ? `Max Limit: ${option.maxLimit}`
+              description: DEDUCTION_CHAPTER_VI_OPTIONS[option.category].maxLimit
+                ? `Max Limit: ${DEDUCTION_CHAPTER_VI_OPTIONS[option.category].maxLimit}`
                 : "",
             }}
             entryId={option.id}

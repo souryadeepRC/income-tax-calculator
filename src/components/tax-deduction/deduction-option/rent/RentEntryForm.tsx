@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 // library
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
@@ -37,7 +37,6 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
 
   // store
   const dispatch = useDispatch();
-  const userActivity = useRef<boolean>(false);
   const [rentEntry, setRentEntry] = useState<EntryInput>({
     amount: "",
     duration: "",
@@ -84,9 +83,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       ...error,
       [name]: errorMessage,
     }));
-    if (!userActivity.current) {
-      userActivity.current = true;
-    }
+
   }, []);
 
   /* eslint-disable */
@@ -99,15 +96,14 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   // Save Rent Entry and call API
   const onRentEntrySave = () => {
     if (error.amount || error.duration) return;
-    if (!userActivity.current) {
-      const errorMessage = {
-        amount: ErrorMessage.amountInput(amount),
-        duration: ErrorMessage.rentDuration(duration, maxDuration),
-      };
-      if (errorMessage.amount || errorMessage.duration) {
-        setError(errorMessage);
-        return;
-      }
+
+    const errorMessage = {
+      amount: ErrorMessage.amountInput(amount),
+      duration: ErrorMessage.rentDuration(duration, maxDuration),
+    };
+    if (errorMessage.amount || errorMessage.duration) {
+      setError(errorMessage);
+      return;
     }
     mutate({
       type: DEDUCTION_TYPE.RENT,

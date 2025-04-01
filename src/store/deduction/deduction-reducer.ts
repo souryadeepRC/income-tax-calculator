@@ -219,6 +219,7 @@ const DeductionReducer = (
           ...state.chapter6,
           ...mapSaveDeductionEntry([...options], deductedAmount, payload),
         },
+        actionEntry: initialState.actionEntry,
       };
     }
     case DELETE_CHAPTER_VI_ENTRY: {
@@ -229,6 +230,7 @@ const DeductionReducer = (
           ...state.chapter6,
           ...mapDeleteDeductionEntry(options, deductedAmount, payload),
         },
+        actionEntry: initialState.actionEntry,
       };
     }
     default:
