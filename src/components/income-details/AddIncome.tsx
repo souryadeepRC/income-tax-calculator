@@ -46,7 +46,7 @@ const AddIncome: React.FC = () => {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (incomeDetails: object) =>
       dbService.createDetails("income", incomeDetails),
-    onSuccess: (data) => {
+    onSuccess: (data:any) => {
       const { $id: id, group, category, amount } = data || {};
       dispatch(saveIncomeDetails({ id, group, category, amount }));
     },

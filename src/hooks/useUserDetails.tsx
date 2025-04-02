@@ -22,7 +22,7 @@ const useUserDetails = (): void => {
     isFetched: isIncomeFetched,
     data: incomeData,
     isSuccess: isIncomeSuccess,
-  } = useQuery({
+  }: any = useQuery({
     queryKey: ["user-income-details"],
     queryFn: () => dbService.getAllDetails("income"),
     retry: 0,
@@ -32,7 +32,7 @@ const useUserDetails = (): void => {
     isFetched: isDeductionFetched,
     data: deductionData,
     isSuccess: isDeductionSuccess,
-  } = useQuery({
+  }: any = useQuery({
     queryKey: ["user-deduction-details"],
     queryFn: () => dbService.getAllDetails("deduction"),
     retry: 0,
@@ -41,7 +41,7 @@ const useUserDetails = (): void => {
 
   useEffect(() => {
     if (!isIncomeFetched || !isIncomeSuccess || !incomeData) return;
-    const modifiedIncome = incomeData.documents.map((option) => ({
+    const modifiedIncome = incomeData.documents.map((option: any) => ({
       id: option?.$id,
       category: option.category,
       amount: option.amount,
@@ -52,7 +52,7 @@ const useUserDetails = (): void => {
 
   useEffect(() => {
     if (!isDeductionFetched || !isDeductionSuccess || !deductionData) return;
-    const modifiedDeduction = deductionData.documents.map((option) => ({
+    const modifiedDeduction = deductionData.documents.map((option: any) => ({
       id: option?.$id,
       type: option.type,
       category: option.category,
