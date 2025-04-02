@@ -10,9 +10,9 @@ import { EntryFormModal } from "src/components/common";
 import dbService from "src/service/Database";
 // actions
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveRentEntry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage } from "src/utils/common-utils";
 // constants
@@ -115,7 +115,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   };
 
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
   const { amount, duration, isMetroCity } = rentEntry;
   return (

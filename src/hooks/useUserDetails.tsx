@@ -6,9 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import dbService from "src/service/Database";
 // store
 import { loginUser } from "src/store/auth/auth-actions";
-import { selectUserName, selectIsLoggedIn } from "src/store/auth/auth-selectors";
+import {
+  selectUserName,
+  selectIsLoggedIn,
+} from "src/store/auth/auth-selectors";
 import { loadIncomeDetails } from "src/store/income/income-actions";
-import { loadDeduction } from "src/store/deduction/deduction-actions";
+import { loadDeduction } from "src/store/deduction/deduction-reducer";
 
 const useUserDetails = (): void => {
   const dispatch = useDispatch();

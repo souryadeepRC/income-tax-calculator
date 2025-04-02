@@ -10,9 +10,9 @@ import { EntryFormModal, Select } from "src/components/common";
 import dbService from "src/service/Database";
 // store
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveSection80CEntry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage, updateState } from "src/utils/common-utils";
 // constants
@@ -68,14 +68,13 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
 
     const errorMessage = {
       category: ErrorMessage.category(entryInput.category),
-      amount: ErrorMessage.amountInput(entryInput.amount)
+      amount: ErrorMessage.amountInput(entryInput.amount),
     };
 
     if (errorMessage.category || errorMessage.amount) {
       setError(errorMessage);
       return;
     }
-
 
     mutate({
       type: DEDUCTION_TYPE.SECTION80C,
@@ -86,17 +85,18 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
   };
   const onCategoryChange = (event: any) => {
     setEntryInput(updateState("category", event.target.value as string));
-    setError(updateState("category", ErrorMessage.category(event.target.value)));
+    setError(
+      updateState("category", ErrorMessage.category(event.target.value))
+    );
   };
   const onAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const amount: string = event.target.value;
     setEntryInput(updateState("amount", amount));
     setError(updateState("amount", ErrorMessage.amountInput(amount)));
-
   };
 
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
 
   return (

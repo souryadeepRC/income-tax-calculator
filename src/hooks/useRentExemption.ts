@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // store
-import { setRentDeductedAmount } from "src/store/deduction/deduction-actions";
+import { setRentDeductedAmount } from "src/store/deduction/deduction-reducer";
 import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 // types

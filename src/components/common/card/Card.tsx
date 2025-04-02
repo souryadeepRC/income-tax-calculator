@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   deleteDeduction,
   editDeduction,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // types
 import { DeductionType } from "src/types/deduction-types";
 // styles

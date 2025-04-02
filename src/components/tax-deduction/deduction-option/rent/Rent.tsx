@@ -10,7 +10,7 @@ import RentEntryForm from "./RentEntryForm";
 import { Card, CardWrapper } from "src/components/common";
 import { DeleteDeduction } from "src/components/tax-deduction";
 // store
-import { deleteRentEntry } from "src/store/deduction/deduction-actions";
+import { deleteRentEntry } from "src/store/deduction/deduction-reducer";
 // constants
 import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // types

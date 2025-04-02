@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // components
 import { DeductionHeader } from "src/components/tax-deduction";
 //actions
-import { editDeduction } from "src/store/deduction/deduction-actions";
+import { editDeduction } from "src/store/deduction/deduction-reducer";
 // selectors
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";

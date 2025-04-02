@@ -9,9 +9,9 @@ import { EntryFormModal } from "src/components/common";
 import dbService from "src/service/Database";
 //store
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveSection24Entry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage } from "src/utils/common-utils";
 // constants
@@ -65,7 +65,7 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
     }
   };
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
 
   return (

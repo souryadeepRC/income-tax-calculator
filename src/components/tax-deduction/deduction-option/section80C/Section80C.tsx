@@ -11,7 +11,7 @@ import { useDeductionActionEntry } from "src/hooks";
 import {
   deleteSection80CEntry,
   editDeduction,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 import { selectSection80CDeduction } from "src/store/deduction/deduction-selectors";
 // types
 import { AppDispatch } from "src/types/store-types";

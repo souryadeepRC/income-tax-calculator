@@ -80,6 +80,12 @@ const deductionSlice = createSlice({
         },
       };
     },
+    resetDeduction: (state) => {
+      return {
+        ...state,
+        actionEntry: initialState.actionEntry,
+      };
+    },
     // Rent deduction operations
     saveRentEntry: (state, action: PayloadAction<RentOption>) => {
       const options = DeductionMapper.mapRentOptions(
@@ -209,6 +215,7 @@ export const {
   loadDeduction,
   editDeduction,
   deleteDeduction,
+  resetDeduction,
   saveRentEntry,
   deleteRentEntry,
   setRentDeductedAmount,

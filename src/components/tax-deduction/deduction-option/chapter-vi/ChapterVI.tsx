@@ -11,7 +11,7 @@ import { useDeductionActionEntry } from "src/hooks";
 import {
   deleteChapterVIEntry,
   editDeduction,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // selectors
 import { selectChapter6Deduction } from "src/store/deduction/deduction-selectors";
 // types

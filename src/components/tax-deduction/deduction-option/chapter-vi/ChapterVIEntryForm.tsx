@@ -10,9 +10,9 @@ import { EntryFormModal, Select } from "src/components/common";
 import dbService from "src/service/Database";
 // store
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveChapterVIEntry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage, updateState } from "src/utils/common-utils";
 // constants
@@ -95,7 +95,7 @@ const ChapterVIEntryForm: React.FC<DeductionEntryFormProps> = ({
   };
 
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
 
   return (

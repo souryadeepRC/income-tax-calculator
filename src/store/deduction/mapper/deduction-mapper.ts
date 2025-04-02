@@ -90,7 +90,6 @@ const mapDeductions = (
     },
     initialDetails
   );
-  console.log(details);
 
   return {
     ...state,
