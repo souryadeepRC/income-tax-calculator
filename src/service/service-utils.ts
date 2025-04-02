@@ -1,3 +1,3 @@
 export function isDevelopment(): boolean {
-  return process.env.NODE_ENV !== "development";
+  return import.meta.env.VITE_ENVIRONMENT === "development";
 }
