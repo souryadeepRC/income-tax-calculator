@@ -1,14 +1,14 @@
- 
 import {
   DeductionEntry,
-  RentEntry,
-  Section24Entry,
+  DeductionOption,
+  RentOption,
 } from "src/types/deduction-types";
 
-export const mapSaveRentEntry = (
-  options: RentEntry[],
-  payload: RentEntry
-): RentEntry[] => {
+export const mapRentOptions = (
+  rentOptions: RentOption[],
+  payload: RentOption
+): RentOption[] => {
+  const options = [...rentOptions];
   const entryIndex = options.findIndex(
     (rentEntry) => rentEntry.id === payload.id
   );
@@ -24,43 +24,51 @@ export const mapSaveRentEntry = (
 };
 
 // Save Entry in store for Section 24 | section 80C
-type EntryType = {
-  options: (Section24Entry | DeductionEntry)[];
-  deductedAmount: number;
-};
-type saveEntryPayload = Section24Entry | DeductionEntry;
-
-export const mapSaveEntry = (
-  details: EntryType,
-  payload: saveEntryPayload,
+const getEffectiveAmount = (
+  options: DeductionOption[],
+  addedAmount: number,
   limit: number
-): EntryType => {
-  const { deductedAmount, options } = details;
-  let updatedAmount: number = deductedAmount + payload.amount;
+) => {
+  const previousAmount = options.reduce(
+    (acc: number, option: DeductionOption) => acc + option.amount,
+    0
+  );
+  return Math.min(previousAmount + addedAmount, limit);
+};
+export const mapSaveEntry = (
+  details: DeductionEntry,
+  payload: DeductionOption,
+  limit: number
+): DeductionEntry => {
+  const { options: existingOptions } = details;
+  const options = [...existingOptions];
   const entryIndex = options.findIndex((entry: any) => entry.id === payload.id);
+  let alteredAmount = payload.amount;
   if (entryIndex > -1) {
+    alteredAmount = alteredAmount - options[entryIndex].amount;
     options[entryIndex] = {
       ...options[entryIndex],
       ...payload,
     };
-    updatedAmount += payload.amount - options[entryIndex].amount;
   } else {
     options.push(payload);
   }
-  return { options, deductedAmount: Math.min(updatedAmount, limit) };
+  return {
+    options,
+    deductedAmount: getEffectiveAmount(existingOptions, alteredAmount, limit),
+  };
 };
 
 // Delete Entry in store for Section 24 | section 80C
-type DeleteEntryOptions = (Section24Entry | DeductionEntry)[];
-
 export const mapDeleteEntry = (
-  options: DeleteEntryOptions,
+  options: DeductionOption[],
   entryId: string,
   limit: number
-): EntryType => {
+): DeductionEntry => {
   const entryIndex = options.findIndex((entry) => entry.id === entryId);
+  const addedAmount = options[entryIndex].amount * -1;
   return {
     options: options.filter((entry) => entry.id !== entryId),
-    deductedAmount: Math.min(options[entryIndex].amount, limit),
+    deductedAmount: getEffectiveAmount(options, addedAmount, limit),
   };
 };

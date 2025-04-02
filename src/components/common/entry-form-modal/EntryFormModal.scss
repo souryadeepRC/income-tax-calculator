@@ -13,15 +13,22 @@
     flex-direction: column;
     gap: 10px;
     width: 70vw;
+    padding: 10px;
     max-width: 400px;
     max-height: 60vh;
     overflow: auto;
     font-size: 1.1rem;
     color: var(--secondary-color);
+    .TUIText_field__container input {
+      box-shadow: -1px 2px 9px 0 rgba($card-shadow, 0.25); 
+    }
   }
   .action_btn__container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+    .Button-root.contained{
+      padding: 8px 20px;
+    }
   }
 }

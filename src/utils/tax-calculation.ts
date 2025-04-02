@@ -64,9 +64,9 @@ const calculateSurcharge = (
   return incomeTax * (surchargeRate / 100);
 };
 
-export const formatNumber = (value: number): number => {
-  if (!value) return 0;
-  return value % 1 === 0 ? value : +value.toFixed(2);
+export const formatNumber = (value: number): string => {
+  if (!value) return "0";
+  return value.toLocaleString("en-In", { maximumFractionDigits: 2 });
 };
 
 export const calculateIncomeTax = (

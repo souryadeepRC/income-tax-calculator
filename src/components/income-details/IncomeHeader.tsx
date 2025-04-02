@@ -7,6 +7,8 @@ import { AmountLabel, Button } from "src/components/common";
 import { selectOverallIncomeAmount } from "src/store/income/income-selectors";
 import { editIncomeEntry } from "src/store/income/income-actions";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
+// utils
+import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./IncomeDetails.module.scss";
 
@@ -34,7 +36,7 @@ const IncomeHeader: React.FC = () => {
           Add Income
         </Button>
       </div>
-      <AmountLabel amount={`${totalIncome}`} />
+      <AmountLabel amount={formatNumber(totalIncome)} />
     </section>
   );
 };

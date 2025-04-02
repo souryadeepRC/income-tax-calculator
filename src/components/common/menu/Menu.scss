@@ -1,6 +1,24 @@
+.menu__icon {
+  &.MuiIconButton-root {
+    color: var(--secondary-color);
+  }
+}
 .menu__container {
   .MuiMenuItem-root {
     gap: 20px;
-    color: var(--primary-color);
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--secondary-color);
+    min-height: 10px;
+    .MuiSvgIcon-root {
+      font-size: inherit;
+    }
+    &:last-child {
+      border: none;
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .MuiPaper-root .MuiMenuItem-root {
+    min-height: 10px;
   }
 }

@@ -12,7 +12,7 @@ import {
 // service
 import dbService from "src/service/Database";
 // store
-import { resetDeductionAction } from "src/store/deduction/deduction-actions";
+import { resetDeduction } from "src/store/deduction/deduction-reducer";
 // styles
 import classes from "./TaxDeduction.module.scss";
 
@@ -33,7 +33,7 @@ const DeleteDeduction: React.FC<DeleteDeductionProps> = ({
   });
 
   const onCancel = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
   const onRemove = () => {
     mutate(entryId);

@@ -1,17 +1,19 @@
 // library
 import { useDispatch } from "react-redux";
 import { IconButton } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 import TuneIcon from "@mui/icons-material/Tune";
 import DeleteIcon from "@mui/icons-material/Delete";
 // store
 import {
   deleteDeduction,
   editDeduction,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // types
 import { DeductionType } from "src/types/deduction-types";
 // styles
 import "./Card.scss";
+import Menu from "../menu/Menu";
 
 interface CardContent {
   amountLabel: string;
@@ -37,27 +39,28 @@ const Card: React.FC<CardProps> = ({
   const { amountLabel, title, description } = content;
   return (
     <div className="card__container">
-      <div className="card__action_bar">
-        {isEdit && (
-          <IconButton
-            onClick={() => dispatch(editDeduction({ type, entryId }))}
-          >
-            <TuneIcon />
-          </IconButton>
-        )}
-        {isDelete && (
-          <IconButton
-            onClick={() => dispatch(deleteDeduction({ type, entryId }))}
-          >
-            <DeleteIcon />
-          </IconButton>
-        )}
+      <div className="card">
+        <div className="card__content">
+          <h2>{amountLabel}</h2>
+          <p>{title}</p>
+        </div>
+        <Menu
+          MenuIcon={<SettingsIcon />}
+          actions={[
+            {
+              label: "Modify",
+              icon: <TuneIcon />,
+              onClick: () => dispatch(editDeduction({ type, entryId })),
+            },
+            {
+              label: "Delete",
+              icon: <DeleteIcon />,
+              onClick: () => dispatch(deleteDeduction({ type, entryId })),
+            },
+          ]}
+        />
       </div>
-      <div className="card__content">
-        <h2>{amountLabel}</h2>
-        <p>{title}</p>
-        {description && <span>{description}</span>}
-      </div>
+      {description && <p>{description}</p>}
     </div>
   );
 };

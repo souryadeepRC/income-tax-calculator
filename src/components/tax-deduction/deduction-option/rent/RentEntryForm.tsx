@@ -10,9 +10,9 @@ import { EntryFormModal } from "src/components/common";
 import dbService from "src/service/Database";
 // actions
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveRentEntry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage } from "src/utils/common-utils";
 // constants
@@ -49,7 +49,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       const { $id: id, amount, duration, category } = data || {};
       dispatch(
         saveRentEntry({
@@ -65,7 +65,14 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   // set previous rent entry details for Edit scenario
   useEffect(() => {
     if (!entry) return;
-    setRentEntry(entry);
+    const { amount, duration, isMetroCity } = entry;
+
+    setRentEntry({
+      ...rentEntry,
+      amount: `${amount}`,
+      duration: `${duration}`,
+      isMetroCity,
+    });
   }, [entry]);
 
   // Change Rent Entry
@@ -83,7 +90,6 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       ...error,
       [name]: errorMessage,
     }));
-
   }, []);
 
   /* eslint-disable */
@@ -115,7 +121,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   };
 
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
   const { amount, duration, isMetroCity } = rentEntry;
   return (

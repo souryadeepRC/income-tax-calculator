@@ -9,9 +9,10 @@ import {
   deleteIncomeEntry,
 } from "src/store/income/income-actions";
 // types
-import { IncomeDeleteEntry, IncomeOption } from "src/types/income-types";
+import { IncomeOption } from "src/types/income-types";
 // utils
 import { isReservedCategory } from "src/utils/income-utils";
+import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./IncomeDetails.module.scss";
 
@@ -38,7 +39,7 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
           className={classes.income__amount}
           onClick={() => dispatch(editIncomeEntry(rowData.id))}
         >
-          <span>{rowData.amount}</span>
+          <span>{formatNumber(rowData.amount)}</span>
           <EditIcon />
         </div>
       ),

@@ -28,7 +28,7 @@ describe("test TaxBreakupPage component", () => {
       newScheme: { taxDetails: "newSchemeDetails" },
       oldScheme: { taxDetails: "oldSchemeDetails" },
     });
-    MockFormatNumber.mockReturnValue(100.45);
+    MockFormatNumber.mockReturnValue("100.45");
     render(<TaxBreakupPage />);
     expect(screen.getByTestId("tax-breakup-message")).toHaveTextContent(
       "You can save Rs.100.45 by choosing New Tax Regime"

@@ -22,7 +22,7 @@
   &.contained {
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    box-shadow: 4px 2px 12px 1px rgba($card-shadow, 0.5);
+    box-shadow: 0 4px 4px 0 rgba($card-shadow, 0.25);
     &:hover {
       box-shadow: 9px 5px 12px 1px rgba($card-shadow, 0.5);
     }

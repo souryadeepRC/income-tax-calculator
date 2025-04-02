@@ -9,7 +9,7 @@ jest.mock("react-redux", () => ({
 }));
 
 // Mocking the action
-jest.mock("src/store/deduction/deduction-actions", () => ({
+jest.mock("src/store/deduction/deduction-reducer", () => ({
   updateSection24Deduction: jest.fn(),
 }));
 const mockUseSelector = useSelector as jest.MockedFunction<typeof useSelector>;

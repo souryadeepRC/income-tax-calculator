@@ -1,19 +1,19 @@
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // components
-import Section24EntryForm from "./Section24EntryForm";
+import OtherEntryForm from "./OtherEntryForm";
 import { DeductionHeader, DeleteDeduction } from "src/components/tax-deduction";
 import { Card, CardWrapper } from "src/components/common";
 // hooks
 import { useDeductionActionEntry } from "src/hooks";
 // actions
 import {
-  deleteSection24Entry,
+  deleteOtherEntry,
   editDeduction,
 } from "src/store/deduction/deduction-reducer";
 // selectors
-import { selectDeductionSection24 } from "src/store/deduction/deduction-selectors";
+import { selectOtherDeduction } from "src/store/deduction/deduction-selectors";
 // types
 import { AppDispatch } from "src/types/store-types";
 // constants
@@ -21,13 +21,13 @@ import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // styles
 import { formatNumber } from "src/utils/tax-calculation";
 
-const Section24 = () => {
+const OtherDeduction = () => {
   const { isEditable, entryId, isDelete } = useDeductionActionEntry(
-    DEDUCTION_TYPE.SECTION_24
+    DEDUCTION_TYPE.OTHERS
   );
   // store
   const dispatch: AppDispatch = useDispatch();
-  const { options, deductedAmount } = useSelector(selectDeductionSection24);
+  const { options, deductedAmount } = useSelector(selectOtherDeduction);
 
   const actionEntry = useMemo(() => {
     return options.find((entry: any) => entry.id === entryId);
@@ -35,22 +35,21 @@ const Section24 = () => {
 
   return (
     <>
-      {isEditable && <Section24EntryForm entry={actionEntry} />}
+      {isEditable && <OtherEntryForm entry={actionEntry} />}
       {isDelete && entryId && (
         <DeleteDeduction
-          title="Section 24"
+          title="Other deduction"
           entryId={entryId}
-          onDelete={() => dispatch(deleteSection24Entry(entryId))}
+          onDelete={() => dispatch(deleteOtherEntry(entryId))}
         />
       )}
       <DeductionHeader
-        title="Section 24"
+        title="Other Deductions"
         amount={deductedAmount}
         addAction={() =>
-          dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION_24 }))
+          dispatch(editDeduction({ type: DEDUCTION_TYPE.OTHERS }))
         }
         actionText="Add Entry"
-        note="you can avail maximum Rc. 2,00,000 of exemption"
       />
 
       <CardWrapper>
@@ -62,7 +61,7 @@ const Section24 = () => {
               title: "",
             }}
             entryId={option.id}
-            type={DEDUCTION_TYPE.SECTION_24}
+            type={DEDUCTION_TYPE.OTHERS}
           />
         ))}
       </CardWrapper>
@@ -70,4 +69,4 @@ const Section24 = () => {
   );
 };
 
-export default memo(Section24);
+export default OtherDeduction;

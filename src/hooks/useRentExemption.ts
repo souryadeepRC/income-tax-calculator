@@ -2,11 +2,11 @@ import { useEffect, useMemo } from "react";
 // library
 import { useDispatch, useSelector } from "react-redux";
 // store
-import { setRentDeductedAmount } from "src/store/deduction/deduction-actions";
+import { setRentDeductedAmount } from "src/store/deduction/deduction-reducer";
 import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 // types
-import { RentEntry } from "src/types/deduction-types";
+import { RentEntry, RentOption } from "src/types/deduction-types";
 // utils
 import { calculateRentDeduction } from "src/utils/tax-calculation";
 
@@ -17,12 +17,12 @@ type RentBreakup = {
 
 const useRentExemption = (): void => {
   const dispatch = useDispatch();
-  const options: RentEntry[] = useSelector(selectRentOptions);
+  const options: RentOption[] = useSelector(selectRentOptions);
   const { basic, hra } = useSelector(selectRentEligibleDetails);
 
   const rentBreakup: RentBreakup = useMemo(() => {
     return options.reduce(
-      (acc: RentBreakup, rentEntry: RentEntry) => {
+      (acc: RentBreakup, rentEntry: RentOption) => {
         const { amount, duration, isMetroCity } = rentEntry;
         const field = isMetroCity ? "metro" : "nonMetro";
         return {

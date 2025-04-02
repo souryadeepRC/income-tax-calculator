@@ -2,19 +2,20 @@ import { memo, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // hooks
 import { useDeductionActionEntry, useRentExemption } from "src/hooks";
-// selectors
-import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
 // components
 import AddRentEntry from "./AddRentEntry";
 import RentEntryForm from "./RentEntryForm";
 import { Card, CardWrapper } from "src/components/common";
 import { DeleteDeduction } from "src/components/tax-deduction";
 // store
-import { deleteRentEntry } from "src/store/deduction/deduction-actions";
+import { deleteRentEntry } from "src/store/deduction/deduction-reducer";
+// selectors
+import { selectRentOptions } from "src/store/deduction/deduction-selectors";
 // constants
 import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // types
-import { DeductionByRent, RentEntry } from "src/types/deduction-types";
+import { RentOption } from "src/types/deduction-types";
+import { formatNumber } from "src/utils/tax-calculation";
 
 const TOTAL_RENT_DURATION = 12;
 
@@ -23,24 +24,17 @@ const Rent = () => {
   const { isEditable, entryId, isDelete } = useDeductionActionEntry(
     DEDUCTION_TYPE.RENT
   );
-  const { options }: DeductionByRent = useSelector(selectRentDeduction);
+  const options: RentOption[] = useSelector(selectRentOptions);
 
   useRentExemption();
 
   const actionEntry = useMemo(() => {
-    const rentEntry = options.find((rentEntry) => rentEntry.id === entryId);
-    if (!rentEntry) return undefined;
-    const { amount, duration } = rentEntry;
-    return {
-      ...rentEntry,
-      amount: `${amount}`,
-      duration: `${duration}`,
-    };
+    return options.find((rentEntry: RentOption) => rentEntry.id === entryId);
   }, [isEditable, isDelete]);
 
   const totalDuration: number = useMemo(
     () =>
-      options.reduce((acc: number, entry) => {
+      options.reduce((acc: number, entry: RentOption) => {
         return acc + (entry.id === entryId ? 0 : entry.duration);
       }, 0),
     [isEditable, isDelete]
@@ -63,15 +57,15 @@ const Rent = () => {
       )}
       <AddRentEntry />
       <CardWrapper>
-        {options?.map((rentEntry: RentEntry) => {
-          const { id = "", amount, duration, isMetroCity } = rentEntry;
+        {options?.map((rentEntry: RentOption) => {
+          const { id, amount, duration, isMetroCity } = rentEntry;
           return (
             <Card
               key={id}
               entryId={id}
               type={DEDUCTION_TYPE.RENT}
               content={{
-                amountLabel: `Rs. ${amount}`,
+                amountLabel: `Rs. ${formatNumber(amount)}`,
                 title: `${duration} ${`Month${duration > 1 ? "s" : ""}`}`,
                 description: isMetroCity ? "Metro" : "Non-Metro",
               }}

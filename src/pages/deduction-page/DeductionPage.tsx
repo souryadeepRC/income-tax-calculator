@@ -1,31 +1,31 @@
-import { memo } from "react";
 // library
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 // components
-import DeductionNavigation from "./DeductionNavigation";
+import { AmountLabel } from "src/components/common";
 // selectors
 import { selectTotalDeduction } from "src/store/deduction/deduction-selectors";
+import { selectIsMobile } from "src/store/screen/screen-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./DeductionPage.module.scss";
 
 const DeductionPage: React.FC = () => {
-  const amount: number = useSelector(selectTotalDeduction);
+  const { pathname } = useLocation();
 
+  const isNavigationPage: boolean = pathname === "/deduction";
+  const isMobile: boolean = useSelector(selectIsMobile);
+  const amount: number = useSelector(selectTotalDeduction);
+  const showHeader: boolean = !isMobile || (isMobile && isNavigationPage);
   return (
     <>
-      <section className={classes.deduction_page__container}>
+      {showHeader && (
         <div className={classes.deduction_page__header}>
           <h2>Track Your Deduction with Ease</h2>
-          <div className={classes.deduction_amount__label}>
-            <span>Rs.</span>
-            <span>{formatNumber(amount)}</span>
-          </div>
+          <AmountLabel amount={formatNumber(amount)} />
         </div>
-        <DeductionNavigation />
-      </section>
+      )}
       <div className={classes.deduction_outlet__container}>
         <Outlet />
       </div>

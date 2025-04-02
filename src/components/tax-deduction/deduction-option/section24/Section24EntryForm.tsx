@@ -9,9 +9,9 @@ import { EntryFormModal } from "src/components/common";
 import dbService from "src/service/Database";
 //store
 import {
-  resetDeductionAction,
+  resetDeduction,
   saveSection24Entry,
-} from "src/store/deduction/deduction-actions";
+} from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage } from "src/utils/common-utils";
 // constants
@@ -29,9 +29,9 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
-    onSuccess: (data) => {
-      const { $id: id, amount } = data || {};
-      dispatch(saveSection24Entry({ id, amount }));
+    onSuccess: (data: any) => {
+      const { $id: id, amount, category, duration } = data || {};
+      dispatch(saveSection24Entry({ id, amount, category, duration }));
     },
   });
 
@@ -50,7 +50,7 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
       }
     }
     mutate({
-      type: DEDUCTION_TYPE.SECTION24,
+      type: DEDUCTION_TYPE.SECTION_24,
       id: entry?.id,
       amount: +amount,
     });
@@ -65,7 +65,7 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
     }
   };
   const onReset = () => {
-    dispatch(resetDeductionAction());
+    dispatch(resetDeduction());
   };
 
   return (
@@ -74,6 +74,7 @@ const Section24EntryForm: React.FC<Section24EntryFormProps> = ({ entry }) => {
       isError={isError}
       onSave={onEntrySave}
       onCancel={onReset}
+      saveBtnLabel={`${entry?.id ? "Modify" : "Add"} Investment`}
     >
       <TUITextField
         fullWidth
