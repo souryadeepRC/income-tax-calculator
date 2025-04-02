@@ -1,14 +1,14 @@
- 
 import {
-  DeductionEntry,
-  RentEntry,
+  DeductionOption,
+  RentOption,
   Section24Entry,
 } from "src/types/deduction-types";
 
-export const mapSaveRentEntry = (
-  options: RentEntry[],
-  payload: RentEntry
-): RentEntry[] => {
+export const mapRentOptions = (
+  rentOptions: RentOption[],
+  payload: RentOption
+): RentOption[] => {
+  const options = [...rentOptions];
   const entryIndex = options.findIndex(
     (rentEntry) => rentEntry.id === payload.id
   );

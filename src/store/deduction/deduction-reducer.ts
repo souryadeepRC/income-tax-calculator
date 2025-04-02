@@ -1,89 +1,60 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // types
-import { ReducerActionPayloadType } from "src/types/store-types";
 import {
-  DeductionEntry,
+  ActionDeleteEntryPayload,
+  ActionEditEntryPayload,
+  DeductionOption,
   DeductionReducerType,
-  Section24Entry,
+  DeductionResponse,
+  RentOption,
 } from "src/types/deduction-types";
+// mapper
+import DeductionMapper from "src/store/deduction/mapper";
 // constants
-import {
-  RESET_DEDUCTION_ACTION,
-  EDIT_DEDUCTION,
-  SAVE_RENT_ENTRY,
-  DELETE_RENT_ENTRY,
-  SET_RENT_DEDUCTED_AMOUNT,
-  SAVE_SECTION_24_ENTRY,
-  DELETE_SECTION_24_ENTRY,
-  SAVE_CHAPTER_VI_ENTRY,
-  DELETE_CHAPTER_VI_ENTRY,
-  LOAD_DEDUCTION,
-  DELETE_DEDUCTION,
-  SAVE_SECTION_80C_ENTRY,
-  DELETE_SECTION_80C_ENTRY,
-} from "src/store/deduction/deduction-constants";
-import {
-  mapSaveRentEntry,
-  mapDeleteEntry,
-  mapSaveEntry,
-} from "./mapper/deduction-rent-mapper";
-import {
-  mapDeleteDeductionEntry,
-  mapSaveDeductionEntry,
-} from "./mapper/deduction-80C-mapper";
 import {
   SECTION_24_MAX_LIMIT,
   SECTION_80C_MAX_LIMIT,
 } from "src/constants/common-constants";
-import { mapDeductions } from "./mapper/deduction-mapper";
 
 const initialState: DeductionReducerType = {
-  standardDeduction: { newScheme: 75000, oldScheme: 50000 },
   actionEntry: {
     type: undefined,
     entryId: "",
     isEditable: false,
     isDelete: false,
   },
-  options: [],
-  rent: {
-    options: [],
-    deductedAmount: 0,
-    isEditable: false,
-    editableEntryId: "",
-  },
-  section24: {
-    options: [],
-    deductedAmount: 0,
-    isEditable: false,
-    editableEntryId: "",
-  },
-  section80C: {
-    options: [],
-    deductedAmount: 0,
-    isEditable: false,
-    editableEntryId: "",
-  },
-  chapter6: {
-    options: [],
-    deductedAmount: 0,
-    isEditable: false,
-    editableEntryId: "",
+  entries: {
+    rent: {
+      options: [],
+      deductedAmount: 0,
+    },
+    section24: {
+      options: [],
+      deductedAmount: 0,
+    },
+    section80C: {
+      options: [],
+      deductedAmount: 0,
+    },
+    chapter6: {
+      options: [],
+      deductedAmount: 0,
+    },
+    others: {
+      options: [],
+      deductedAmount: 0,
+    },
   },
 };
-const DeductionReducer = (
-  state = initialState,
-  action: ReducerActionPayloadType
-): DeductionReducerType => {
-  const { type, payload } = action;
-  switch (type) {
-    case LOAD_DEDUCTION: {
-      return mapDeductions(state, payload);
-    }
-
-    // Modification of deduction entry
-
-    case EDIT_DEDUCTION: {
-      const { type, entryId } = payload;
+const deductionSlice = createSlice({
+  name: "Deduction",
+  initialState,
+  reducers: {
+    loadDeduction: (state, action: PayloadAction<DeductionResponse[]>) => {
+      return DeductionMapper.mapDeductions(state, action.payload);
+    },
+    editDeduction: (state, action: PayloadAction<ActionEditEntryPayload>) => {
+      const { type, entryId } = action.payload;
       return {
         ...state,
         actionEntry: {
@@ -93,9 +64,12 @@ const DeductionReducer = (
           isEditable: true,
         },
       };
-    }
-    case DELETE_DEDUCTION: {
-      const { type, entryId } = payload;
+    },
+    deleteDeduction: (
+      state,
+      action: PayloadAction<ActionDeleteEntryPayload>
+    ) => {
+      const { type, entryId } = action.payload;
       return {
         ...state,
         actionEntry: {
@@ -105,136 +79,144 @@ const DeductionReducer = (
           isDelete: true,
         },
       };
-    }
-    case RESET_DEDUCTION_ACTION: {
-      return {
-        ...state,
-        actionEntry: initialState.actionEntry,
-      };
-    }
+    },
     // Rent deduction operations
-
-    case SAVE_RENT_ENTRY: {
+    saveRentEntry: (state, action: PayloadAction<RentOption>) => {
+      const options = DeductionMapper.mapRentOptions(
+        state.entries.rent.options,
+        action.payload
+      );
       return {
         ...state,
-        rent: {
-          ...state.rent,
-          options: mapSaveRentEntry([...state.rent.options], payload),
-        },
+        entries: DeductionMapper.mapEntry(state, "rent", { options }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case DELETE_RENT_ENTRY: {
+    },
+    deleteRentEntry: (state, action: PayloadAction<string>) => {
+      const options = state.entries.rent.options.filter(
+        (rentEntry) => rentEntry.id !== action.payload
+      );
       return {
         ...state,
-        rent: {
-          ...state.rent,
-          options: state.rent.options.filter(
-            (rentEntry) => rentEntry.id !== payload
-          ),
-        },
+        entries: DeductionMapper.mapEntry(state, "rent", { options }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case SET_RENT_DEDUCTED_AMOUNT: {
-      return { ...state, rent: { ...state.rent, deductedAmount: payload } };
-    }
-
+    },
+    setRentDeductedAmount: (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        entries: DeductionMapper.mapEntry(state, "rent", {
+          deductedAmount: action.payload,
+        }),
+      };
+    },
     // Section 24 deduction operations
-    case SAVE_SECTION_24_ENTRY: {
-      const latestState = state.section24;
-      const { options, deductedAmount } = mapSaveEntry(
-        latestState,
-        payload,
+    saveSection24Entry: (state, action: PayloadAction<DeductionOption>) => {
+      const { options, deductedAmount } = DeductionMapper.mapSaveEntry(
+        state.entries.section24,
+        action.payload,
         SECTION_24_MAX_LIMIT
       );
       return {
         ...state,
-        section24: {
-          ...state.section24,
-          options: options as Section24Entry[],
+        entries: DeductionMapper.mapEntry(state, "section24", {
+          options,
           deductedAmount,
-        },
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case DELETE_SECTION_24_ENTRY: {
-      const latestOptions = state.section24.options;
-      const { options, deductedAmount } = mapDeleteEntry(
-        latestOptions,
-        payload,
+    },
+    deleteSection24Entry: (state, action: PayloadAction<string>) => {
+      const { options, deductedAmount } = DeductionMapper.mapDeleteEntry(
+        state.entries.section24.options,
+        action.payload,
         SECTION_24_MAX_LIMIT
       );
       return {
         ...state,
-        section24: {
-          ...state.section24,
-          options: options as Section24Entry[],
+        entries: DeductionMapper.mapEntry(state, "section24", {
+          options,
           deductedAmount,
-        },
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-
+    },
     // Section 80C deduction operations
-    case SAVE_SECTION_80C_ENTRY: {
-      const latestState = state.section80C;
-      const { options, deductedAmount } = mapSaveEntry(
-        latestState,
-        payload,
+    saveSection80CEntry: (state, action: PayloadAction<DeductionOption>) => {
+      const { options, deductedAmount } = DeductionMapper.mapSaveEntry(
+        state.entries.section80C,
+        action.payload,
         SECTION_80C_MAX_LIMIT
       );
       return {
         ...state,
-        section80C: {
-          ...state.section80C,
-          options: options as DeductionEntry[],
+        entries: DeductionMapper.mapEntry(state, "section80C", {
+          options,
           deductedAmount,
-        },
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case DELETE_SECTION_80C_ENTRY: {
-      const latestOptions = state.section80C.options;
-      const { options, deductedAmount } = mapDeleteEntry(
-        latestOptions,
-        payload,
+    },
+    deleteSection80CEntry: (state, action: PayloadAction<string>) => {
+      const { options, deductedAmount } = DeductionMapper.mapDeleteEntry(
+        state.entries.section80C.options,
+        action.payload,
         SECTION_80C_MAX_LIMIT
       );
       return {
         ...state,
-        section80C: {
-          ...state.section80C,
-          options: options as DeductionEntry[],
+        entries: DeductionMapper.mapEntry(state, "section80C", {
+          options,
           deductedAmount,
-        },
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case SAVE_CHAPTER_VI_ENTRY: {
-      const { options, deductedAmount } = state.chapter6;
+    },
+    // Chapter VI deduction operations
+    saveChapterVIEntry: (state, action: PayloadAction<DeductionOption>) => {
+      const { options, deductedAmount } = DeductionMapper.mapChapter6EntrySave(
+        state.entries.chapter6,
+        action.payload
+      );
       return {
         ...state,
-        chapter6: {
-          ...state.chapter6,
-          ...mapSaveDeductionEntry([...options], deductedAmount, payload),
-        },
+        entries: DeductionMapper.mapEntry(state, "chapter6", {
+          options,
+          deductedAmount,
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case DELETE_CHAPTER_VI_ENTRY: {
-      const { options, deductedAmount } = state.chapter6;
+    },
+    deleteChapterVIEntry: (state, action: PayloadAction<string>) => {
+      const { options, deductedAmount } =
+        DeductionMapper.mapChapter6EntryDeletion(
+          state.entries.chapter6,
+          action.payload
+        );
       return {
         ...state,
-        chapter6: {
-          ...state.chapter6,
-          ...mapDeleteDeductionEntry(options, deductedAmount, payload),
-        },
+        entries: DeductionMapper.mapEntry(state, "chapter6", {
+          options,
+          deductedAmount,
+        }),
         actionEntry: initialState.actionEntry,
       };
-    }
-    default:
-      return state;
-  }
-};
-export { DeductionReducer };
+    },
+  },
+});
+
+export const {
+  loadDeduction,
+  editDeduction,
+  deleteDeduction,
+  saveRentEntry,
+  deleteRentEntry,
+  setRentDeductedAmount,
+  saveSection24Entry,
+  deleteSection24Entry,
+  saveSection80CEntry,
+  deleteSection80CEntry,
+  saveChapterVIEntry,
+  deleteChapterVIEntry,
+} = deductionSlice.actions;
+export default deductionSlice.reducer;

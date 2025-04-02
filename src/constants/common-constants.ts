@@ -52,12 +52,13 @@ export const DEDUCTION_MAX_LIMIT: Record<string, number> = {
   SECTION_24: 200000,
   SECTION_80C: 150000,
 };
-
-export const DEDUCTION_TYPE: { [key: string]: DeductionType } = {
+//  { [key: string]: DeductionType }
+export const DEDUCTION_TYPE = {
   RENT: "Rent",
-  SECTION24: "Section24",
-  SECTION80C: "80C",
-  CHAPTER6A: "Chapter6A",
+  SECTION_24: "Section24",
+  SECTION_80C: "80C",
+  CHAPTER_VIA: "Chapter6A",
+  OTHERS: "Others",
 };
 export const RENT_CITY: Record<string, "Metro" | "Non-Metro"> = {
   METRO: "Metro",

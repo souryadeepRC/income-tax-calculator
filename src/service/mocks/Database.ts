@@ -3,7 +3,12 @@ const mockIncomes = [
   { $id: ID.unique(), category: "BASIC", amount: 500000, group: "salary" },
   { $id: ID.unique(), category: "HRA", amount: 100000, group: "salary" },
   { $id: ID.unique(), category: "Business", amount: 100000, group: "extra" },
-  { $id: ID.unique(), category: "Miscellaneous", amount: 100000, group: "salary" },
+  {
+    $id: ID.unique(),
+    category: "Miscellaneous",
+    amount: 100000,
+    group: "salary",
+  },
 ];
 const mockDeductions = [
   {
@@ -27,6 +32,12 @@ const mockDeductions = [
     type: "Chapter6A",
     amount: 75000,
     category: "medicalInsuranceParent",
+  },
+  {
+    $id: ID.unique(),
+    type: "Others",
+    amount: 75000,
+    category: "",
   },
 ];
 type DocumentType = "income" | "deduction";
