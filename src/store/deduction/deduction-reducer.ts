@@ -226,4 +226,7 @@ export const {
   saveChapterVIEntry,
   deleteChapterVIEntry,
 } = deductionSlice.actions;
+
 export default deductionSlice.reducer;
+
+export { initialState };

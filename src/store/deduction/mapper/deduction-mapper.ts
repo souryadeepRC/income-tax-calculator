@@ -1,3 +1,4 @@
+import { initialState } from "src/store/deduction/deduction-reducer";
 import {
   DEDUCTION_CHAPTER_VI_OPTIONS,
   DEDUCTION_TYPE,
@@ -70,13 +71,8 @@ const mapDeductions = (
   state: DeductionReducerType,
   deductions: DeductionResponse[]
 ): DeductionReducerType => {
-  const initialDetails = {
-    rent: { deductedAmount: 0, options: [] },
-    section24: { deductedAmount: 0, options: [] },
-    section80C: { deductedAmount: 0, options: [] },
-    chapter6: { deductedAmount: 0, options: [] },
-    others: { deductedAmount: 0, options: [] },
-  };
+  const initialDetails = initialState.entries;
+
   const deductionMap: Record<string, Function> = {
     [DEDUCTION_TYPE.RENT]: mapRent,
     [DEDUCTION_TYPE.SECTION_24]: mapSection24,

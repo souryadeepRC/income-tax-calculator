@@ -1,7 +1,7 @@
 import {
+  DeductionEntry,
   DeductionOption,
   RentOption,
-  Section24Entry,
 } from "src/types/deduction-types";
 
 export const mapRentOptions = (
@@ -24,17 +24,12 @@ export const mapRentOptions = (
 };
 
 // Save Entry in store for Section 24 | section 80C
-type EntryType = {
-  options: (Section24Entry | DeductionEntry)[];
-  deductedAmount: number;
-};
-type saveEntryPayload = Section24Entry | DeductionEntry;
 
 export const mapSaveEntry = (
-  details: EntryType,
-  payload: saveEntryPayload,
+  details: DeductionEntry,
+  payload: DeductionOption,
   limit: number
-): EntryType => {
+): DeductionEntry => {
   const { deductedAmount, options } = details;
   let updatedAmount: number = deductedAmount + payload.amount;
   const entryIndex = options.findIndex((entry: any) => entry.id === payload.id);
@@ -51,13 +46,11 @@ export const mapSaveEntry = (
 };
 
 // Delete Entry in store for Section 24 | section 80C
-type DeleteEntryOptions = (Section24Entry | DeductionEntry)[];
-
 export const mapDeleteEntry = (
-  options: DeleteEntryOptions,
+  options: DeductionOption[],
   entryId: string,
   limit: number
-): EntryType => {
+): DeductionEntry => {
   const entryIndex = options.findIndex((entry) => entry.id === entryId);
   return {
     options: options.filter((entry) => entry.id !== entryId),
