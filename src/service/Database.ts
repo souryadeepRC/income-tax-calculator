@@ -1,5 +1,9 @@
 import { Client, ID, Databases } from "appwrite";
 import APIConfig from "./api-config";
+// utils
+import { isDevelopment } from "./service-utils";
+// mocks
+import mockDatabaseService from "./mocks/Database";
 
 type DocumentType = "income" | "deduction";
 const getCollectionId = (type: DocumentType): string => {
@@ -53,5 +57,5 @@ class DBService {
     );
   }
 }
-const dbService = new DBService();
-export default dbService;
+
+export default isDevelopment() ? mockDatabaseService : new DBService();

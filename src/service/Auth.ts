@@ -2,6 +2,10 @@ import { Account, Client, ID } from "appwrite";
 import APIConfig from "./api-config";
 import { CreateUserParam, LoginUserParam } from "src/types/AppServiceTypes";
 import dbService from "./Database";
+// utils
+import { isDevelopment } from "./service-utils";
+// mocks
+import mockAuthService from "./mocks/Auth";
 
 class AuthService {
   client = new Client();
@@ -41,5 +45,4 @@ class AuthService {
   }
 }
 
-const authService = new AuthService();
-export default authService;
+export default isDevelopment() ? mockAuthService : new AuthService();
