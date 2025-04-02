@@ -16,3 +16,9 @@
     word-break: break-all;
   }
 }
+@media screen and (max-width: $mobile-max-width) {
+  .amount_label__container {
+    font-size: 14px;
+    min-width: 175px;
+  }
+}

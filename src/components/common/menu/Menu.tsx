@@ -25,6 +25,7 @@ const Menu: React.FC<MenuProps> = ({ MenuIcon, actions }) => {
   return (
     <>
       <IconButton
+        className="menu__icon"
         data-testid="menu-icon-btn"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"

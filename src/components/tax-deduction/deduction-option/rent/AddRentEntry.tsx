@@ -9,15 +9,13 @@ import { selectRentEligibleDetails } from "src/store/income/income-selectors";
 import { selectRentDeduction } from "src/store/deduction/deduction-selectors";
 // constants
 import { DEDUCTION_TYPE } from "src/constants/common-constants";
-// types
-import { DeductionByRent } from "src/types/deduction-types";
 // styles
 import classes from "./Rent.module.scss";
 
 const AddRentEntry: React.FC = () => {
   // store
   const dispatch = useDispatch();
-  const { deductedAmount }: DeductionByRent = useSelector(selectRentDeduction);
+  const { deductedAmount } = useSelector(selectRentDeduction);
   const { basic, hra } = useSelector(selectRentEligibleDetails);
   const isRentEligible: boolean = basic > 0 && hra > 0;
 
@@ -26,11 +24,12 @@ const AddRentEntry: React.FC = () => {
       <DeductionHeader
         title="Rent"
         amount={deductedAmount}
+        actionText="Add Rent Entry"
         addAction={
           isRentEligible
             ? () => {
-              dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
-            }
+                dispatch(editDeduction({ type: DEDUCTION_TYPE.RENT }));
+              }
             : undefined
         }
       />

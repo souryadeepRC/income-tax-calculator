@@ -26,22 +26,24 @@ import { formatNumber } from "src/utils/tax-calculation";
 
 const Section80C = () => {
   const { isEditable, entryId, isDelete } = useDeductionActionEntry(
-    DEDUCTION_TYPE.SECTION80C
+    DEDUCTION_TYPE.SECTION_80C
   );
   // store
   const dispatch: AppDispatch = useDispatch();
 
-  const { options, deductedAmount }: DeductionOption = useSelector(
+  const { options, deductedAmount }: DeductionEntry = useSelector(
     selectSection80CDeduction
   );
 
-  const actionEntry: DeductionEntry | undefined = useMemo(() => {
-    return options.find((deductionEntry) => deductionEntry.id === entryId);
+  const actionEntry: DeductionOption | undefined = useMemo(() => {
+    return options.find(
+      (deductionEntry: DeductionOption) => deductionEntry.id === entryId
+    );
   }, [isEditable, isDelete]);
 
   const entryOptions = useMemo(() => {
     const optionsMap = new Map(
-      options.map((option) => [option.category, true])
+      options.map((option: DeductionOption) => [option.category, true])
     );
     return Object.keys(DEDUCTION_80C_OPTIONS).map((category) => {
       return {
@@ -68,12 +70,14 @@ const Section80C = () => {
         title="Section 80C"
         amount={deductedAmount}
         addAction={() => {
-          dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION80C }));
+          dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION_80C }));
         }}
+        actionText="Add Entry"
+        note="you can avail maximum Rc. 1,50,000 of exemption"
       />
 
       <CardWrapper>
-        {options.map((option) => (
+        {options.map((option: DeductionOption) => (
           <Card
             key={option.id}
             content={{
@@ -81,7 +85,7 @@ const Section80C = () => {
               title: DEDUCTION_80C_OPTIONS[option.category],
             }}
             entryId={option.id}
-            type={DEDUCTION_TYPE.SECTION80C}
+            type={DEDUCTION_TYPE.SECTION_80C}
           />
         ))}
       </CardWrapper>

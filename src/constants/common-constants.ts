@@ -1,4 +1,4 @@
-import { DeductionType } from "src/types/deduction-types";
+import { DeductionEntriesType, DeductionType } from "src/types/deduction-types";
 
 export const NUMERIC_REGEX = /^(?!0(\.0{1,2})?$)\d+(\.\d{1,2})?$/;
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -53,7 +53,7 @@ export const DEDUCTION_MAX_LIMIT: Record<string, number> = {
   SECTION_80C: 150000,
 };
 //  { [key: string]: DeductionType }
-export const DEDUCTION_TYPE = {
+export const DEDUCTION_TYPE: Record<string, DeductionType> = {
   RENT: "Rent",
   SECTION_24: "Section24",
   SECTION_80C: "80C",

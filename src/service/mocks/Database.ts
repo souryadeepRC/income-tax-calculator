@@ -11,13 +11,15 @@ const mockIncomes = [
   },
 ];
 const mockDeductions = [
-  {
-    $id: ID.unique(),
-    type: "Rent",
-    amount: 10000,
-    category: "Metro",
-    duration: 8,
-  },
+  ...Array(10)
+    .fill("i")
+    .map((id, index) => ({
+      $id: ID.unique(),
+      type: "Rent",
+      amount: 10000 * (index + 1),
+      category: "Metro",
+      duration: 1,
+    })),
   {
     $id: ID.unique(),
     type: "Rent",

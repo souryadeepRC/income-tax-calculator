@@ -16,6 +16,7 @@ import {
 import { IncomeOption } from "src/types/income-types";
 // utils
 import { getAmountError } from "src/utils/income-utils";
+import { formatNumber } from "src/utils/tax-calculation";
 // styles
 import classes from "./IncomeDetails.module.scss";
 
@@ -32,7 +33,7 @@ const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (incomeDetails: any) =>
       dbService.updateDetails("income", incomeDetails),
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       const { $id: id, group, category, amount } = data || {};
       dispatch(saveIncomeDetails({ id, group, category, amount }));
     },
@@ -72,7 +73,7 @@ const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
       <div className={classes.edit__header}>
         <strong>Previous Amount</strong>
         <label>
-          {category}: Rs. {amount}
+          {category}: Rs. {formatNumber(amount)}
         </label>
       </div>
       <TUITextField

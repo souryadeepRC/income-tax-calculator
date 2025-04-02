@@ -208,6 +208,37 @@ const deductionSlice = createSlice({
         actionEntry: initialState.actionEntry,
       };
     },
+    // Other Deduction Options
+    saveOtherEntry: (state, action: PayloadAction<DeductionOption>) => {
+      const { options, deductedAmount } = DeductionMapper.mapSaveEntry(
+        state.entries.others,
+        action.payload,
+        Infinity
+      );
+      return {
+        ...state,
+        entries: DeductionMapper.mapEntry(state, "others", {
+          options,
+          deductedAmount,
+        }),
+        actionEntry: initialState.actionEntry,
+      };
+    },
+    deleteOtherEntry: (state, action: PayloadAction<string>) => {
+      const { options, deductedAmount } = DeductionMapper.mapDeleteEntry(
+        state.entries.others.options,
+        action.payload,
+        Infinity
+      );
+      return {
+        ...state,
+        entries: DeductionMapper.mapEntry(state, "others", {
+          options,
+          deductedAmount,
+        }),
+        actionEntry: initialState.actionEntry,
+      };
+    },
   },
 });
 
@@ -225,6 +256,8 @@ export const {
   deleteSection80CEntry,
   saveChapterVIEntry,
   deleteChapterVIEntry,
+  saveOtherEntry,
+  deleteOtherEntry,
 } = deductionSlice.actions;
 
 export default deductionSlice.reducer;

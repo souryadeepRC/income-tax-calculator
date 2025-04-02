@@ -24,25 +24,39 @@ export const mapRentOptions = (
 };
 
 // Save Entry in store for Section 24 | section 80C
-
+const getEffectiveAmount = (
+  options: DeductionOption[],
+  addedAmount: number,
+  limit: number
+) => {
+  const previousAmount = options.reduce(
+    (acc: number, option: DeductionOption) => acc + option.amount,
+    0
+  );
+  return Math.min(previousAmount + addedAmount, limit);
+};
 export const mapSaveEntry = (
   details: DeductionEntry,
   payload: DeductionOption,
   limit: number
 ): DeductionEntry => {
-  const { deductedAmount, options } = details;
-  let updatedAmount: number = deductedAmount + payload.amount;
+  const { options: existingOptions } = details;
+  const options = [...existingOptions];
   const entryIndex = options.findIndex((entry: any) => entry.id === payload.id);
+  let alteredAmount = payload.amount;
   if (entryIndex > -1) {
+    alteredAmount = alteredAmount - options[entryIndex].amount;
     options[entryIndex] = {
       ...options[entryIndex],
       ...payload,
     };
-    updatedAmount += payload.amount - options[entryIndex].amount;
   } else {
     options.push(payload);
   }
-  return { options, deductedAmount: Math.min(updatedAmount, limit) };
+  return {
+    options,
+    deductedAmount: getEffectiveAmount(existingOptions, alteredAmount, limit),
+  };
 };
 
 // Delete Entry in store for Section 24 | section 80C
@@ -52,8 +66,9 @@ export const mapDeleteEntry = (
   limit: number
 ): DeductionEntry => {
   const entryIndex = options.findIndex((entry) => entry.id === entryId);
+  const addedAmount = options[entryIndex].amount * -1;
   return {
     options: options.filter((entry) => entry.id !== entryId),
-    deductedAmount: Math.min(options[entryIndex].amount, limit),
+    deductedAmount: getEffectiveAmount(options, addedAmount, limit),
   };
 };

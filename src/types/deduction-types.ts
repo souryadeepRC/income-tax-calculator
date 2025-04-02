@@ -1,4 +1,9 @@
-export type DeductionType = "Rent" | "Section24" | "80C" | "Chapter6A";
+export type DeductionType =
+  | "Rent"
+  | "Section24"
+  | "80C"
+  | "Chapter6A"
+  | "Others";
 export type DeductionReducerType = {
   actionEntry: ActionEntry;
   entries: DeductionEntries;
@@ -90,3 +95,10 @@ export interface DeductionResponse {
   category: string;
   duration: number;
 }
+export interface DeductionAPIResponse {
+  $id: string;
+  amount: number;
+  category: string;
+  duration: number;
+}
+export type DeductionAmountBreakup = Record<string, number>;

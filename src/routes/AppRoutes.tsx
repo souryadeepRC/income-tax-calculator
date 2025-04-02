@@ -2,10 +2,13 @@
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router";
 // components
-import Section80C from "src/components/tax-deduction/deduction-option/section80C/Section80C";
-import ChapterVI from "src/components/tax-deduction/deduction-option/chapter-vi/ChapterVI";
-import Rent from "src/components/tax-deduction/deduction-option/rent/Rent";
-import Section24 from "src/components/tax-deduction/deduction-option/section24/Section24";
+import {
+  Rent,
+  Section24,
+  Section80C,
+  ChapterVI,
+  OtherDeduction,
+} from "src/components/tax-deduction/deduction-option";
 import {
   DeductionPage,
   IncomePage,
@@ -14,6 +17,7 @@ import {
 } from "src/pages";
 //store
 import { selectIsLoggedIn } from "src/store/auth/auth-selectors";
+import DeductionNavigation from "src/pages/deduction-page/DeductionNavigation";
 
 const AppUserRoutes = () => {
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
@@ -22,11 +26,12 @@ const AppUserRoutes = () => {
     <Routes>
       <Route path="income" element={<IncomePage />} />
       <Route path="deduction" element={<DeductionPage />}>
-        <Route path="" element={<Navigate to="/deduction/80C" />} />
+        <Route path="" element={<DeductionNavigation />} />
         <Route path="rent" element={<Rent />} />
         <Route path="section-24" element={<Section24 />} />
-        <Route path="80C" element={<Section80C />} />
-        <Route path="Chapter-VIA" element={<ChapterVI />} />
+        <Route path="section-80C" element={<Section80C />} />
+        <Route path="chapter-VIA" element={<ChapterVI />} />
+        <Route path="others" element={<OtherDeduction />} />
       </Route>
       <Route path="tax-breakup" element={<TaxBreakupPage />} />
     </Routes>

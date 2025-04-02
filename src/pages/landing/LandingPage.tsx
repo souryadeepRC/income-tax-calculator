@@ -16,7 +16,7 @@ const WelcomeModal = () => {
   if (!username) return <></>;
   return (
     <Modal onClose={() => {}}>
-      <div className={classes.auth_welcome__container}>
+      <div className={classes.welcome__container}>
         <h2>Welcome, {username}!</h2>
         <p>We are glad to have you here. Let&apos;s get started.</p>
       </div>

@@ -20,12 +20,12 @@ import { DEDUCTION_TYPE } from "src/constants/common-constants";
 // types
 import {
   DeductionEntryOption,
-  DeductionEntry,
+  DeductionOption,
 } from "src/types/deduction-types";
 
 interface DeductionEntryFormProps {
   options: DeductionEntryOption[];
-  entry: DeductionEntry | undefined;
+  entry: DeductionOption | undefined;
 }
 interface EntryInput {
   category: string;
@@ -40,8 +40,8 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (deduction: object) =>
       dbService.storeDetails("deduction", deduction),
-    onSuccess: (data) => {
-      const { $id: id, category, amount } = data;
+    onSuccess: (data: any) => {
+      const { $id: id, category, amount } = data || {};
       dispatch(
         saveSection80CEntry({
           id,
@@ -77,7 +77,7 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
     }
 
     mutate({
-      type: DEDUCTION_TYPE.SECTION80C,
+      type: DEDUCTION_TYPE.SECTION_80C,
       id: entry?.id,
       category: entryInput.category,
       amount: +entryInput.amount,
@@ -105,6 +105,7 @@ const Section80CEntryForm: React.FC<DeductionEntryFormProps> = ({
       isError={isError}
       onSave={onEntrySave}
       onCancel={onReset}
+      saveBtnLabel={`${entry?.id ? "Modify" : "Add"} Investment`}
     >
       <Select
         label="Category"
