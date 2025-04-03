@@ -1,12 +1,14 @@
 import { lazy, Suspense } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+// library
+import { motion } from "motion/react";
 import { NavLink } from "react-router";
 import { useToggle } from "triva-ui";
 import { ThemeButton } from "react-web-theme";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+// components
 import { Button, Modal } from "src/components/common";
 const Auth = lazy(() => import("src/components/auth/Auth"));
 import {
@@ -21,19 +23,41 @@ import {
 } from "src/store/auth/auth-selectors";
 // styles
 import classes from "./Header.module.scss";
-import authService from "src/service/Auth";
-import dbService from "src/service/Database";
-import { setLogoutActive } from "src/store/auth/auth-actions";
+
+interface MotionHeaderProps {
+  className: string;
+  children: React.ReactElement;
+}
+const MotionHeader: React.FC<MotionHeaderProps> = ({ children, className }) => {
+  return (
+    <motion.header
+      className={className}
+      animate={{
+        scale: [1, 1.02, 1],
+        opacity: [1, 0.8, 1],
+      }}
+      transition={{
+        duration: 2,
+        ease: "easeInOut",
+        repeat: Infinity,
+      }}
+    >
+      {children}
+    </motion.header>
+  );
+};
 
 const HeaderUser: React.FC = () => {
-  const dispatch = useDispatch();
   const isMobile: boolean = useSelector(selectIsMobile);
+
   return (
-    <header className={classes.header_user__container}>
-      {isMobile && <NavigationMobile />}
-      <AppTitle />
-      {!isMobile && <NavigationDesktop />}
-    </header>
+    <MotionHeader className={classes.header_user__container}>
+      <>
+        {isMobile && <NavigationMobile />}
+        <AppTitle />
+        {!isMobile && <NavigationDesktop />}
+      </>
+    </MotionHeader>
   );
 };
 const HeaderLanding: React.FC = () => {
@@ -49,18 +73,20 @@ const HeaderLanding: React.FC = () => {
           </Suspense>
         </Modal>
       )}
-      <header className={classes.header_landing__container}>
-        <AppTitle />
-        {!username && (
-          <Button
-            variant="text"
-            onClick={handleAuth}
-            startIcon={<AccountCircleIcon />}
-          >
-            Login
-          </Button>
-        )}
-      </header>
+      <MotionHeader className={classes.header_landing__container}>
+        <>
+          <AppTitle />
+          {!username && (
+            <Button
+              variant="text"
+              onClick={handleAuth}
+              startIcon={<AccountCircleIcon />}
+            >
+              Login
+            </Button>
+          )}
+        </>
+      </MotionHeader>
     </>
   );
 };
@@ -76,7 +102,11 @@ const AppTitle: React.FC = () => {
 };
 const Header: React.FC = () => {
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
-  return isLoggedIn ? <HeaderUser /> : <HeaderLanding />;
+  return (
+    <div className={classes.header__container}>
+      {isLoggedIn ? <HeaderUser /> : <HeaderLanding />}
+    </div>
+  );
 };
 
 export default Header;
