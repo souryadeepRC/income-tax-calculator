@@ -53,7 +53,6 @@ const HeaderUser: React.FC = () => {
   return (
     <MotionHeader className={classes.header_user__container}>
       <>
-        {isMobile && <NavigationMobile />}
         <AppTitle />
         {!isMobile && <NavigationDesktop />}
       </>
@@ -101,11 +100,15 @@ const AppTitle: React.FC = () => {
   );
 };
 const Header: React.FC = () => {
+  const isMobile = useSelector(selectIsMobile);
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   return (
-    <div className={classes.header__container}>
-      {isLoggedIn ? <HeaderUser /> : <HeaderLanding />}
-    </div>
+    <>
+      <div className={classes.header__container}>
+        {isLoggedIn ? <HeaderUser /> : <HeaderLanding />}
+      </div>
+      {isMobile && <NavigationMobile />}
+    </>
   );
 };
 

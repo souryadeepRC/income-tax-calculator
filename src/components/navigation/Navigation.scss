@@ -22,92 +22,44 @@
   font-size: 1rem;
 }
 .navigation_mobile__container {
-  .navigation_mobile__icon.MuiSvgIcon-root {
-    color: var(--secondary-color);
-  }
-  .navigation__slider {
-    box-shadow: 14px 3px 20px 0px var(--navigation-link-color);
-    position: absolute;
-    z-index: 6;
-    top: 0;
-    left: 0;
-    width: 90%;
-    height: 100vh;
-    animation: slideIn 1s ease-in-out;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  z-index: 2;
+  background-color: transparent;
+  ul {
+    margin: 0;
+    padding: 10px 15px;
     background-color: var(--primary-color);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--secondary-color);
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px;
-      border-bottom: 5px solid var(--secondary-color);
-      animation: slideLinks 0.2s ease-in-out;
-      .MuiSvgIcon-root {
-        fill: var(--secondary-color);
-      }
-    }
-    ul {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 0;
-      padding: 14px;
-      list-style-type: none;
-      li {
-        width: 100%;
-        padding: 0 0 0 15px;
-        a {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 10px;
-          overflow: hidden;
-          width: 90%;
-          padding: 10px;
-          animation: slideLinks 0.2s ease-in-out;
-          border-radius: 10px;
-          font-size: 14px;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: -1px -3px 4px 0 rgba($card-shadow, 0.25);
+    border-radius: 15px;
+    width: fit-content;
+    gap: 10px;
+    margin: 0 auto;
 
-          .MuiSvgIcon-root {
-            font-size: inherit;
-          }
+    li {
+      box-shadow: -1px -3px 4px 0 rgba($card-shadow, 0.25);
+      border-radius: 15px;
+      padding: 10px;
+      display: flex;
+      width: 50px;
+      align-items: center;
+      justify-content: center;
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .MuiSvgIcon-root {
+          font-size: 20px;
         }
       }
+      .MuiIconButton-root {
+        padding: 0;
+      }
     }
-    .navigation__options {
-      padding: 14px;
-      border-top: 1px solid;
-      padding: 15px 30px;
-    }
-  }
-}
-@keyframes slideIn {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 92%;
-  }
-  100% {
-    width: 90%;
-  }
-}
-
-@keyframes slideLinks {
-  0% {
-    width: 0;
-    font-size: 1px;
-  }
-  50% {
-    width: 50%;
-    font-size: 8px;
-  }
-  100% {
-    width: 90%;
-    font-size: 14px;
   }
 }

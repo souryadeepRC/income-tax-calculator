@@ -4,6 +4,7 @@
   position: fixed;
   height: fit-content;
   background-color: transparent;
+  z-index: 2;
 }
 .header__content {
   display: flex;
@@ -65,8 +66,9 @@
   .header_user__container {
     @extend .header__content;
     .header__title {
-      width: 80%;
+      width: 100%;
       font-size: 16px;
+      justify-content: center;
     }
   }
 }

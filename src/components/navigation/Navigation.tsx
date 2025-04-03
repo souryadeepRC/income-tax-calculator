@@ -15,13 +15,13 @@ import "./Navigation.scss";
 type CustomSvgIcon = OverridableComponent<SvgIconTypeMap> & {
   muiName?: string;
 };
-interface NavigationType {
+export interface NavigationType {
   label: string;
   path: string;
   Icon: CustomSvgIcon;
 }
 
-const NAVIGATION_LIST: NavigationType[] = [
+export const NAVIGATION_LIST: NavigationType[] = [
   {
     label: "Income",
     path: "income",
