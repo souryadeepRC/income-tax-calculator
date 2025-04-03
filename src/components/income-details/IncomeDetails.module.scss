@@ -83,7 +83,7 @@
     box-shadow: 3px 3px 4px 1px rgba($card-shadow, 0.2);
     :global(.MuiSvgIcon-root) {
       font-size: 1rem;
-      font-weight: 900;
+      font-weight: 600;
       color: var(--secondary-color);
     }
     :global(.TUISearch_input) {
@@ -125,7 +125,7 @@
       span {
         font-size: 1.2rem;
         font-style: italic;
-        font-weight: 900;
+        font-weight: 600;
       }
     }
   }

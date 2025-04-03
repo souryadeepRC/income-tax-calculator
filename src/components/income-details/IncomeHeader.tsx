@@ -27,6 +27,9 @@ const IncomeHeader: React.FC = () => {
         )}
 
         <Button
+          whileHover={{
+            scale: 1.1,
+          }}
           variant="contained"
           border="round"
           label="add-income"

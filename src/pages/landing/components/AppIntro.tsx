@@ -24,7 +24,13 @@ const AppIntro: React.FC = () => {
           specifically for Salaried individuals of India.
         </p>
         {username && (
-          <Button variant="contained" onClick={onStarted}>
+          <Button
+            whileHover={{
+              scale: 1.12,
+            }}
+            variant="contained"
+            onClick={onStarted}
+          >
             Let&apos;s Get Started
           </Button>
         )}
