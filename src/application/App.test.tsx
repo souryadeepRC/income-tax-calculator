@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { useSelector } from "react-redux";
 import App from "./App";
 import { useMediaQuery } from "src/hooks";
-import { selectAppTheme } from "src/store/screen/screen-selectors";
 
 jest.mock("src/components/common", () => ({
   Header: jest.fn(() => <div>Header</div>),
@@ -23,7 +22,6 @@ describe("App component", () => {
 
     render(<App />);
 
-    expect(mockUseSelector).toHaveBeenCalledWith(selectAppTheme);
     expect(useMediaQuery).toHaveBeenCalledTimes(1);
     expect(screen.getByText(/Tax Calculator/i)).toBeInTheDocument();
 

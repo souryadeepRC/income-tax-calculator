@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AmountLabel, Button } from "src/components/common";
 // store
 import { selectOverallIncomeAmount } from "src/store/income/income-selectors";
-import { editIncomeEntry } from "src/store/income/income-actions";
+import { editIncomeEntry } from "src/store/income/income-reducer";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
@@ -27,6 +27,9 @@ const IncomeHeader: React.FC = () => {
         )}
 
         <Button
+          whileHover={{
+            scale: 1.1,
+          }}
           variant="contained"
           border="round"
           label="add-income"

@@ -83,7 +83,7 @@
     box-shadow: 3px 3px 4px 1px rgba($card-shadow, 0.2);
     :global(.MuiSvgIcon-root) {
       font-size: 1rem;
-      font-weight: 900;
+      font-weight: 600;
       color: var(--secondary-color);
     }
     :global(.TUISearch_input) {
@@ -125,7 +125,7 @@
       span {
         font-size: 1.2rem;
         font-style: italic;
-        font-weight: 900;
+        font-weight: 600;
       }
     }
   }
@@ -139,16 +139,11 @@
     }
   }
 }
-.income_edit__container {
-  :global(.form_input__container) {
-    padding: 25px 20px;
-    .edit__header {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 1.2rem;
-    }
-  }
+.income_edit__container .edit__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: $mobile-max-width) {
@@ -171,8 +166,19 @@
   }
   .income_options__container {
     width: 95%;
+    :global(.TUITable__mobile_container .TUITable__content) {
+      color: var(--secondary-color);
+      background-color: var(--primary-color);
+      box-shadow: 0 4px 1px rgba($card-shadow, 0.25);
+    }
     :global(.TUITable_container .TUITable_header) {
       flex-wrap: wrap;
     }
+    :global(.TUITable_container .TUITable_content) {
+      color: var(--primary-color);
+    }
+  }
+  .income_edit__container .edit__header {
+    font-size: 14px;
   }
 }

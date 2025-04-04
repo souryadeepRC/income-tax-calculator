@@ -8,5 +8,4 @@ export type DeviceMedia = {
 
 export interface ScreenReducerType {
   mediaType: DeviceType;
-  theme: AppTheme;
 }

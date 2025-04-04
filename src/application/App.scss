@@ -16,7 +16,7 @@
 }
 .tax-section {
   width: 100vw;
-  padding: 50px 0 10px 0;
+  padding: 120px 0 10px 0;
   overflow: auto;
   color: var(--secondary-color);
 }
@@ -32,6 +32,9 @@ body {
 }
 
 @media (max-width: $mobile-max-width) {
+  .tax-section { 
+    padding: 80px 0 90px 0; 
+  }
   .MuiPaper-root {
     .MuiMenuItem-root {
       font-size: 12px;

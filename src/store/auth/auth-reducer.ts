@@ -1,11 +1,6 @@
-import { AuthReducerType } from "src/types/auth-types";
-import { ReducerActionPayloadType } from "src/types/store-types";
-import {
-  CREATE_USER,
-  LOGIN_USER,
-  LOGOUT_USER,
-  SET_LOGOUT_ACTIVE,
-} from "./auth-constants";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+// types
+import { AuthReducerType, AuthUserType } from "src/types/auth-types";
 
 const initialState: AuthReducerType = {
   user: undefined,
@@ -13,39 +8,42 @@ const initialState: AuthReducerType = {
   isDataLoading: false,
   isLogoutActive: false,
 };
-const AuthReducer = (
-  state = initialState,
-  action: ReducerActionPayloadType
-) => {
-  const { type, payload } = action;
-  switch (type) {
-    case CREATE_USER:
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    createUser: (state, action: PayloadAction<AuthUserType>) => {
       return {
         ...state,
-        user: payload,
+        user: action.payload,
         isDataLoading: true,
       };
-    case LOGIN_USER:
+    },
+    loginUser: (state) => {
       return {
         ...state,
         isLoggedIn: true,
         isDataLoading: false,
       };
-    case SET_LOGOUT_ACTIVE:
+    },
+    setLogoutActive: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        isLogoutActive: payload,
+        isLogoutActive: action.payload,
       };
+    },
 
-    case LOGOUT_USER:
+    logoutUser: (state) => {
       return {
         ...state,
         user: undefined,
         isLoggedIn: false,
         isLogoutActive: false,
       };
-    default:
-      return state;
-  }
-};
-export default AuthReducer;
+    },
+  },
+});
+
+export const { createUser, loginUser, setLogoutActive, logoutUser } =
+  authSlice.actions;
+export default authSlice.reducer;

@@ -1,0 +1,9 @@
+.logout__btn {
+  font-size: 1rem;
+  &:global(.Button-root) {
+    color: var(--secondary-color);
+  }
+  &:global(.MuiIconButton-root) {
+    color: var(--secondary-color);
+  }
+}

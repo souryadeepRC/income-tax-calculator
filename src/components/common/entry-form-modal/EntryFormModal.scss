@@ -11,24 +11,81 @@
   .form_input__container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 70vw;
-    padding: 10px;
+    gap: 15px;
+    width: fit-content;
+    padding: 20px 25px;
     max-width: 400px;
     max-height: 60vh;
     overflow: auto;
     font-size: 1.1rem;
     color: var(--secondary-color);
-    .TUIText_field__container input {
-      box-shadow: -1px 2px 9px 0 rgba($card-shadow, 0.25); 
+    .TUIText_field__container {
+      label {
+        font-weight: 600;
+      }
+      input {
+        box-shadow: none;
+        border-radius: 20px;
+        padding: 10px 30px;
+        border: 1px solid var(--secondary-color);
+        transition: all 0.3s cubic-bezier(0.39, 0.58, 0.57, 1);
+        &:focus {
+          border-color: var(--secondary-color);
+          box-shadow: -1px 2px 9px 0 rgba($card-shadow, 0.25);
+        }
+      }
+      &.TUIText__error input {
+        border: 2px solid var(--error-color);
+      }
+      .error__msg {
+        padding: 0 0 0 15px;
+      }
     }
   }
   .action_btn__container {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    .Button-root.contained{
-      padding: 8px 20px;
+    .Button-root.contained {
+      padding: 8px 30px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      box-shadow: none;
+    }
+    .Button-root.text {
+      font-size: 0.9rem;
+      box-shadow: none;
+    }
+  }
+}
+@media screen and (max-width: $mobile-max-width) {
+  .entry__form {
+    width: 70vw;
+    max-width: 400px;
+    .form_input__container {
+      padding: 5px;
+      gap: 5px;
+      width: 100%;
+      .TUIText_field__container {
+        label {
+          font-size: 16px;
+        }
+        input {
+          padding: 10px 0 10px 25px;
+          width: 100%;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .action_btn__container {
+      .Button-root.contained {
+        font-size: 12px;
+        padding:8px 18px;
+      }
+      .Button-root.text {
+        font-size: 12px;
+      }
     }
   }
 }

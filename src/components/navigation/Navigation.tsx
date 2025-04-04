@@ -4,7 +4,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SavingsIcon from "@mui/icons-material/Savings";
 // components
-import LogOutButton from "src/components/log-out/LogOutButton";
+import LogoutButton from "src/components/log-out/LogoutButton";
 import NavigationMobile from "src/components/navigation/NavigationMobile";
 // types
 import { SvgIconTypeMap } from "@mui/material";
@@ -15,13 +15,13 @@ import "./Navigation.scss";
 type CustomSvgIcon = OverridableComponent<SvgIconTypeMap> & {
   muiName?: string;
 };
-interface NavigationType {
+export interface NavigationType {
   label: string;
   path: string;
   Icon: CustomSvgIcon;
 }
 
-const NAVIGATION_LIST: NavigationType[] = [
+export const NAVIGATION_LIST: NavigationType[] = [
   {
     label: "Income",
     path: "income",
@@ -69,7 +69,7 @@ const NavigationDesktop = () => {
   return (
     <>
       <Navigation className="navigation-list" />
-      <LogOutButton />
+      <LogoutButton />
     </>
   );
 };

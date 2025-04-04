@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {
   editIncomeEntry,
   deleteIncomeEntry,
-} from "src/store/income/income-actions";
+} from "src/store/income/income-reducer";
 // types
 import { IncomeOption } from "src/types/income-types";
 // utils
@@ -22,6 +22,23 @@ interface IncomeOptionsProps {
 const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
   const dispatch = useDispatch();
 
+  const actions = [
+    {
+      key: "delete",
+      render: (rowData: any) => {
+        if (isReservedCategory(rowData.category)) return <></>;
+        return (
+          <DeleteIcon
+            className={classes.income_option__delete}
+            role="button"
+            aria-label="income option delete icon button"
+            tabIndex={0}
+            onClick={() => dispatch(deleteIncomeEntry(rowData.id))}
+          />
+        );
+      },
+    },
+  ];
   const columns = [
     { key: "category", label: "Category" },
     {
@@ -44,22 +61,6 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
         </div>
       ),
     },
-    {
-      key: "deleteAction",
-      label: "",
-      render: (rowData: any) => {
-        if (isReservedCategory(rowData.category)) return <></>;
-        return (
-          <DeleteIcon
-            className={classes.income_option__delete}
-            role="button"
-            aria-label="income option delete icon button"
-            tabIndex={0}
-            onClick={() => dispatch(deleteIncomeEntry(rowData.id))}
-          />
-        );
-      },
-    },
   ];
 
   return (
@@ -68,9 +69,10 @@ const IncomeOptions: React.FC<IncomeOptionsProps> = ({ options }) => {
         title="Income Options"
         columns={columns}
         data={options}
+        actions={actions}
         emptyRecords={"No Income option added"}
         showPagination
-        pagination={{ pageSize: 10 }}
+        pagination={{ pageSize: 5 }}
       />
     </div>
   );

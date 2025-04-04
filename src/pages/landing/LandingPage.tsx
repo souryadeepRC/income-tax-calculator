@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 // components
 import AppIntro from "./components/AppIntro";
 import Features from "./components/Features";
+import Footer from "src/components/footer/Footer";
 import { Modal } from "src/components/common";
 // store
 import {
@@ -30,6 +31,7 @@ const LandingPage: React.FC = () => {
       {isUserDataLoading && <WelcomeModal />}
       <AppIntro />
       <Features />
+      <Footer />
     </>
   );
 };

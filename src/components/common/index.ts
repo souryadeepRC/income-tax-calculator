@@ -14,6 +14,7 @@ import EntryFormModal from "src/components/common/entry-form-modal/EntryFormModa
 import AmountLabel from "src/components/common/amount-label/AmountLabel";
 import ToggleView from "src/components/common/toggle-view/ToggleView";
 import BackButton from "src/components/common/back-button/BackButton";
+import Choice from "src/components/common/choice/Choice";
 
 export {
   Select,
@@ -32,4 +33,5 @@ export {
   AmountLabel,
   ToggleView,
   BackButton,
+  Choice,
 };

@@ -25,14 +25,14 @@ const TaxRegimeBreakup: React.FC<TaxRegimeBreakupProps> = ({
   details,
   isBestChoice,
 }) => {
-  const monthlyTax = details?.tax?.monthlyTax || 0;
+  const monthlyTax: number = details?.tax?.monthlyTax || 0;
   const [isDetailsVisible, toggleVisibility] = useToggle(false);
   const isMobile: boolean = useSelector(selectIsMobile);
   return (
     <div className={classes.regime__container}>
       {isMobile && isDetailsVisible && (
         <Modal onClose={toggleVisibility}>
-          <div className={classes.tax_breakup__container}>
+          <div className={classes.breakup__container_mobile}>
             <h2 className={classes.regime__title} data-testid="regime-label">
               {type} Tax Regime
             </h2>

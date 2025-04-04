@@ -9,7 +9,9 @@ import dbService from "src/service/Database";
 import {
   removeIncomeDetails,
   resetActionIncomeEntry,
-} from "src/store/income/income-actions";
+} from "src/store/income/income-reducer";
+// utils
+import { formatNumber } from "src/utils/tax-calculation";
 // types
 import { IncomeOption } from "src/types/income-types";
 // styles
@@ -20,7 +22,7 @@ interface DeleteIncomeProps {
 }
 const DeleteIncome: React.FC<DeleteIncomeProps> = ({ entry }) => {
   const dispatch = useDispatch();
-  const { id, category } = entry;
+  const { id, category, amount } = entry;
 
   const { mutate, isPending, isSuccess, isError } = useMutation({
     mutationFn: (id: string) => dbService.deleteDetails("income", id),
@@ -48,7 +50,7 @@ const DeleteIncome: React.FC<DeleteIncomeProps> = ({ entry }) => {
         <div className={classes.delete__message}>
           <h1>
             Are you sure you want to Delete&nbsp;
-            <span>{category}</span>&nbsp;Income?
+            <span>{category}</span>&nbsp;Income of Rs. {formatNumber(amount)}?
           </h1>
         </div>
       </div>

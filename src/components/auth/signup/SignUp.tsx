@@ -8,13 +8,13 @@ import { Button, InfiniteProgressBar } from "src/components/common";
 // service
 import authService from "src/service/Auth";
 // store
-import { createUser } from "src/store/auth/auth-actions";
+import { createUser } from "src/store/auth/auth-reducer";
 // utils
 import { setFormData } from "../Auth";
 import { updateState } from "src/utils/common-utils";
 // constants
 import { EMAIL_REGEX } from "src/constants/common-constants";
-import { SignUpPasswordRules } from "src/store/auth/auth-constants";
+import { SignUpPasswordRules } from "src/constants/auth-constants";
 // styles
 import classes from "../Auth.module.scss";
 
@@ -105,7 +105,13 @@ const SignUp: React.FC = () => {
   return (
     <div>
       <InfiniteProgressBar isLoading={isPending} />
-      <h2>Join with us</h2>
+      <div className={classes.auth__header}>
+        <h2>Optimize your finance</h2>
+        <p>
+          Gain access to personalized tool to handle estimates, deductions, and
+          tax breakup.
+        </p>
+      </div>
       {isError && (
         <span className={classes.error__message}>
           {getErrorMessage(errorResponse)}
@@ -138,7 +144,7 @@ const SignUp: React.FC = () => {
           handleValidity={handleValidity}
         />
         <Button variant="contained" border="round" onClick={onSubmit}>
-          Sign up
+          Register
         </Button>
       </form>
     </div>

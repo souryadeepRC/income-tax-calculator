@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 // store
-import { createUser } from "src/store/auth/auth-actions";
+import { createUser } from "src/store/auth/auth-reducer";
 import { selectIsLoggedIn } from "src/store/auth/auth-selectors";
 // service
 import authService from "src/service/Auth";

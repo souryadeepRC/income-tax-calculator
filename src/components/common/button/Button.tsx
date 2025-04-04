@@ -1,3 +1,4 @@
+import { motion, TargetAndTransition, VariantLabels } from "motion/react";
 import "./Button.scss";
 import { SvgIconProps } from "src/types/common-types";
 
@@ -14,6 +15,7 @@ interface CustomButtonProps {
   border?: ButtonBorder;
   endIcon?: SvgIconProps;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  whileHover?: VariantLabels | TargetAndTransition | undefined;
 }
 const Button: React.FC<CustomButtonProps> = (props) => {
   const {
@@ -27,6 +29,7 @@ const Button: React.FC<CustomButtonProps> = (props) => {
     border,
     onClick,
     variant,
+    whileHover,
   } = props;
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,7 +37,8 @@ const Button: React.FC<CustomButtonProps> = (props) => {
     onClick?.(event);
   };
   return (
-    <button
+    <motion.button
+      whileHover={whileHover}
       tabIndex={tabIndex}
       aria-label={label}
       disabled={disabled}
@@ -45,7 +49,7 @@ const Button: React.FC<CustomButtonProps> = (props) => {
       {StartIcon && <>{StartIcon}</>}
       {children}
       {EndIcon && <>{EndIcon}</>}
-    </button>
+    </motion.button>
   );
 };
 export default Button;

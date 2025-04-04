@@ -7,7 +7,7 @@ import { TAX_SLAB } from "src/constants/tax-constants";
 // types
 import { TaxSlabType } from "src/types/tax-types";
 // style
-import classes from "./TaxRegimeBreakup.module.scss";
+import classes from "./TaxSlabView.module.scss";
 
 interface TaxSlabViewProps {
   type: string;
@@ -32,7 +32,14 @@ const TaxSlabView: React.FC<TaxSlabViewProps> = ({ type }) => {
           </div>
         </Modal>
       )}
-      <Button variant="text" border="oval" onClick={toggleVisibility}>
+      <Button
+        variant="text"
+        border="oval"
+        onClick={toggleVisibility}
+        whileHover={{
+          scale: 1.2,
+        }}
+      >
         Show SLAB
       </Button>
     </div>
