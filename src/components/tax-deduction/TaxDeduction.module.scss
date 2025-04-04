@@ -3,7 +3,7 @@
   top: 170px;
   background: var(--primary-color);
   z-index: 2;
-  width: 50vw;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,7 +20,7 @@
   section {
     width: 100%;
     display: flex;
-    gap: 10px;
+    gap: 25px;
     justify-content: space-between;
 
     .deduction_data {
@@ -111,16 +111,27 @@
 @media screen and (max-width: $mobile-max-width) {
   .deduction_header__container {
     font-size: 14px;
-    padding: 0 0 5px 0;
-    .deduction_data {
-      flex-direction: column;
-      flex-direction: column;
-      align-items: flex-start;
-      width: 50%;
+    top: 70px;
+    max-width: 90vw;
+    padding: 10px;
+    section {
+      gap: 10px;
+      flex-wrap: wrap;
+      .deduction_data {
+        .deduction__title {
+          font-size: 14px;
+        }
+        .deduction__amount {
+          font-size: 12px;
+        }
+      }
+      :global(.Button-root.contained) {
+        font-size: 12px;
+        padding: 8px 15px;
+      }
     }
-    :global(.Button-root) {
-      font-size: 14px;
-      padding: 8px 15px;
+    .deduction_note {
+      bottom: -20px;
     }
   }
 }

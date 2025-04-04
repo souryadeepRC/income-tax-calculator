@@ -21,7 +21,7 @@ const DeductionHeader: React.FC<DeductionHeaderProps> = ({
   title,
   amount,
   addAction,
-  actionText = "Add",
+  actionText = "Add Entry",
   note,
 }) => {
   const isMobile: boolean = useSelector(selectIsMobile);
@@ -32,13 +32,13 @@ const DeductionHeader: React.FC<DeductionHeaderProps> = ({
         <div className={classes.deduction_data}>
           <h2 className={classes.deduction__title}>{title}</h2>
           <p className={classes.deduction__amount}>
-            Exempted : Rs. {formatNumber(amount)}
+            {!isMobile && "Exempted : "}Rs. {formatNumber(amount)}
           </p>
         </div>
 
         {addAction && (
           <Button
-            variant="contained" 
+            variant="contained"
             data-testid="add-deduction-btn"
             onClick={addAction}
           >
@@ -46,9 +46,7 @@ const DeductionHeader: React.FC<DeductionHeaderProps> = ({
           </Button>
         )}
       </section>
-      {note && (
-        <div className={classes.deduction_note}>Note&nbsp;:&nbsp;{note}</div>
-      )}
+      {note && <div className={classes.deduction_note}>{note}</div>}
     </div>
   );
 };

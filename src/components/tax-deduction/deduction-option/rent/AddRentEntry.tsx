@@ -24,7 +24,6 @@ const AddRentEntry: React.FC = () => {
       <DeductionHeader
         title="Rent"
         amount={deductedAmount}
-        actionText="Add Rent Entry"
         addAction={
           isRentEligible
             ? () => {

@@ -7,3 +7,9 @@
     }
   }
 }
+
+@media screen and (max-width: $mobile-max-width) {
+  .back__Button.Button-root.text {
+    font-size: 16px;
+  }
+}

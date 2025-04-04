@@ -49,8 +49,7 @@ const Section24 = () => {
         addAction={() =>
           dispatch(editDeduction({ type: DEDUCTION_TYPE.SECTION_24 }))
         }
-        actionText="Add Entry"
-        note="you can avail maximum Rc. 2,00,000 of exemption"
+        note="Maximum limit Rs. 2,00,000"
       />
 
       <CardWrapper>
