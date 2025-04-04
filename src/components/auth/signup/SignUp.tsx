@@ -14,7 +14,7 @@ import { setFormData } from "../Auth";
 import { updateState } from "src/utils/common-utils";
 // constants
 import { EMAIL_REGEX } from "src/constants/common-constants";
-import { SignUpPasswordRules } from "src/store/auth/auth-constants";
+import { SignUpPasswordRules } from "src/constants/auth-constants";
 // styles
 import classes from "../Auth.module.scss";
 

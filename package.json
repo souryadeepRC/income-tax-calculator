@@ -17,7 +17,7 @@
     "react-redux": "^9.1.1",
     "react-router": "^7.0.2",
     "react-web-theme": "^3.1.0",
-    "triva-ui": "^3.0.4",
+    "triva-ui": "^3.0.5",
     "uuid": "^11.0.3"
   },
   "scripts": {

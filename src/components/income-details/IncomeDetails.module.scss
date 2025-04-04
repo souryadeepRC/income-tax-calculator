@@ -166,8 +166,16 @@
   }
   .income_options__container {
     width: 95%;
+    :global(.TUITable__mobile_container .TUITable__content) {
+      color: var(--secondary-color);
+      background-color: var(--primary-color);
+      box-shadow: 0 4px 1px rgba($card-shadow, 0.25);
+    }
     :global(.TUITable_container .TUITable_header) {
       flex-wrap: wrap;
+    }
+    :global(.TUITable_container .TUITable_content) {
+      color: var(--primary-color);
     }
   }
   .income_edit__container .edit__header {
