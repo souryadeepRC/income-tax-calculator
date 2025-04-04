@@ -1,4 +1,5 @@
 // library
+import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutIcon from "@mui/icons-material/Logout";
 // components
@@ -6,12 +7,13 @@ import { Button } from "src/components/common";
 // store
 import { setLogoutActive } from "src/store/auth/auth-actions";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
-import { IconButton } from "@mui/material";
+// styles
+import classes from "./LogoutButton.module.scss";
 
-interface LogOutButtonProps {
+interface LogoutButtonProps {
   onClick?: () => void;
 }
-const LogOutButton: React.FC<LogOutButtonProps> = ({ onClick }) => {
+const LogoutButton: React.FC<LogoutButtonProps> = ({ onClick }) => {
   const isMobile = useSelector(selectIsMobile);
   const dispatch = useDispatch();
 
@@ -21,14 +23,14 @@ const LogOutButton: React.FC<LogOutButtonProps> = ({ onClick }) => {
   };
   if (isMobile) {
     return (
-      <IconButton className="navigation__logout" onClick={onLogout}>
+      <IconButton className={classes.logout__btn} onClick={onLogout}>
         <LogoutIcon />
       </IconButton>
     );
   }
   return (
     <Button
-      className="navigation__logout"
+      className={classes.logout__btn}
       variant="text"
       border="round"
       startIcon={<LogoutIcon />}
@@ -38,4 +40,4 @@ const LogOutButton: React.FC<LogOutButtonProps> = ({ onClick }) => {
     </Button>
   );
 };
-export default LogOutButton;
+export default LogoutButton;
