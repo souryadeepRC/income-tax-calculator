@@ -27,7 +27,7 @@ interface TaxRegimeDetailsProps {
 const TaxRegimeDetails: React.FC<TaxRegimeDetailsProps> = ({ details }) => {
   const { tax, deduction, income } = details || {};
   return (
-    <div className={classes.tax__breakup}>
+    <div className={classes.breakup__details}>
       <ToggleView header="Tax">
         <BreakupItem label="Annual Tax" amount={tax.yearlyTax} />
         <BreakupItem label="Tax after Rebate" amount={tax.baseTax} />
