@@ -1,5 +1,9 @@
 .back__Button {
-  &:global(.Button-root.text) {
+  &.Button-root.text {
     font-size: 0.8rem;
+    padding: 0;
+    &:hover {
+      text-shadow: none;
+    }
   }
 }

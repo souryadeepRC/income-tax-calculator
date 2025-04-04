@@ -1,12 +1,12 @@
 // library
 import { NavLink } from "react-router";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
+import MoreIcon from "@mui/icons-material/Dns";
 // hooks
-import { useDeductionNavigation } from "src/hooks"; 
+import { useDeductionNavigation } from "src/hooks";
 // utils
 import { formatNumber } from "src/utils/tax-calculation";
 // styles
-import classes from "./DeductionPage.module.scss"; 
+import classes from "./DeductionPage.module.scss";
 
 interface DeductionTypeProps {
   navigation: { title: string; path: string; amount: number };
@@ -16,7 +16,7 @@ const DeductionType: React.FC<DeductionTypeProps> = ({ navigation }) => {
   return (
     <>
       <NavLink to={path}>
-        See Details <ReadMoreIcon />
+        See Details <MoreIcon />
       </NavLink>
       <h3>{title}</h3>
       <h2>Rs. {formatNumber(amount)}</h2>

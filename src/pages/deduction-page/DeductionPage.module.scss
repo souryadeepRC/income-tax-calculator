@@ -6,7 +6,6 @@
   color: var(--secondary-color);
   width: 90%;
   margin: 0 auto;
-  padding: 15px;
   border-radius: 10px;
   h2 {
     margin: 0;
@@ -20,6 +19,9 @@
   width: 90%;
   margin: 0 auto;
   padding: 10px 0;
+  :global(.TUIModal__container) {
+    z-index: 4;
+  }
 }
 .deduction__options {
   display: flex;
