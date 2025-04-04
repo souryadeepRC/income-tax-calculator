@@ -37,6 +37,7 @@ const EntryFormModal: React.FC<EntryFormModalProps> = ({
         <section className="action_btn__container" aria-label={ariaLabel}>
           <Button
             variant="text"
+            disabled={isPending}
             data-testid="deduction-form-cancel-btn"
             onClick={onCancel}
           >
@@ -45,6 +46,7 @@ const EntryFormModal: React.FC<EntryFormModalProps> = ({
           <Button
             variant="contained"
             border="round"
+            disabled={isPending}
             data-testid="deduction-form-save-btn"
             onClick={onSave}
           >

@@ -7,7 +7,7 @@ import Login from "src/components/auth/login/Login";
 import SignUp from "src/components/auth/signup/SignUp";
 import { Button } from "src/components/common";
 // store
-import { createUser, loginUser } from "src/store/auth/auth-actions";
+import { createUser, loginUser } from "src/store/auth/auth-reducer";
 // types
 import { AuthUserType } from "src/types/auth-types";
 // style

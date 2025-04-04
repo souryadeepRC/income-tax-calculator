@@ -12,7 +12,7 @@ import {
 // service
 import authService from "src/service/Auth";
 // store
-import { logoutUser, setLogoutActive } from "src/store/auth/auth-actions";
+import { logoutUser, setLogoutActive } from "src/store/auth/auth-reducer";
 import { selectIsLogoutActive } from "src/store/auth/auth-selectors";
 // styles
 import classes from "./LogoutPage.module.scss";

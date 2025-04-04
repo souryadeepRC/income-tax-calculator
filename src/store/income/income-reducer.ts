@@ -1,16 +1,7 @@
 // types
-import { ReducerActionPayloadType } from "src/types/store-types";
 import { IncomeOption, IncomeReducerType } from "src/types/income-types";
-// constants
-import {
-  EDIT_INCOME_ENTRY,
-  SAVE_INCOME_DETAILS,
-  DELETE_INCOME_DETAILS,
-  RESET_EDIT_INCOME_ENTRY,
-  LOAD_INCOME_DETAILS,
-  DELETE_INCOME_ENTRY,
-} from "src/store/income/income-constants";
 import { mapDeleteIncomeEntry, mapSaveIncomeEntry } from "./income-mapper";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: IncomeReducerType = {
   overallAmount: 0,
@@ -21,64 +12,69 @@ const initialState: IncomeReducerType = {
     isDelete: false,
   },
 };
-const IncomeReducer = (
-  state = initialState,
-  action: ReducerActionPayloadType
-): IncomeReducerType => {
-  const { type, payload } = action;
-  switch (type) {
-    case LOAD_INCOME_DETAILS: {
+const incomeSlice = createSlice({
+  name: "income",
+  initialState,
+  reducers: {
+    loadIncomeDetails: (state, action: PayloadAction<IncomeOption[]>) => {
       return {
         ...state,
-        options: payload,
-        overallAmount: payload.reduce(
+        options: action.payload,
+        overallAmount: action.payload.reduce(
           (acc: number, option: IncomeOption) => acc + option.amount,
           0
         ),
       };
-    }
-    case EDIT_INCOME_ENTRY: {
+    },
+    editIncomeEntry: (state, action: PayloadAction<string | undefined>) => {
       return {
         ...state,
         actionEntry: {
           ...state.actionEntry,
           isEditable: true,
-          ...(payload ? { entryId: payload } : {}),
+          ...(action.payload ? { entryId: action.payload } : {}),
         },
       };
-    }
-    case DELETE_INCOME_ENTRY: {
+    },
+    deleteIncomeEntry: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         actionEntry: {
           ...state.actionEntry,
           isDelete: true,
-          entryId: payload,
+          entryId: action.payload,
         },
       };
-    }
-    case RESET_EDIT_INCOME_ENTRY: {
+    },
+    resetActionIncomeEntry: (state) => {
       return {
         ...state,
         actionEntry: initialState.actionEntry,
       };
-    }
-    case SAVE_INCOME_DETAILS: {
+    },
+    saveIncomeDetails: (state, action: PayloadAction<IncomeOption>) => {
       return {
         ...state,
-        ...mapSaveIncomeEntry(state, payload),
+        ...mapSaveIncomeEntry(state, action.payload),
         actionEntry: initialState.actionEntry,
       };
-    }
-    case DELETE_INCOME_DETAILS: {
+    },
+    removeIncomeDetails: (state, action: PayloadAction<string>) => {
       return {
         ...state,
-        ...mapDeleteIncomeEntry(state, payload),
+        ...mapDeleteIncomeEntry(state, action.payload),
         actionEntry: initialState.actionEntry,
       };
-    }
-    default:
-      return state;
-  }
-};
-export { IncomeReducer };
+    },
+  },
+});
+export const {
+  loadIncomeDetails,
+  editIncomeEntry,
+  deleteIncomeEntry,
+  resetActionIncomeEntry,
+  saveIncomeDetails,
+  removeIncomeDetails,
+} = incomeSlice.actions;
+
+export default incomeSlice.reducer;

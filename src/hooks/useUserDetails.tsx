@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 // service
 import dbService from "src/service/Database";
 // store
-import { loginUser } from "src/store/auth/auth-actions";
+import { loginUser } from "src/store/auth/auth-reducer";
 import {
   selectUserName,
   selectIsLoggedIn,
 } from "src/store/auth/auth-selectors";
-import { loadIncomeDetails } from "src/store/income/income-actions";
+import { loadIncomeDetails } from "src/store/income/income-reducer";
 import { loadDeduction } from "src/store/deduction/deduction-reducer";
 
 const useUserDetails = (): void => {

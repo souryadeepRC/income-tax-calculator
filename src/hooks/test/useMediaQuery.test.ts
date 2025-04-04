@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "src/hooks/useMediaQuery"; // assuming this is where the hook is located
-import { setMediaType } from "src/store/screen/screen-actions";
+import { setMediaType } from "src/store/screen/screen-reducer";
 import { renderHook } from "@testing-library/react";
 
 // Mock Redux hooks

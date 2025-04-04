@@ -4,14 +4,11 @@ import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { TUITextField, TUIPassword } from "triva-ui";
 // components
-import {
-  Button,
-  InfiniteProgressBar,
-} from "src/components/common";
+import { Button, InfiniteProgressBar } from "src/components/common";
 // service
 import authService from "src/service/Auth";
 // store
-import { createUser } from "src/store/auth/auth-actions";
+import { createUser } from "src/store/auth/auth-reducer";
 // utils
 import { setFormData } from "../Auth";
 import { updateState } from "src/utils/common-utils";
@@ -81,7 +78,13 @@ const Login: React.FC = () => {
   return (
     <div>
       <InfiniteProgressBar isLoading={isPending} />
-      <h2>Login</h2>
+      <div className={classes.auth__header}>
+        <h2>Your personalized tax tool</h2>
+        <p>
+          Manage estimates, deductions, and financial data securely and
+          efficiently.
+        </p>
+      </div>
       {isError && (
         <span className={classes.error__message}>
           {getErrorMessage(errorResponse)}
@@ -90,7 +93,6 @@ const Login: React.FC = () => {
       <form className={classes.auth__form}>
         <TUITextField
           fullWidth
-          isRequired
           label="Email"
           value={email}
           onChange={onEmailChange}

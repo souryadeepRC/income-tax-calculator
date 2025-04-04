@@ -5,7 +5,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 // components
 import { Button } from "src/components/common";
 // store
-import { setLogoutActive } from "src/store/auth/auth-actions";
+import { setLogoutActive } from "src/store/auth/auth-reducer";
 import { selectIsMobile } from "src/store/screen/screen-selectors";
 // styles
 import classes from "./LogoutButton.module.scss";

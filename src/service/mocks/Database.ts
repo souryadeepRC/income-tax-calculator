@@ -9,6 +9,14 @@ const mockIncomes = [
     amount: 100000,
     group: "salary",
   },
+  ...Array(10)
+    .fill("i")
+    .map((id, index) => ({
+      $id: ID.unique(),
+      category: "Miscellaneous",
+      amount: 100000,
+      group: "salary",
+    })),
 ];
 const mockDeductions = [
   ...Array(10)

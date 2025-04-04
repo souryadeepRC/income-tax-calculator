@@ -1,36 +1,21 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // types
-import { ReducerActionPayloadType } from "src/types/store-types";
-import { ScreenReducerType } from "src/types/screen-types";
-// constants
-import {
-  TOGGLE_THEME,
-  UPDATE_MEDIA_TYPE,
-} from "src/store/screen/screen-constants";
+import { DeviceType, ScreenReducerType } from "src/types/screen-types";
 
 const initialState: ScreenReducerType = {
   mediaType: "DESKTOP",
-  theme: "light",
 };
-const ScreenReducer = (
-  state = initialState,
-  action: ReducerActionPayloadType
-): ScreenReducerType => {
-  const { type, payload } = action;
-  switch (type) {
-    case UPDATE_MEDIA_TYPE: {
+const screenSlice = createSlice({
+  name: "screen",
+  initialState,
+  reducers: {
+    setMediaType: (state, action: PayloadAction<DeviceType>) => {
       return {
         ...state,
-        mediaType: payload,
+        mediaType: action.payload,
       };
-    }
-    case TOGGLE_THEME: {
-      return {
-        ...state,
-        theme: state.theme === "light" ? "dark" : "light",
-      };
-    }
-    default:
-      return state;
-  }
-};
-export { ScreenReducer };
+    },
+  },
+});
+export const { setMediaType } = screenSlice.actions;
+export default screenSlice.reducer;

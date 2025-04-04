@@ -23,7 +23,7 @@ export const getAmountError = (amount: string): string => {
   if (amount === "") {
     return "Amount is required";
   } else if (!NUMERIC_REGEX.test(amount)) {
-    return "Enter a valid amount ( max 2 decimal ) more than 0 (e.g. 100.50 or 100)";
+    return "Enter a valid amount up to 2 decimals (e.g., 100.50).";
   }
   return "";
 };

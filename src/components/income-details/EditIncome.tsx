@@ -11,7 +11,7 @@ import dbService from "src/service/Database";
 import {
   resetActionIncomeEntry,
   saveIncomeDetails,
-} from "src/store/income/income-actions";
+} from "src/store/income/income-reducer";
 // types
 import { IncomeOption } from "src/types/income-types";
 // utils
@@ -78,7 +78,6 @@ const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
       </div>
       <TUITextField
         isRequired
-        fullWidth
         label="Amount"
         id="edit-income-amount"
         inputProps={{ "data-testid": "edit-income-amount-input" }}

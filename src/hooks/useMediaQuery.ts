@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 // library
 import { useDispatch } from "react-redux";
 // actions
-import { setMediaType } from "src/store/screen/screen-actions";
+import { setMediaType } from "src/store/screen/screen-reducer";
 // types
 import { AppDispatch } from "src/types/store-types";
 // constants

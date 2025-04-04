@@ -6,17 +6,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    padding: 5px 0 0;
+    :global(.Button-root.text) {
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 20px;
+    }
   }
-  h2 {
-    margin: 0;
-    text-align: center;
+  .auth__header {
+    width: 85%;
+    margin: 0 auto;
+    h2 {
+      margin: 0;
+      text-align: left;
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      margin: 0;
+      text-align: left;
+    }
   }
   :global(.Button-root.contained) {
     justify-content: center;
-    width: 100%;
+    width: 70%;
+    margin: 20px auto 0;
     padding: 10px;
-    font-size: 1.2rem;
+    border-radius: 20px;
+    font-size: 1.1rem;
     font-weight: 600;
   }
 }
@@ -30,8 +49,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
-  margin: 15px 0;
+  margin: 15px auto;
   padding: 0 20px;
+  width: 80%;
 
   :global(.TUIPassword_rule_popover__container .MuiIconButton-root) {
     background-color: var(--secondary-color);

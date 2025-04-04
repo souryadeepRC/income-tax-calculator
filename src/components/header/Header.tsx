@@ -39,7 +39,7 @@ const MotionHeader: React.FC<MotionHeaderProps> = ({ children, className }) => {
       transition={{
         duration: 2,
         ease: "easeInOut",
-        repeat: Infinity,
+        repeat: 2,
       }}
     >
       {children}
@@ -74,7 +74,7 @@ const HeaderLanding: React.FC = () => {
       )}
       <MotionHeader className={classes.header_landing__container}>
         <>
-          <AppTitle />
+          <AppTitle isCenter={!!username} />
           {!username && (
             <Button
               variant="text"
@@ -89,9 +89,11 @@ const HeaderLanding: React.FC = () => {
     </>
   );
 };
-const AppTitle: React.FC = () => {
+const AppTitle: React.FC<{ isCenter?: boolean }> = ({ isCenter }) => {
   return (
-    <div className={classes.header__title}>
+    <div
+      className={`${classes.header__title} ${isCenter ? classes.center : ""}`}
+    >
       <NavLink to="">
         <span>TAX CALCULATOR</span>
       </NavLink>

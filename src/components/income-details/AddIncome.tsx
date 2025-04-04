@@ -2,24 +2,21 @@ import { useState } from "react";
 // library
 import { TUITextField } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
-import { MenuItem } from "@mui/material";
 import { useDispatch } from "react-redux";
 // components
-import { Select, EntryFormModal } from "src/components/common";
+import { EntryFormModal, Choice } from "src/components/common";
 // service
 import dbService from "src/service/Database";
 // actions
 import {
   resetActionIncomeEntry,
   saveIncomeDetails,
-} from "src/store/income/income-actions";
+} from "src/store/income/income-reducer";
 // utils
 import { updateState } from "src/utils/common-utils";
 import { getCategoryError, getAmountError } from "src/utils/income-utils";
 // types
 import { AppDispatch } from "src/types/store-types";
-// styles
-import classes from "./IncomeDetails.module.scss";
 
 interface IncomeFormError {
   category: string;
@@ -46,12 +43,11 @@ const AddIncome: React.FC = () => {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (incomeDetails: object) =>
       dbService.createDetails("income", incomeDetails),
-    onSuccess: (data:any) => {
+    onSuccess: (data: any) => {
       const { $id: id, group, category, amount } = data || {};
       dispatch(saveIncomeDetails({ id, group, category, amount }));
     },
   });
-
   const [incomeDetails, setIncomeDetails] = useState<IncomeComponent>(
     INITIAL_INCOME_DETAILS
   );
@@ -70,8 +66,8 @@ const AddIncome: React.FC = () => {
     setErrors(updateState("amount", getAmountError(amount)));
   };
 
-  const onGroupChange = (event: any) => {
-    setIncomeDetails(updateState("group", event.target.value));
+  const onGroupChange = (selectedValue: any) => {
+    setIncomeDetails(updateState("group", selectedValue));
   };
   const onCancel = () => {
     dispatch(resetActionIncomeEntry());
@@ -103,42 +99,33 @@ const AddIncome: React.FC = () => {
       onSave={onAddIncome}
       saveBtnLabel="Add Income"
     >
-      <div className={classes.income_edit__container}>
-        <TUITextField
-          fullWidth
-          isRequired
-          label="Income Category"
-          id="add-income-form-category"
-          inputProps={{ "data-testid": "add-income-form-category-input" }}
-          value={category}
-          onChange={onCategoryChange}
-          helperText={"Enter category within min 100 characters"}
-          errorMessage={errors.category}
-          placeholder="Enter income category"
-        />
-        <TUITextField
-          isRequired
-          placeholder="Enter amount"
-          label="Amount"
-          type="number"
-          fullWidth
-          id="add-income-form-amount"
-          inputProps={{ "data-testid": "add-income-form-amount-input" }}
-          value={amount}
-          onChange={onAmountChange}
-          errorMessage={errors.amount}
-        />
-        <Select
-          label="Group"
-          value={group}
-          onChange={onGroupChange}
-          data-testid={`group-option`}
-          fullWidth
-        >
-          <MenuItem value="salary">Salary income</MenuItem>
-          <MenuItem value="extra">Extra Income</MenuItem>
-        </Select>
-      </div>
+      <TUITextField
+        label="Income Category"
+        id="add-income-form-category"
+        inputProps={{ "data-testid": "add-income-form-category-input" }}
+        value={category}
+        onChange={onCategoryChange}
+        helperText={"Enter category within min 100 characters"}
+        errorMessage={errors.category}
+        placeholder="Enter income category"
+      />
+      <TUITextField
+        placeholder="Enter amount"
+        label="Amount"
+        id="add-income-form-amount"
+        inputProps={{ "data-testid": "add-income-form-amount-input" }}
+        value={amount}
+        onChange={onAmountChange}
+        errorMessage={errors.amount}
+      />
+      <Choice
+        options={[
+          { label: "Salary", value: "salary" },
+          { label: "Extra", value: "extra" },
+        ]}
+        selectedOption={group}
+        onChoice={onGroupChange}
+      />
     </EntryFormModal>
   );
 };

@@ -139,16 +139,11 @@
     }
   }
 }
-.income_edit__container {
-  :global(.form_input__container) {
-    padding: 25px 20px;
-    .edit__header {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      font-size: 1.2rem;
-    }
-  }
+.income_edit__container .edit__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: $mobile-max-width) {
@@ -174,5 +169,8 @@
     :global(.TUITable_container .TUITable_header) {
       flex-wrap: wrap;
     }
+  }
+  .income_edit__container .edit__header {
+    font-size: 14px;
   }
 }
