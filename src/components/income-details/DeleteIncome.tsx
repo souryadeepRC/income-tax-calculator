@@ -1,4 +1,5 @@
 // library
+import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 // components
@@ -27,6 +28,9 @@ const DeleteIncome: React.FC<DeleteIncomeProps> = ({ entry }) => {
   const { mutate, isPending, isSuccess, isError } = useMutation({
     mutationFn: (id: string) => dbService.deleteDetails("income", id),
     onSuccess: () => {
+      toast.success(
+        `${category} income of Rs. ${formatNumber(amount)} removed successfully`
+      );
       dispatch(removeIncomeDetails(id));
     },
   });

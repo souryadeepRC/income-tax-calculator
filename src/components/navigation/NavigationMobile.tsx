@@ -1,7 +1,7 @@
 // library
 import { NavLink } from "react-router";
 //components
-import LogOutButton from "src/components/log-out/LogoutButton";
+import LogOutButton from "src/components/log-out/LogOutButton";
 // constants
 import { NAVIGATION_LIST, NavigationType } from "./Navigation";
 // styles

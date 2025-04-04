@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 // library
+import { toast } from "sonner";
 import { TUITextField } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
@@ -35,6 +36,9 @@ const EditIncome: React.FC<EditIncomeProps> = ({ entry }) => {
       dbService.updateDetails("income", incomeDetails),
     onSuccess: (data: any) => {
       const { $id: id, group, category, amount } = data || {};
+      toast.success(
+        `${category} income of Rs. ${formatNumber(amount)} updated successfully`
+      );
       dispatch(saveIncomeDetails({ id, group, category, amount }));
     },
   });

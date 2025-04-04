@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 // library
+import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { TUITextField } from "triva-ui";
-import { Switch } from "@mui/material";
 // components
-import { EntryFormModal } from "src/components/common";
+import { Choice, EntryFormModal } from "src/components/common";
 // service
 import dbService from "src/service/Database";
 // actions
@@ -15,6 +15,7 @@ import {
 } from "src/store/deduction/deduction-reducer";
 // utils
 import { ErrorMessage } from "src/utils/common-utils";
+import { formatNumber } from "src/utils/tax-calculation";
 // constants
 import { DEDUCTION_TYPE, RENT_CITY } from "src/constants/common-constants";
 
@@ -25,7 +26,7 @@ interface RentEntryFormProps {
 interface EntryInput {
   amount: string;
   duration: string;
-  isMetroCity: boolean;
+  category: string;
 }
 interface EntryError {
   amount: string;
@@ -40,7 +41,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   const [rentEntry, setRentEntry] = useState<EntryInput>({
     amount: "",
     duration: "",
-    isMetroCity: false,
+    category: RENT_CITY.METRO,
   });
   const [error, setError] = useState<EntryError>({
     amount: "",
@@ -51,6 +52,9 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       dbService.storeDetails("deduction", deduction),
     onSuccess: (data: any) => {
       const { $id: id, amount, duration, category } = data || {};
+      toast.success(
+        `Rent entry of Rs. ${formatNumber(amount)} ${entry?.id ? "updated" : "added"}`
+      );
       dispatch(
         saveRentEntry({
           id,
@@ -71,7 +75,7 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       ...rentEntry,
       amount: `${amount}`,
       duration: `${duration}`,
-      isMetroCity,
+      category: isMetroCity ? RENT_CITY.METRO : RENT_CITY.NON_METRO,
     });
   }, [entry]);
 
@@ -93,10 +97,10 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
   }, []);
 
   /* eslint-disable */
-  const onCityChange = (event: any) => {
+  const onCityChange = (selectedValue: string) => {
     setRentEntry((rentEntry) => ({
       ...rentEntry,
-      isMetroCity: event.target.checked,
+      category: selectedValue,
     }));
   };
   // Save Rent Entry and call API
@@ -116,14 +120,14 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
       id: entry?.id,
       amount: +amount,
       duration: +duration,
-      category: isMetroCity ? RENT_CITY.METRO : RENT_CITY.NON_METRO,
+      category: category,
     });
   };
 
   const onReset = () => {
     dispatch(resetDeduction());
   };
-  const { amount, duration, isMetroCity } = rentEntry;
+  const { amount, duration, category } = rentEntry;
   return (
     <EntryFormModal
       isPending={isPending}
@@ -152,17 +156,21 @@ const RentEntryForm: React.FC<RentEntryFormProps> = (props) => {
         inputProps={{ "data-testid": "rent-duration-input" }}
         errorMessage={error.duration}
       />
-      <section aria-label="rent metro city switch">
-        <label>
-          I&#39;m residing in a
-          <Switch
-            data-testid="rent-city-switch"
-            checked={isMetroCity}
-            onChange={onCityChange}
-          />
-          {isMetroCity ? "Metro" : "Non-metro"} City
-        </label>
-      </section>
+      <Choice
+        title="Rent location"
+        options={[
+          {
+            label: "Metro",
+            value: RENT_CITY.METRO,
+          },
+          {
+            label: "Non Metro",
+            value: RENT_CITY.NON_METRO,
+          },
+        ]}
+        onChoice={onCityChange}
+        selectedOption={category}
+      />
     </EntryFormModal>
   );
 };

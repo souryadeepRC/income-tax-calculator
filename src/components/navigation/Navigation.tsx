@@ -4,7 +4,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SavingsIcon from "@mui/icons-material/Savings";
 // components
-import LogoutButton from "src/components/log-out/LogoutButton";
+import LogoutButton from "src/components/log-out/LogOutButton";
 import NavigationMobile from "src/components/navigation/NavigationMobile";
 // types
 import { SvgIconTypeMap } from "@mui/material";

@@ -7,13 +7,14 @@ type Option = {
   isDisabled?: boolean;
 };
 interface ChoiceProps {
+  title: string;
   options: Option[];
   selectedOption: string;
   onChoice: (selectedValue: string) => void;
 }
 
 const Choice: React.FC<ChoiceProps> = (props) => {
-  const { options, selectedOption, onChoice } = props;
+  const { title, options, selectedOption, onChoice } = props;
 
   const onOptionClick = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ const Choice: React.FC<ChoiceProps> = (props) => {
 
   return (
     <div className="form_group__container">
-      <h4 className="group__header">Income Group</h4>
+      <h4 className="group__header">{title}</h4>
       <div className="group__options">
         {options.map((option: Option) => {
           const isSelected: boolean = option.value === selectedOption;

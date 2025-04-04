@@ -1,3 +1,5 @@
+// library
+import { Toaster } from "sonner";
 // components
 import { ScrollToTop } from "src/components/common";
 import Header from "src/components/header/Header";
@@ -13,6 +15,7 @@ const App: React.FC = () => {
   if (isLoading) return <FallbackPage />;
   return (
     <>
+      <Toaster position="top-right" richColors />
       <ScrollToTop />
       <LogoutPage />
       <Header />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 // library
+import { toast } from "sonner";
 import { TUITextField } from "triva-ui";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
@@ -15,6 +16,7 @@ import {
 // utils
 import { updateState } from "src/utils/common-utils";
 import { getCategoryError, getAmountError } from "src/utils/income-utils";
+import { formatNumber } from "src/utils/tax-calculation";
 // types
 import { AppDispatch } from "src/types/store-types";
 
@@ -45,6 +47,9 @@ const AddIncome: React.FC = () => {
       dbService.createDetails("income", incomeDetails),
     onSuccess: (data: any) => {
       const { $id: id, group, category, amount } = data || {};
+      toast.success(
+        `${category} income of Rs. ${formatNumber(amount)} added as ${group} income`
+      );
       dispatch(saveIncomeDetails({ id, group, category, amount }));
     },
   });
@@ -119,6 +124,7 @@ const AddIncome: React.FC = () => {
         errorMessage={errors.amount}
       />
       <Choice
+        title="Income Group"
         options={[
           { label: "Salary", value: "salary" },
           { label: "Extra", value: "extra" },
