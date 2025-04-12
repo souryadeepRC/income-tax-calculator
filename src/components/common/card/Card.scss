@@ -33,6 +33,19 @@
         font-weight: 600;
       }
     }
+    .MuiSvgIcon-root {
+      color: var(--secondary-color);
+    }
+    .option_menu__container .menu__container {
+      background-color: var(--primary-color);
+      ul li {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        .MuiSvgIcon-root {
+          color: var(--secondary-color);
+        }
+      }
+    }
   }
 }
 
