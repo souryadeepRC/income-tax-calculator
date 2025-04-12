@@ -15,7 +15,7 @@ export const selectDeductionActionEntry = (store: AppStoreType): ActionEntry =>
 export const selectDeduction = (store: AppStoreType): DeductionReducerType =>
   store.deduction;
 export const selectRentDeduction = (store: AppStoreType): RentEntry =>
-  store.deduction.entries.rent; 
+  store.deduction.entries.rent;
 export const selectDeductionSection24 = (store: AppStoreType): any =>
   store.deduction.entries.section24;
 export const selectSection80CDeduction = (
@@ -47,9 +47,20 @@ export const selectTotalDeduction = createSelector(
     select80CDeductedAmount,
     selectChapterVIDeductedAmount,
     selectOthersDeductedAmount,
+    selectOthersDeductedAmount,
   ],
-  (rentDeduction, deductionSection24, deduction80C, deductionChapter6) =>
-    rentDeduction + deductionSection24 + deduction80C + deductionChapter6
+  (
+    rentDeduction,
+    deductionSection24,
+    deduction80C,
+    deductionChapter6,
+    deductionOthers
+  ) =>
+    rentDeduction +
+    deductionSection24 +
+    deduction80C +
+    deductionChapter6 +
+    deductionOthers
 );
 export const selectDeductionAmountBreakup = createSelector(
   [

@@ -58,7 +58,7 @@ const OtherDeduction = () => {
             key={option.id}
             content={{
               amountLabel: `Rs. ${formatNumber(option.amount)}`,
-              title: "",
+              title: option.category,
             }}
             entryId={option.id}
             type={DEDUCTION_TYPE.OTHERS}

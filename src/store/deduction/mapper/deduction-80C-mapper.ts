@@ -7,10 +7,11 @@ const getEffectiveAmount = (category: string, amount: number) => {
   return Math.min(amount, deductedMaxLimit);
 };
 export const mapChapter6EntrySave = (
-  { options, deductedAmount }: any,
+  { options: existingOptions, deductedAmount }: any,
   payload: DeductionOption
 ) => {
   const { id, amount, category } = payload;
+  const options = [...existingOptions];
   const entryIndex = options.findIndex((entry: any) => entry.id === id);
 
   let updatedAmount = 0;
