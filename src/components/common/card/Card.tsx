@@ -1,19 +1,19 @@
 // library
-import { useDispatch } from "react-redux";
-import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TuneIcon from "@mui/icons-material/Tune";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { TrivaOptionMenu } from "triva-ui";
 // store
 import {
   deleteDeduction,
   editDeduction,
 } from "src/store/deduction/deduction-reducer";
+import { selectIsMobile } from "src/store/screen/screen-selectors";
 // types
 import { DeductionType } from "src/types/deduction-types";
 // styles
 import "./Card.scss";
-import Menu from "../menu/Menu";
 
 interface CardContent {
   amountLabel: string;
@@ -36,6 +36,7 @@ const Card: React.FC<CardProps> = ({
   content,
 }) => {
   const dispatch = useDispatch();
+  const isMobile: boolean = useSelector(selectIsMobile);
   const { amountLabel, title, description } = content;
   return (
     <div className="card__container">
@@ -44,15 +45,18 @@ const Card: React.FC<CardProps> = ({
           <h2>{amountLabel}</h2>
           <p>{title}</p>
         </div>
-        <Menu
+        <TrivaOptionMenu
+          {...(!isMobile ? { position: "bottom-right" } : {})}
           MenuIcon={<SettingsIcon />}
           actions={[
             {
+              id: "modify",
               label: "Modify",
               icon: <TuneIcon />,
               onClick: () => dispatch(editDeduction({ type, entryId })),
             },
             {
+              id: "delete",
               label: "Delete",
               icon: <DeleteIcon />,
               onClick: () => dispatch(deleteDeduction({ type, entryId })),
