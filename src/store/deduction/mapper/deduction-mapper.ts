@@ -78,6 +78,7 @@ const mapDeductions = (
     [DEDUCTION_TYPE.SECTION_24]: mapSection24,
     [DEDUCTION_TYPE.SECTION_80C]: mapOther("section80C"),
     [DEDUCTION_TYPE.CHAPTER_VIA]: mapOther("chapter6"),
+    [DEDUCTION_TYPE.OTHERS]: mapOther("others"),
   };
   const details = deductions.reduce(
     (acc: DeductionEntries, option: DeductionResponse) => {
@@ -109,6 +110,8 @@ const getDeductedAmount = (
       DEDUCTION_CHAPTER_VI_OPTIONS[category]?.maxLimit || Infinity
     );
     return deductedAmount + effectiveAmount;
+  } else if (type === DEDUCTION_TYPE.OTHERS) {
+    return deductedAmount + amount;
   }
 };
 type mapEntryData =

@@ -47,7 +47,7 @@ const mockDeductions = [
     $id: ID.unique(),
     type: "Others",
     amount: 75000,
-    category: "",
+    category: "Professional Tax",
   },
 ];
 type DocumentType = "income" | "deduction";
